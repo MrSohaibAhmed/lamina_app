@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import logoImg from '../../assets/img/logo.png'
-import '../Navbar/Navbar.css'
-import { Link } from 'react-router-dom';
+import '../../components/Navbar/ExternalNavbar/Navbar.css'
+import { Link, useNavigate } from 'react-router-dom';
+import KeyContext from '../../context/walletContext';
+
+
 
 const LuminaWallets = () => {
+  const navigate = useNavigate();
+  // const { privateKey, publickey, balance } = useContext(KeyContext)
+  const { generateKeyHandler } = useContext(KeyContext);
+
+  // const generateKeyHandler = () => {
+  //   console.log("Private key is", privateKey);
+  // }
+
+  // console.log("step1 public key" , publicKey);
+
   return (
     <div>
       <div className="text-center py-4">
-        <a href="index.html">
+        <Link to="/">
           <img src={logoImg} width="200px" alt="" />
-        </a>
+        </Link>
       </div>
       <section id="hero" className="hero d-flex align-items-center">
         <div className="container-fluid">
@@ -25,9 +38,10 @@ const LuminaWallets = () => {
               <h3>
                 Click Generate to obtain your lumina wallet<br className="d-break" /> and private key!
               </h3>
-              <Link className="step-box-btn" to={"/step2"}>
+              <Link onClick={generateKeyHandler} className="step-box-btn" >
                 Generate
               </Link>
+              {/* <button onClick={click}>Click me </button> */}
             </div>
           </div>
           <div className="row">

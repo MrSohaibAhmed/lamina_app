@@ -1,11 +1,11 @@
 import React from 'react'
 import LandingPage from '../LandingPage'
-import NavbarComp from '../Navbar/Navbar'
+import NavbarComp from '../Navbar/ExternalNavbar/Navbar'
 
 const Home = () => {
   return (
     <div>
-        <NavbarComp/>
+       <NavbarComp/>
         <LandingPage/>
     </div>
   )

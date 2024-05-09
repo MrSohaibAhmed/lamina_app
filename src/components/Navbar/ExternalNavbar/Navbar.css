@@ -1,0 +1,317 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
+
+
+.nav-item{
+  margin: 20px 0px 0px 0px;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: rgb(255 255 255);
+ background-color: transparent;
+ margin-right: 20px;
+}
+
+.navbar-dark .dropdown-item{
+  color: #fff;
+ 
+}
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+  position: absolute;
+  background: #2E2E55;
+}
+.navbar-dark .dropdown-item:hover {
+  background: #000;
+}
+.dropdown-menu {
+  min-width: 5rem;
+  padding: .1rem 0;
+  font-size: 14px;
+}
+.btn-bsc{
+  background-color:#2E2E55;
+  padding: 5px 20px;
+  margin-right: 20px;
+  color: #fff;
+}
+.btn-bsc:hover{
+  background-color:#424277;
+  color: #fff;
+}
+.btn-connect{
+  background: linear-gradient(100.89deg, #AF47F8 1.78%, #595FFB 43.31%, #1ECBE3 95.1%);
+  padding: 5px 20px;
+  margin-right: 20px;
+  color: #fff;
+}
+.btn-connect:hover{
+  background: linear-gradient(100.89deg,  #1ECBE3 1.78%, #595FFB 43.31%, #AF47F8 95.1%);
+  transition-duration: 0.5s;
+  color: #fff;
+}
+
+.navbar-collapse {
+  
+  flex-grow: 0 !important;
+ 
+}
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+
+
+/* Steps  */
+
+.step-box{
+  padding: 140px 15px;
+  background-color: #7470D938;
+  border-radius: 40px;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.step-box h3{
+  color: #fff;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 32px;
+  margin-bottom: 60px;
+}
+.step-box-btn{
+  background: linear-gradient(100.89deg, #AF47F8 1.78%, #595FFB 43.31%, #1ECBE3 95.1%);
+  padding: 20px 100px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 60px;
+  border-radius: 50px;
+}
+.step-box-btn:hover,.btn-save:hover{
+  background: linear-gradient(100.89deg,#1ECBE3  1.78%, #595FFB 43.31%,#AF47F8  95.1%);
+  color: #fff;
+}
+.btn-save{
+  background: linear-gradient(100.89deg, #AF47F8 1.78%, #595FFB 43.31%, #1ECBE3 95.1%);
+  padding: 13px 24px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 50px;
+}
+.btn-cancel{
+  border-radius: 50px;
+  padding: 11px 24px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+  border: 2px solid #A54BF9;
+}
+.WizardSteps__line {
+  flex-grow: 0;
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0 none transparent;
+  font-size: 1rem;
+  background-color: #687d93;
+}
+
+.WizardSteps__status {
+  box-sizing: border-box;
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  border: 1px solid #687d93;
+  border-radius: 50%;
+  line-height: calc(1.5em - 1px * 2);
+  text-align: center;
+}
+.WizardSteps__step {
+  display: flex;
+  flex-grow: 2;
+  flex-wrap: nowrap;
+  text-decoration: none;
+}
+
+.WizardSteps__step > .WizardSteps__status {
+  margin-right: 0.25em;
+
+}
+
+.WizardSteps > .WizardSteps__line {
+  margin-left: 0em;
+  margin-right: 0em;
+}
+
+.WizardSteps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+/* Statuses */
+
+/* Error status styles */
+
+
+/* Complete status styles */
+.WizardSteps__step--complete > .WizardSteps__title {
+  color: #fff;
+}
+
+.WizardSteps__step--complete > .WizardSteps__status {
+  border-color: #fff;
+  background: linear-gradient(100.89deg, #AF47F8 1.78%, #595FFB 43.31%, #1ECBE3 95.1%);
+}
+
+.WizardSteps__step--complete > .WizardSteps__status > .WizardSteps__status-text {
+  color: #fff;
+}
+
+.WizardSteps__step--complete + .WizardSteps__line {
+  background-color: #fff;
+}
+
+/* Active status styles */
+.WizardSteps__step--active > .WizardSteps__title {
+  font-weight: 400;
+}
+
+.WizardSteps__step--active > .WizardSteps__status {
+  border-width: 2px;
+  line-height: calc(1.5em - 2px * 2);
+}
+
+.WizardSteps__step--active > .WizardSteps__status > .WizardSteps__status-text {
+  font-weight: 700;
+}
+
+.WizardSteps__step--active + .WizardSteps__line {
+  height: 2px;
+}
+
+
+/**
+ * Reset and contextual styles.
+ */
+html {
+  height: 100%;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+body {
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  padding: 2em;
+}
+
+.modal-content{
+  color: #000;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 1024px) {
+  .footer-bottom{
+    padding-top: 130px;
+  }
+  .trader-heading{
+    padding-top: 200px;
+  }
+  .main-heading{
+    font-size: 53px;
+    line-height: 74px;
+    font-weight: 300;
+}
+.trader-box{
+  background-color: #7470D91F;
+  border-radius: 40px;
+  padding: 50px 50px;
+}
+.trading-num{
+  font-size: 43px;
+  font-weight: 300;
+  position: relative;
+  bottom: -120px;
+  color: #414151;
+}
+.d-break{
+  display: block;
+}
+}
+
+
+@media (min-width: 992px) {
+  img.circle-img.img-fluid {
+    display: block;
+    position: absolute;
+    bottom: 9%;
+    left: -74px;
+    z-index: -1;
+  }
+}
+
+
+@media (max-width: 991px) {
+  .hero {
+    height: auto;
+    padding: 259px 0 60px 0;
+    text-align: center;
+  }
+
+  .hero .hero-img {
+    height: auto;
+    padding: 0px 0 60px 0;
+    text-align: center;
+  }
+
+  .hero .hero-img img {
+    width: 80%;
+  }
+  img.circle-img.img-fluid {
+    display: none!important;
+  }
+}
+
+@media (max-width: 768px) {
+  .step-box-btn{
+    background: linear-gradient(100.89deg, #AF47F8 1.78%, #595FFB 43.31%, #1ECBE3 95.1%);
+    padding: 12px 12px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .hero {
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero h2 {
+    font-size: 24px;
+  }
+
+  .hero .hero-img img {
+    width: 100%;
+  }
+}
+.container{
+  max-width: 1500px;
+}

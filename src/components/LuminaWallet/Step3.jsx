@@ -1,5 +1,6 @@
 import React from 'react';
-import '../Navbar/Navbar.css'
+// import '../Navbar/Navbar.css'
+import '../Navbar/ExternalNavbar/Navbar.css'
 
 const Step3 = () => {
     return (
