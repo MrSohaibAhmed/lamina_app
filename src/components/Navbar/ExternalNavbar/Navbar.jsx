@@ -6,18 +6,24 @@ import binanceImg from '../../../assets/img/binance.png'
 import './Navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import usePhantom from '../../../components/hooks/usePhantom';
-
+import { checkUser } from '../../hooks/useWallet';
 const NavbarComp = () => {
 
-    const { connectToPhantom, connected, account, web3, signMessage } = usePhantom();
-
+    const { connectToPhantom, connected, account, web3, signMessage, newUsersignMessage } = usePhantom();
     useEffect(() => {
         if (web3 && account) {
-          signMessage();
+            checkUser(account)
+                .then(() => {
+                    console.log("user found")
+                    signMessage();
+                })
+                .catch((error) => {
+                    newUsersignMessage();
+                    console.log("user not found")
+                    console.error("Error checking user:", error);
+                });
         }
-      }, [web3, account]);
-
-
+    }, [web3, account]);
 
     return (
         <nav className="navbar py-3 navbar-expand-lg navbar-dark">
@@ -46,9 +52,10 @@ const NavbarComp = () => {
                             </ul>
                         </li>
                         {/* {walletAvail && ( */}
-                            <li className="nav-item">
-                                <button onClick={connectToPhantom} className="btn btn-connect active">{connected ? "Successfully Connected" : "Connect Wallet"}</button>
-                            </li>
+                        <li className="nav-item">
+                            {/* <button onClick={connectToPhantom} className="btn btn-connect active">{connected ? "Successfully Connected" : "Connect Wallet"}</button> */}
+                            <button onClick={connectToPhantom} className="btn btn-connect active">Connect Wallet</button>
+                        </li>
                         {/* )} */}
                     </ul>
                 </div>

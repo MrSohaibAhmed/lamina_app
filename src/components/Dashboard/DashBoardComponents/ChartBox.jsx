@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import shortBoxImg from '../../../assets/dashboard/short-box.png'
 import '../Dashboard.css'
-import ApexChartComponent from './ApexChartComp'
+import TradingViewWidget from "./ApexChartComp"
 
-const ChartBox = () => {
+const ChartBox = ({ data }) => {
+    const [name, setname] = useState("BTCUSD")
+    useEffect(() => {
+        if (data?.pairs && data.pairs.length > 0 && data.pairs[0]?.baseToken?.name) {
+            setname(data.pairs[0]?.baseToken?.name)
+        }
+    }, [data])
+
     return (
         <div>
             <div className="chart-box">
                 <div className="row">
                     <div className="col-6 col-sm-4 align-self-center">
-                        <h4 className="mb-0">The First Shitcoin</h4>
+                        <h4 className="mb-0">{name}</h4>
                     </div>
                     <div className="col-12 mt-2 mt-sm-0 col-sm-4 d-flex align-self-center">
                         Token
@@ -22,15 +29,15 @@ const ChartBox = () => {
                     </div>
                     <div className="col-12 col-sm-4 mt-2 mt-sm-0 justify-content-lg-end d-flex align-self-center ms-lg-auto">
                         <label className="switch">
-                            <input  className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                             <span className="slider round"></span>
                         </label>
                         <span className="switch-lable ms-1">Outlier</span>
                     </div>
-          
+
                     <div className="col-lg-12 mt-2 px-0">
                         <div id="candlestick-basic">
-                        <ApexChartComponent />
+                            <TradingViewWidget data={data} />
                         </div>
                     </div>
                 </div>

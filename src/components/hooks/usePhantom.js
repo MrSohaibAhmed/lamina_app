@@ -29,7 +29,7 @@ const usePhantom = () => {
             alert('Phantom extension not detected!');
         }
     };
-    const disconnectFromPhantom = () => {
+    const disconnectFromMetaMask = () => {
         setConnected(false);
         setAccount(null);
         setWeb3(null);
@@ -38,6 +38,24 @@ const usePhantom = () => {
         localStorage.removeItem("connected");
         localStorage.removeItem("-walletlink:https://www.walletlink.org:EIP6963ProviderUUID");
 
+    };
+    const newUsersignMessage = async () => {
+        if (web3 && account) {
+            const message = 'To avoid digital dognappers, sign below to authenticate with fusiond_app.';
+            const encoder = new TextEncoder();
+            const msg = `0x${Array.prototype.map.call(encoder.encode(message), x => ('00' + x.toString(16)).slice(-2)).join('')}`;
+            try {
+                const sign = await web3.eth.personal.sign(msg, account, 'Example password');
+                setSignedMessage(sign);
+                localStorage.setItem("sign", sign);
+
+            } catch (error) {
+                console.error('Error signing message:', error);
+            }
+            navi("/step1");
+        } else {
+            console.error('Web3 instance or account not available.');
+        }
     };
     const signMessage = async () => {
         if (web3 && account) {
@@ -59,7 +77,7 @@ const usePhantom = () => {
     };
 
 
-    return { connectToPhantom, disconnectFromPhantom, connected, account, web3, signMessage };
+    return { connectToPhantom, disconnectFromMetaMask, connected, account, web3, signMessage, newUsersignMessage };
 };
 
 export default usePhantom;

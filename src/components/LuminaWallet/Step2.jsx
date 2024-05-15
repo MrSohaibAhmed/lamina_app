@@ -1,13 +1,15 @@
 
 import React, { useContext, useState } from 'react';
 import '../Navbar/ExternalNavbar/Navbar.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import './step2.css'
 import KeyContext from '../../context/walletContext';
 const Step2 = () => {
     const { privateKey, publicKey } = useContext(KeyContext);
+    const [revealPrivateKey, setRevealPrivateKey] = useState(false);
+    const navigate = useNavigate();
     const handleCopy = (keyValue) => {
         navigator.clipboard.writeText(keyValue)
             .then(() => {
@@ -17,6 +19,9 @@ const Step2 = () => {
                 console.error("Error copying text:", error);
             });
     }
+    const handleReveal = () => {
+        setRevealPrivateKey(true);
+    };
     return (
         <div className='step2main'>
             <div className="text-center py-4"><Link to="/"><img src="assets/img/logo.png" width="200px" alt="" /></Link></div>
@@ -42,12 +47,22 @@ const Step2 = () => {
                                         </div>
                                     </div>
                                     <h3 className="mb-1">Private Key</h3>
-                                    <div className="input-group input-group-lg mb-4">
+
+                                    <div style={{
+                                        opacity: revealPrivateKey ? 1 : 0.02,
+                                        transition: 'opacity 0.5s ease-in-out'
+                                    }} className="input-group input-group-lg mb-4">
                                         <input readOnly type="text" value={privateKey} className="form-control" aria-label="Amount" />
-                                        <span className="input-group-text"><FontAwesomeIcon onClick={() => handleCopy(privateKey)} icon={faCopy} /></span>
+                                        <span className="input-group-text"><FontAwesomeIcon onClick={handleCopy} icon={faCopy} /></span>
                                     </div>
-                                    <p className="mb-5">Please copy the below private key and store it in a safe location. Your private key will NOT be displayed again.</p>
-                                    <div className="text-center mb-5"> <Link className="step-box-btn" to="#">Click here to reveal private key</Link></div>
+                                    <p style={{
+                                        opacity: revealPrivateKey ? 1 : 0.04,
+                                        transition: 'opacity 0.5s ease-in-out'
+                                    }} className="mb-0">Please copy the below private key and store it in a safe location. Your private key will NOT be displayed again.</p>
+                                    <div className="text-center mb-5">
+                                        <button className="step-box-btn" onClick={handleReveal}>Click here to reveal private key</button>
+                                    </div>
+
                                     <div className="text-center mt-5"> <Link className="step-box-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Continue</Link></div>
                                 </div>
                             </div>
@@ -84,7 +99,7 @@ const Step2 = () => {
                 {/* <!-- Button trigger modal --> */}
 
                 {/* <!-- Modal --> */}
-                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -95,7 +110,7 @@ const Step2 = () => {
                                 <p className="py-4">You will not be able to retrieve it again.</p>
                                 <div className="my-3">
                                     <button type="button" className="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                                    <Link className="btn-save" to={"/step3"}>I already saved it</Link>
+                                    <button data-bs-dismiss="modal" className="btn-save" onClick={()=>{navigate('/step3')}}>I already saved it</button>
                                 </div>
                             </div>
                         </div>

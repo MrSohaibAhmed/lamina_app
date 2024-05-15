@@ -1,8 +1,10 @@
 import React from 'react';
 // import '../Navbar/Navbar.css'
 import '../Navbar/ExternalNavbar/Navbar.css'
+import { useNavigate } from 'react-router-dom';
 
 const Step3 = () => {
+const navigate = useNavigate();
     return (
         <div>
             <div className="text-center py-4"><a href="index.html"><img src="assets/img/logo.png" width="200px" alt="" /></a></div>
@@ -17,7 +19,7 @@ const Step3 = () => {
                         <div className="col-lg-7 mx-auto step-box">
                             <h3 className="mb-4">Oops! Your Photon wallet has 0 SOL Deposit SOL to this<br className="d-break" /> wallet to start trading</h3>
                             <div className="mb-5"><a href="#"></a>8ANgsVdw2dQXZtyJbXAdBvi6njrv4KB1VLmFhLmFjWum <i className="fa fa-copy"></i></div>
-                            <a className="step-box-btn" href="#">Check Balance</a>
+                            <button onClick={()=>{navigate('/dashboard')}} className="step-box-btn" href="#">Check Balance</button>
                         </div>
                     </div>
                     <div className="row">
