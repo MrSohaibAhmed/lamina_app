@@ -50,7 +50,7 @@ const data = [
 ]
 
 const InternalNavbar = () => {
-    const { setCoinsKey } = useContext(KeyContext)
+    const { setCoinsKey, setNoDetails } = useContext(KeyContext)
     const [showDropdown, setShowDropdown] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -63,12 +63,14 @@ const InternalNavbar = () => {
         // Check if the clicked pair's pairAddress exists in the data
         const foundPair = data.find(pair => pair.pairaddress === pairAddress);
         if (foundPair) {
+            setNoDetails(false)
             console.log(foundPair);
             const res = await pairData(foundPair.pairaddress)
-            console.log(res?.data, ">>>>>>>>>")
+            console.log(res?.data, "Response data is = >>>>>>>>>")
             setCoinsKey(res?.data);
         } else {
-            alert("This pair does not exist in the data.");
+            setNoDetails(true)
+            alert("Sorry We Are Not Dealing with this Pair.");
         }
     }
 
@@ -77,15 +79,24 @@ const InternalNavbar = () => {
     // };
 
     const handleSearch = async (e) => {
+        // debugger
         e.preventDefault();
         // Call the searchPair function with the input parameter
         const response = await searchPair(searchInput);
         const filteredResults = response?.data?.pairs?.filter(pair => pair.quoteToken.symbol === 'SOL');
         console.log("filter data is =>", filteredResults);
-        // Set the search results
         setSearchResults(filteredResults?.slice(0, 5));
-        // Optionally, you can clear the input field after search
         setSearchInput('');
+    };
+    const quickSearch = async (e) => {
+        // debugger
+        // e.preventDefault();
+        // Call the searchPair function with the input parameter
+        const response = await searchPair(searchInput);
+        const filteredResults = response?.data?.pairs?.filter(pair => pair.quoteToken.symbol === 'SOL');
+        console.log("filter data is =>", filteredResults);
+        setSearchResults(filteredResults?.slice(0, 5));
+        // setSearchInput('');
     };
 
     useEffect(() => {
@@ -111,6 +122,12 @@ const InternalNavbar = () => {
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
     };
+    useEffect(() => {
+        pairData("")
+    }, [])
+    useEffect(() => {
+        quickSearch();
+    }, [searchInput])
     return (
         <div>
             <nav className="navbar py-3 navbar-expand-lg navbar-dark ">

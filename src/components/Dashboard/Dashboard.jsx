@@ -1,38 +1,62 @@
-import React, { useContext } from 'react'
-import ChartBox from './DashBoardComponents/ChartBox'
-import TabComp from './DashBoardComponents/TabComp'
-import RightInnerBox from './DashBoardComponents/RightInnerBox'
-import RightAccordian from './DashBoardComponents/RightAccordian'
-import InternalNavbar from '../Navbar/InternalNabvar/InternalNavbar'
-import KeyContext from '../../context/walletContext'
+import React, { useContext, useState, useEffect } from 'react';
+import ChartBox from './DashBoardComponents/ChartBox';
+import TabComp from './DashBoardComponents/TabComp';
+import RightInnerBox from './DashBoardComponents/RightInnerBox';
+import RightAccordian from './DashBoardComponents/RightAccordian';
+import InternalNavbar from '../Navbar/InternalNabvar/InternalNavbar';
+import KeyContext from '../../context/walletContext';
+
 const Dashboard = () => {
-  const { coinsKey } = useContext(KeyContext);
+  const { coinsKey, noDetails } = useContext(KeyContext);
+  const [key, setKey] = useState(0); // State to manage the key for ChartBox component
+
+  const coinKeyLength = coinsKey.length;
+  console.log("coin key length =", coinKeyLength);
+
+  // Function to update key when data prop changes
+  const updateKey = () => {
+    setKey(prevKey => prevKey + 1);
+  }
+
+
+  useEffect(() => {
+    updateKey();
+  }, [coinsKey]);
+
   return (
     <>
       <InternalNavbar />
-      <div className='main'>
-        <div class="container-fluid">
-          <div class="row">
-            {/* Left Side  */}
-            <div class="col-lg-8 left-side">
-              <ChartBox data={coinsKey} />
-
-              <TabComp data={coinsKey} />
-            </div>
-
-            {/* Right Side  */}
-            <div class="col-lg-4 right-side">
-              <RightInnerBox data={coinsKey} />
-              <div class="my-3">
-                <RightAccordian data={coinsKey} />
+      {noDetails === true ? (
+        <div style={{ height: "500px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <center>
+            <h3 className=' pt-5'>Sorry 😥 We Are not Dealing With This Pair Right Now . </h3>
+            <h3>Try Searching Another One 😃</h3>
+          </center>
+        </div>
+      ) : (
+        <div>
+          <div className='main'>
+            <div className="container-fluid">
+              <div className="row">
+                {/* Left Side  */}
+                <div className="col-lg-8 left-side">
+                  <ChartBox key={key} data={coinsKey} />
+                  <TabComp data={coinsKey} />
+                </div>
+                {/* Right Side  */}
+                <div className="col-lg-4 right-side">
+                  <RightInnerBox data={coinsKey} />
+                  <div className="my-3">
+                    <RightAccordian data={coinsKey} />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-      </div>
+      )}
     </>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

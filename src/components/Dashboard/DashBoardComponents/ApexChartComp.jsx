@@ -285,7 +285,7 @@ import React, { useEffect, useRef, memo } from "react";
 function TradingViewWidget({ data }) {
   let symbol = "BTCUSD";
   if (data?.pairs && data.pairs.length > 0 && data.pairs[0]?.baseToken?.symbol) {
-    debugger
+    // debugger
     symbol = data.pairs[0].baseToken.symbol;
   }
 
@@ -316,9 +316,9 @@ function TradingViewWidget({ data }) {
 
     // Check if there's already a script element in the container
     const existingScript = container.current.childNodes[0];
-    debugger
+    // debugger
     if (existingScript) {
-      debugger
+      // debugger
       container.current.removeChild(existingScript);
     }
 

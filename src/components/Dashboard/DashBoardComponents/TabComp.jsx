@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import transcationImg from '../../../assets/dashboard/transaction.png';
 import holdingImg from '../../../assets/dashboard/holding.png';
 import arrowImg from '../../../assets/dashboard/arrows.png';
 import solIconImg from '../../../assets/dashboard/sol-icon.png';
 import transationTableIconImg from '../../../assets/dashboard/transaction-table-icon.png'
-
-const TabComp = () => {
+// import { getTokenAccounts } from '../../hooks/useTransactions';
+const TabComp = ({ data }) => {
+    const walletToQuery = 'FvjW8SdGgfFHJ5Q9XSni9g8GwnuY69RUQ5eEQxSYMeB2';
+    useEffect(() => {
+        // getTokenAccounts(walletToQuery)
+    })
     return (
 
         <div className="mt-3 tab-box">

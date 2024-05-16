@@ -16,50 +16,94 @@ import { Log } from 'ethers'
 
 const RightInnerBox = ({ data }) => {
 
-  const [txns, setTxns] = useState(0);
+  const [Txnsfive, setsetTxnsfive] = useState(0);
+  const [Txnsone, setsetTxnsone] = useState(0);
+  const [Txnssix, setsetTxnssix] = useState(0);
+  const [Txnstwentyfour, setsetTxnstwentyfour] = useState(0);
+  const [totaltxns, setTotaltxns] = useState(0)
+
   const [volume, setVolume] = useState('$0');
   const [makers, setMakers] = useState(0);
-  const [selectedValue, setSelectedValue] = useState(2);
-  
+  const [selectedValue, setSelectedValue] = useState(" ");
+  const [buy, setBuy] = useState(0)
+  const [buyVol, setBuyVol] = useState(0)
+  const [sell, setsell] = useState(0)
+
+  const [sellVol, setsellVol] = useState(0)
+  const [activeButton, setActiveButton] = useState(null)
+  const [inputAmountVal, setInputAmountVal] = useState();
   const scrollToTop = () => {
     scroll.scrollToTop();
 
   };
 
-  const updateData = (timeframe) =>{
+  const calculateVolumes = (buys, sells, volume) => {
+    const totalTransactions = buys + sells;
+    const volumeInThousands = Math.round(volume / 1000);
+
+    const buyVolume = Math.round(((buys / totalTransactions) * volume) / 1000);
+    const sellVolume = Math.round(((sells / totalTransactions) * volume) / 1000);
+
+    return { buyVolume, sellVolume, totalTransactions, volumeInThousands };
+  };
+  const updateData = (timeframe) => {
+    setSelectedValue(timeframe); // Update selectedValue state
     switch (timeframe) {
-      case '5H':
-        console.log('5H');
-        console.log("txns  is" , txns);
-        console.log("volume  is" , volume);
-        console.log("makers  is" , makers);
-        break;
+      case '5M':
+        {
+          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnsfive.buys || 0, Txnsfive.sells || 0, data?.pairs[0]?.volume?.m5);
+          setBuy(Txnsfive.buys || 0);
+          setsell(Txnsfive.sells || 0);
+          setTotaltxns(totalTransactions);
+          setVolume(volumeInThousands);
+          setBuyVol(buyVolume);
+          setsellVol(sellVolume);
+          break;
+        }
       case '1H':
-        console.log('1H');
-        console.log("txns  is" , txns);
-        console.log("volume  is" , volume);
-        console.log("makers  is" , makers);
-        break;
+        {
+          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnsone.buys || 0, Txnsone.sells || 0, data?.pairs[0]?.volume?.h1);
+          setBuy(Txnsone.buys || 0);
+          setsell(Txnsone.sells || 0);
+          setTotaltxns(totalTransactions);
+          setVolume(volumeInThousands);
+          setBuyVol(buyVolume);
+          setsellVol(sellVolume);
+          break;
+        }
       case '6H':
-        console.log('6H');
-        console.log("txns  is" , txns);
-        console.log("volume  is" , volume);
-        console.log("makers  is" , makers);
-        break;
+        {
+          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnssix.buys || 0, Txnssix.sells || 0, data?.pairs[0]?.volume?.h6);
+          setBuy(Txnssix.buys || 0);
+          setsell(Txnssix.sells || 0);
+          setTotaltxns(totalTransactions);
+          setVolume(volumeInThousands);
+          setBuyVol(buyVolume);
+          setsellVol(sellVolume);
+          break;
+        }
       case '24H':
-        console.log('24H');
-        console.log("txns  is" , txns);
-        console.log("volume  is" , volume);
-        console.log("makers  is" , makers);
-        break;
-        
-    
+        {
+          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnstwentyfour.buys || 0, Txnstwentyfour.sells || 0, data?.pairs[0]?.volume?.h24);
+          setBuy(Txnstwentyfour.buys || 0);
+          setsell(Txnstwentyfour.sells || 0);
+          setTotaltxns(totalTransactions);
+          setVolume(volumeInThousands);
+          setBuyVol(buyVolume);
+          setsellVol(sellVolume);
+          break;
+        }
       default:
-        console.log('5H');
-        console.log("txns  is" , txns);
-        console.log("volume  is" , volume);
-        console.log("makers  is" , makers);
-        break;
+        {
+          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(txns?.m5?.buys || 0, txns?.m5?.sells || 0, data?.pairs[0]?.volume?.m5);
+          setBuy(txns?.m5?.buys || 0);
+          setsell(txns?.m5?.sells || 0);
+          setTotaltxns(totalTransactions);
+          setVolume(volumeInThousands);
+          setBuyVol(buyVolume);
+          setsellVol(sellVolume);
+          break;
+        }
     }
   }
 
@@ -90,11 +134,29 @@ const RightInnerBox = ({ data }) => {
   const handleButtonClick = (value) => {
     setSelectedValue(value);
     console.log("selected value is", value);
+    setActiveButton(value)
+    console.log("Active Button:", activeButton)
+
   };
+
+  const changeAmountHandler = (event) => {
+    setInputAmountVal(event.target.value)
+    console.log(event.target.value);
+    setSelectedValue(event.target.value)
+    setActiveButton('')
+  }
+
   useEffect(() => {
-    // debugger
-    console.log(data, "from ")
+    if (data?.pairs && data.pairs.length > 0 && data.pairs[0]?.txns) {
+      setsetTxnsfive(data?.pairs[0]?.txns?.m5)
+      setsetTxnsone(data?.pairs[0]?.txns?.h1)
+      setsetTxnssix(data?.pairs[0]?.txns?.h6)
+      setsetTxnstwentyfour(data?.pairs[0]?.txns?.h24)
+
+
+    }
   }, [data])
+
   return (
     <>
       <Toaster position="top-center"
@@ -113,8 +175,8 @@ const RightInnerBox = ({ data }) => {
             <h6 className="mb-0">From Contract</h6>
           </div>
           <div className="col-md-6 my-3 align-self-center">
-            <Link to="#"><img src={twitterImg} alt="" width="15px" /></Link>
-            <Link to="#"><img src={telegramImg} alt="" width="15px" /></Link>
+            <a target="_blank" href={data?.pairs?.[0]?.info?.socials?.[0]?.url}><img src={twitterImg} alt="" width="15px" /></a>
+            <a target="_blank" href={data?.pairs?.[0]?.info?.socials?.[1]?.url}><img src={telegramImg} alt="" width="15px" /></a>
           </div>
         </div>
         <div className="row mt-4">
@@ -157,28 +219,39 @@ const RightInnerBox = ({ data }) => {
       </div>
       <div className="right-inner-box mt-3">
         <div className="row price-inner text-center">
-          <button onClick={()=>updateData('5M')} className="col-lg-3 col border-inner bg-transparent text-white">
+          <button onClick={() => updateData('5M')} className="col-lg-3 col border-inner bg-transparent text-white">
             <h4>5M</h4>
-            <h5>N/A</h5>
+            <h5 className={data?.pairs?.[0]?.priceChange?.m5 < 0 ? 'text-danger' : ''}>
+              {data?.pairs?.[0]?.priceChange?.m5 || 0}
+            </h5>
+
           </button>
-          <button  onClick={()=>updateData('1H')} className="col-lg-3 col border-inner bg-transparent text-white">
+          <button onClick={() => updateData('1H')} className="col-lg-3 col border-inner bg-transparent text-white">
             <h4>1H</h4>
-            <h5>N/A</h5>
+            <h5 className={data?.pairs?.[0]?.priceChange?.h1 < 0 ? 'text-danger' : ''}>
+              {data?.pairs?.[0]?.priceChange?.h1 || 0}
+            </h5>
+
           </button>
-          <button onClick={()=>updateData('6H')} className="col-lg-3 col border-inner bg-transparent text-white ">
+          <button onClick={() => updateData('6H')} className="col-lg-3 col border-inner bg-transparent text-white ">
             <h4>6H</h4>
-            <h5>N/A</h5>
+            <h5 className={data?.pairs?.[0]?.priceChange?.h6 < 0 ? 'text-danger' : ''}>
+              {data?.pairs?.[0]?.priceChange?.h6 || 0}
+            </h5>
+
           </button>
-          <button onClick={()=>updateData('24H')} className="col-lg-3 col bg-transparent text-white">
+          <button onClick={() => updateData('24H')} className="col-lg-3 col bg-transparent text-white">
             <h4>24H</h4>
-            <h5 className="text-danger">-98.57%</h5>
+            <h5 className={data?.pairs?.[0]?.priceChange?.h24 < 0 ? 'text-danger' : ''}>
+              {data?.pairs?.[0]?.priceChange?.h24 || 0}
+            </h5>
           </button>
         </div>
         <hr />
         <div className="row price-inner">
           <div className="col-lg-3 border-bottom-inner">
             <h6>TXNS</h6>
-            <h5>{txns}</h5>
+            <h5>{totaltxns}</h5>
             <br />
             <h6>VOLUME</h6>
             <h5>{volume}</h5>
@@ -190,10 +263,10 @@ const RightInnerBox = ({ data }) => {
             <div className=" mt-5 position-relative">
               <div className="progress-values">
                 <div className="progress-value-left">
-                  <h6 className="mb-0">BUYS</h6> 0
+                  <h6 className="mb-0">BUYS</h6>{buy}
                 </div>
                 <div className="progress-value-right text-end">
-                  <h6 className="mb-0">SELL</h6> 0
+                  <h6 className="mb-0">SELL</h6> {sell}
                 </div>
               </div>
               <div className="progress progress-default">
@@ -204,10 +277,10 @@ const RightInnerBox = ({ data }) => {
             <div className=" mt-6 position-relative">
               <div className="progress-values">
                 <div className="progress-value-left">
-                  <h6 className="mb-0">BUYS VOL</h6> $0
+                  <h6 className="mb-0">BUYS VOL</h6> ${buyVol}
                 </div>
                 <div className="progress-value-right text-end">
-                  <h6 className="mb-0">SELL VOL</h6> 0
+                  <h6 className="mb-0">SELL VOL</h6> ${sellVol}
                 </div>
               </div>
               <div className="progress progress-default">
@@ -256,35 +329,38 @@ const RightInnerBox = ({ data }) => {
             <hr />
             <div className="d-flex flex-wrap">
               <div className="my-3 mx-2">
-                <button onClick={() => handleButtonClick(0.25)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
+                <button onClick={() => handleButtonClick(0.25)}
+                  className={`bg-dark btn-inner-box ${activeButton == 0.25 ? 'btn1-active' : ''}`}>
+                  <img src={solIconImg} width="18px" alt="" />
                   &nbsp; 0.25</button>
               </div>
               <div className="my-3 mx-2">
-                <button onClick={() => handleButtonClick(0.5)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
+                <button onClick={() => handleButtonClick(0.5)} className={`bg-dark btn-inner-box ${activeButton == 0.5 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
                   &nbsp;0.5</button>
               </div>
               <div className="my-3 mx-2">
-                <button onClick={() => handleButtonClick(1)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
+                <button onClick={() => handleButtonClick(1)}
+                  className={`bg-dark btn-inner-box ${activeButton == 1 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
                   &nbsp;1</button>
               </div>
               <div className="my-3 mx-2">
-                <button onClick={() => handleButtonClick(2)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
+                <button onClick={() => handleButtonClick(2)} className={`bg-dark btn-inner-box ${activeButton == 2 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
                   &nbsp;2</button>
               </div>
               <div className="my-3 mx-2">
-                <button onClick={() => handleButtonClick(1)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
-                  &nbsp;1</button>
+                <button onClick={() => handleButtonClick(1.5)} className={`bg-dark btn-inner-box ${activeButton == 1.5 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
+                  &nbsp;1.5</button>
               </div>
               <div className="my-3 mx-2">
-                <button onClick={() => handleButtonClick(2)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
-                  &nbsp;2</button>
+                <button onClick={() => handleButtonClick(2)} className={`bg-dark btn-inner-box ${activeButton == 2.90 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
+                  &nbsp;2.90</button>
               </div>
             </div>
             <div>
               <div className="input-group mx-2 my-4">
                 <span className="input-group-text bg-transparent border border-right-0" id="basic-addon1"><img
                   src={solIconImg} width="18px" alt="" /></span>
-                <input type="text" className="form-control bg-transparent border border-left-0 text-light"
+                <input type="number" value={inputAmountVal} onChange={changeAmountHandler} className="form-control bg-transparent border border-left-0 text-light"
                   placeholder="Amount to buy in SOL" aria-label="Amount" aria-describedby="basic-addon1" />
               </div>
             </div>
@@ -364,7 +440,7 @@ const RightInnerBox = ({ data }) => {
             </div>
             <hr />
             <div className="mt-5 mb-3">
-              <button onClick={handleQuickBuy} className=" btn-buy-quick">Quick Buy</button>
+              <button onClick={handleQuickBuy} className=" btn-buy-quick">Quick Buy {selectedValue}</button>
             </div>
           </div>
           <div className="tab-pane fade" id="pills-one" role="tabpanel" aria-labelledby="pills-one-tab">
@@ -376,28 +452,28 @@ const RightInnerBox = ({ data }) => {
             <hr />
             <div className="d-flex flex-wrap">
               <div className="my-3 mx-2">
-                <button value="0.25" onClick={() => handleButtonClick(0.25)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
+                <button value="0.25" onClick={() => handleButtonClick(0.25)} className={`bg-dark btn-inner-box ${activeButton == 0.25 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
                   &nbsp; 0.25</button>
               </div>
               <div className="my-3 mx-2">
-                <button value="0.5" onClick={() => handleButtonClick(0.5)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
+                <button value="0.5" onClick={() => handleButtonClick(0.5)} className={`bg-dark btn-inner-box ${activeButton == 0.5 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
                   &nbsp;0.5</button>
               </div>
               <div className="my-3 mx-2">
-                <button value="1" onClick={() => handleButtonClick(1)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
+                <button value="1" onClick={() => handleButtonClick(1)} className={`bg-dark btn-inner-box ${activeButton == 1 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
                   &nbsp;1</button>
               </div>
               <div className="my-3 mx-2">
-                <button value="2" onClick={() => handleButtonClick(2)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
+                <button value="2" onClick={() => handleButtonClick(2)} className={`bg-dark btn-inner-box ${activeButton == 2 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
                   &nbsp;2</button>
               </div>
               <div className="my-3 mx-2">
-                <button value="1" onClick={() => handleButtonClick(1)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
-                  &nbsp;1</button>
+                <button value="1" onClick={() => handleButtonClick(1.5)} className={`bg-dark btn-inner-box ${activeButton == 1.5 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
+                  &nbsp;1.5</button>
               </div>
               <div className="my-3 mx-2">
-                <button value="2" onClick={() => handleButtonClick(2)} className="bg-dark btn-inner-box"><img src={solIconImg} width="18px" alt="" />
-                  &nbsp;2</button>
+                <button value="2" onClick={() => handleButtonClick(2.90)} className={`bg-dark btn-inner-box ${activeButton == 2.90 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
+                  &nbsp;2.90</button>
               </div>
             </div>
             <div>

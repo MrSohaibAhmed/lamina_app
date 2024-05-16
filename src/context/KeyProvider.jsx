@@ -8,6 +8,8 @@ export const KeyProvider = ({ children }) => {
     const [privateKey, setPrivateKey] = useState(null);
     const [publicKey, setPublicKey] = useState(null); // Corrected variable name
     const [coinsKey, setCoinsKey] = useState([]);
+    const [noDetails, setNoDetails] = useState(false);
+
     // const [balance, setBalance] = useState(null);
     const generateKeyHandler = async () => {
         try {
@@ -36,7 +38,7 @@ export const KeyProvider = ({ children }) => {
     };
 
     return (
-        <KeyContext.Provider value={{ privateKey, publicKey, generateKeyHandler, coinsKey, setCoinsKey }}>
+        <KeyContext.Provider value={{ privateKey, publicKey, generateKeyHandler, coinsKey, setCoinsKey, noDetails, setNoDetails }}>
             {children}
         </KeyContext.Provider>
     );
