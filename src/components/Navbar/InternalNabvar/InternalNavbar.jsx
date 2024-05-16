@@ -54,7 +54,7 @@ const InternalNavbar = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const { disconnectFromPhantom } = usePhantom();
+    const { disconnectFromMetaMask } = usePhantom();
     const navigate = useNavigate();
 
     const dropdownRef = useRef(null);
@@ -118,7 +118,10 @@ const InternalNavbar = () => {
         };
     }, []);
 
-
+    const logout = () => {
+        disconnectFromMetaMask();
+        navigate('/');
+    }
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
     };
@@ -208,8 +211,8 @@ const InternalNavbar = () => {
                                 </Link>
                                 <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                     <li>
-                                        <Button className="dropdown-item" onClick={handleClick}>
-                                            <img src={logoutImg} alt="Logout" />
+                                        <Button className="dropdown-item" >
+                                            <img src={logoutImg} alt="Logout" onClick={logout} />
                                             <span className='px-2'>Logout</span>
                                         </Button>
                                     </li>
