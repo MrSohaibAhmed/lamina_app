@@ -8,7 +8,7 @@ import solIconImg from "../../../assets/dashboard/sol-icon.png"
 import settingImg from "../../../assets/dashboard/setting.png"
 import { animateScroll as scroll } from 'react-scroll';
 import toast, { Toaster } from 'react-hot-toast';
-import { swapTokens } from '../../hooks/useWallet'
+import { swapTokens, swapTokensOut } from '../../hooks/useWallet'
 import "../Dashboard.css"
 import { Log } from 'ethers'
 
@@ -130,7 +130,29 @@ const RightInnerBox = ({ data }) => {
       noValueError();
     }
   };
+  const handleQuickSell = () => {
+    if (selectedValue !== null && selectedValue !== 0) { // Check if selectedValue is not null or 0
+      const value = {
+        amount: selectedValue * 1000000000,
+        inputMint: "So11111111111111111111111111111111111111112",
+        outputMint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      };
 
+      const buyPromise = swapTokensOut(value);
+
+      toast.promise(
+        buyPromise,
+        {
+          loading: 'Selling...',
+          success: 'Sold Successfully',
+          error: 'Cannot Sell. Try Again',
+        }
+      );
+    } else {
+      console.error("No value selected");
+      noValueError();
+    }
+  };
   const handleButtonClick = (value) => {
     setSelectedValue(value);
     console.log("selected value is", value);
@@ -453,28 +475,17 @@ const RightInnerBox = ({ data }) => {
             <div className="d-flex flex-wrap">
               <div className="my-3 mx-2">
                 <button value="0.25" onClick={() => handleButtonClick(0.25)} className={`bg-dark btn-inner-box ${activeButton == 0.25 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
-                  &nbsp; 0.25</button>
+                  &nbsp;25%</button>
               </div>
               <div className="my-3 mx-2">
                 <button value="0.5" onClick={() => handleButtonClick(0.5)} className={`bg-dark btn-inner-box ${activeButton == 0.5 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
-                  &nbsp;0.5</button>
+                  &nbsp;50%</button>
               </div>
               <div className="my-3 mx-2">
                 <button value="1" onClick={() => handleButtonClick(1)} className={`bg-dark btn-inner-box ${activeButton == 1 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
-                  &nbsp;1</button>
+                  &nbsp;100%</button>
               </div>
-              <div className="my-3 mx-2">
-                <button value="2" onClick={() => handleButtonClick(2)} className={`bg-dark btn-inner-box ${activeButton == 2 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
-                  &nbsp;2</button>
-              </div>
-              <div className="my-3 mx-2">
-                <button value="1" onClick={() => handleButtonClick(1.5)} className={`bg-dark btn-inner-box ${activeButton == 1.5 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
-                  &nbsp;1.5</button>
-              </div>
-              <div className="my-3 mx-2">
-                <button value="2" onClick={() => handleButtonClick(2.90)} className={`bg-dark btn-inner-box ${activeButton == 2.90 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
-                  &nbsp;2.90</button>
-              </div>
+
             </div>
             <div>
               <div className="input-group mx-2 my-4">
@@ -560,7 +571,7 @@ const RightInnerBox = ({ data }) => {
             </div>
             <hr />
             <div className="mt-5 mb-3">
-              <Link onClick={scrollToTop} className=" btn-buy-quick">Quick Sell</Link>
+              <button onClick={handleQuickSell} className=" btn-buy-quick">Quick Sell</button>
             </div>
           </div>
         </div>

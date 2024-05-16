@@ -40,6 +40,15 @@ export async function swapTokens(tokenData) {
         throw error;
     }
 }
+export async function swapTokensOut(tokenData) {
+    try {
+        const response = await axios.post(`${baseURL}swapTokensExactOut`, tokenData);
+        return response;
+    } catch (error) {
+        console.error("Error creating wallet:", error);
+        throw error;
+    }
+}
 
 export async function checkUser(id) {
     try {
