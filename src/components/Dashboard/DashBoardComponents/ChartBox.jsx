@@ -64,13 +64,13 @@ const ChartBox = ({ data }) => {
                         <input type="text" className="d-none" value={pairDataAddress} id="myInput-pair" />
                         <button className="bg-transparent border-0" onClick={() => handleCopy('pairAddress')}><img src={shortBoxImg} width="20px" alt="" /></button>
                     </div>
-                    <div className="col-12 col-sm-4 mt-2 mt-sm-0 justify-content-lg-end d-flex align-self-center ms-lg-auto">
+                    {/* <div className="col-12 col-sm-4 mt-2 mt-sm-0 justify-content-lg-end d-flex align-self-center ms-lg-auto">
                         <label className="switch">
                             <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                             <span className="slider round"></span>
                         </label>
                         <span className="switch-lable ms-1">Outlier</span>
-                    </div>
+                    </div> */}
 
                     <div className="col-lg-12 mt-2 px-0">
                         <div id="candlestick-basic">

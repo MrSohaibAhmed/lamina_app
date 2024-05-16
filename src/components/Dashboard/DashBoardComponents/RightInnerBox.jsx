@@ -51,7 +51,8 @@ const RightInnerBox = ({ data }) => {
     switch (timeframe) {
       case '5M':
         {
-          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnsfive.buys || 0, Txnsfive.sells || 0, data?.pairs[0]?.volume?.m5);
+
+          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnsfive.buys || 0, Txnsfive.sells || 0, data?.pairs?.[0]?.volume?.m5);
           setBuy(Txnsfive.buys || 0);
           setsell(Txnsfive.sells || 0);
           setTotaltxns(totalTransactions);
@@ -62,7 +63,7 @@ const RightInnerBox = ({ data }) => {
         }
       case '1H':
         {
-          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnsone.buys || 0, Txnsone.sells || 0, data?.pairs[0]?.volume?.h1);
+          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnsone.buys || 0, Txnsone.sells || 0, data?.pairs?.[0]?.volume?.h1);
           setBuy(Txnsone.buys || 0);
           setsell(Txnsone.sells || 0);
           setTotaltxns(totalTransactions);
@@ -73,7 +74,7 @@ const RightInnerBox = ({ data }) => {
         }
       case '6H':
         {
-          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnssix.buys || 0, Txnssix.sells || 0, data?.pairs[0]?.volume?.h6);
+          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnssix.buys || 0, Txnssix.sells || 0, data?.pairs?.[0]?.volume?.h6);
           setBuy(Txnssix.buys || 0);
           setsell(Txnssix.sells || 0);
           setTotaltxns(totalTransactions);
@@ -84,7 +85,7 @@ const RightInnerBox = ({ data }) => {
         }
       case '24H':
         {
-          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnstwentyfour.buys || 0, Txnstwentyfour.sells || 0, data?.pairs[0]?.volume?.h24);
+          const { buyVolume, sellVolume, totalTransactions, volumeInThousands } = calculateVolumes(Txnstwentyfour.buys || 0, Txnstwentyfour.sells || 0, data?.pairs?.[0]?.volume?.h24);
           setBuy(Txnstwentyfour.buys || 0);
           setsell(Txnstwentyfour.sells || 0);
           setTotaltxns(totalTransactions);
@@ -170,14 +171,21 @@ const RightInnerBox = ({ data }) => {
 
   useEffect(() => {
     if (data?.pairs && data.pairs.length > 0 && data.pairs[0]?.txns) {
-      setsetTxnsfive(data?.pairs[0]?.txns?.m5)
-      setsetTxnsone(data?.pairs[0]?.txns?.h1)
-      setsetTxnssix(data?.pairs[0]?.txns?.h6)
-      setsetTxnstwentyfour(data?.pairs[0]?.txns?.h24)
-
-
+      setsetTxnsfive(data?.pairs[0]?.txns?.m5);
+      setsetTxnsone(data?.pairs[0]?.txns?.h1);
+      setsetTxnssix(data?.pairs[0]?.txns?.h6);
+      setsetTxnstwentyfour(data?.pairs[0]?.txns?.h24);
     }
-  }, [data])
+  }, [data]);
+  useEffect(() => {
+    if (Txnsfive) {
+      const timer = setTimeout(() => {
+        updateData('5M');
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [Txnsfive]);
 
   return (
     <>
@@ -474,15 +482,15 @@ const RightInnerBox = ({ data }) => {
             <hr />
             <div className="d-flex flex-wrap">
               <div className="my-3 mx-2">
-                <button value="0.25" onClick={() => handleButtonClick(0.25)} className={`bg-dark btn-inner-box ${activeButton == 0.25 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
+                <button value="0.25" onClick={() => handleButtonClick('25%')} className={`bg-dark btn-inner-box ${activeButton == '25%' ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
                   &nbsp;25%</button>
               </div>
               <div className="my-3 mx-2">
-                <button value="0.5" onClick={() => handleButtonClick(0.5)} className={`bg-dark btn-inner-box ${activeButton == 0.5 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
+                <button value="50%" onClick={() => handleButtonClick("50%")} className={`bg-dark btn-inner-box ${activeButton == "50%" ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
                   &nbsp;50%</button>
               </div>
               <div className="my-3 mx-2">
-                <button value="1" onClick={() => handleButtonClick(1)} className={`bg-dark btn-inner-box ${activeButton == 1 ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
+                <button value="100%" onClick={() => handleButtonClick("100%")} className={`bg-dark btn-inner-box ${activeButton == "100%" ? 'btn1-active' : ''}`}><img src={solIconImg} width="18px" alt="" />
                   &nbsp;100%</button>
               </div>
 
@@ -491,7 +499,7 @@ const RightInnerBox = ({ data }) => {
               <div className="input-group mx-2 my-4">
                 <span className="input-group-text bg-transparent border border-right-0" id="basic-addon1"><img
                   src={solIconImg} width="18px" alt="" /></span>
-                <input type="text" className="form-control bg-transparent border border-left-0 text-light"
+                <input type="text" value={inputAmountVal} onChange={changeAmountHandler} className="form-control bg-transparent border border-left-0 text-light"
                   placeholder="Amount to buy in SOL" aria-label="Amount" aria-describedby="basic-addon1" />
               </div>
             </div>
@@ -571,7 +579,7 @@ const RightInnerBox = ({ data }) => {
             </div>
             <hr />
             <div className="mt-5 mb-3">
-              <button onClick={handleQuickSell} className=" btn-buy-quick">Quick Sell</button>
+              <button onClick={handleQuickSell} className=" btn-buy-quick">Quick Sell  {selectedValue}</button>
             </div>
           </div>
         </div>
