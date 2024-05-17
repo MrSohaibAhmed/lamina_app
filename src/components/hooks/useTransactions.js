@@ -2,8 +2,8 @@ import axios from "axios";
 export async function setTransaction(id) { // Add transactionData parameter
     const options = {
         method: 'GET', // Likely a POST request for setting a transaction
-        // url: `https://public-api.birdeye.so/defi/txs/token?address=${id}&tx_type=swap`, 
-        url: `https://public-api.birdeye.so/defi/txs/token?address=Dse7rYtFvsghemc6JYBTrqKHZd7au2LGWreHJuR11d8U&tx_type=swap`, // Adjust URL based on API
+        url: `https://public-api.birdeye.so/defi/txs/token?address=${id}&tx_type=swap`,
+        // url: `https://public-api.birdeye.so/defi/txs/token?address=Dse7rYtFvsghemc6JYBTrqKHZd7au2LGWreHJuR11d8U&tx_type=swap`, // Adjust URL based on API
         // Adjust URL based on API
         headers: {
             'x-chain': 'solana',
