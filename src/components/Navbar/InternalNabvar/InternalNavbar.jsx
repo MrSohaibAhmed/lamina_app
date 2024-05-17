@@ -120,7 +120,8 @@ const InternalNavbar = () => {
         };
     }, []);
 
-    const logout = () => {
+    const logoutAccount = () => {
+        console.log("clicked")
         disconnectFromMetaMask();
         navigate('/');
     }
@@ -215,10 +216,10 @@ const InternalNavbar = () => {
                                 </Link>
                                 <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                     <li>
-                                        <Button className="dropdown-item" >
-                                            <img src={logoutImg} alt="Logout" onClick={logout} />
+                                        <button className="dropdown-item" onClick={logoutAccount}>
+                                            <img src={logoutImg} alt="Logout" />
                                             <span className='px-2'>Logout</span>
-                                        </Button>
+                                        </button>
                                     </li>
                                 </ul>
                             </li>
