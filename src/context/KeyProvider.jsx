@@ -13,23 +13,20 @@ export const KeyProvider = ({ children }) => {
     // const [balance, setBalance] = useState(null);
     const generateKeyHandler = async () => {
         try {
-            const response = await createWalletAndSaveToMongoDB(localStorage.getItem("account"));
+            const response = await createWalletAndSaveToMongoDB(localStorage.getItem("solanaKey"));
             if (response) {
+                // debugger
                 // console.log("response is", response);
-                const walletDataResponse = response.data.data;
+                const walletDataResponse = response?.data;
                 // console.log("wallet data response is", walletDataResponse);
                 setWalletData(walletDataResponse);
-                // console.log("Wallet data is", walletDataResponse);
-                // Access publicKey from walletDataResponse
+
                 const publicKey1 = walletDataResponse.publicKey;
-                // console.log("publicKey1 key is =>", publicKey1);
+                localStorage.setItem("publicKey", publicKey1)
                 setPublicKey(publicKey1);
                 const privateKey1 = walletDataResponse.encryptedPrivateKey.encryptedPrivateKey;
-                // console.log("Private key is =>", privateKey1);
                 setPrivateKey(privateKey1);
-                // const balance1 = walletData.balance;
-                // console.log("publicKey1 key is =>", publicKey1);
-                // setBalance(balance1)
+
                 navigate('/step2');
             }
         } catch (error) {

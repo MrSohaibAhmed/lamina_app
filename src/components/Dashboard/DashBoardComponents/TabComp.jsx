@@ -4,12 +4,12 @@ import holdingImg from '../../../assets/dashboard/holding.png';
 import arrowImg from '../../../assets/dashboard/arrows.png';
 import solIconImg from '../../../assets/dashboard/sol-icon.png';
 import transationTableIconImg from '../../../assets/dashboard/transaction-table-icon.png'
+import TransactionTable from './TrancationTable';
+import HoldingTable from './HoldingTable';
 // import { getTokenAccounts } from '../../hooks/useTransactions';
 const TabComp = ({ data }) => {
-    const walletToQuery = 'FvjW8SdGgfFHJ5Q9XSni9g8GwnuY69RUQ5eEQxSYMeB2';
-    useEffect(() => {
-        // getTokenAccounts(walletToQuery)
-    })
+    // debugger
+
     return (
 
         <div className="mt-3 tab-box">
@@ -30,149 +30,13 @@ const TabComp = ({ data }) => {
             <div className="tab-content" id="pills-tabContent">
                 <div className="tab-pane fade show active" id="pills-transaction" role="tabpanel"
                     aria-labelledby="pills-transaction-tab">
-                    <div className="table-responsive">
-                        <table className="table table-dark">
-                            <thead>
-                                <tr className="border-0">
-                                    <th scope="col">Date/Age <img src={arrowImg} width="14px" alt="" /></th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Price USD</th>
-                                    <th scope="col">Total USD</th>
-                                    <th scope="col">Price SOL</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Total SOL</th>
-                                    <th scope="col">Makers</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody className="border-top-0">
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Apr 23 11:19:34</td>
-                                    <td>Sell</td>
-                                    <td>$0.05114</td>
-                                    <td>$0.49</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td>
-                                    <td>433k</td>
-                                    <td><img src={solIconImg} width="18px" alt="" /> 0.00311</td>
-                                    <td>3XUv67...7uU8</td>
-                                    <td><img src={transationTableIconImg} width="20px" alt="" /></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <TransactionTable address={data?.pairs?.[0]?.pairAddress} />
                 </div>
                 <div className="tab-pane fade" id="pills-holding" role="tabpanel" aria-labelledby="pills-holding-tab">
-                    <h2 className="pt-3">My Holding</h2>
+                    <div className="tab-pane fade show active" id="pills-transaction" role="tabpanel"
+                        aria-labelledby="pills-transaction-tab">
+                        <HoldingTable address={data?.pairs?.[0]?.pairAddress} />
+                    </div>
                 </div>
             </div>
         </div>

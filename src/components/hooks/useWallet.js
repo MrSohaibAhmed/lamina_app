@@ -1,10 +1,13 @@
 
 import axios from "axios";
 
-const baseURL = "http://192.168.1.21:3000/";
+// const baseURL = "http://192.168.1.21:5000/";
+const baseURL = "http://35.238.34.252:5000/";
 export async function createWalletAndSaveToMongoDB(id) {
     try {
-        const response = await axios.get(`${baseURL}createWalletAndSaveToMongoDB?publicAddress=${id}`);
+        const response = await axios.get(`${baseURL}createWalletAndSaveToMongoDB/${id}`);
+        // const response = await axios.get(`${baseURL}createWalletAndSaveToMongoDB/publicAddress=2Rrw9VvoX7c841ZF6KbvuBnyH5aPqu9vzVXgz93xRUvA`);
+
         return response.data;
     } catch (error) {
         console.error("Error creating wallet:", error);

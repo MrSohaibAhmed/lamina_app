@@ -98,3 +98,14 @@
   .footer-bottom{
     padding-top: 50px;
   }
+
+  .btn-transparent{
+    background-color: transparent;
+  text-align: left;
+  padding: 0;
+  border: none;
+  }
+  .btn-transparent:hover{
+   border: none;
+   padding: 0;
+  }

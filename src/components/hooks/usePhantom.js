@@ -7,6 +7,7 @@ const usePhantom = () => {
     const [account, setAccount] = useState(null);
     const [web3, setWeb3] = useState(null);
     const [signedMessage, setSignedMessage] = useState(null);
+    const [solanaKey, setSolanaKey] = useState(null);
 
     const connectToPhantom = async () => {
         if (window.ethereum) {
@@ -14,13 +15,18 @@ const usePhantom = () => {
                 await window.ethereum.request({ method: 'eth_requestAccounts' });
                 const web3Instance = new Web3(window.ethereum);
                 const accounts = await web3Instance.eth.getAccounts();
-                console.log(accounts, ">>>>>>>");
+                await window.solana.connect();
+                const solanaPublicKey = window.solana.publicKey.toString();
+                console.log(accounts, solanaPublicKey, ">>>>>>>");
                 setAccount(accounts[0]);
                 setWeb3(web3Instance);
+                setSolanaKey(solanaPublicKey);
                 setConnected(true);
                 localStorage.setItem("account", accounts[0]);
                 localStorage.setItem("web3", web3Instance);
                 localStorage.setItem("connected", true);
+                localStorage.setItem("solanaKey", solanaPublicKey);
+
 
             } catch (error) {
                 console.error(error);
@@ -36,6 +42,8 @@ const usePhantom = () => {
         localStorage.removeItem("account");
         localStorage.removeItem("web3");
         localStorage.removeItem("connected");
+        localStorage.removeItem("solanaKey");
+        localStorage.removeItem("publicKey");
         localStorage.removeItem("-walletlink:https://www.walletlink.org:EIP6963ProviderUUID");
 
     };
@@ -70,6 +78,7 @@ const usePhantom = () => {
             } catch (error) {
                 console.error('Error signing message:', error);
             }
+            // debugger
             navi("/dashboard");
         } else {
             console.error('Web3 instance or account not available.');
@@ -77,7 +86,7 @@ const usePhantom = () => {
     };
 
 
-    return { connectToPhantom, disconnectFromMetaMask, connected, account, web3, signMessage, newUsersignMessage };
+    return { connectToPhantom, disconnectFromMetaMask, connected, account, web3, signMessage, newUsersignMessage, solanaKey };
 };
 
 export default usePhantom;

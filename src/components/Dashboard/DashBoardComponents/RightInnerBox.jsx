@@ -110,10 +110,12 @@ const RightInnerBox = ({ data }) => {
         }
     }
   }
+  const [buyResult, setBuyResult] = useState("");
 
   const handleQuickBuy = () => {
-    if (selectedValue !== null && selectedValue !== 0) { // Check if selectedValue is not null or 0
+    if (selectedValue !== null && selectedValue !== 0) {
       const value = {
+        address: localStorage.getItem("publicKey"),
         amount: selectedValue * 1000000000,
         inputMint: "So11111111111111111111111111111111111111112",
         outputMint: data?.pairs?.[0]?.baseToken?.address,
@@ -121,12 +123,27 @@ const RightInnerBox = ({ data }) => {
 
       const buyPromise = swapTokens(value);
 
+      buyPromise.then(result => {
+        const transactionResult = result?.data?.swapResponse?.transactionResult;
+        setBuyResult(transactionResult);
+        console.log('Buy Promise Result:', transactionResult);
+        const t = <div>Buyed Successfully. Here is your Transaction Id ${transactionResult}</div>
+        toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
+          duration: 10000,
+
+        },
+        );
+      }).catch(error => {
+        console.error('Buy Promise Error:', error);
+        toast.error('Cannot Buy. Try Again');
+      });
+
       toast.promise(
         buyPromise,
         {
           loading: 'Buying...',
-          success: 'Buyed Successfully',
-          error: 'Cannot Buy. Try Again',
+          success: '',
+          error: '',
         }
       );
     } else {
@@ -134,16 +151,27 @@ const RightInnerBox = ({ data }) => {
       noValueError();
     }
   };
+
   const handleQuickSell = () => {
     if (selectedValue !== null && selectedValue !== 0) { // Check if selectedValue is not null or 0
       const value = {
-        amount: selectedValue * 1000000000,
+        address: localStorage.getItem("publicKey"),
+        amount: 0.25 * 1000000000,
         inputMint: data?.pairs?.[0]?.baseToken?.address,
         outputMint: "So11111111111111111111111111111111111111112",
       };
 
       const buyPromise = swapTokensOut(value);
+      buyPromise.then(result => {
+        const transactionResult = result?.data?.swapResponse?.transactionResult;
+        setBuyResult(transactionResult);
+        console.log('Buy Promise Result:', transactionResult);
 
+        toast.success(`Sold Successfully. Your Transaction is Sent`);
+      }).catch(error => {
+        console.error('Buy Promise Error:', error);
+        toast.error('Cannot Buy. Try Again');
+      });
       toast.promise(
         buyPromise,
         {

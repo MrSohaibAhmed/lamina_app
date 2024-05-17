@@ -134,7 +134,7 @@ const InternalNavbar = () => {
         quickSearch();
     }, [searchInput])
 
-  
+
     return (
         <div>
             <nav className="navbar py-3 navbar-expand-lg navbar-dark ">
