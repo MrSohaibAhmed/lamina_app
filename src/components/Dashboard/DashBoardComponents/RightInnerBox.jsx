@@ -11,11 +11,14 @@ import toast, { Toaster } from 'react-hot-toast';
 import { swapTokens, swapTokensOut } from '../../hooks/useWallet'
 import "../Dashboard.css"
 import { Log } from 'ethers'
-
+import { pairData } from '../../hooks/useWallet'
 
 
 const RightInnerBox = ({ data }) => {
-
+  const [allData, setAllData] = useState([])
+  useEffect(() => {
+    setAllData(data)
+  }, [data])
   const [Txnsfive, setsetTxnsfive] = useState(0);
   const [Txnsone, setsetTxnsone] = useState(0);
   const [Txnssix, setsetTxnssix] = useState(0);
@@ -113,7 +116,7 @@ const RightInnerBox = ({ data }) => {
       const value = {
         amount: selectedValue * 1000000000,
         inputMint: "So11111111111111111111111111111111111111112",
-        outputMint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+        outputMint: data?.pairs?.[0]?.baseToken?.address,
       };
 
       const buyPromise = swapTokens(value);
@@ -135,8 +138,8 @@ const RightInnerBox = ({ data }) => {
     if (selectedValue !== null && selectedValue !== 0) { // Check if selectedValue is not null or 0
       const value = {
         amount: selectedValue * 1000000000,
-        inputMint: "So11111111111111111111111111111111111111112",
-        outputMint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+        inputMint: data?.pairs?.[0]?.baseToken?.address,
+        outputMint: "So11111111111111111111111111111111111111112",
       };
 
       const buyPromise = swapTokensOut(value);
@@ -186,7 +189,36 @@ const RightInnerBox = ({ data }) => {
       return () => clearTimeout(timer);
     }
   }, [Txnsfive]);
+  useEffect(() => {
+    // debugger
+    let intervalId;
+    // Define a function to make the API call
+    const fetchData = () => {
+      // Check if the required data is available
+      if (data?.pairs?.[0]?.priceUsd) {
+        // Make the API call with the required parameter
+        pairData(data.pairs?.[0]?.pairAddress)
+          .then(response => {
+            setAllData(response.data)
+            // Process the response as needed
+            // console.log("API call response:", response.data);
+          })
+          .catch(error => {
+            // Handle errors
+            // console.error("API call error:", error);
+          });
+      }
+    };
 
+    // Schedule the first API call when component mounts
+    fetchData();
+
+    // Set interval to make API call every 5 seconds
+    intervalId = setInterval(fetchData, 5000);
+
+    // Clean up interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [data]);
   return (
     <>
       <Toaster position="top-center"
@@ -220,12 +252,12 @@ const RightInnerBox = ({ data }) => {
         <div className="row price-inner">
           <div className="col-lg-4 col">
             <h6>Price USD</h6>
-            <h5>{data?.pairs?.[0]?.priceUsd || "0.1980"}</h5>
+            <h5>{allData?.pairs?.[0]?.priceUsd || "0.1980"}</h5>
 
           </div>
           <div className="col-lg-4  col">
             <h6>Price SOL</h6>
-            <h5>{data?.pairs?.[0]?.priceNative || "0.1980"}</h5>
+            <h5>{allData?.pairs?.[0]?.priceNative || "0.1980"}</h5>
           </div>
           <div className="col-lg-4 col">
             <h6>SUPPLY</h6>
@@ -236,11 +268,11 @@ const RightInnerBox = ({ data }) => {
         <div className="row price-inner">
           <div className="col-lg-4 col">
             <h6>LIQUIDITY</h6>
-            <h5>{data?.pairs?.[0]?.liquidity?.usd || "0.1980"}</h5>
+            <h5>${Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100)}K</h5>
           </div>
           <div className="col-lg-4 col">
             <h6>MKT CAP</h6>
-            <h5>{(data?.pairs?.[0]?.liquidity?.base || 0) / 1000000}M</h5>
+            <h5>${(allData?.pairs?.[0]?.liquidity?.base || 0) / 1000000}M</h5>
 
           </div>
           <div className="col-lg-4 col">

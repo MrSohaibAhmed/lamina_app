@@ -18,7 +18,6 @@ const Dashboard = () => {
     setKey(prevKey => prevKey + 1);
   }
 
-
   useEffect(() => {
     updateKey();
   }, [coinsKey]);
@@ -40,7 +39,7 @@ const Dashboard = () => {
               <div className="row">
                 {/* Left Side  */}
                 <div className="col-lg-8 left-side">
-                  <ChartBox key={key} data={coinsKey} />
+                  <MemoizedChartBox key={key} data={coinsKey} />
                   <TabComp data={coinsKey} />
                 </div>
                 {/* Right Side  */}
@@ -58,5 +57,12 @@ const Dashboard = () => {
     </>
   );
 }
+
+// Memoized ChartBox component
+const MemoizedChartBox = React.memo(ChartBox, (prevProps, nextProps) => {
+  // debugger
+  // Compare the symbols in the previous and next props
+  return prevProps.data?.pairs?.[0]?.baseToken.symbol === nextProps.data?.pairs?.[0]?.baseToken.symbol;
+});
 
 export default Dashboard;

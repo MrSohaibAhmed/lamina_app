@@ -283,12 +283,7 @@
 
 import React, { useEffect, useRef, memo } from "react";
 function TradingViewWidget({ data }) {
-  let symbol = "BTCUSD";
-  if (data?.pairs && data.pairs.length > 0 && data.pairs[0]?.baseToken?.symbol) {
-    // debugger
-    symbol = data.pairs[0].baseToken.symbol;
-  }
-
+  let deafault = "BTCUSD";
 
   const container = useRef();
   useEffect(() => {
@@ -300,7 +295,7 @@ function TradingViewWidget({ data }) {
     script.innerHTML = `
         {
           "height": "600",
-          "symbol": "${symbol}",
+          "symbol": "${data ? data : deafault}",
           "interval": "D",
           "timezone": "Etc/UTC",
           "theme": "dark",
@@ -331,7 +326,7 @@ function TradingViewWidget({ data }) {
         script.parentNode.removeChild(script);
       }
     };
-  }, [data, symbol]);
+  }, [data]);
 
   return (
     <div className="tradingview-widget-container" ref={container}>

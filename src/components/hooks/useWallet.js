@@ -80,3 +80,13 @@ export async function pairData(id) {
         throw error;
     }
 }
+
+export async function getMyHoldings(id) {
+    try {
+        const response = await axios.get(`${baseURL}token-accounts/${id}`);
+        return response;
+    } catch (error) {
+        console.error("Error Finding Pair", error);
+        throw error;
+    }
+}

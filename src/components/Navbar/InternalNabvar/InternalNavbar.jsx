@@ -54,6 +54,7 @@ const InternalNavbar = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [pairAddress, setPairAddress] = useState(null)
     const { disconnectFromMetaMask } = usePhantom();
     const navigate = useNavigate();
 
@@ -64,7 +65,8 @@ const InternalNavbar = () => {
         const foundPair = data.find(pair => pair.pairaddress === pairAddress);
         if (foundPair) {
             setNoDetails(false)
-            console.log(foundPair);
+            setPairAddress(foundPair.pairaddress)
+            // console.log(foundPair);
             const res = await pairData(foundPair.pairaddress)
             console.log(res?.data, "Response data is = >>>>>>>>>")
             setCoinsKey(res?.data);
@@ -131,6 +133,8 @@ const InternalNavbar = () => {
     useEffect(() => {
         quickSearch();
     }, [searchInput])
+
+  
     return (
         <div>
             <nav className="navbar py-3 navbar-expand-lg navbar-dark ">
