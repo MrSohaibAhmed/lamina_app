@@ -1,21 +1,26 @@
-import React, { useContext, useState } from 'react';
-import logoImg from '../../assets/img/logo.png'
-import '../../components/Navbar/ExternalNavbar/Navbar.css'
-import { Link, useNavigate } from 'react-router-dom';
-import KeyContext from '../../context/walletContext';
-
-
+import React, { useContext, useState } from "react";
+import logoImg from "../../assets/img/logo.png";
+import "../../components/Navbar/ExternalNavbar/Navbar.css";
+import { Link, useNavigate } from "react-router-dom";
+import KeyContext from "../../context/walletContext";
+import Loader from "./Loader";
 
 const LuminaWallets = () => {
   const navigate = useNavigate();
-  // const { privateKey, publickey, balance } = useContext(KeyContext)
   const { generateKeyHandler } = useContext(KeyContext);
+  const [loading, setLoading] = useState(false);
 
-  // const generateKeyHandler = () => {
-  //   console.log("Private key is", privateKey);
-  // }
-
-  // console.log("step1 public key" , publicKey);
+  const handleGenerateKey = async () => {
+    setLoading(true);
+    try {
+      await generateKeyHandler();
+      // Handle success if needed, e.g., navigate to another page
+    } catch (error) {
+      console.error("Error generating key:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -29,19 +34,28 @@ const LuminaWallets = () => {
           <div className="row">
             <div className="col-lg-12 pt-5 text-center">
               <h1 className="main-heading">
-                Generate and download your<br className="d-break" /> Lumina trading wallet
+                Generate and download your
+                <br className="d-break" /> Lumina trading wallet
               </h1>
             </div>
           </div>
           <div className="row">
             <div className="col-lg-7 mx-auto step-box">
               <h3>
-                Click Generate to obtain your lumina wallet<br className="d-break" /> and private key!
+                Click Generate to obtain your lumina wallet
+                <br className="d-break" /> and private key!
               </h3>
-              <Link onClick={generateKeyHandler} className="step-box-btn" >
-                Generate
-              </Link>
-              {/* <button onClick={click}>Click me </button> */}
+              {loading ? (
+                <center>
+                  <Link className="step-box-btn" disabled>
+                    Generating....
+                  </Link>
+                </center>
+              ) : (
+                <Link onClick={handleGenerateKey} className="step-box-btn">
+                  Generate
+                </Link>
+              )}
             </div>
           </div>
           <div className="row">
