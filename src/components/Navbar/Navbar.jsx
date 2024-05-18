@@ -5,9 +5,39 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { checkUser } from "../hooks/useWallet";
+import usePhantom from "../../components/hooks/usePhantom";
+
 const NavbarComp = () => {
-    const { connection } = useConnection();
-    const { publicKey, sendTransaction } = useWallet();
+  const {
+    connectToPhantom,
+    connected,
+    account,
+    web3,
+    signMessage,
+    newUsersignMessage,
+    solanaKey,
+  } = usePhantom();
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
+  useEffect(() => {
+    debugger
+    if (solanaKey) {
+      checkUser(solanaKey)
+        .then((res) => {
+          // debugger
+          console.log(res);
+          localStorage.setItem("publicKey", res?.data?.data.publicKey);
+          console.log("user found");
+          signMessage();
+        })
+        .catch((error) => {
+          newUsersignMessage();
+          console.log("user not found");
+          console.error("Error checking user:", error);
+        });
+    }
+  }, [solanaKey]);
   return (
     <nav className="navbar py-3 navbar-expand-lg navbar-dark ">
       <div className="container">
@@ -56,14 +86,13 @@ const NavbarComp = () => {
               </ul>
             </li>
             <li className="nav-item">
-              <a
+              <button
                 className="btn btn-connect active"
                 aria-current="page"
-                href="#"
+                onClick={connectToPhantom}
               >
-               
                 Connect Wallet
-              </a>
+              </button>
             </li>
           </ul>
         </div>

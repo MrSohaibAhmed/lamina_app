@@ -9,6 +9,7 @@ const usePhantom = () => {
     const [signedMessage, setSignedMessage] = useState(null);
     const [solanaKey, setSolanaKey] = useState(null);
     const connectToPhantom = async () => {
+        debugger
         if (window.solana) { // Check if Solana wallet extension is available
             try {
                 // Request connection to Solana wallet
