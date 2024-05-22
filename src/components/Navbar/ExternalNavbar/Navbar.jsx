@@ -51,6 +51,12 @@ const NavbarComp = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
+          <li className="nav-item">
+              <a className="mx-4 txt-nav">$GENAI CA - 5XzX3PGu2mmWSeSJ8yXdXgX9xjAA1Prdr8dPz3FNzQT9</a>
+            </li>
+          <li className="nav-item">
+              <a href="#"  className="btn-nav">Twitter</a> /  <a href="#" className="me-3 btn-nav">Telegram</a>
+            </li>
             <li className="nav-item">
               <Link className="btn btn-bsc active" aria-current="page">
                 <img src={solImg} width="20px" alt="SOLONA" /> SOLANA
