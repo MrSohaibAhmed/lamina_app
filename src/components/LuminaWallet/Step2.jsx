@@ -1,6 +1,7 @@
 
 import React, { useContext, useState } from 'react';
-import '../Navbar/ExternalNavbar/Navbar.css'
+import '../Navbar/ExternalNavbar/Navbar.css';
+import logoImg from "../../assets/dashboard/logo.png";
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +24,13 @@ const Step2 = () => {
         setRevealPrivateKey(true);
     };
     return (
+        
         <div className='step2main'>
+            <div className="text-center py-4">
+      <Link className="navbar-brand" to="/">
+            <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
+          </Link>
+      </div>
             <div className="text-center py-4"><Link to="/"><img src="assets/img/logo.png" width="200px" alt="" /></Link></div>
             <section id="hero" className="hero d-flex align-items-center">
                 <div className="container-fluid">

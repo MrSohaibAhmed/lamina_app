@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import logoImg from "../../assets/img/logo.png";
+import logoImg from "../../assets/dashboard/logo.png";
 import "../../components/Navbar/ExternalNavbar/Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import KeyContext from "../../context/walletContext";
 import Loader from "./Loader";
 
-const LuminaWallets = () => {
+const GENAIWallets = () => {
   const navigate = useNavigate();
   const { generateKeyHandler } = useContext(KeyContext);
   const [loading, setLoading] = useState(false);
@@ -25,9 +25,9 @@ const LuminaWallets = () => {
   return (
     <div>
       <div className="text-center py-4">
-        <Link to="/">
-          <img src={logoImg} width="200px" alt="" />
-        </Link>
+      <Link className="navbar-brand" to="/">
+            <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
+          </Link>
       </div>
       <section id="hero" className="hero d-flex align-items-center">
         <div className="container-fluid">
@@ -35,14 +35,14 @@ const LuminaWallets = () => {
             <div className="col-lg-12 pt-5 text-center">
               <h1 className="main-heading step-heading">
                 Generate and download your
-                <br className="d-break" /> Lumina trading wallet
+                <br className="d-break" /> GENAI trading wallet
               </h1>
             </div>
           </div>
           <div className="row">
             <div className="col-lg-6 mx-auto step-box">
               <h3>
-                Click Generate to obtain your lumina wallet
+                Click Generate to obtain your GENAI wallet
                 <br className="d-break" /> and private key!
               </h3>
               {loading ? (
@@ -91,4 +91,4 @@ const LuminaWallets = () => {
   );
 };
 
-export default LuminaWallets;
+export default GENAIWallets;
