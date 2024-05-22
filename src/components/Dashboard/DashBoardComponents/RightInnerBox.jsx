@@ -14,11 +14,17 @@ import { Log } from "ethers";
 import { pairData } from "../../hooks/useWallet";
 import shortBoxImg from "../../../assets/dashboard/short-box.png";
 
-const RightInnerBox = ({ data }) => {
+const RightInnerBox = ({ data , checkZoomLevel }) => {
   const [allData, setAllData] = useState([]);
   useEffect(() => {
     setAllData(data);
+
   }, [data]);
+  useEffect(() => {
+    checkZoomLevel();
+
+  }, [checkZoomLevel]);
+
   const [Txnsfive, setsetTxnsfive] = useState(0);
   const [Txnsone, setsetTxnsone] = useState(0);
   const [Txnssix, setsetTxnssix] = useState(0);
@@ -367,7 +373,7 @@ const RightInnerBox = ({ data }) => {
           <div className="col-lg-4 col"></div>
         </div>
       </div>
-      <div className="right-inner-box mt-3">
+      <div className="right-inner-box mt-3 hide-on-zoom">
         <div className="row price-inner text-center">
           <button
             onClick={() => updateData("5M")}
@@ -637,7 +643,7 @@ const RightInnerBox = ({ data }) => {
                 className="accordion accordion-flush bg-dark"
                 id="accordionFlush"
               >
-                <div className="accordion-item">
+                <div className="accordion-item ">
                   <h2 className="accordion-header" id="flush-headingOne">
                     <button
                       className="accordion-button accordion-button-inner collapsed"

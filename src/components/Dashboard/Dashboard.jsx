@@ -5,6 +5,7 @@ import RightInnerBox from "./DashBoardComponents/RightInnerBox";
 import RightAccordian from "./DashBoardComponents/RightAccordian";
 import InternalNavbar from "../Navbar/InternalNabvar/InternalNavbar";
 import KeyContext from "../../context/walletContext";
+import './Dashboard.css'
 
 const Dashboard = () => {
   const { coinsKey, noDetails } = useContext(KeyContext);
@@ -18,9 +19,36 @@ const Dashboard = () => {
     setKey((prevKey) => prevKey + 1);
   };
 
+  const checkZoomLevel = () => {
+    const zoomLevel = Math.round(window.devicePixelRatio * 100);
+
+    const elementsToHide = document.querySelectorAll('.hide-on-zoom');
+    if (zoomLevel >= 175) {
+      elementsToHide.forEach(element => {
+        element.classList.add('hidden');
+      });
+    } else {
+      elementsToHide.forEach(element => {
+        element.classList.remove('hidden');
+      });
+    }
+  };
+
+
   useEffect(() => {
     updateKey();
   }, [coinsKey]);
+
+
+  useEffect(() => {
+   
+    window.addEventListener('resize', checkZoomLevel);
+    checkZoomLevel(); // Check initially
+
+    return () => {
+      window.removeEventListener('resize', checkZoomLevel);
+    };
+  }, []);
 
   return (
     <>
@@ -48,13 +76,17 @@ const Dashboard = () => {
               <div className="row">
                 {/* Left Side  */}
                 <div className="col-lg-8 left-side">
-                  <MemoizedChartBox key={key} data={coinsKey} />
-                  <TabComp data={coinsKey} />
+                  <div className="hide-on-zoom">
+                    <MemoizedChartBox key={key} data={coinsKey} />
+                  </div>
+                  <div>
+                    <TabComp data={coinsKey} />
+                  </div>
                 </div>
                 {/* Right Side  */}
                 <div className="col-lg-4 right-side">
-                  <RightInnerBox data={coinsKey} />
-                  <div className="my-3">
+                  <RightInnerBox checkZoomLevel={checkZoomLevel} data={coinsKey} />
+                  <div className="my-3 hide-on-zoom">
                     <RightAccordian data={coinsKey} />
                   </div>
                 </div>
