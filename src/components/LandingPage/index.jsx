@@ -19,22 +19,23 @@ const LandingPage = () => {
     signMessage,
     newUsersignMessage,
     solanaKey,
+    connectToSolflare,
   } = usePhantom();
   useEffect(() => {
     if (solanaKey) {
-    checkUser(solanaKey)
-      .then((res) => {
-        // //debugger
-        console.log(res);
-        localStorage.setItem("publicKey", res?.data?.data.publicKey);
-        console.log("user found");
-        signMessage();
-      })
-      .catch((error) => {
-        newUsersignMessage();
-        console.log("user not found");
-        console.error("Error checking user:", error);
-      });
+      checkUser(solanaKey)
+        .then((res) => {
+          // //debugger
+          console.log(res);
+          localStorage.setItem("publicKey", res?.data?.data.publicKey);
+          console.log("user found");
+          signMessage();
+        })
+        .catch((error) => {
+          newUsersignMessage();
+          console.log("user not found");
+          console.error("Error checking user:", error);
+        });
     }
   }, [solanaKey]);
 

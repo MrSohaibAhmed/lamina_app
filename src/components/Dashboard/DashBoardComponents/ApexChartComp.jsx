@@ -1,4 +1,3 @@
-
 // import React from 'react';
 // // import ReactApexChart from 'react-apexcharts';
 // import Chart from 'react-apexcharts';
@@ -280,7 +279,6 @@
 
 // export default ApexChartComponent;
 
-
 import React, { useEffect, useRef, memo } from "react";
 function TradingViewWidget({ data }) {
   let deafault = "BTCUSD";
@@ -295,11 +293,11 @@ function TradingViewWidget({ data }) {
     script.innerHTML = `
         {
           "height": "600",
-          "symbol": "${data ? data : deafault}",
+           "symbol": "${data ? data : deafault}",
           "interval": "D",
           "timezone": "Etc/UTC",
           "theme": "dark",
-          "style": "0",
+          "style": "1",
           "locale": "en",
           "enable_publishing": false,
           "withdateranges": true,
@@ -335,5 +333,4 @@ function TradingViewWidget({ data }) {
     </div>
   );
 }
-export default memo(TradingViewWidget)
-
+export default memo(TradingViewWidget);
