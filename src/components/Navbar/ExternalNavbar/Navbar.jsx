@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import { PublicKey } from "@solana/web3.js"
-import logoImg from "../../../assets/img/logo.png";
+import logoImg from "../../../assets/dashboard/logo.png";
 import solImg from "../../../assets/img/sol-d6ecfc05903dc1848872e95eab3de8cdbdeb68927d14e9d1dcf5d16212d65f74.svg";
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -35,9 +35,9 @@ const NavbarComp = () => {
   return (
     <nav className="navbar py-3 navbar-expand-lg navbar-dark">
       <div className="container">
-        <Link className="navbar-brand" to="/">
-          <img src={logoImg} width="200px" alt="Logo" />
-        </Link>
+      <Link className="navbar-brand" to="/">
+            <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
+          </Link>
         <button
           className="navbar-toggler"
           type="button"
