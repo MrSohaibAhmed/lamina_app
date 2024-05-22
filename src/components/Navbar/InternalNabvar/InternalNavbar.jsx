@@ -81,7 +81,7 @@ const InternalNavbar = () => {
   // };
 
   const handleSearch = async (e) => {
-    // debugger
+    // //debugger
     e.preventDefault();
     // Call the searchPair function with the input parameter
     const response = await searchPair(searchInput);
@@ -93,7 +93,7 @@ const InternalNavbar = () => {
     setSearchInput("");
   };
   const quickSearch = async (e) => {
-    // debugger
+    // //debugger
     // e.preventDefault();
     // Call the searchPair function with the input parameter
     const response = await searchPair(searchInput);

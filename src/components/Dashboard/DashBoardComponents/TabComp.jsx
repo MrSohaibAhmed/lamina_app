@@ -8,7 +8,7 @@ import TransactionTable from './TrancationTable';
 import HoldingTable from './HoldingTable';
 // import { getTokenAccounts } from '../../hooks/useTransactions';
 const TabComp = ({ data }) => {
-    // debugger
+    // //debugger
 
     return (
 

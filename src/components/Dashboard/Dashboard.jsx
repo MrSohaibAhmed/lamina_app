@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
-import ChartBox from './DashBoardComponents/ChartBox';
-import TabComp from './DashBoardComponents/TabComp';
-import RightInnerBox from './DashBoardComponents/RightInnerBox';
-import RightAccordian from './DashBoardComponents/RightAccordian';
-import InternalNavbar from '../Navbar/InternalNabvar/InternalNavbar';
-import KeyContext from '../../context/walletContext';
+import React, { useContext, useState, useEffect } from "react";
+import ChartBox from "./DashBoardComponents/ChartBox";
+import TabComp from "./DashBoardComponents/TabComp";
+import RightInnerBox from "./DashBoardComponents/RightInnerBox";
+import RightAccordian from "./DashBoardComponents/RightAccordian";
+import InternalNavbar from "../Navbar/InternalNabvar/InternalNavbar";
+import KeyContext from "../../context/walletContext";
 
 const Dashboard = () => {
   const { coinsKey, noDetails } = useContext(KeyContext);
@@ -15,8 +15,8 @@ const Dashboard = () => {
 
   // Function to update key when data prop changes
   const updateKey = () => {
-    setKey(prevKey => prevKey + 1);
-  }
+    setKey((prevKey) => prevKey + 1);
+  };
 
   useEffect(() => {
     updateKey();
@@ -26,15 +26,24 @@ const Dashboard = () => {
     <>
       <InternalNavbar />
       {noDetails === true ? (
-        <div style={{ height: "500px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div
+          style={{
+            height: "500px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <center>
-            <h3 className=' pt-5'>Sorry 😥 We Are not Dealing With This Pair Right Now . </h3>
+            <h3 className=" pt-5">
+              Sorry 😥 We Are not Dealing With This Pair Right Now .{" "}
+            </h3>
             <h3>Try Searching Another One 😃</h3>
           </center>
         </div>
       ) : (
         <div>
-          <div className='main'>
+          <div className="main">
             <div className="container-fluid">
               <div className="row">
                 {/* Left Side  */}
@@ -56,13 +65,16 @@ const Dashboard = () => {
       )}
     </>
   );
-}
+};
 
 // Memoized ChartBox component
 const MemoizedChartBox = React.memo(ChartBox, (prevProps, nextProps) => {
-  // debugger
+  // //debugger
   // Compare the symbols in the previous and next props
-  return prevProps.data?.pairs?.[0]?.baseToken.symbol === nextProps.data?.pairs?.[0]?.baseToken.symbol;
+  return (
+    prevProps.data?.pairs?.[0]?.baseToken.symbol ===
+    nextProps.data?.pairs?.[0]?.baseToken.symbol
+  );
 });
 
 export default Dashboard;

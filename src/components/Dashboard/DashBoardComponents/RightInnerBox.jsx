@@ -265,7 +265,7 @@ const RightInnerBox = ({ data }) => {
     }
   }, [Txnsfive]);
   useEffect(() => {
-    // debugger
+    // //debugger
     let intervalId;
     // Define a function to make the API call
     const fetchData = () => {

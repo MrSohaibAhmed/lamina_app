@@ -9,7 +9,6 @@ const usePhantom = () => {
     const [signedMessage, setSignedMessage] = useState(null);
     const [solanaKey, setSolanaKey] = useState(null);
     const connectToPhantom = async () => {
-        debugger
         if (window.solana) { // Check if Solana wallet extension is available
             try {
                 // Request connection to Solana wallet
@@ -84,7 +83,7 @@ const usePhantom = () => {
     //     }
     // };
     const newUsersignMessage = async () => {
-        debugger
+        //debugger
         if (window.solana && solanaKey) {
             const message = 'To avoid digital dognappers, sign below to authenticate with fusiond_app.';
             const encoder = new TextEncoder();
@@ -95,7 +94,6 @@ const usePhantom = () => {
                 // const signature = Buffer.from(signedMessage.signature).toString('hex'); // Convert signature to hex string
                 // setSignedMessage(signature);
                 // localStorage.setItem("sign", signature);
-                debugger
                 navi("/step1");
             } catch (error) {
                 console.error('Error signing message:', error);
@@ -118,14 +116,14 @@ const usePhantom = () => {
     //         } catch (error) {
     //             console.error('Error signing message:', error);
     //         }
-    //         // debugger
+    //         // //debugger
     //         navi("/dashboard");
     //     } else {
     //         console.error('Web3 instance or account not available.');
     //     }
     // };
     const signMessage = async () => {
-        debugger
+        //debugger
         if (window.solana && solanaKey) {
             const message = 'To avoid digital dognappers, sign below to authenticate with fusiond_app.';
             const encoder = new TextEncoder();

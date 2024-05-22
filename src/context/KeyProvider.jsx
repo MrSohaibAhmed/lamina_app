@@ -18,7 +18,7 @@ export const KeyProvider = ({ children }) => {
         localStorage.getItem("solanaKey")
       );
       if (response) {
-        // debugger
+        // //debugger
         // console.log("response is", response);
         const walletDataResponse = response?.data;
         // console.log("wallet data response is", walletDataResponse);

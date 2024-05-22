@@ -15,11 +15,11 @@ const NavbarComp = () => {
     solanaKey,
   } = usePhantom();
   useEffect(() => {
-    debugger;
+    //debugger;
     if (solanaKey) {
       checkUser(solanaKey)
         .then((res) => {
-          // debugger
+          // //debugger
           localStorage.setItem("publicKey", res?.data?.data.publicKey);
           console.log("user found");
           signMessage();

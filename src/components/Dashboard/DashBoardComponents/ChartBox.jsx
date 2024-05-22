@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 
 const ChartBox = ({ data }) => {
     console.log(data.pairs?.[0]?.baseToken?.symbol)
-    // debugger
+    // //debugger
     const [tokenAddress, setTokenAddress] = useState();
     const [pairDataAddress, setPairDataAddress] = useState();
     const [name, setName] = useState("BTCUSD");
