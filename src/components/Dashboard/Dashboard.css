@@ -345,9 +345,9 @@ td {
     background-color: black !important;
 }
 
-.hidden{
+/* .hidden{
     display:none;
-}
+} */
 .progress-value-right, .progress-value-left{
     font-size: 16px!important;
 }
@@ -387,11 +387,13 @@ td {
         padding-top: 12px;
     }
 
+}
+@media (max-width: 1329px) {
+
     .topnav {
-        display: none;
+        display: none!important;
     }
 }
-
 
 @media (max-width: 1400px) {
     .navbar-dark {
@@ -405,3 +407,13 @@ td {
     }
 }
 
+@media (max-width: 1608px) {
+    .navbar-dark .navbar-nav .nav-link {
+        margin: 1px 5px;
+    }
+}
+@media (max-width: 1064px) {
+        .navbar-dark .navbar-nav .nav-link {
+            margin: 1px 3px;
+        }
+    }
