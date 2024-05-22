@@ -6,7 +6,11 @@ import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import usePhantom from "../../../components/hooks/usePhantom";
 import { checkUser } from "../../hooks/useWallet";
+import ModalComp from "./ModalComp";
 const NavbarComp = () => {
+
+
+  const [showModal, setShowModal] = useState(false);
   const {
     connectToPhantom,
     connected,
@@ -32,7 +36,13 @@ const NavbarComp = () => {
     }
   }, [solanaKey]);
 
+  const handleConnectWallet = () => {
+    setShowModal(true); // Show modal when "Connect Wallet" button is clicked
+    // connectToPhantom();
+  };
+
   return (
+    <>
     <nav className="navbar py-3 navbar-expand-lg navbar-dark">
       <div className="container">
         <Link className="navbar-brand" to="/">
@@ -77,21 +87,32 @@ const NavbarComp = () => {
                 </li>
               </ul>
             </li>
-            {/* {walletAvail && ( */}
-            <li className="nav-item">
-              {/* <button onClick={connectToPhantom} className="btn btn-connect active">{connected ? "Successfully Connected" : "Connect Wallet"}</button> */}
-              <button
-                onClick={connectToPhantom}
-                className="btn btn-connect active"
-              >
-                Connect Wallet
-              </button>
+            <li className="nav-item"> 
+              
+              <ModalComp/>
             </li>
             {/* )} */}
           </ul>
         </div>
       </div>
     </nav>
+    {showModal && (
+      <div className="modal">
+        <div className="modal-content">
+          <span className="close" onClick={() => setShowModal(false)}>
+            &times;
+          </span>
+          <p>This is the modal content</p>
+          <button onClick={() => console.log("Button 1 clicked")}>
+            Button 1
+          </button>
+          <button onClick={() => console.log("Button 2 clicked")}>
+            Button 2
+          </button>
+        </div>
+      </div>
+    )}
+    </>
   );
 };
 
