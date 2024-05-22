@@ -53,7 +53,8 @@ const LandingPage = () => {
             <div className="col-lg-1"></div>
             <div className="col-lg-5 d-flex flex-column justify-content-center">
               <h1 data-aos="fade-up">
-                Snipe and sell tokens <br /> at lightning speed
+              TRADE TOKENS
+              <br /> AT LIGHTNING SPEED
               </h1>
               <button className="btn-transparent" onClick={connectToPhantom}>
                 <h2 data-aos="fade-up" data-aos-delay="400">
