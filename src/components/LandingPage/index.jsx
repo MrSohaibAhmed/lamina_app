@@ -135,7 +135,7 @@ const LandingPage = () => {
           <div className="row">
             <div className="col-lg-12 text-center">
               <h1 className="main-heading">
-                START TRADINGIN
+                START TRADING IN
                 <br /> LESS THAN 30 SECS
               </h1>
               <p>Install Phantom and connect your wallet to log in.</p>
