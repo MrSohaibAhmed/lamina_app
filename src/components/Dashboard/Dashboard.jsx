@@ -72,7 +72,7 @@ const Dashboard = () => {
             <div className="container-fluid">
               <div className="row">
                 {/* Left Side  */}
-                <div className="col-lg-8 left-side">
+                <div className="col-lg-9 left-side">
                   <div className="hide-on-zoom">
                     <MemoizedChartBox key={key} data={coinsKey} />
                   </div>
@@ -81,7 +81,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 {/* Right Side  */}
-                <div className="col-lg-4 right-side">
+                <div className="col-lg-3 right-side">
                   <RightInnerBox
                     checkZoomLevel={checkZoomLevel}
                     data={coinsKey}
