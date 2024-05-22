@@ -18,7 +18,7 @@ export async function setTransaction(id) { // Add transactionData parameter
     }
 }
 
-export async function setHoldings(id) { // Add transactionData parameter
+export async function setHoldings(id) {
     const options = {
         method: 'GET',
         url: `https://public-api.birdeye.so/v1/wallet/token_list?wallet=${id}`,

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../Dashboard.css'
 
 const RightAccordian = () => {
+   
     return (
         <div className="accordion accordion-flush bg-dark" id="accordionFlush">
             <div className="accordion-item">
