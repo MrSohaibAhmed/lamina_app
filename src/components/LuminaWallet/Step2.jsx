@@ -33,13 +33,13 @@ const Step2 = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-7 mx-auto step-box text-lg-start">
+                        <div className="col-lg-5 mx-auto step-box text-lg-start">
                             <div className="row">
                                 <div className="col-lg-11 mx-auto">
                                     <h3 className="mb-4">Lumina Trading wallet</h3>
                                     <div className="row">
                                         <div className="col-lg-12 mx-auto">
-                                            <div className="input-group input-group-lg mb-4">
+                                            <div className="input-group input-group mb-4">
                                                 <input readOnly type="text" value={publicKey} className="form-control" aria-label="Amount" />
                                                 <span className="input-group-text"><FontAwesomeIcon onClick={() => handleCopy(publicKey)} icon={faCopy} /></span>
                                             </div>
@@ -49,16 +49,16 @@ const Step2 = () => {
                                     <h3 className="mb-1">Private Key</h3>
 
                                     <div style={{
-                                        opacity: revealPrivateKey ? 1 : 0.02,
-                                        transition: 'opacity 0.5s ease-in-out'
-                                    }} className="input-group input-group-lg mb-4">
+                                        opacity: revealPrivateKey ? 1 : 0.5,
+                                        transition: ' 0.5s ease-in-out'
+                                    }} className="input-group input-group mb-4">
                                         <input readOnly type="text" value={privateKey} className="form-control" aria-label="Amount" />
                                         <span className="input-group-text"><FontAwesomeIcon onClick={handleCopy} icon={faCopy} /></span>
                                     </div>
                                     <p style={{
-                                        opacity: revealPrivateKey ? 1 : 0.04,
-                                        transition: 'opacity 0.5s ease-in-out'
-                                    }} className="mb-0">Please copy the below private key and store it in a safe location. Your private key will NOT be displayed again.</p>
+                                        opacity: revealPrivateKey ? 1 : 0.9,
+                                        transition: ' 0.5s ease-in-out'
+                                    }} className="mb-0 text-white">Please copy the below private key and store it in a safe location. Your private key will NOT be displayed again.</p>
                                     <div className="text-center mb-5">
                                         <button className="step-box-btn" onClick={handleReveal}>Click here to reveal private key</button>
                                     </div>

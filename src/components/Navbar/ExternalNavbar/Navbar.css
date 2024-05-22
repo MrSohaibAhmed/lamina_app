@@ -72,17 +72,17 @@
 }
 .step-box h3{
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 300;
   line-height: 32px;
   margin-bottom: 60px;
 }
 .step-box-btn{
   background: linear-gradient(100.89deg, #AF47F8 1.78%, #595FFB 43.31%, #1ECBE3 95.1%);
-  padding: 15px 70px;
+  padding: 11px 40px;
   color: #fff;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   margin-top: 60px;
   border-radius: 50px;

@@ -1,6 +1,9 @@
 .mainLandingPage{
     background-color: #03040D;
 }
+.text-white{
+  color: #fff!important;
+}
 .hero {
     width: 100%;
     background: url(../img/hero-bg.png) top center no-repeat;
