@@ -73,15 +73,15 @@ const LandingPage = () => {
             </div>
             <div className="col-lg-12 trader-heading text-center">
               <h1 className="main-heading">
-                BUILT BY TRADERS
-                <br /> <span className="text-gradiant">FOR TRADERS</span>
+              BUILT FOR SPEED
+                <br /> <span className="text-gradiant">AND NO DELAYS</span>
               </h1>
             </div>
           </div>
         </div>
       </div>
       {/* <!-- End Hero --> */}
-      <div className="trader-div align-items-center">
+      {/* <div className="trader-div align-items-center">
         <div className="container trader-box">
           <div className="row">
             <div className="col-lg-6 align-self-center">
@@ -127,8 +127,8 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-      </div>
-      {/* <!-- End Hero --> */}
+      </div> */}
+      {/* <!-- End step --> */}
       <div className="footer">
         <div className="container">
           <div className="row">
@@ -142,7 +142,7 @@ const LandingPage = () => {
             <div className="col-lg-12 footer-bottom">
               <div className="row">
                 <div className="col-lg-6 text-lg-start text-center">
-                  <p>© Lumina wallet Inc. 2024</p>
+                  <p>© $GENAI SOLANA Wallet Inc. 2024</p>
                 </div>
                 <div className="col-lg-6 text-center text-lg-end">
                   <Link onClick={scrollToTop}>Terms of use </Link> |{" "}
