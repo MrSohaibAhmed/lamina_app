@@ -12,11 +12,11 @@ const navigate = useNavigate();
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-12 pt-5 text-center">
-                            <h1 className="main-heading">Confirm your Photon trading <br className="d-break" /> wallet balance</h1>
+                            <h1 className="main-heading step-heading">Confirm your Photon trading <br className="d-break" /> wallet balance</h1>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-7 mx-auto step-box">
+                        <div className="col-lg-5 mx-auto step-box">
                             <h3 className="mb-4">Oops! Your Photon wallet has 0 SOL Deposit SOL to this<br className="d-break" /> wallet to start trading</h3>
                             <div className="mb-5"><a href="#"></a>8ANgsVdw2dQXZtyJbXAdBvi6njrv4KB1VLmFhLmFjWum <i className="fa fa-copy"></i></div>
                             <button onClick={()=>{navigate('/dashboard')}} className="step-box-btn" href="#">Check Balance</button>

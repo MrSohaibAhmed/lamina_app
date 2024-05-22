@@ -29,14 +29,14 @@ const Step2 = () => {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-12 pt-5 text-center">
-                            <h1 className="main-heading step-heading">This is your <br className="d-break" /> Lumina trading wallet</h1>
+                            <h1 className="main-heading step-heading">This is your <br className="d-break" /> GENAI trading wallet</h1>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-5 mx-auto step-box text-lg-start">
                             <div className="row">
                                 <div className="col-lg-11 mx-auto">
-                                    <h3 className="mb-4">Lumina Trading wallet</h3>
+                                    <h3 className="mb-4">GENAI Trading wallet</h3>
                                     <div className="row">
                                         <div className="col-lg-12 mx-auto">
                                             <div className="input-group input-group mb-4">
@@ -58,7 +58,7 @@ const Step2 = () => {
                                     <p style={{
                                         opacity: revealPrivateKey ? 1 : 0.9,
                                         transition: ' 0.5s ease-in-out'
-                                    }} className="mb-0 text-white">Please copy the below private key and store it in a safe location. Your private key will NOT be displayed again.</p>
+                                    }} className="mb-0 text-white">Please copy the above private key and store it in a safe location. Your private key will NOT be displayed again.</p>
                                     <div className="text-center mb-5">
                                         <button className="step-box-btn" onClick={handleReveal}>Click here to reveal private key</button>
                                     </div>
