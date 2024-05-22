@@ -8,8 +8,6 @@ import TransactionTable from "./TrancationTable";
 import HoldingTable from "./HoldingTable";
 // import { getTokenAccounts } from '../../hooks/useTransactions';
 const TabComp = ({ data }) => {
-  debugger;
-
   return (
     <div className="mt-3 tab-box">
       <ul className="nav nav-pills" id="pills-tab" role="tablist">

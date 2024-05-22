@@ -27,6 +27,30 @@ const usePhantom = () => {
             alert('Phantom extension not detected!');
         }
     };
+    const connectToSolflare = async () => {
+        if (window.solflare) {
+            debugger
+            try {
+                const response = await window.solflare.connect();
+                if (response) {
+
+                    const solflarePublicKey = window.solflare.publicKey.toString();
+
+                    console.log(solfarePublicKey, ">>>>>>>");
+                    setSolanaKey(solfarePublicKey);
+                    setConnected(true);
+                    localStorage.setItem("solanaKey", solflarePublicKey);
+                    localStorage.setItem("connected", true);
+                } else {
+                    console.error("Failed to retrieve the public key from Solflare.");
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            alert('Solflare extension not detected!');
+        }
+    };
     // const connectToPhantom = async () => {
     //     if (window.ethereum) {
     //         try {
@@ -148,7 +172,7 @@ const usePhantom = () => {
 
 
     // return { connectToPhantom, disconnectFromMetaMask, connected, account, web3, signMessage, newUsersignMessage, solanaKey };
-    return { connectToPhantom, disconnectFromMetaMask, connected, signMessage, newUsersignMessage, solanaKey };
+    return { connectToPhantom, disconnectFromMetaMask, connected, signMessage, newUsersignMessage, solanaKey, connectToSolflare };
 
 };
 
