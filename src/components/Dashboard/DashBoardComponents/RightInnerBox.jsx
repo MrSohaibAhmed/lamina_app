@@ -166,13 +166,14 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
               style={{ cursor: "pointer" }}
               onClick={() => copy(transactionResult)}
             >
-              Click Here To Copy your Transaction Hash <img src={shortBoxImg} />
+              Buyed Successfully. Your Transaction Is Sent . Click Here To Copy
+              your Transaction Hash <img src={shortBoxImg} />
             </div>
           );
 
-          toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
-            duration: 10000,
-          });
+          // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
+          //   duration: 10000,
+          // });
           toast.success(t, {
             duration: 10000,
           });
@@ -215,10 +216,11 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
               style={{ cursor: "pointer" }}
               onClick={() => copy(transactionResult)}
             >
-              Click Here To Copy your Transaction Hash <img src={shortBoxImg} />
+              Sold Successfully. Your Transaction is Sent . Click Here To Copy
+              your Transaction Hash <img src={shortBoxImg} />
             </div>
           );
-          toast.success(`Sold Successfully. Your Transaction is Sent`);
+          // toast.success(`Sold Successfully. Your Transaction is Sent`);
           toast.success(t, {
             duration: 10000,
           });
@@ -325,26 +327,22 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
             </a>
           </div>
         </div>
-        {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100) <
-        150 ? (
-          <div className="row mt-4">
-            <div
-              className="alert alert-info alert-dismissible fade show"
-              role="alert"
-            >
-              <img src={alertImg} height="22px" width="20px" alt="" />
-              &nbsp; This pair has very little liquidity
-              <button
-                type="button"
-                className="btn-close btn-close-white"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-            </div>
+        <div className="row mt-4">
+          <div
+            className="alert alert-info alert-dismissible fade show"
+            role="alert"
+          >
+            <img src={alertImg} height="22px" width="20px" alt="" />
+            &nbsp; This pair has very little liquidity
+            <button
+              type="button"
+              className="btn-close btn-close-white"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
           </div>
-        ) : null}
-
-        <div className="row price-inner mt-4">
+        </div>
+        <div className="row price-inner">
           <div className="col-lg-4 col">
             <h6>Price USD</h6>
             <h5>{allData?.pairs?.[0]?.priceUsd || "0.1980"}</h5>
