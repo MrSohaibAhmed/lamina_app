@@ -341,6 +341,10 @@ td {
     background-color: black !important;
 }
 
+.hidden{
+    display:none;
+}
+
 
 
 
