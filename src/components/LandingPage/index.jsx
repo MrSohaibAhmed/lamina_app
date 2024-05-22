@@ -82,21 +82,21 @@ const LandingPage = () => {
         </div>
       </div>
       {/* <!-- End Hero --> */}
-      {/* <div className="trader-div align-items-center">
+      <div className="trader-div align-items-center">
         <div className="container trader-box">
           <div className="row">
             <div className="col-lg-6 align-self-center">
               <img src={traderIconImg} width="54px" alt="" />
               <h1 className="trader-hd">Discover</h1>
               <p>Discover new tokens and filter by your preferences.</p>
-              <h2 className="trading-num">01</h2>
+              {/* <h2 className="trading-num">01</h2> */}
             </div>
             <div className="col-lg-6 align-self-center">
               <img src={trader1Img} className="img-fluid" alt="" />
             </div>
           </div>
         </div>
-        <div className="container trader-box">
+        {/* <div className="container trader-box">
           <div className="row">
             <div className="col-lg-6 align-self-center">
               <img src={traderIconImg} width="54px" alt="" />
@@ -127,8 +127,8 @@ const LandingPage = () => {
               <img src={trader3Img} className="img-fluid" alt="" />
             </div>
           </div>
-        </div>
-      </div> */}
+        </div> */}
+      </div>
       {/* <!-- End step --> */}
       <div className="footer">
         <div className="container">
