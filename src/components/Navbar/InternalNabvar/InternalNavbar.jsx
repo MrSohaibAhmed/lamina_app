@@ -10,6 +10,7 @@ import usePhantom from "../../hooks/usePhantom";
 import { Button } from "react-scroll";
 import { searchPair, pairData } from "../../hooks/useWallet";
 import KeyContext from "../../../context/walletContext";
+import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 
 const data = [
   {
@@ -47,6 +48,11 @@ const data = [
     tokenaddress: "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
     name: " $WIF",
   },
+  {
+    pairaddress: "CwJCznavdHe6AYU85v56nDh1VCWKs3ywcRj8uShXd3F3",
+    tokenaddress: "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+    name: "GEN AI BOT",
+  },
 ];
 
 const InternalNavbar = () => {
@@ -78,8 +84,11 @@ const InternalNavbar = () => {
   useEffect(() => {
     const fetchPairData = async () => {
       try {
+        // const res = await pairData(
+        //   "CwJCznavdHe6AYU85v56nDh1VCWKs3ywcRj8uShXd3F3"
+        // );
         const res = await pairData(
-          "CwJCznavdHe6AYU85v56nDh1VCWKs3ywcRj8uShXd3F3"
+          "9tz6vYKiBDLYx2RnGWC5tESu4pyVE4jD6Tm56352UGte"
         );
         console.log(res?.data, "Response data is = >>>>>>>>>");
         setCoinsKey(res?.data);
@@ -153,6 +162,24 @@ const InternalNavbar = () => {
   useEffect(() => {
     quickSearch();
   }, [searchInput]);
+
+  useEffect(() => {
+    const getSolBalance = async (address) => {
+      try {
+        const connection = new Connection(clusterApiUrl("mainnet-beta"));
+        const publicKey = new PublicKey(localStorage.getItem("publicKey"));
+        const balance = await connection.getBalance(publicKey);
+        const solBalance = balance / 1000000000;
+        console.log(solBalance);
+      } catch (error) {
+        console.error("Error getting SOL balance:", error);
+      }
+    };
+
+    if (true) {
+      getSolBalance();
+    }
+  }, []);
 
   return (
     <div>
@@ -278,6 +305,17 @@ const InternalNavbar = () => {
                     </Link>
                   </li>
                 </ul>
+              </li>
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  id="navbarScrollingDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  SOL :
+                </Link>
               </li>
               <li className="nav-item dropdown">
                 <Link

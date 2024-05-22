@@ -14,15 +14,13 @@ import { Log } from "ethers";
 import { pairData } from "../../hooks/useWallet";
 import shortBoxImg from "../../../assets/dashboard/short-box.png";
 
-const RightInnerBox = ({ data , checkZoomLevel }) => {
+const RightInnerBox = ({ data, checkZoomLevel }) => {
   const [allData, setAllData] = useState([]);
   useEffect(() => {
     setAllData(data);
-
   }, [data]);
   useEffect(() => {
     checkZoomLevel();
-
   }, [checkZoomLevel]);
 
   const [Txnsfive, setsetTxnsfive] = useState(0);
@@ -168,13 +166,14 @@ const RightInnerBox = ({ data , checkZoomLevel }) => {
               style={{ cursor: "pointer" }}
               onClick={() => copy(transactionResult)}
             >
-              Click Here To Copy your Transaction Hash <img src={shortBoxImg} />
+              Buyed Successfully. Your Transaction Is Sent . Click Here To Copy
+              your Transaction Hash <img src={shortBoxImg} />
             </div>
           );
 
-          toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
-            duration: 10000,
-          });
+          // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
+          //   duration: 10000,
+          // });
           toast.success(t, {
             duration: 10000,
           });
@@ -217,10 +216,11 @@ const RightInnerBox = ({ data , checkZoomLevel }) => {
               style={{ cursor: "pointer" }}
               onClick={() => copy(transactionResult)}
             >
-              Click Here To Copy your Transaction Hash <img src={shortBoxImg} />
+              Sold Successfully. Your Transaction is Sent . Click Here To Copy
+              your Transaction Hash <img src={shortBoxImg} />
             </div>
           );
-          toast.success(`Sold Successfully. Your Transaction is Sent`);
+          // toast.success(`Sold Successfully. Your Transaction is Sent`);
           toast.success(t, {
             duration: 10000,
           });

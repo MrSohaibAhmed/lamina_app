@@ -5,7 +5,7 @@ import RightInnerBox from "./DashBoardComponents/RightInnerBox";
 import RightAccordian from "./DashBoardComponents/RightAccordian";
 import InternalNavbar from "../Navbar/InternalNabvar/InternalNavbar";
 import KeyContext from "../../context/walletContext";
-import './Dashboard.css'
+import "./Dashboard.css";
 
 const Dashboard = () => {
   const { coinsKey, noDetails } = useContext(KeyContext);
@@ -22,31 +22,28 @@ const Dashboard = () => {
   const checkZoomLevel = () => {
     const zoomLevel = Math.round(window.devicePixelRatio * 100);
 
-    const elementsToHide = document.querySelectorAll('.hide-on-zoom');
+    const elementsToHide = document.querySelectorAll(".hide-on-zoom");
     if (zoomLevel >= 175) {
-      elementsToHide.forEach(element => {
-        element.classList.add('hidden');
+      elementsToHide.forEach((element) => {
+        element.classList.add("hidden");
       });
     } else {
-      elementsToHide.forEach(element => {
-        element.classList.remove('hidden');
+      elementsToHide.forEach((element) => {
+        element.classList.remove("hidden");
       });
     }
   };
-
 
   useEffect(() => {
     updateKey();
   }, [coinsKey]);
 
-
   useEffect(() => {
-   
-    window.addEventListener('resize', checkZoomLevel);
+    window.addEventListener("resize", checkZoomLevel);
     checkZoomLevel(); // Check initially
 
     return () => {
-      window.removeEventListener('resize', checkZoomLevel);
+      window.removeEventListener("resize", checkZoomLevel);
     };
   }, []);
 
@@ -85,7 +82,10 @@ const Dashboard = () => {
                 </div>
                 {/* Right Side  */}
                 <div className="col-lg-4 right-side">
-                  <RightInnerBox checkZoomLevel={checkZoomLevel} data={coinsKey} />
+                  <RightInnerBox
+                    checkZoomLevel={checkZoomLevel}
+                    data={coinsKey}
+                  />
                   <div className="my-3 hide-on-zoom">
                     <RightAccordian data={coinsKey} />
                   </div>
