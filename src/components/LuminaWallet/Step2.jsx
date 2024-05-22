@@ -29,7 +29,7 @@ const Step2 = () => {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-12 pt-5 text-center">
-                            <h1 className="main-heading">This is your <br className="d-break" /> Lumina trading wallet</h1>
+                            <h1 className="main-heading step-heading">This is your <br className="d-break" /> Lumina trading wallet</h1>
                         </div>
                     </div>
                     <div className="row">

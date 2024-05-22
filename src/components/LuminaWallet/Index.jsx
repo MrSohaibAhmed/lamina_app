@@ -33,14 +33,14 @@ const LuminaWallets = () => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12 pt-5 text-center">
-              <h1 className="main-heading">
+              <h1 className="main-heading step-heading">
                 Generate and download your
                 <br className="d-break" /> Lumina trading wallet
               </h1>
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-7 mx-auto step-box">
+            <div className="col-lg-6 mx-auto step-box">
               <h3>
                 Click Generate to obtain your lumina wallet
                 <br className="d-break" /> and private key!
@@ -58,7 +58,7 @@ const LuminaWallets = () => {
               )}
             </div>
           </div>
-          <div className="row">
+          <div className="row bg-def">
             <div className="col-lg-3 mx-auto">
               <nav className="WizardSteps">
                 <a className="WizardSteps__step WizardSteps__step--complete">

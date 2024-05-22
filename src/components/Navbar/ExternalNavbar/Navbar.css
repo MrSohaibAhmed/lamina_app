@@ -59,9 +59,11 @@
 
 
 /* Steps  */
-
+.bg-def{
+  background-color: #03040D;
+}
 .step-box{
-  padding: 140px 15px;
+  padding: 100px 15px;
   background-color: #7470D938;
   border-radius: 40px;
   text-align: center;
@@ -70,14 +72,14 @@
 }
 .step-box h3{
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 32px;
   margin-bottom: 60px;
 }
 .step-box-btn{
   background: linear-gradient(100.89deg, #AF47F8 1.78%, #595FFB 43.31%, #1ECBE3 95.1%);
-  padding: 20px 100px;
+  padding: 15px 70px;
   color: #fff;
   text-decoration: none;
   font-size: 16px;

@@ -17,6 +17,9 @@
   .txt-nav{
     font-size: 13px;
   }
+  .step-heading{
+    font-size: 24px!important;
+  }
   .txt-nav:hover{
     font-size: 13px;
     text-decoration: none;
