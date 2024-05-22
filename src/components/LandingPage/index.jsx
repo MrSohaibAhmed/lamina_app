@@ -58,10 +58,10 @@ const LandingPage = () => {
               </h1>
               <button className="btn-transparent" onClick={connectToPhantom}>
                 <h2 data-aos="fade-up" data-aos-delay="400">
-                  Connect to start trading SOL now
+                Connect to start trading now
                 </h2>
               </button>
-              <p>Install Phantom and connect your wallet to log in.</p>
+              <p>Install Phantom or any other Wallet to start.</p>
             </div>
             <div
               className="col-lg-6 px-0 hero-img"
