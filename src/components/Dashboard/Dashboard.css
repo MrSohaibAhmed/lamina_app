@@ -156,7 +156,7 @@ input:checked+.slider:before {
 }
 
 .tab-box .nav-pills {
-    background-color: #9C41E1;
+    background-color: #595FFB;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
@@ -212,14 +212,16 @@ td {
 }
 
 .price-inner h6 {
-    font-size: 18px;
+    font-size: 14px;
     color: #d3d3d3;
 }
 
 .price-inner h5 {
-    font-size: 20px;
+    font-size: 16px;
 }
-
+.price-inner h4 {
+    font-size: 16px;
+}
 .price-inner .border-inner {
     border-right: 1px solid #0F1D35;
     border-left: 1px solid #0F1D35;
@@ -242,7 +244,7 @@ td {
 
 .progress-values {
     position: absolute;
-    top: -62px;
+    top: -55px;
     left: 0px;
     right: 0px;
     display: flex;
@@ -278,7 +280,7 @@ td {
 }
 
 .btn-inner-box {
-    padding: 10px 26px;
+    padding: 6px 20px;
     text-decoration: none;
     color: #fff;
     border-radius: 8px;
@@ -318,13 +320,13 @@ td {
 }
 .btn-buy-quick{
     background: linear-gradient(90deg, #AF47F8 0%, #20C7E4 100%);
-    padding: 20px 40px;
+    padding: 12px 30px;
     color: #fff;
     text-decoration: none;
     border-radius: 14px;
     display: block;
     text-align: center;
-    font-size: 18px;
+    font-size: 15px;
     width: 100%;
 }
 .btn-buy-quick:hover{
@@ -344,7 +346,9 @@ td {
 .hidden{
     display:none;
 }
-
+.progress-value-right, .progress-value-left{
+    font-size: 16px!important;
+}
 
 
 

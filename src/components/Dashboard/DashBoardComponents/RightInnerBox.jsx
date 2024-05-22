@@ -442,7 +442,7 @@ const RightInnerBox = ({ data , checkZoomLevel }) => {
           </div>
           <div className="col-lg-8">
             <div className=" mt-5 position-relative">
-              <div className="progress-values">
+              <div className="progress-values mt-3">
                 <div className="progress-value-left">
                   <h6 className="mb-0">BUYS</h6>
                   {buy}

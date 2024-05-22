@@ -154,7 +154,7 @@ input:checked+.slider:before {
 }
 
 .tab-box .nav-pills {
-    background-color: #9C41E1;
+    background-color: #646cff;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
