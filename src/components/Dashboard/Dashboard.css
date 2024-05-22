@@ -147,7 +147,7 @@ input:checked+.slider:before {
 }
 
 .switch-lable {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .chart-box h4 {
@@ -167,6 +167,7 @@ input:checked+.slider:before {
     background: none !important;
     border-bottom: 2px solid #fff;
     border-radius: 0px;
+    font-size: 14px;
 }
 
 .tab-box .nav-link {
@@ -209,18 +210,24 @@ td {
     border: none;
     border-radius: 12px;
     color: #fff;
+    font-size: 11px;
 }
-
+.sm-font p{
+    font-size: 12px;
+}
+.sm-font h5{
+    font-size: 13px;
+}
 .price-inner h6 {
-    font-size: 14px;
+    font-size: 11px;
     color: #d3d3d3;
 }
 
 .price-inner h5 {
-    font-size: 16px;
+    font-size: 12px;
 }
 .price-inner h4 {
-    font-size: 16px;
+    font-size: 12px;
 }
 .price-inner .border-inner {
     border-right: 1px solid #0F1D35;
@@ -287,6 +294,7 @@ td {
     color: #fff;
     border-radius: 8px;
     border: 1px solid #575757;
+    font-size: 11px;
 }
 .btn1-active{
    border:1px solid #646cff  !important;
@@ -299,6 +307,7 @@ td {
     background-color: #0E0E26;
     color: #fff;
     border-radius: 10px!important;
+    font-size: 13px;
 }
 .accordion-item {
     background: #0E0E26;
@@ -319,6 +328,10 @@ td {
 .accordion-body-inner{
     background-color: #0E0E26;
     color: #fff;
+    font-size: 13px;
+}
+.def-table{
+    font-size: 12px!important;
 }
 .btn-buy-quick{
     background: linear-gradient(90deg, #AF47F8 0%, #20C7E4 100%);
@@ -349,7 +362,7 @@ td {
     display:none;
 } */
 .progress-value-right, .progress-value-left{
-    font-size: 16px!important;
+    font-size: 14px!important;
 }
 
 

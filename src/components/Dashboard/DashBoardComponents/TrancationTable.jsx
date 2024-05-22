@@ -65,7 +65,7 @@ const TransactionTable = ({ address }) => {
 
   return (
     <>
-      <div className="table-responsive">
+      <div className="table-responsive def-table">
         <table className="table table-dark">
           <thead>
             <tr className="border-0">

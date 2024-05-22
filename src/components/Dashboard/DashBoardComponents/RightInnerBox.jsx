@@ -305,11 +305,11 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="right-inner-box">
         <div className="row">
-          <div className="col-lg-5 col-md-12 align-self-center d-flex">
+          <div className="col-lg-5 col-md-12 sm-font align-self-center d-flex">
             <h5>{data?.pairs?.[0]?.baseToken?.symbol || "BTC"}</h5>&nbsp;{" "}
-            <img src={sercureImg} height="25px" width="20px" alt="" />
+            <img src={sercureImg} height="15px" width="10px" alt="" />
           </div>
-          <div className="col-lg-7 col-md-12 px-0 align-self-center d-flex">
+          <div className="col-lg-7 col-md-12 px-0 sm-font align-self-center d-flex">
             <p>{data?.pairs?.[0]?.dexId || "raydium V4"}</p>&nbsp; |&nbsp;{" "}
             <p>Profile</p>
           </div>
@@ -558,7 +558,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                     activeButton == 0.25 ? "btn1-active" : ""
                   }`}
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                   &nbsp; 0.25
                 </button>
               </div>
@@ -569,7 +569,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                     activeButton == 0.5 ? "btn1-active" : ""
                   }`}
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                   &nbsp;0.5
                 </button>
               </div>
@@ -580,7 +580,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                     activeButton == 1 ? "btn1-active" : ""
                   }`}
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                   &nbsp;1
                 </button>
               </div>
@@ -591,7 +591,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                     activeButton == 2 ? "btn1-active" : ""
                   }`}
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                   &nbsp;2
                 </button>
               </div>
@@ -602,7 +602,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                     activeButton == 1.5 ? "btn1-active" : ""
                   }`}
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                   &nbsp;1.5
                 </button>
               </div>
@@ -613,7 +613,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                     activeButton == 2.9 ? "btn1-active" : ""
                   }`}
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                   &nbsp;2.90
                 </button>
               </div>
@@ -624,7 +624,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                   className="input-group-text bg-transparent border border-right-0"
                   id="basic-addon1"
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                 </span>
                 <input
                   type="number"
@@ -738,7 +738,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                               className="input-group-text bg-transparent border border-right-0"
                               id="basic-addon1"
                             >
-                              <img src={solIconImg} width="18px" alt="" />
+                              <img src={solIconImg} width="14px" alt="" />
                             </span>
                             <input
                               type="text"
@@ -783,7 +783,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                     activeButton == "25%" ? "btn1-active" : ""
                   }`}
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                   &nbsp;25%
                 </button>
               </div>
@@ -795,7 +795,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                     activeButton == "50%" ? "btn1-active" : ""
                   }`}
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                   &nbsp;50%
                 </button>
               </div>
@@ -807,7 +807,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                     activeButton == "100%" ? "btn1-active" : ""
                   }`}
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                   &nbsp;100%
                 </button>
               </div>
@@ -818,7 +818,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                   className="input-group-text bg-transparent border border-right-0"
                   id="basic-addon1"
                 >
-                  <img src={solIconImg} width="18px" alt="" />
+                  <img src={solIconImg} width="14px" alt="" />
                 </span>
                 <input
                   type="text"
@@ -932,7 +932,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
                               className="input-group-text bg-transparent border border-right-0"
                               id="basic-addon1"
                             >
-                              <img src={solIconImg} width="18px" alt="" />
+                              <img src={solIconImg} width="14px" alt="" />
                             </span>
                             <input
                               type="text"

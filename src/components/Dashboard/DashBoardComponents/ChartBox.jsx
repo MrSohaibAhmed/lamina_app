@@ -57,14 +57,14 @@ const ChartBox = ({ data }) => {
                     <div className="col-6 col-sm-4 align-self-center">
                         <h4 className="mb-0">{name}</h4>
                     </div>
-                    <div className="col-12 mt-2 mt-sm-0 col-sm-4 d-flex align-self-center">
+                    <div className="col-12 mt-2 mt-sm-0 col-sm-4 d-flex def-table align-items-center align-self-center">
                         Token
                         <input type="text" className="d-none" value={tokenAddress} id="myInput-token" />
-                        <button className="bg-transparent border-0" onClick={() => handleCopy('tokenAddress')}><img src={shortBoxImg} width="20px" alt="" /></button>
+                        <button className="bg-transparent border-0" onClick={() => handleCopy('tokenAddress')}><img src={shortBoxImg} width="15px" alt="" /></button>
                         <div className="vl"></div>
                         Pair
                         <input type="text" className="d-none" value={pairDataAddress} id="myInput-pair" />
-                        <button className="bg-transparent border-0" onClick={() => handleCopy('pairAddress')}><img src={shortBoxImg} width="20px" alt="" /></button>
+                        <button className="bg-transparent border-0" onClick={() => handleCopy('pairAddress')}><img src={shortBoxImg} width="15px" alt="" /></button>
                     </div>
                     <div className="col-lg-12 mt-2 px-0">
                         <div id="candlestick-basic">
