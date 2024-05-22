@@ -226,7 +226,9 @@ td {
     border-right: 1px solid #0F1D35;
     border-left: 1px solid #0F1D35;
 }
-
+.d-content{
+    display: contents;
+}
 .border-bottom-inner {
     border-right: 1px solid #0F1D35;
 }

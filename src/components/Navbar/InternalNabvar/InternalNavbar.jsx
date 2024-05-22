@@ -253,7 +253,10 @@ const InternalNavbar = () => {
                 </div>
               </li>
             </ul>
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav d-content ms-auto mb-2 mb-lg-0">
+            <li className="nav-item dropdown">
+              <a href="https://x.com/genaitrade" className="btn-nav">Twitter</a> / <a href="https://t.me/genaitrade" className="btn-nav">Telegram</a>
+              </li>
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link dropdown-toggle"
