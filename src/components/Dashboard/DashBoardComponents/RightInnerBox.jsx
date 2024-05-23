@@ -327,21 +327,24 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
             </a>
           </div>
         </div>
-        <div className="row mt-4">
-          <div
-            className="alert alert-info alert-dismissible fade show"
-            role="alert"
-          >
-            <img src={alertImg} height="22px" width="20px" alt="" />
-            &nbsp; This pair has very little liquidity
-            <button
-              type="button"
-              className="btn-close btn-close-white"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
+        {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100) <
+        150 ? (
+          <div className="row mt-4">
+            <div
+              className="alert alert-info alert-dismissible fade show"
+              role="alert"
+            >
+              <img src={alertImg} height="22px" width="20px" alt="" />
+              &nbsp; This pair has very little liquidity
+              <button
+                type="button"
+                className="btn-close btn-close-white"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
           </div>
-        </div>
+        ) : null}
         <div className="row price-inner">
           <div className="col-lg-4 col">
             <h6>Price USD</h6>
