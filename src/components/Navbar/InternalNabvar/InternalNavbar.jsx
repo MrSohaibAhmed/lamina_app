@@ -10,7 +10,14 @@ import usePhantom from "../../hooks/usePhantom";
 import { Button } from "react-scroll";
 import { searchPair, pairData } from "../../hooks/useWallet";
 import KeyContext from "../../../context/walletContext";
-import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
+// import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import * as bs58 from "bs58";
+import {
+  clusterApiUrl,
+  Connection,
+  PublicKey,
+  LAMPORTS_PER_SOL,
+} from "@solana/web3.js";
 
 const data = [
   {
@@ -56,7 +63,7 @@ const data = [
 ];
 
 const InternalNavbar = () => {
-  const { setCoinsKey, setNoDetails } = useContext(KeyContext);
+  const { setCoinsKey, setNoDetails, setSolBalance } = useContext(KeyContext);
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -162,25 +169,54 @@ const InternalNavbar = () => {
   useEffect(() => {
     quickSearch();
   }, [searchInput]);
+  const connection = new Connection("https://api.devnet.solana.com");
 
+  // 5YNmS1R9nNSCDzb5a7mMJ1dwK9uHeAAF4CmPEwKgVWr8
+  // const feePayer = Keypair.fromSecretKey(
+  //   bs58.decode(
+  //     "588FU4PktJWfGfxtzpAAXywSNt74AvtroVzGfKkVN1LwRuvHwKGr851uH8czM5qm4iqLbs1kKoMKtMJG4ATR7Ld2"
+  //   )
+  // );
+
+  // (async () => {
+  //   let balance = await connection.getBalance(feePayer.publicKey);
+  //   debugger;
+  //   console.log(`${balance / LAMPORTS_PER_SOL} SOL`);
+  // })();
+  // const [solBalance, setSolBalance] = useState(0);
+
+  // (async () => {
+  //   const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+  //   let wallet = new PublicKey(localStorage.getItem("solanaKey"));
+  //   console.log(
+  //     `${(await connection.getBalance(wallet)) / LAMPORTS_PER_SOL} SOL`
+  //   );
+  // })();
   useEffect(() => {
-    const getSolBalance = async (address) => {
+    const fetchBalance = async () => {
       try {
-        const connection = new Connection(clusterApiUrl("mainnet-beta"));
-        const publicKey = new PublicKey(localStorage.getItem("publicKey"));
-        const balance = await connection.getBalance(publicKey);
-        const solBalance = balance / 1000000000;
-        console.log(solBalance);
-      } catch (error) {
-        console.error("Error getting SOL balance:", error);
+        const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+        const walletKey = localStorage.getItem("solanaKey");
+        if (walletKey) {
+          const wallet = new PublicKey(walletKey);
+          const balance = await connection.getBalance(wallet);
+          setSolBalance(balance / LAMPORTS_PER_SOL);
+          console.log(balance / LAMPORTS_PER_SOL, ">>>>>>");
+        } else {
+          // setError('No wallet address found in local storage.');
+        }
+      } catch (err) {
+        setError("Error fetching balance: " + err.message);
+      } finally {
+        // setLoading(false);
       }
     };
 
-    if (true) {
-      getSolBalance();
-    }
-  }, []);
+    fetchBalance();
+    const interval = setInterval(fetchBalance, 5000);
 
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div>
       <nav className="navbar py-3 navbar-expand-lg navbar-dark ">

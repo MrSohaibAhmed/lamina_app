@@ -10,6 +10,7 @@ export const KeyProvider = ({ children }) => {
   const [coinsKey, setCoinsKey] = useState([]);
   const [noDetails, setNoDetails] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [solBalance, setSolBalance] = useState(false);
 
   // const [balance, setBalance] = useState(null);
   const generateKeyHandler = async () => {
@@ -50,6 +51,8 @@ export const KeyProvider = ({ children }) => {
         setNoDetails,
         loading,
         setLoading,
+        solBalance,
+        setSolBalance,
       }}
     >
       {children}
