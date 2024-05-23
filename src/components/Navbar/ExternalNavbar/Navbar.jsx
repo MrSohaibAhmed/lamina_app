@@ -53,59 +53,75 @@ const NavbarComp = () => {
 
   return (
     <>
-    <nav className="navbar py-3 navbar-expand-lg navbar-dark">
-      <div className="container">
-        <Link className="navbar-brand" to="/">
-          <img src={logoImg} width="200px" alt="Logo" />
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
-            <li className="nav-item">
-              <Link className="btn btn-bsc active" aria-current="page">
-                <img src={solImg} width="20px" alt="SOLONA" /> SOLANA
-              </Link>
-            </li>
-            <li className="nav-item dropdown">
-              <Link
-                className="nav-link dropdown-toggle"
-                id="navbarScrollingDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                English
-              </Link>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="navbarScrollingDropdown"
-              >
-                <li>
-                  <Link className="dropdown-item" To="#">
-                    German
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item modalComp"> 
-              
-              <ModalComp connectToPhantom={connectToPhantom} connectToSolflare={connectToSolflare}/>
-            </li>
-            {/* )} */}
-          </ul>
+      <nav className="navbar py-3 navbar-expand-lg navbar-dark">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
+              <li className="nav-item">
+                <a className="mx-4 txt-nav">
+                  $GENAI CA - 5XzX3PGu2mmWSeSJ8yXdXgX9xjAA1Prdr8dPz3FNzQT9
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="https://x.com/genaitrade" className="btn-nav">
+                  Twitter
+                </a>{" "}
+                /{" "}
+                <a href="https://t.me/genaitrade" className="me-3 btn-nav">
+                  Telegram
+                </a>
+              </li>
+              <li className="nav-item">
+                <Link className="btn btn-bsc active" aria-current="page">
+                  <img src={solImg} width="20px" alt="SOLONA" /> SOLANA
+                </Link>
+              </li>
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  id="navbarScrollingDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  English
+                </Link>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="navbarScrollingDropdown"
+                >
+                  <li>
+                    <Link className="dropdown-item" To="#">
+                      German
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+              <li className="nav-item">
+                <ModalComp
+                  connectToPhantom={connectToPhantom}
+                  connectToSolflare={connectToSolflare}
+                />
+              </li>
+              {/* )} */}
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
     </>
   );
 };
