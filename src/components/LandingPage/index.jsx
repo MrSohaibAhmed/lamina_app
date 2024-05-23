@@ -20,6 +20,8 @@ const LandingPage = () => {
     newUsersignMessage,
     solanaKey,
     connectToSolflare,
+    SignMessageWithSolflare,
+    newSignMessageWithSolflare,
   } = usePhantom();
   useEffect(() => {
     if (solanaKey) {
@@ -29,10 +31,12 @@ const LandingPage = () => {
           console.log(res);
           localStorage.setItem("publicKey", res?.data?.data.publicKey);
           console.log("user found");
-          signMessage();
+          // signMessage();
+          SignMessageWithSolflare();
         })
         .catch((error) => {
-          newUsersignMessage();
+          // newUsersignMessage();
+          newSignMessageWithSolflare();
           console.log("user not found");
           console.error("Error checking user:", error);
         });
@@ -54,12 +58,12 @@ const LandingPage = () => {
             <div className="col-lg-1"></div>
             <div className="col-lg-5 d-flex flex-column justify-content-center">
               <h1 data-aos="fade-up">
-              TRADE TOKENS
-              <br /> AT LIGHTNING SPEED
+                TRADE TOKENS
+                <br /> AT LIGHTNING SPEED
               </h1>
-              <button className="btn-transparent" onClick={connectToPhantom}>
+              <button className="btn-transparent" onClick={connectToSolflare}>
                 <h2 data-aos="fade-up" data-aos-delay="400">
-                Connect to start trading now
+                  Connect to start trading now
                 </h2>
               </button>
               <p>Install Phantom or any other Wallet to start.</p>
@@ -74,7 +78,7 @@ const LandingPage = () => {
             </div>
             <div className="col-lg-12 trader-heading text-center">
               <h1 className="main-heading">
-              BUILT FOR SPEED
+                BUILT FOR SPEED
                 <br /> <span className="text-gradiant">AND NO DELAYS</span>
               </h1>
             </div>

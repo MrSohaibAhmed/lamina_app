@@ -28,29 +28,36 @@ const usePhantom = () => {
         }
     };
     const connectToSolflare = async () => {
-        if (window.solflare) {
-            debugger
-            try {
-                const response = await window.solflare.connect();
-                if (response) {
+        try {
+            if (!window.solflare) {
+                alert('Solflare extension not detected!');
+                return;
+            }
 
-                    const solflarePublicKey = window.solflare.publicKey.toString();
+            const response = await window.solflare.connect();
 
-                    console.log(solfarePublicKey, ">>>>>>>");
-                    setSolanaKey(solfarePublicKey);
+            if (response) {
+                const solflarePublicKey = await window.solflare.publicKey;
+
+                if (solflarePublicKey) {
+                    // debugger
                     setConnected(true);
-                    localStorage.setItem("solanaKey", solflarePublicKey);
+                    console.log(solflarePublicKey.toString(), ">>>>>>>");
+                    setSolanaKey(solflarePublicKey.toString());
                     localStorage.setItem("connected", true);
+                    localStorage.setItem("solanaKey", solflarePublicKey.toString());
+
                 } else {
                     console.error("Failed to retrieve the public key from Solflare.");
                 }
-            } catch (error) {
-                console.error(error);
+            } else {
+                console.error("Failed to connect to the Solflare wallet.");
             }
-        } else {
-            alert('Solflare extension not detected!');
+        } catch (error) {
+            console.error(error);
         }
     };
+
     // const connectToPhantom = async () => {
     //     if (window.ethereum) {
     //         try {
@@ -127,6 +134,74 @@ const usePhantom = () => {
             console.error('Solana wallet instance or public key not available.');
         }
     };
+    const newSignMessageWithSolflare = async () => {
+        try {
+            // Check if the Solflare extension is available
+            if (!window.solflare) {
+                console.error('Solflare extension not detected!');
+                return;
+            }
+
+            // Check if the user is connected to the Solflare wallet
+            if (!window.solflare.isConnected) {
+                console.error('User is not connected to the Solflare wallet.');
+                return;
+            }
+
+            // Construct the message to be signed
+            const message = 'To avoid digital dognappers, sign below to authenticate with fusiond_app.';
+            const encoder = new TextEncoder();
+            const encodedMessage = encoder.encode(message);
+
+            // Sign the message using the Solflare wallet
+            const signedMessage = await window.solflare.signMessage(encodedMessage, 'utf8');
+
+            // Convert the signature to a hex string
+            // const signature = Buffer.from(signedMessage.signature).toString('hex');
+
+            // Store the signed message in localStorage
+            // localStorage.setItem("sign", signature);
+
+            // Navigate to the next step
+            navi("/step1");
+        } catch (error) {
+            console.error('Error signing message:', error);
+        }
+    };
+    const SignMessageWithSolflare = async () => {
+        try {
+            // Check if the Solflare extension is available
+            if (!window.solflare) {
+                console.error('Solflare extension not detected!');
+                return;
+            }
+
+            // Check if the user is connected to the Solflare wallet
+            if (!window.solflare.isConnected) {
+                console.error('User is not connected to the Solflare wallet.');
+                return;
+            }
+
+            // Construct the message to be signed
+            const message = 'To avoid digital dognappers, sign below to authenticate with fusiond_app.';
+            const encoder = new TextEncoder();
+            const encodedMessage = encoder.encode(message);
+
+            // Sign the message using the Solflare wallet
+            const signedMessage = await window.solflare.signMessage(encodedMessage, 'utf8');
+
+            // Convert the signature to a hex string
+            // const signature = Buffer.from(signedMessage.signature).toString('hex');
+
+            // Store the signed message in localStorage
+            // localStorage.setItem("sign", signature);
+
+            // Navigate to the next step
+            navi("/dashboard");
+        } catch (error) {
+            console.error('Error signing message:', error);
+        }
+    };
 
     // const signMessage = async () => {
     //     if (web3 && account) {
@@ -172,7 +247,7 @@ const usePhantom = () => {
 
 
     // return { connectToPhantom, disconnectFromMetaMask, connected, account, web3, signMessage, newUsersignMessage, solanaKey };
-    return { connectToPhantom, disconnectFromMetaMask, connected, signMessage, newUsersignMessage, solanaKey, connectToSolflare };
+    return { connectToPhantom, disconnectFromMetaMask, connected, signMessage, newUsersignMessage, solanaKey, connectToSolflare, SignMessageWithSolflare, newSignMessageWithSolflare };
 
 };
 
