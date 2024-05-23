@@ -358,9 +358,9 @@ td {
     background-color: black !important;
 }
 
-/* .hidden{
+.hidden{
     display:none;
-} */
+}
 .progress-value-right, .progress-value-left{
     font-size: 14px!important;
 }

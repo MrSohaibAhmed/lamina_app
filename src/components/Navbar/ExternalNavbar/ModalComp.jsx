@@ -4,8 +4,31 @@ import solfareImg from "../../../assets/navbarImg/solfareimg.webp";
 import phantomImg from "../../../assets/navbarImg/phantom.webp";
 import usePhantom from "../../hooks/usePhantom";
 import { checkUser } from "../../hooks/useWallet";
+import "./Navbar.css";
 
 const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
+  const handleConnect = (value) => {
+    if (value === "solfare") {
+      connectToSolflare();
+    }
+    if (value === "phantom") {
+      connectToPhantom();
+    }
+    const modalElement = document.getElementById("staticBackdrop");
+    const modalBackdrop = document.querySelector(".modal-backdrop");
+    document.body.classList.add("overflow-auto");
+
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
+      }
+    }
+    if (modalBackdrop) {
+      modalBackdrop.remove();
+    }
+  };
+
   return (
     <>
       {/* Button trigger modal */}
@@ -55,8 +78,9 @@ const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
             </div>
             <div className="modal-body">
               <div
-                onClick={connectToSolflare}
+                onClick={() => handleConnect("solfare")}
                 className="m-2 d-flex align-items-center px-2"
+                data-bs-dismiss="modal"
                 style={{
                   width: "260px",
                   backgroundColor: "#2e2e55",
@@ -66,13 +90,17 @@ const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
                 <span>
                   <img src={solfareImg} />
                 </span>
-                <button type="button" className=" bg-transparent">
+                <button
+                  type="button"
+                  className=" bg-transparent text-white modalbtn"
+                >
                   Connect to Solfare
                 </button>
               </div>
               <div
-                onClick={connectToPhantom}
+                onClick={() => handleConnect("phantom")}
                 className="m-2 d-flex align-items-center px-2 "
+                data-bs-dismiss
                 style={{
                   width: "260px",
                   backgroundColor: "#2e2e55",
@@ -82,7 +110,10 @@ const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
                 <span>
                   <img src={phantomImg} />
                 </span>
-                <button type="button" className=" bg-transparent ">
+                <button
+                  type="button"
+                  className=" bg-transparent text-white modalbtn"
+                >
                   Connect to Phantom
                 </button>
               </div>
