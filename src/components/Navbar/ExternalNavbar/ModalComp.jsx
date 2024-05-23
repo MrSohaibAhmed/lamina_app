@@ -4,6 +4,7 @@ import solfareImg from "../../../assets/navbarImg/solfareimg.webp";
 import phantomImg from "../../../assets/navbarImg/phantom.webp";
 import usePhantom from "../../hooks/usePhantom";
 import { checkUser } from "../../hooks/useWallet";
+import './navbar.css'
 
 const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
   return (
@@ -58,7 +59,7 @@ const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
                 <span>
                   <img src={solfareImg} />
                 </span>
-                <button type="button" className=" bg-transparent" >
+                <button type="button" className=" bg-transparent text-white modalbtn" >
                   Connect to Solfare
                 </button>
               </div>
@@ -66,7 +67,7 @@ const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
                 <span>
                   <img src={phantomImg} />
                 </span>
-                <button type="button" className=" bg-transparent " >
+                <button type="button" className=" bg-transparent text-white modalbtn" >
                   Connect to Phantom
                 </button>
               </div>
