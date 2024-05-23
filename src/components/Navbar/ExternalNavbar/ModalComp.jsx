@@ -22,7 +22,7 @@ const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
       <div
         className="modal fade"
         id="staticBackdrop"
-        data-bs-backdrop="static"
+        data-bs-backdrop="false"
         data-bs-keyboard="false"
         tabIndex="-1"
         aria-labelledby="staticBackdropLabel"
