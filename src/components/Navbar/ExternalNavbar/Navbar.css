@@ -63,6 +63,10 @@
 .modalbtn:hover{
   border-color: #2e2e55 !important;
 }
+
+.overflow-auto{
+  overflow:auto !important;
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
