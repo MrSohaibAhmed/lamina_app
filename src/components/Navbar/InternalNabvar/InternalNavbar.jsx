@@ -247,7 +247,10 @@ const InternalNavbar = () => {
                         <div
                           key={index}
                           className="dropdown-item rounded"
-                          style={{ borderBottom: "1px solid #4d4b5a" }}
+                          style={{
+                            borderBottom: "1px solid #4d4b5a",
+                            cursor: "pointer",
+                          }}
                           onClick={() => handleClick(pair.pairAddress)}
                         >
                           <div className="d-flex align-items-center p-3">
@@ -281,8 +284,14 @@ const InternalNavbar = () => {
               </li>
             </ul>
             <ul className="navbar-nav d-content ms-auto mb-2 mb-lg-0">
-            <li className="nav-item dropdown">
-              <a href="https://x.com/genaitrade" className="btn-nav">Twitter</a> / <a href="https://t.me/genaitrade" className="btn-nav">Telegram</a>
+              <li className="nav-item dropdown">
+                <a href="https://x.com/genaitrade" className="btn-nav">
+                  Twitter
+                </a>{" "}
+                /{" "}
+                <a href="https://t.me/genaitrade" className="btn-nav">
+                  Telegram
+                </a>
               </li>
               <li className="nav-item dropdown">
                 <Link
