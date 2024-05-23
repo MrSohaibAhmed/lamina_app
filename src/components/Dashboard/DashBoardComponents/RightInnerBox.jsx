@@ -14,7 +14,7 @@ import { Log } from "ethers";
 import { pairData } from "../../hooks/useWallet";
 import shortBoxImg from "../../../assets/dashboard/short-box.png";
 
-const RightInnerBox = ({ data, checkZoomLevel }) => {
+const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const [allData, setAllData] = useState([]);
   useEffect(() => {
     setAllData(data);
@@ -31,7 +31,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
 
   const [volume, setVolume] = useState("$0");
   const [makers, setMakers] = useState(0);
-  const [selectedValue, setSelectedValue] = useState(" ");
+  const [selectedValue, setSelectedValue] = useState(null);
   const [buy, setBuy] = useState(0);
   const [buyVol, setBuyVol] = useState(0);
   const [sell, setsell] = useState(0);
@@ -39,6 +39,8 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
   const [sellVol, setsellVol] = useState(0);
   const [activeButton, setActiveButton] = useState(null);
   const [inputAmountVal, setInputAmountVal] = useState();
+  const[buttonValue , setButtonValue]= useState(null)
+
   const scrollToTop = () => {
     scroll.scrollToTop();
   };
@@ -55,7 +57,7 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
     return { buyVolume, sellVolume, totalTransactions, volumeInThousands };
   };
   const updateData = (timeframe) => {
-    setSelectedValue(timeframe); // Update selectedValue state
+    // setSelectedValue(timeframe); // Update selectedValue state
     switch (timeframe) {
       case "5M": {
         const { buyVolume, sellVolume, totalTransactions, volumeInThousands } =
@@ -145,52 +147,62 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
       .catch((error) => console.error("Error copying baseToken:", error));
   };
   const handleQuickBuy = () => {
+    // debugger
+    console.log("solona balance is =>>", solBalance);
     if (selectedValue !== null && selectedValue !== 0) {
-      const value = {
-        address: localStorage.getItem("publicKey"),
-        amount: selectedValue * 1000000000,
-        inputMint: "So11111111111111111111111111111111111111112",
-        outputMint: data?.pairs?.[0]?.baseToken?.address,
-      };
+      if (solBalance !==0) {
+        const value = {
+          address: localStorage.getItem("publicKey"),
+          amount: selectedValue * 1000000000,
+          inputMint: "So11111111111111111111111111111111111111112",
+          outputMint: data?.pairs?.[0]?.baseToken?.address,
+        };
 
-      const buyPromise = swapTokens(value);
+        const buyPromise = swapTokens(value);
 
-      buyPromise
-        .then((result) => {
-          const transactionResult =
-            result?.data?.swapResponse?.transactionResult;
-          setBuyResult(transactionResult);
-          console.log("Buy Promise Result:", transactionResult);
-          const t = (
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={() => copy(transactionResult)}
-            >
-              Buyed Successfully. Your Transaction Is Sent . Click Here To Copy
-              your Transaction Hash <img src={shortBoxImg} />
-            </div>
-          );
+        buyPromise
+          .then((result) => {
+            const transactionResult =
+              result?.data?.swapResponse?.transactionResult;
+            setBuyResult(transactionResult);
+            console.log("Buy Promise Result:", transactionResult);
+            const t = (
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => copy(transactionResult)}
+              >
+                Buyed Successfully. Your Transaction Is Sent . Click Here To
+                Copy your Transaction Hash <img src={shortBoxImg} />
+              </div>
+            );
 
-          // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
-          //   duration: 10000,
-          // });
-          toast.success(t, {
-            duration: 10000,
+            // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
+            //   duration: 10000,
+            // });
+            toast.success(t, {
+              duration: 10000,
+            });
+          })
+          .catch((error) => {
+            console.error("Buy Promise Error:", error);
+            toast.error("Cannot Buy. Try Again");
           });
-        })
-        .catch((error) => {
-          console.error("Buy Promise Error:", error);
-          toast.error("Cannot Buy. Try Again");
-        });
 
-      toast.promise(buyPromise, {
-        loading: "Buying...",
-        success: "",
-        error: "",
-      });
+        toast.promise(buyPromise, {
+          loading: "Buying...",
+          success: "",
+          error: "",
+        });
+      }
+      else{
+        toast.error("you donot have enough sol balance")
+      }
+      
     } else {
+      
       console.error("No value selected");
-      noValueError();
+      // noValueError();
+      toast.error("pls select the value")
     }
   };
 
