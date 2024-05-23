@@ -35,7 +35,7 @@ const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
           >
             <div className="modal-header background-transparent">
               <h5 className="modal-title" id="staticBackdropLabel">
-               Choose Any Wallet
+                Choose Any Wallet
               </h5>
 
               <button
