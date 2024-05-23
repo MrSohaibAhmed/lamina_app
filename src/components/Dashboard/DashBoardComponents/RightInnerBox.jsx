@@ -39,7 +39,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const [sellVol, setsellVol] = useState(0);
   const [activeButton, setActiveButton] = useState(null);
   const [inputAmountVal, setInputAmountVal] = useState();
-  const[buttonValue , setButtonValue]= useState(null)
+  const[sellButtonValue , setSellButtonValue]= useState(null)
 
   const scrollToTop = () => {
     scroll.scrollToTop();
@@ -153,7 +153,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
       if (solBalance !==0) {
         const value = {
           address: localStorage.getItem("publicKey"),
-          amount: selectedValue * 1000000000,
+          amount: sellButtonValue * 1000000000,
           inputMint: "So11111111111111111111111111111111111111112",
           outputMint: data?.pairs?.[0]?.baseToken?.address,
         };
@@ -207,11 +207,15 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   };
 
   const handleQuickSell = () => {
+
+    if(!selectedValue){
+      toast.error("Please select a Value")
+    }
     if (selectedValue !== null && selectedValue !== 0) {
       // Check if selectedValue is not null or 0
       const value = {
         address: localStorage.getItem("publicKey"),
-        amount: 0.25 * 1000000000,
+        amount: (selectedValue/100) * 1000000000,
         inputMint: data?.pairs?.[0]?.baseToken?.address,
         outputMint: "So11111111111111111111111111111111111111112",
       };
@@ -251,8 +255,33 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
       noValueError();
     }
   };
+  const handleButtonClickSell = (value) => {
+    // Remove the percentage sign (%) from the value
+    setSelectedValue(value);
+    setActiveButton(value);
+    const valueWithoutPercent = value.slice(0, -1);
+    console.log("Sell button is", valueWithoutPercent);
+  
+    // Try converting the value to a number, handle potential errors
+    try {
+      const sellValue = parseFloat(valueWithoutPercent) / 100;
+      setSellButtonValue(selectedValue); // Set state with decimal value
+      console.log("Selected value (decimal):", sellValue);
+    } catch (error) {
+      console.error("Error converting value:", error.message);
+      // Handle invalid input (optional)
+      // You can display an error message to the user here
+    }
+  
+    setActiveButton(value);
+    console.log("Active Button:", activeButton);
+  };
+
+
+
   const handleButtonClick = (value) => {
     setSelectedValue(value);
+    
     console.log("selected value is", value);
     setActiveButton(value);
     console.log("Active Button:", activeButton);
@@ -793,7 +822,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   value="0.25"
-                  onClick={() => handleButtonClick("25%")}
+                  onClick={() => handleButtonClickSell("25%")}
                   className={`bg-dark btn-inner-box ${
                     activeButton == "25%" ? "btn1-active" : ""
                   }`}
@@ -805,7 +834,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   value="50%"
-                  onClick={() => handleButtonClick("50%")}
+                  onClick={() => handleButtonClickSell("50%")}
                   className={`bg-dark btn-inner-box ${
                     activeButton == "50%" ? "btn1-active" : ""
                   }`}
@@ -817,7 +846,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   value="100%"
-                  onClick={() => handleButtonClick("100%")}
+                  onClick={() => handleButtonClickSell("100%")}
                   className={`bg-dark btn-inner-box ${
                     activeButton == "100%" ? "btn1-active" : ""
                   }`}
