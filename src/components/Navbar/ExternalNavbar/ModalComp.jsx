@@ -5,43 +5,7 @@ import phantomImg from "../../../assets/navbarImg/phantom.webp";
 import usePhantom from "../../hooks/usePhantom";
 import { checkUser } from "../../hooks/useWallet";
 
-const ModalComp = () => {
-  const {
-    connectToPhantom,
-    connected,
-    signMessage,
-    newUsersignMessage,
-    solanaKey,
-    connectToSolflare,
-    SignMessageWithSolflare,
-    newSignMessageWithSolflare,
-  } = usePhantom();
-  useEffect(() => {
-    //debugger;
-    if (solanaKey) {
-      checkUser(solanaKey)
-        .then((res) => {
-          // //debugger
-          localStorage.setItem("publicKey", res?.data?.data.publicKey);
-          console.log("user found");
-          if (localStorage.getItem("connectedToSolflare")) {
-            SignMessageWithSolflare();
-          } else {
-            signMessage();
-          }
-        })
-        .catch((error) => {
-          if (localStorage.getItem("connectedToSolflare")) {
-            newSignMessageWithSolflare();
-          } else {
-            newUsersignMessage();
-          }
-
-          console.log("user not found");
-          console.error("Error checking user:", error);
-        });
-    }
-  }, [solanaKey]);
+const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
   return (
     <>
       {/* Button trigger modal */}

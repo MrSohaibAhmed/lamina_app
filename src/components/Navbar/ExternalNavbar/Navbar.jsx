@@ -112,7 +112,10 @@ const NavbarComp = () => {
                 </ul>
               </li>
               <li className="nav-item">
-                <ModalComp />
+                <ModalComp
+                  connectToPhantom={connectToPhantom}
+                  connectToSolflare={connectToSolflare}
+                />
               </li>
               {/* )} */}
             </ul>
