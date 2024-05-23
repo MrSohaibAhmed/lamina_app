@@ -33,8 +33,8 @@ const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
             className="modal-content"
             style={{ backgroundColor: "#10141f", color: "#ffffff" }}
           >
-            <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">
+            <div className="modal-header background-transparent" >
+              <h5 className="modal-title" id="staticBackdropLabel" >
                 Connect to Wallets
               </h5>
 
@@ -54,25 +54,21 @@ const ModalComp = ({ connectToPhantom, connectToSolflare }) => {
               ></button>
             </div>
             <div className="modal-body">
-              <div
-                onClick={connectToSolflare}
-                className="m-2 d-flex"
-                style={{ width: "250px" }}
-              >
+              <div onClick={connectToSolflare} className="m-2 d-flex align-items-center px-2" style={{ width: "260px" , backgroundColor:"#2e2e55" , borderRadius:"5px"}}>
                 <span>
                   <img src={solfareImg} />
                 </span>
-                <button type="button">Connect to Solfare</button>
+                <button type="button" className=" bg-transparent" >
+                  Connect to Solfare
+                </button>
               </div>
-              <div
-                onClick={connectToPhantom}
-                className="m-2 "
-                style={{ width: "250px", backgroundColor: "green" }}
-              >
+              <div onClick={connectToPhantom} className="m-2 d-flex align-items-center px-2 " style={{ width: "260px" , backgroundColor:"#2e2e55" , borderRadius:"5px"}}>
                 <span>
                   <img src={phantomImg} />
                 </span>
-                <button type="button">Connect to Phantom</button>
+                <button type="button" className=" bg-transparent " >
+                  Connect to Phantom
+                </button>
               </div>
             </div>
           </div>

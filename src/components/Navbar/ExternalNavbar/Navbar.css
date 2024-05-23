@@ -53,6 +53,13 @@
   flex-grow: 0 !important;
  
 }
+
+.modalComp button.btn.btn-primary {
+  background-color: #2e2e55;
+  border: transparent;
+  padding: 0x;
+}
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
