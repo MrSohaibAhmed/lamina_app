@@ -31,12 +31,12 @@ const LandingPage = () => {
           console.log(res);
           localStorage.setItem("publicKey", res?.data?.data.publicKey);
           console.log("user found");
-          // signMessage();
-          SignMessageWithSolflare();
+          signMessage();
+          // SignMessageWithSolflare();
         })
         .catch((error) => {
-          // newUsersignMessage();
-          newSignMessageWithSolflare();
+          newUsersignMessage();
+          // newSignMessageWithSolflare();
           console.log("user not found");
           console.error("Error checking user:", error);
         });
@@ -61,7 +61,7 @@ const LandingPage = () => {
                 TRADE TOKENS
                 <br /> AT LIGHTNING SPEED
               </h1>
-              <button className="btn-transparent" onClick={connectToSolflare}>
+              <button className="btn-transparent" onClick={connectToPhantom}>
                 <h2 data-aos="fade-up" data-aos-delay="400">
                   Connect to start trading now
                 </h2>

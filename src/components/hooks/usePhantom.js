@@ -46,6 +46,7 @@ const usePhantom = () => {
                     setSolanaKey(solflarePublicKey.toString());
                     localStorage.setItem("connected", true);
                     localStorage.setItem("solanaKey", solflarePublicKey.toString());
+                    localStorage.setItem("connectedToSolflare", true);
 
                 } else {
                     console.error("Failed to retrieve the public key from Solflare.");
@@ -93,6 +94,7 @@ const usePhantom = () => {
         localStorage.removeItem("connected");
         localStorage.removeItem("solanaKey");
         localStorage.removeItem("publicKey");
+        localStorage.removeItem("connectedToSolflare");
         localStorage.removeItem("-walletlink:https://www.walletlink.org:EIP6963ProviderUUID");
 
     };

@@ -1,7 +1,47 @@
 import React from "react";
+import { useEffect } from "react";
 import solfareImg from "../../../assets/navbarImg/solfareimg.webp";
 import phantomImg from "../../../assets/navbarImg/phantom.webp";
+import usePhantom from "../../hooks/usePhantom";
+import { checkUser } from "../../hooks/useWallet";
+
 const ModalComp = () => {
+  const {
+    connectToPhantom,
+    connected,
+    signMessage,
+    newUsersignMessage,
+    solanaKey,
+    connectToSolflare,
+    SignMessageWithSolflare,
+    newSignMessageWithSolflare,
+  } = usePhantom();
+  useEffect(() => {
+    //debugger;
+    if (solanaKey) {
+      checkUser(solanaKey)
+        .then((res) => {
+          // //debugger
+          localStorage.setItem("publicKey", res?.data?.data.publicKey);
+          console.log("user found");
+          if (localStorage.getItem("connectedToSolflare")) {
+            SignMessageWithSolflare();
+          } else {
+            signMessage();
+          }
+        })
+        .catch((error) => {
+          if (localStorage.getItem("connectedToSolflare")) {
+            newSignMessageWithSolflare();
+          } else {
+            newUsersignMessage();
+          }
+
+          console.log("user not found");
+          console.error("Error checking user:", error);
+        });
+    }
+  }, [solanaKey]);
   return (
     <>
       {/* Button trigger modal */}
@@ -50,22 +90,25 @@ const ModalComp = () => {
               ></button>
             </div>
             <div className="modal-body">
-              <div className="m-2 d-flex" style={{ width: "250px" }}>
+              <div
+                onClick={connectToSolflare}
+                className="m-2 d-flex"
+                style={{ width: "250px" }}
+              >
                 <span>
-                  
                   <img src={solfareImg} />
                 </span>
-                <button type="button" >
-                  Connect to Solfare
-                </button>
+                <button type="button">Connect to Solfare</button>
               </div>
-              <div className="m-2 " style={{ width: "250px" , backgroundColor:"green"}}>
+              <div
+                onClick={connectToPhantom}
+                className="m-2 "
+                style={{ width: "250px", backgroundColor: "green" }}
+              >
                 <span>
                   <img src={phantomImg} />
                 </span>
-                <button type="button" >
-                  Connect to Phantom
-                </button>
+                <button type="button">Connect to Phantom</button>
               </div>
             </div>
           </div>
