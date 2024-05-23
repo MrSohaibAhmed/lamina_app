@@ -354,10 +354,10 @@ const InternalNavbar = () => {
               </li>
               <li className="nav-item dropdown">
                 <Link
-                  className="nav-link dropdown-toggle"
+                  className="nav-link text-white"
                   id="navbarScrollingDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
+                  // role="button"
+                  
                   aria-expanded="false"
                 >
                   SOL : {solBalance}
