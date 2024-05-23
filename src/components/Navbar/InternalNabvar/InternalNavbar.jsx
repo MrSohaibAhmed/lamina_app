@@ -63,7 +63,8 @@ const data = [
 ];
 
 const InternalNavbar = () => {
-  const { setCoinsKey, setNoDetails, setSolBalance } = useContext(KeyContext);
+  const { setCoinsKey, setNoDetails, setSolBalance, solBalance } =
+    useContext(KeyContext);
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -359,7 +360,7 @@ const InternalNavbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  SOL :
+                  SOL : ${solBalance}
                 </Link>
               </li>
               <li className="nav-item dropdown">
