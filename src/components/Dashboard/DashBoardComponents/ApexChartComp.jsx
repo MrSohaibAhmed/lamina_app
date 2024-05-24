@@ -294,7 +294,7 @@ function TradingViewWidget({ data }) {
         {
           "height": "600",
            "symbol": "${data ? data : deafault}",
-          "interval": "D",
+           "interval": "60",
           "timezone": "Etc/UTC",
           "theme": "dark",
           "style": "1",
