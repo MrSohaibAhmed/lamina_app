@@ -42,6 +42,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const [inputAmountVal, setInputAmountVal] = useState();
   const[sellButtonValue , setSellButtonValue]= useState(null)
   const [buttonValue, setButtonValue] = useState(null);
+  const [slippage, setSlippage] = useState(10.0);
 
   const scrollToTop = () => {
     scroll.scrollToTop();
