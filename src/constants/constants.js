@@ -1,0 +1,1 @@
+export const encryptionKey = "b9be42878310d599e4e49e040d1badb9";

@@ -32,6 +32,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const [volume, setVolume] = useState("$0");
   const [makers, setMakers] = useState(0);
   const [selectedValue, setSelectedValue] = useState(null);
+  const [sellSelectedValue, setSellSelectedValue] = useState(null);
   const [buy, setBuy] = useState(0);
   const [buyVol, setBuyVol] = useState(0);
   const [sell, setsell] = useState(0);
@@ -41,6 +42,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const [inputAmountVal, setInputAmountVal] = useState();
   const [sellButtonValue, setSellButtonValue] = useState(null)
   const [buttonValue, setButtonValue] = useState(null);
+  const [slippage, setSlippage] = useState(10.0);
 
   const scrollToTop = () => {
     scroll.scrollToTop();
@@ -206,11 +208,11 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
 
   const handleQuickSell = () => {
 
-    if (!selectedValue) {
+    if(!sellSelectedValue){
       toast.error("Please select a Value")
     }
-    if (selectedValue !== null && selectedValue !== 0) {
-      console.log("slected value is =>>", selectedValue);
+    if (sellSelectedValue !== null && sellSelectedValue !== 0) {
+      console.log("slected value is =>>", sellSelectedValue);
       // Check if selectedValue is not null or 0
       if (solBalance !== 0) {
         const value = {
@@ -262,7 +264,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const handleButtonClickSell = (value) => {
     // Remove the percentage sign (%) from the value
     console.log("clicked on quick sell", value)
-    setSelectedValue(value);
+    setSellSelectedValue(value);
     setActiveButton(value);
     const valueWithoutPercent = value.slice(0, -1);
     console.log("Sell button is", valueWithoutPercent);
@@ -992,7 +994,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
             <hr />
             <div className="mt-5 mb-3">
               <button onClick={handleQuickSell} className=" btn-buy-quick">
-                Quick Sell {selectedValue}
+                Quick Sell {sellSelectedValue}
               </button>
             </div>
           </div>
