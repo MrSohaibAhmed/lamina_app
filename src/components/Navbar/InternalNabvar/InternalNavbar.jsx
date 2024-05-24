@@ -196,8 +196,11 @@ const InternalNavbar = () => {
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
+        // const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
+        const connection = new Connection("https://ultra-delicate-lambo.solana-mainnet.quiknode.pro/9e6a18285b47f9974b7cac73e999be568cfe9929/");
+        // const walletKey = "9B6ifM6iH71LPNq4U1H3TtMi8Z2fQaq3kv6gF2FVpbqd";
         const walletKey = localStorage.getItem("publicKey");
+
         if (walletKey) {
           const wallet = new PublicKey(walletKey);
           const balance = await connection.getBalance(wallet);
@@ -207,7 +210,7 @@ const InternalNavbar = () => {
           // setError('No wallet address found in local storage.');
         }
       } catch (err) {
-        setError("Error fetching balance: " + err.message);
+        // setError("Error fetching balance: " + err.message);
       } finally {
         // setLoading(false);
       }
@@ -360,7 +363,7 @@ const InternalNavbar = () => {
 
                   aria-expanded="false"
                 >
-                  SOL : {solBalance}
+                  SOL: {parseFloat(solBalance).toFixed(3)}
                 </Link>
               </li>
               <li className="nav-item dropdown">
