@@ -154,47 +154,47 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
     console.log("solona balance is =>>", solBalance);
     if (selectedValue !== null && selectedValue !== 0) {
       if (solBalance !== 0) {
-      const value = {
-        address: localStorage.getItem("publicKey"),
-        amount: selectedValue * 1000000000,
-        inputMint: "So11111111111111111111111111111111111111112",
-        outputMint: data?.pairs?.[0]?.baseToken?.address,
-        slippageBps: slippage,
-      };
-      const buyPromise = swapTokens(value);
-      buyPromise
-        .then((result) => {
-          const transactionResult =
-            result?.data?.swapResponse?.transactionResult;
-          setBuyResult(transactionResult);
-          console.log("Buy Promise Result:", transactionResult);
-          const t = (
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={() => copy(transactionResult)}
-            >
-              Your Transaction Is Sent . Click Here To
-              Check your Transaction Hash <a href={transactionResult} target="blanked"><img width={20} src={arrowImg} /></a>
-            </div>
-          );
+        const value = {
+          address: localStorage.getItem("publicKey"),
+          amount: selectedValue * 1000000000,
+          inputMint: "So11111111111111111111111111111111111111112",
+          outputMint: data?.pairs?.[0]?.baseToken?.address,
+          slippageBps: slippage,
+        };
+        const buyPromise = swapTokens(value);
+        buyPromise
+          .then((result) => {
+            const transactionResult =
+              result?.data?.swapResponse?.transactionResult;
+            setBuyResult(transactionResult);
+            console.log("Buy Promise Result:", transactionResult);
+            const t = (
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => copy(transactionResult)}
+              >
+                Your Transaction Is Sent . Click Here To
+                Check your Transaction Hash <a href={transactionResult} target="blanked"><img width={20} src={arrowImg} /></a>
+              </div>
+            );
 
-          // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
-          //   duration: 10000,
-          // });
-          toast.success(t, {
-            duration: 10000,
+            // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
+            //   duration: 10000,
+            // });
+            toast.success(t, {
+              duration: 10000,
+            });
+          })
+          .catch((error) => {
+            console.error("Buy Promise Error:", error);
+            toast.error("Cannot Buy. Try Again");
           });
-        })
-        .catch((error) => {
-          console.error("Buy Promise Error:", error);
-          toast.error("Cannot Buy. Try Again");
-        });
 
-      toast.promise(buyPromise, {
-        loading: "Waiting For Transaction...",
-        success: "",
-        error: "",
-      });
+        toast.promise(buyPromise, {
+          loading: "Waiting For Transaction...",
+          success: "",
+          error: "",
+        });
       } else {
         toast.error("You Donot have Enough Sol Balance");
       }
@@ -206,9 +206,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   };
 
   const handleQuickSell = () => {
-    debugger
 
-    if(!sellSelectedValue){
+    if (!sellSelectedValue) {
       toast.error("Please select a Value")
     }
     if (sellSelectedValue !== null && sellSelectedValue !== 0) {
@@ -252,7 +251,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
           success: "Sold Successfully",
           error: "Cannot Sell. Try Again",
         });
-      } else {
+      }
+      else {
         toast.error("you donot have enough balance to sell")
       }
     }
