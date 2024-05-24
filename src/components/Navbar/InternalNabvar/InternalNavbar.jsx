@@ -360,7 +360,7 @@ const InternalNavbar = () => {
                   
                   aria-expanded="false"
                 >
-                  SOL : ${solBalance}
+                  SOL : {solBalance}
                 </Link>
               </li>
               <li className="nav-item dropdown">

@@ -40,6 +40,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const [activeButton, setActiveButton] = useState(null);
   const [inputAmountVal, setInputAmountVal] = useState();
   const[sellButtonValue , setSellButtonValue]= useState(null)
+  const [buttonValue, setButtonValue] = useState(null);
 
   const scrollToTop = () => {
     scroll.scrollToTop();
@@ -150,7 +151,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
     // debugger
     console.log("solona balance is =>>", solBalance);
     if (selectedValue !== null && selectedValue !== 0) {
-      if (solBalance !==0) {
+      if (solBalance !== 0) {
         const value = {
           address: localStorage.getItem("publicKey"),
           amount: sellButtonValue * 1000000000,
@@ -193,16 +194,13 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
           success: "",
           error: "",
         });
+      } else {
+        toast.error("You Donot have Enough Sol Balance");
       }
-      else{
-        toast.error("you donot have enough sol balance")
-      }
-      
     } else {
-      
       console.error("No value selected");
       // noValueError();
-      toast.error("pls select the value")
+      toast.error("Please select a value First");
     }
   };
 
