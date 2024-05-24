@@ -5,6 +5,7 @@ import logoImg from "../../assets/dashboard/logo.png";
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import toast, { Toaster } from "react-hot-toast";
 import './step2.css'
 import KeyContext from '../../context/walletContext';
 const Step2 = () => {
@@ -15,6 +16,7 @@ const Step2 = () => {
         navigator.clipboard.writeText(keyValue)
             .then(() => {
                 console.log("Text copied to clipboard:");
+                toast.success("Successfully copied ");
             })
             .catch((error) => {
                 console.error("Error copying text:", error);
@@ -61,6 +63,8 @@ const Step2 = () => {
                                     }} className="input-group input-group mb-4">
                                         <input readOnly type="text" value={decryptPrivateKey} className="form-control" aria-label="Amount" />
                                         <span className="input-group-text"><FontAwesomeIcon onClick={handleCopy} icon={faCopy} /></span>
+                                        <input readOnly type="text" value={privateKey} className="form-control" aria-label="Amount" />
+                                        <span className="input-group-text "><FontAwesomeIcon onClick={handleCopy} icon={faCopy} /></span>
                                     </div>
                                     <p style={{
                                         opacity: revealPrivateKey ? 1 : 0.9,
