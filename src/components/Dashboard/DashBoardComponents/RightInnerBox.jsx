@@ -187,13 +187,13 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
           })
           .catch((error) => {
             console.error("Buy Promise Error:", error);
-            toast.error("Cannot Buy. Try Again");
+            // toast.error("");
           });
 
         toast.promise(buyPromise, {
           loading: "Waiting For Transaction...",
           success: "",
-          error: "",
+          error: "Transaction not found . Please Try Again",
         });
       } else {
         toast.error("You Donot have Enough Sol Balance");
@@ -247,9 +247,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
             toast.error("Cannot Buy. Try Again");
           });
         toast.promise(buyPromise, {
-          loading: "Selling...",
+          loading: "Waiting For Transaction...",
           success: "Sold Successfully",
-          error: "Cannot Sell. Try Again",
+          error: "Transaction Failed. Try Again",
         });
       }
       else {
@@ -269,7 +269,6 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
     const valueWithoutPercent = value.slice(0, -1);
     console.log("Sell button is", valueWithoutPercent);
 
-    // Try converting the value to a number, handle potential errors
     try {
       const sellValue = parseFloat(valueWithoutPercent) / 100;
       setSellButtonValue(sellValue);

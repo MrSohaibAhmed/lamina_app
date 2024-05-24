@@ -8,7 +8,7 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import './step2.css'
 import KeyContext from '../../context/walletContext';
 const Step2 = () => {
-    const { privateKey, publicKey } = useContext(KeyContext);
+    const { privateKey, publicKey, decryptPrivateKey } = useContext(KeyContext);
     const [revealPrivateKey, setRevealPrivateKey] = useState(false);
     const navigate = useNavigate();
     const handleCopy = (keyValue) => {
@@ -24,13 +24,13 @@ const Step2 = () => {
         setRevealPrivateKey(true);
     };
     return (
-        
+
         <div className='step2main'>
             <div className="text-center py-4">
-      <Link className="navbar-brand" to="/">
-            <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
-          </Link>
-      </div>
+                <Link className="navbar-brand" to="/">
+                    <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
+                </Link>
+            </div>
             <div className="text-center py-4"><Link to="/"><img src="assets/img/logo.png" width="200px" alt="" /></Link></div>
             <section id="hero" className="hero d-flex align-items-center">
                 <div className="container-fluid">
@@ -59,7 +59,7 @@ const Step2 = () => {
                                         opacity: revealPrivateKey ? 1 : 0.5,
                                         transition: ' 0.5s ease-in-out'
                                     }} className="input-group input-group mb-4">
-                                        <input readOnly type="text" value={privateKey} className="form-control" aria-label="Amount" />
+                                        <input readOnly type="text" value={decryptPrivateKey} className="form-control" aria-label="Amount" />
                                         <span className="input-group-text"><FontAwesomeIcon onClick={handleCopy} icon={faCopy} /></span>
                                     </div>
                                     <p style={{
@@ -117,7 +117,7 @@ const Step2 = () => {
                                 <p className="py-4">You will not be able to retrieve it again.</p>
                                 <div className="my-3">
                                     <button type="button" className="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                                    <button data-bs-dismiss="modal" className="btn-save" onClick={()=>{navigate('/step3')}}>I already saved it</button>
+                                    <button data-bs-dismiss="modal" className="btn-save" onClick={() => { navigate('/step3') }}>I already saved it</button>
                                 </div>
                             </div>
                         </div>

@@ -29,7 +29,7 @@ export async function createWalletKeypairs() {
 
 export async function getPrivateKey(wallet) {
     try {
-        const response = await axios.post(`${baseURL}decrypt-private-key`, wallet);
+        const response = await axios.post(`${baseURL}getPrivateKey`, wallet);
         return response;
     } catch (error) {
         console.error("Error creating wallet:", error);
@@ -39,6 +39,8 @@ export async function getPrivateKey(wallet) {
 export async function swapTokens(tokenData) {
     try {
         const response = await axios.post(`${baseURL}swapTokensExactIn`, tokenData);
+        // const response = await axios.post(`http://192.168.1.21:8000/swapTokensExactIn`, tokenData);
+
         return response;
     } catch (error) {
         console.error("Error creating wallet:", error);
