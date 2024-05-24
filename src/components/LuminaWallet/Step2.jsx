@@ -26,111 +26,112 @@ const Step2 = () => {
         setRevealPrivateKey(true);
     };
     return (
-
-        <div className='step2main'>
-            <div className="text-center py-4">
-                <Link className="navbar-brand" to="/">
-                    <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
-                </Link>
-            </div>
-            <div className="text-center py-4"><Link to="/"><img src="assets/img/logo.png" width="200px" alt="" /></Link></div>
-            <section id="hero" className="hero d-flex align-items-center">
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-lg-12 pt-5 text-center">
-                            <h1 className="main-heading step-heading">This is your <br className="d-break" /> GENAI trading wallet</h1>
+        <>        <Toaster position="top-center" reverseOrder={false} />
+            <div className='step2main'>
+                <div className="text-center py-4">
+                    <Link className="navbar-brand" to="/">
+                        <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
+                    </Link>
+                </div>
+                <div className="text-center py-4"><Link to="/"><img src="assets/img/logo.png" width="200px" alt="" /></Link></div>
+                <section id="hero" className="hero d-flex align-items-center">
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-lg-12 pt-5 text-center">
+                                <h1 className="main-heading step-heading">This is your <br className="d-break" /> GENAI trading wallet</h1>
+                            </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-5 mx-auto step-box text-lg-start">
-                            <div className="row">
-                                <div className="col-lg-11 mx-auto">
-                                    <h3 className="mb-4">GENAI Trading wallet</h3>
-                                    <div className="row">
-                                        <div className="col-lg-12 mx-auto">
-                                            <div className="input-group input-group mb-4">
-                                                <input readOnly type="text" value={publicKey} className="form-control" aria-label="Amount" />
-                                                <span className="input-group-text"><FontAwesomeIcon onClick={() => handleCopy(publicKey)} icon={faCopy} /></span>
+                        <div className="row">
+                            <div className="col-lg-5 mx-auto step-box text-lg-start">
+                                <div className="row">
+                                    <div className="col-lg-11 mx-auto">
+                                        <h3 className="mb-4">GENAI Trading wallet</h3>
+                                        <div className="row">
+                                            <div className="col-lg-12 mx-auto">
+                                                <div className="input-group input-group mb-4">
+                                                    <input readOnly type="text" value={publicKey} className="form-control" aria-label="Amount" />
+                                                    <span className="input-group-text"><FontAwesomeIcon onClick={() => handleCopy(publicKey)} icon={faCopy} style={{ cursor: "pointer" }} /></span>
+                                                </div>
+
                                             </div>
+                                        </div>
+                                        <h3 className="mb-1">Private Key</h3>
+
+                                        <div style={{
+                                            opacity: revealPrivateKey ? 1 : 0.5,
+                                            transition: ' 0.5s ease-in-out'
+                                        }} className="input-group input-group mb-4">
+                                            <input readOnly type="text" value={decryptPrivateKey} className="form-control" aria-label="Amount" />
+                                            <span className="input-group-text"><FontAwesomeIcon onClick={() => handleCopy(decryptPrivateKey)} icon={faCopy} style={{ cursor: "pointer" }} /></span>
 
                                         </div>
-                                    </div>
-                                    <h3 className="mb-1">Private Key</h3>
+                                        <p style={{
+                                            opacity: revealPrivateKey ? 1 : 0.9,
+                                            transition: ' 0.5s ease-in-out'
+                                        }} className="mb-0 text-white">Please copy the above private key and store it in a safe location. Your private key will NOT be displayed again.</p>
+                                        <div className="text-center mb-5">
+                                            <button className="step-box-btn" onClick={handleReveal}>Click here to reveal private key</button>
+                                        </div>
 
-                                    <div style={{
-                                        opacity: revealPrivateKey ? 1 : 0.5,
-                                        transition: ' 0.5s ease-in-out'
-                                    }} className="input-group input-group mb-4">
-                                        <input readOnly type="text" value={decryptPrivateKey} className="form-control" aria-label="Amount" />
-                                        <span className="input-group-text"><FontAwesomeIcon onClick={handleCopy} icon={faCopy} /></span>
-                                        <input readOnly type="text" value={privateKey} className="form-control" aria-label="Amount" />
-                                        <span className="input-group-text "><FontAwesomeIcon onClick={handleCopy} icon={faCopy} /></span>
+                                        <div className="text-center mt-5"> <Link className="step-box-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Continue</Link></div>
                                     </div>
-                                    <p style={{
-                                        opacity: revealPrivateKey ? 1 : 0.9,
-                                        transition: ' 0.5s ease-in-out'
-                                    }} className="mb-0 text-white">Please copy the above private key and store it in a safe location. Your private key will NOT be displayed again.</p>
-                                    <div className="text-center mb-5">
-                                        <button className="step-box-btn" onClick={handleReveal}>Click here to reveal private key</button>
-                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row step2main">
+                            <div className="col-lg-3 mx-auto">
+                                <nav className="WizardSteps">
+                                    <a className="WizardSteps__step WizardSteps__step--complete">
+                                        <span className="WizardSteps__status">
+                                            <span className="WizardSteps__status-text">✔</span>
+                                        </span>
+                                    </a>
 
-                                    <div className="text-center mt-5"> <Link className="step-box-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Continue</Link></div>
+                                    <hr className="WizardSteps__line" />
+
+                                    <a className="WizardSteps__step WizardSteps__step--complete">
+                                        <span className="WizardSteps__status">
+                                            <span className="WizardSteps__status-text">✔</span>
+                                        </span>
+                                    </a>
+
+                                    <hr className="WizardSteps__line" />
+
+                                    <a className="WizardSteps__step WizardSteps__step--active">
+                                        <span className="WizardSteps__status">
+                                            <span className="WizardSteps__status-text"></span>
+                                        </span>
+                                    </a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    {/* <!-- Button trigger modal --> */}
+
+                    {/* <!-- Modal --> */}
+                    <div className="modal " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body">
+                                    <h5>Final chance to save private key</h5>
+                                    <p className="py-4">You will not be able to retrieve it again.</p>
+                                    <div className="my-3">
+                                        <button type="button" className="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                                        <button data-bs-dismiss="modal" className="btn-save" onClick={() => { navigate('/step3') }}>I already saved it</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="row step2main">
-                        <div className="col-lg-3 mx-auto">
-                            <nav className="WizardSteps">
-                                <a className="WizardSteps__step WizardSteps__step--complete">
-                                    <span className="WizardSteps__status">
-                                        <span className="WizardSteps__status-text">✔</span>
-                                    </span>
-                                </a>
-
-                                <hr className="WizardSteps__line" />
-
-                                <a className="WizardSteps__step WizardSteps__step--complete">
-                                    <span className="WizardSteps__status">
-                                        <span className="WizardSteps__status-text">✔</span>
-                                    </span>
-                                </a>
-
-                                <hr className="WizardSteps__line" />
-
-                                <a className="WizardSteps__step WizardSteps__step--active">
-                                    <span className="WizardSteps__status">
-                                        <span className="WizardSteps__status-text"></span>
-                                    </span>
-                                </a>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                {/* <!-- Button trigger modal --> */}
-
-                {/* <!-- Modal --> */}
-                <div className="modal " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div className="modal-body">
-                                <h5>Final chance to save private key</h5>
-                                <p className="py-4">You will not be able to retrieve it again.</p>
-                                <div className="my-3">
-                                    <button type="button" className="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                                    <button data-bs-dismiss="modal" className="btn-save" onClick={() => { navigate('/step3') }}>I already saved it</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 
-            </section>
-        </div>
+                </section>
+            </div>
+        </>
+
     )
 }
 
