@@ -197,7 +197,7 @@ const InternalNavbar = () => {
     const fetchBalance = async () => {
       try {
         const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
-        const walletKey = localStorage.getItem("solanaKey");
+        const walletKey = localStorage.getItem("publicKey");
         if (walletKey) {
           const wallet = new PublicKey(walletKey);
           const balance = await connection.getBalance(wallet);
@@ -357,7 +357,7 @@ const InternalNavbar = () => {
                   className="nav-link text-white"
                   id="navbarScrollingDropdown"
                   // role="button"
-                  
+
                   aria-expanded="false"
                 >
                   SOL : {solBalance}
