@@ -12,7 +12,7 @@ import { swapTokens, swapTokensOut } from "../../hooks/useWallet";
 import "../Dashboard.css";
 import { Log } from "ethers";
 import { pairData } from "../../hooks/useWallet";
-import shortBoxImg from "../../../assets/dashboard/short-box.png";
+import arrowImg from "../../../assets/dashboard/arrow.webp";
 
 const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const [allData, setAllData] = useState([]);
@@ -173,7 +173,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 onClick={() => copy(transactionResult)}
               >
                 Buyed Successfully. Your Transaction Is Sent . Click Here To
-                Copy your Transaction Hash <img src={shortBoxImg} />
+                Copy your Transaction Hash <img width={20} src={arrowImg} />
               </div>
             );
 
@@ -210,10 +210,12 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
       toast.error("Please select a Value")
     }
     if (selectedValue !== null && selectedValue !== 0) {
+      console.log("slected value is =>>", selectedValue);
       // Check if selectedValue is not null or 0
+    //  if (solBalance !== 0) {
       const value = {
         address: localStorage.getItem("publicKey"),
-        amount: (selectedValue/100) * 1000000000,
+        amount: sellButtonValue * 1000000000,
         inputMint: data?.pairs?.[0]?.baseToken?.address,
         outputMint: "So11111111111111111111111111111111111111112",
       };
@@ -231,7 +233,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               onClick={() => copy(transactionResult)}
             >
               Sold Successfully. Your Transaction is Sent . Click Here To Copy
-              your Transaction Hash <img src={shortBoxImg} />
+              your Transaction Hash <img width={20} src={arrowImg} />
             </div>
           );
           // toast.success(`Sold Successfully. Your Transaction is Sent`);
@@ -248,13 +250,18 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
         success: "Sold Successfully",
         error: "Cannot Sell. Try Again",
       });
-    } else {
+    //  } else {
+      // toast.error("you donot have enough balance to sell")
+    //  }
+    }
+    else {
       console.error("No value selected");
       noValueError();
     }
   };
   const handleButtonClickSell = (value) => {
     // Remove the percentage sign (%) from the value
+    console.log("clicked on quick sell", value)
     setSelectedValue(value);
     setActiveButton(value);
     const valueWithoutPercent = value.slice(0, -1);
@@ -263,7 +270,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
     // Try converting the value to a number, handle potential errors
     try {
       const sellValue = parseFloat(valueWithoutPercent) / 100;
-      setSellButtonValue(selectedValue); // Set state with decimal value
+      setSellButtonValue(sellValue); 
       console.log("Selected value (decimal):", sellValue);
     } catch (error) {
       console.error("Error converting value:", error.message);
