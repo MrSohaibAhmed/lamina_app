@@ -154,59 +154,59 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
     console.log("solona balance is =>>", solBalance);
     if (selectedValue !== null && selectedValue !== 0) {
       if (solBalance !== 0) {
-        const value = {
-          address: localStorage.getItem("publicKey"),
-          amount: sellButtonValue * 1000000000,
-          inputMint: "So11111111111111111111111111111111111111112",
-          outputMint: data?.pairs?.[0]?.baseToken?.address,
-        };
+      const value = {
+        address: localStorage.getItem("publicKey"),
+        amount: selectedValue * 1000000000,
+        inputMint: "So11111111111111111111111111111111111111112",
+        outputMint: data?.pairs?.[0]?.baseToken?.address,
+        slippageBps: slippage,
+      };
+      const buyPromise = swapTokens(value);
+      buyPromise
+        .then((result) => {
+          const transactionResult =
+            result?.data?.swapResponse?.transactionResult;
+          setBuyResult(transactionResult);
+          console.log("Buy Promise Result:", transactionResult);
+          const t = (
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => copy(transactionResult)}
+            >
+              Your Transaction Is Sent . Click Here To
+              Check your Transaction Hash <a href={transactionResult} target="blanked"><img width={20} src={arrowImg} /></a>
+            </div>
+          );
 
-        const buyPromise = swapTokens(value);
-
-        buyPromise
-          .then((result) => {
-            const transactionResult =
-              result?.data?.swapResponse?.transactionResult;
-            setBuyResult(transactionResult);
-            console.log("Buy Promise Result:", transactionResult);
-            const t = (
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => copy(transactionResult)}
-              >
-                Your Transaction Is Sent . Click Here To
-                Check your Transaction Hash <a href={transactionResult} target="blanked"><img width={20} src={arrowImg} /></a>
-              </div>
-            );
-
-            // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
-            //   duration: 10000,
-            // });
-            toast.success(t, {
-              duration: 10000,
-            });
-          })
-          .catch((error) => {
-            console.error("Buy Promise Error:", error);
-            toast.error("Cannot Buy. Try Again");
+          // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
+          //   duration: 10000,
+          // });
+          toast.success(t, {
+            duration: 10000,
           });
-
-        toast.promise(buyPromise, {
-          loading: "Buying...",
-          success: "",
-          error: "",
+        })
+        .catch((error) => {
+          console.error("Buy Promise Error:", error);
+          toast.error("Cannot Buy. Try Again");
         });
+
+      toast.promise(buyPromise, {
+        loading: "Waiting For Transaction...",
+        success: "",
+        error: "",
+      });
       } else {
         toast.error("You Donot have Enough Sol Balance");
       }
     } else {
       console.error("No value selected");
       // noValueError();
-      toast.error("Please select a value First");
+      toast.error("Selected Amount is 0");
     }
   };
 
   const handleQuickSell = () => {
+    debugger
 
     if(!sellSelectedValue){
       toast.error("Please select a Value")
@@ -300,6 +300,12 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
     setSelectedValue(event.target.value);
     setActiveButton("");
   };
+  const handleSlippageChange = (event) => {
+    let newValue = parseInt(event.target.value);
+    newValue = newValue > 100 ? 100 : newValue; // Restrict value to maximum of 100
+    setSlippage(newValue);
+  };
+
 
   useEffect(() => {
     if (data?.pairs && data.pairs.length > 0 && data.pairs[0]?.txns) {
@@ -710,12 +716,20 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                   >
                     <div className="accordion-body">
                       <div className="row">
-                        <div className="col mt-2 ">
+                        <div className="col mt-2">
                           Slippage % <br />
-                          <br />
-                          <Link className="btn-inner-box mt-3">20.0</Link>
+                          <input
+                            className="form-control bg-transparent border border-left-0 text-light"
+                            type="number"
+                            // className="btn-inner-box mt-3"
+                            value={slippage}
+                            onChange={handleSlippageChange} // Call handleSlippageChange on input change
+                            min={1}
+                            max={100}
+                          />
                         </div>
-                        <div className="col mt-2 ">
+
+                        {/* <div className="col mt-2 ">
                           Smart-Mev protection
                           <div className="mt-2 form-check">
                             <input
@@ -727,10 +741,10 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                               Enable
                             </label>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="row mt-3">
-                        <div className="col mt-2 ">
+                        {/* <div className="col mt-2 ">
                           Priority Fee <br />
                           <div className="d-flex flex-wrap">
                             <div className="my-3 mx-1">
@@ -749,10 +763,10 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                               </Link>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="row mt-3">
-                        <div className="col mt-2 ">
+                        {/* <div className="col mt-2 ">
                           Priority Fee <br />
                           <div className="d-flex row flex-wrap">
                             <div className="my-3  align-self-center col-lg-3 mx-1">
@@ -768,7 +782,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                               <p className="mb-0"> Priority Fee (SOL)</p>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="row">
                         <div className="col mt-2 ">
