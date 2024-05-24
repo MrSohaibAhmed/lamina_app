@@ -196,7 +196,7 @@ const InternalNavbar = () => {
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+        const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
         const walletKey = localStorage.getItem("publicKey");
         if (walletKey) {
           const wallet = new PublicKey(walletKey);
