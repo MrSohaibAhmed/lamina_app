@@ -39,7 +39,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const [sellVol, setsellVol] = useState(0);
   const [activeButton, setActiveButton] = useState(null);
   const [inputAmountVal, setInputAmountVal] = useState();
-  const[sellButtonValue , setSellButtonValue]= useState(null)
+  const [sellButtonValue, setSellButtonValue] = useState(null)
   const [buttonValue, setButtonValue] = useState(null);
 
   const scrollToTop = () => {
@@ -172,8 +172,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 style={{ cursor: "pointer" }}
                 onClick={() => copy(transactionResult)}
               >
-                Buyed Successfully. Your Transaction Is Sent . Click Here To
-                Copy your Transaction Hash <img width={20} src={arrowImg} />
+                Your Transaction Is Sent . Click Here To
+                Check your Transaction Hash <a href={transactionResult} target="blanked"><img width={20} src={arrowImg} /></a>
               </div>
             );
 
@@ -206,53 +206,53 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
 
   const handleQuickSell = () => {
 
-    if(!selectedValue){
+    if (!selectedValue) {
       toast.error("Please select a Value")
     }
     if (selectedValue !== null && selectedValue !== 0) {
       console.log("slected value is =>>", selectedValue);
       // Check if selectedValue is not null or 0
-    //  if (solBalance !== 0) {
-      const value = {
-        address: localStorage.getItem("publicKey"),
-        amount: sellButtonValue * 1000000000,
-        inputMint: data?.pairs?.[0]?.baseToken?.address,
-        outputMint: "So11111111111111111111111111111111111111112",
-      };
+      if (solBalance !== 0) {
+        const value = {
+          address: localStorage.getItem("publicKey"),
+          amount: sellButtonValue * 1000000000,
+          inputMint: data?.pairs?.[0]?.baseToken?.address,
+          outputMint: "So11111111111111111111111111111111111111112",
+        };
 
-      const buyPromise = swapTokensOut(value);
-      buyPromise
-        .then((result) => {
-          const transactionResult =
-            result?.data?.swapResponse?.transactionResult;
-          setBuyResult(transactionResult);
-          console.log("Buy Promise Result:", transactionResult);
-          const t = (
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={() => copy(transactionResult)}
-            >
-              Sold Successfully. Your Transaction is Sent . Click Here To Copy
-              your Transaction Hash <img width={20} src={arrowImg} />
-            </div>
-          );
-          // toast.success(`Sold Successfully. Your Transaction is Sent`);
-          toast.success(t, {
-            duration: 10000,
+        const buyPromise = swapTokensOut(value);
+        buyPromise
+          .then((result) => {
+            const transactionResult =
+              result?.data?.swapResponse?.transactionResult;
+            setBuyResult(transactionResult);
+            console.log("Buy Promise Result:", transactionResult);
+            const t = (
+              <div
+                style={{ cursor: "pointer" }}
+              // onClick={() => copy(transactionResult)}
+              >
+                Your Transaction is Sent . Click On Arrow To Check
+                your Transaction Hash <a href={transactionResult} target="blanked"><img width={20} src={arrowImg} /></a>
+              </div>
+            );
+            // toast.success(`Sold Successfully. Your Transaction is Sent`);
+            toast.success(t, {
+              duration: 10000,
+            });
+          })
+          .catch((error) => {
+            console.error("Buy Promise Error:", error);
+            toast.error("Cannot Buy. Try Again");
           });
-        })
-        .catch((error) => {
-          console.error("Buy Promise Error:", error);
-          toast.error("Cannot Buy. Try Again");
+        toast.promise(buyPromise, {
+          loading: "Selling...",
+          success: "Sold Successfully",
+          error: "Cannot Sell. Try Again",
         });
-      toast.promise(buyPromise, {
-        loading: "Selling...",
-        success: "Sold Successfully",
-        error: "Cannot Sell. Try Again",
-      });
-    //  } else {
-      // toast.error("you donot have enough balance to sell")
-    //  }
+      } else {
+        toast.error("you donot have enough balance to sell")
+      }
     }
     else {
       console.error("No value selected");
@@ -266,18 +266,18 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
     setActiveButton(value);
     const valueWithoutPercent = value.slice(0, -1);
     console.log("Sell button is", valueWithoutPercent);
-  
+
     // Try converting the value to a number, handle potential errors
     try {
       const sellValue = parseFloat(valueWithoutPercent) / 100;
-      setSellButtonValue(sellValue); 
+      setSellButtonValue(sellValue);
       console.log("Selected value (decimal):", sellValue);
     } catch (error) {
       console.error("Error converting value:", error.message);
       // Handle invalid input (optional)
       // You can display an error message to the user here
     }
-  
+
     setActiveButton(value);
     console.log("Active Button:", activeButton);
   };
@@ -286,7 +286,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
 
   const handleButtonClick = (value) => {
     setSelectedValue(value);
-    
+
     console.log("selected value is", value);
     setActiveButton(value);
     console.log("Active Button:", activeButton);
@@ -374,7 +374,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
           </div>
         </div>
         {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100) <
-        150 ? (
+          150 ? (
           <div className="row mt-4">
             <div
               className="alert alert-info alert-dismissible fade show"
@@ -603,9 +603,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(0.25)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 0.25 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 0.25 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp; 0.25
@@ -614,9 +613,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(0.5)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 0.5 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 0.5 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;0.5
@@ -625,9 +623,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(1)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 1 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 1 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;1
@@ -636,9 +633,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(2)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 2 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 2 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;2
@@ -647,9 +643,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(1.5)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 1.5 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 1.5 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;1.5
@@ -658,9 +653,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(2)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 2.9 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 2.9 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;2.90
@@ -828,9 +822,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 <button
                   value="0.25"
                   onClick={() => handleButtonClickSell("25%")}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == "25%" ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == "25%" ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;25%
@@ -840,9 +833,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 <button
                   value="50%"
                   onClick={() => handleButtonClickSell("50%")}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == "50%" ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == "50%" ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;50%
@@ -852,9 +844,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 <button
                   value="100%"
                   onClick={() => handleButtonClickSell("100%")}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == "100%" ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == "100%" ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;100%
