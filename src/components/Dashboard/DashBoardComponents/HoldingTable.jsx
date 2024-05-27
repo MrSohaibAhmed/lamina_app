@@ -59,7 +59,7 @@ const HoldingTable = ({ address }) => {
             ) : (
               holdings.map((holding, index) =>
                 holding.address !==
-                "So11111111111111111111111111111111111111111" ? (
+                  "So11111111111111111111111111111111111111111" ? (
                   <tr key={index} className="align-items-center">
                     <td style={{ verticalAlign: "middle" }}>
                       <img

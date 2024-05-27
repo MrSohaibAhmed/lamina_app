@@ -194,12 +194,13 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
         toast.promise(buyPromise, {
           loading: "Waiting For Transaction...",
           success: "",
-          error: "Transaction not found . Please Try Again",
+          error: "Transaction Failed . Please Try Again",
         });
       } else {
         toast.error("You Donot have Enough Sol Balance");
       }
-    } else {
+    }
+    else {
       console.error("No value selected");
       // noValueError();
       toast.error("Selected Amount is 0");
@@ -220,6 +221,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
           amount: sellButtonValue * 1000000000,
           inputMint: data?.pairs?.[0]?.baseToken?.address,
           outputMint: "So11111111111111111111111111111111111111112",
+          slippageBps: slippage,
+
         };
 
         const buyPromise = swapTokensOut(value);
@@ -232,7 +235,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
             const t = (
               <div
                 style={{ cursor: "pointer" }}
-              // onClick={() => copy(transactionResult)}
+                onClick={() => copy(transactionResult)}
               >
                 Your Transaction is Sent . Click On Arrow To Check
                 your Transaction Hash <a href={transactionResult} target="blanked"><img width={20} src={arrowImg} /></a>
@@ -921,12 +924,19 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                   >
                     <div className="accordion-body">
                       <div className="row">
-                        <div className="col mt-2 ">
+                        <div className="col mt-2">
                           Slippage % <br />
-                          <br />
-                          <Link className="btn-inner-box mt-3">20.0</Link>
+                          <input
+                            className="form-control bg-transparent border border-left-0 text-light"
+                            type="number"
+                            // className="btn-inner-box mt-3"
+                            value={slippage}
+                            onChange={handleSlippageChange} // Call handleSlippageChange on input change
+                            min={1}
+                            max={100}
+                          />
                         </div>
-                        <div className="col mt-2 ">
+                        {/* <div className="col mt-2 ">
                           Smart-Mev protection
                           <div className="mt-2 form-check">
                             <input
@@ -938,10 +948,10 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                               Enable
                             </label>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="row mt-3">
-                        <div className="col mt-2 ">
+                        {/* <div className="col mt-2 ">
                           Priority Fee <br />
                           <div className="d-flex flex-wrap">
                             <div className="my-3 mx-1">
@@ -960,9 +970,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                               </Link>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
-                      <div className="row mt-3">
+                      {/* <div className="row mt-3">
                         <div className="col mt-2 ">
                           Priority Fee <br />
                           <div className="d-flex row flex-wrap">
@@ -980,7 +990,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="row">
                         <div className="col mt-2 ">
                           Bribery Amount
