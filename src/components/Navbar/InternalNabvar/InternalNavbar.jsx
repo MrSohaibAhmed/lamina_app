@@ -75,19 +75,20 @@ const InternalNavbar = () => {
   const dropdownRef = useRef(null);
 
   const handleClick = async (pairAddress) => {
+    // debugger
     // Check if the clicked pair's pairAddress exists in the data
-    const foundPair = data.find((pair) => pair.pairaddress === pairAddress);
-    if (foundPair) {
-      setNoDetails(false);
-      setPairAddress(foundPair.pairaddress);
-      // console.log(foundPair);
-      const res = await pairData(foundPair.pairaddress);
-      console.log(res?.data, "Response data is = >>>>>>>>>");
-      setCoinsKey(res?.data);
-    } else {
-      setNoDetails(true);
-      alert("Sorry We Are Not Dealing with this Pair.");
-    }
+    // const foundPair = data.find((pair) => pair.pairaddress === pairAddress);
+    // if (foundPair) {
+    setNoDetails(false);
+    setPairAddress(pairAddress);
+    // console.log(foundPair);
+    const res = await pairData(pairAddress);
+    console.log(res?.data, "Response data is = >>>>>>>>>");
+    setCoinsKey(res?.data);
+    // } else {
+    // setNoDetails(true);
+    // alert("Sorry We Are Not Dealing with this Pair.");
+    // }
   };
   useEffect(() => {
     const fetchPairData = async () => {
@@ -96,7 +97,7 @@ const InternalNavbar = () => {
         //   "CwJCznavdHe6AYU85v56nDh1VCWKs3ywcRj8uShXd3F3"
         // );
         const res = await pairData(
-          "9tz6vYKiBDLYx2RnGWC5tESu4pyVE4jD6Tm56352UGte"
+          "CwJCznavdHe6AYU85v56nDh1VCWKs3ywcRj8uShXd3F3"
         );
         console.log(res?.data, "Response data is = >>>>>>>>>");
         setCoinsKey(res?.data);

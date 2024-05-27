@@ -5,6 +5,7 @@ import TradingViewWidget from "./ApexChartComp";
 import toast from 'react-hot-toast';
 
 const ChartBox = ({ data }) => {
+    // debugger
     console.log(data.pairs?.[0]?.baseToken?.symbol)
     // //debugger
     const [tokenAddress, setTokenAddress] = useState();
@@ -46,7 +47,7 @@ const ChartBox = ({ data }) => {
     }, [data]);
 
     const tradingViewComponent = useMemo(() => (
-        <TradingViewWidget data={data.pairs?.[0]?.baseToken.symbol} />
+        <TradingViewWidget data={data.pairs?.[0]?.baseToken.symbol} token={data.pairs?.[0]?.baseToken?.address} />
     ), [data.pairs?.[0]?.baseToken.symbol, data.pairs?.[0]?.pairAddress]);
 
 

@@ -2,9 +2,12 @@ import React from 'react';
 // import '../Navbar/Navbar.css'
 import '../Navbar/ExternalNavbar/Navbar.css'
 import { useNavigate } from 'react-router-dom';
+import KeyContext from '../../context/walletContext';
 
 const Step3 = () => {
-const navigate = useNavigate();
+    const { privateKey, publicKey, decryptPrivateKey } = useContext(KeyContext);
+
+    const navigate = useNavigate();
     return (
         <div>
             <div className="text-center py-4"><a href="index.html"><img src="assets/img/logo.png" width="200px" alt="" /></a></div>
@@ -18,8 +21,8 @@ const navigate = useNavigate();
                     <div className="row">
                         <div className="col-lg-5 mx-auto step-box">
                             <h3 className="mb-4">Your GENAI Trading Wallet is now at 0 SOL Balance, if you want to Trade Right away, <br className="d-break" /> deposit $SOL to address below.</h3>
-                            <div className="mb-5"><a href="#"></a>8ANgsVdw2dQXZtyJbXAdBvi6njrv4KB1VLmFhLmFjWum <i className="fa fa-copy"></i></div>
-                            <button onClick={()=>{navigate('/dashboard')}} className="step-box-btn" href="#">Check Balance</button>
+                            <div className="mb-5">{publicKey}<i className="fa fa-copy"></i></div>
+                            <button onClick={() => { navigate('/dashboard') }} className="step-box-btn" href="#">Check Balance</button>
                         </div>
                     </div>
                     <div className="row">

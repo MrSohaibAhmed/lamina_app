@@ -46,25 +46,6 @@ const Dashboard = () => {
       window.removeEventListener("resize", checkZoomLevel);
     };
   }, []);
-  useEffect(() => {
-    debugger
-    const fetchData = async () => {
-      const options = {
-        method: 'GET',
-        // url: 'http://192.168.1.21:3000/api/getNewPairs',
-        url: 'http://192.168.31.48:3000/api/getNewPairs',
-      };
-      try {
-        const response = await axios.request(options);
-        // setPairData(response.data)
-        console.log("New pair Api Response is", response.data);
-      } catch (error) {
-        console.error("new pair api Error is =>", error);
-      }
-    };
-    fetchData();
-  }, []);
-
   return (
     <>
       <InternalNavbar />
