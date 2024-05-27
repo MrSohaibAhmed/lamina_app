@@ -408,7 +408,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
             </div>
           </div>
         ) : null}
-        <div className="row price-inner">
+        <div className="row price-inner mt-4">
           <div className="col-lg-4 col">
             <h6>Price USD</h6>
             <h5>{allData?.pairs?.[0]?.priceUsd || "0.1980"}</h5>
