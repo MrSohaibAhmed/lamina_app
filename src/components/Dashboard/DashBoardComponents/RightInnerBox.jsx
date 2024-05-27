@@ -40,6 +40,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const [sellVol, setsellVol] = useState(0);
   const [activeButton, setActiveButton] = useState(null);
   const [inputAmountVal, setInputAmountVal] = useState();
+  const [inputSellAmount, setInputSellAmount] = useState();
   const [sellButtonValue, setSellButtonValue] = useState(null)
   const [buttonValue, setButtonValue] = useState(null);
   const [slippage, setSlippage] = useState(10.0);
@@ -300,6 +301,12 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
     setInputAmountVal(event.target.value);
     console.log(event.target.value);
     setSelectedValue(event.target.value);
+    setActiveButton("");
+  };
+  const changeSellAmountHandler = (event) => {
+    setInputSellAmount(event.target.value);
+    console.log(event.target.value);
+    setSellSelectedValue(event.target.value);
     setActiveButton("");
   };
   const handleSlippageChange = (event) => {
@@ -880,10 +887,10 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 </span>
                 <input
                   type="text"
-                  value={inputAmountVal}
-                  onChange={changeAmountHandler}
+                  value={inputSellAmount}
+                  onChange={changeSellAmountHandler}
                   className="form-control bg-transparent border border-left-0 text-light"
-                  placeholder="Amount to buy in SOL"
+                  placeholder="Amount to sell in SOL"
                   aria-label="Amount"
                   aria-describedby="basic-addon1"
                 />
@@ -1001,6 +1008,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                             </span>
                             <input
                               type="text"
+                              value={inputSellAmount}
+                               onChange={changeSellAmountHandler}
                               className="form-control bg-transparent border border-left-0 text-light"
                               placeholder="0.01 SOL"
                               aria-label="Amount"
