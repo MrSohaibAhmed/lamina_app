@@ -6,9 +6,9 @@ import RightAccordian from "./DashBoardComponents/RightAccordian";
 import InternalNavbar from "../Navbar/InternalNabvar/InternalNavbar";
 import KeyContext from "../../context/walletContext";
 import "./Dashboard.css";
-
+import axios from "axios";
 const Dashboard = () => {
-  const {solBalance , coinsKey, noDetails } = useContext(KeyContext);
+  const { solBalance, coinsKey, noDetails } = useContext(KeyContext);
   const [key, setKey] = useState(0); // State to manage the key for ChartBox component
 
   const coinKeyLength = coinsKey.length;
@@ -45,6 +45,24 @@ const Dashboard = () => {
     return () => {
       window.removeEventListener("resize", checkZoomLevel);
     };
+  }, []);
+  useEffect(() => {
+    debugger
+    const fetchData = async () => {
+      const options = {
+        method: 'GET',
+        // url: 'http://192.168.1.21:3000/api/getNewPairs',
+        url: 'http://192.168.31.48:3000/api/getNewPairs',
+      };
+      try {
+        const response = await axios.request(options);
+        // setPairData(response.data)
+        console.log("New pair Api Response is", response.data);
+      } catch (error) {
+        console.error("new pair api Error is =>", error);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
