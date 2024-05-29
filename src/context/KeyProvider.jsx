@@ -22,7 +22,7 @@ export const KeyProvider = ({ children }) => {
       );
       const { encryptedPrivateKey, iv } = response.data.encryptedPrivateKey;
       if (response) {
-        // //debugger
+        // ////debugger
         // console.log("response is", response);
         const walletDataResponse = response?.data;
         // console.log("wallet data response is", walletDataResponse);
@@ -34,14 +34,14 @@ export const KeyProvider = ({ children }) => {
         const privateKey1 =
           walletDataResponse.encryptedPrivateKey.encryptedPrivateKey;
         setPrivateKey(privateKey1);
-        // debugger
+        // //debugger
         const keys = {
           encryptedPrivateKey: encryptedPrivateKey,
           ivHex: iv,
           encryptionKey: encryptionKey
         }
         const privateDKey = await getPrivateKey(keys);
-        debugger
+        //debugger
         setDecryptPrivateKey(privateDKey?.data?.decryptedPrivateKey);
         navigate("/step2");
       }

@@ -9,10 +9,11 @@ const usePhantom = () => {
     const [signedMessage, setSignedMessage] = useState(null);
     const [solanaKey, setSolanaKey] = useState(null);
     const connectToPhantom = async () => {
+        //debugger
         if (window.solana) { // Check if Solana wallet extension is available
             try {
                 // Request connection to Solana wallet
-                debugger
+                //debugger
                 if (!window.solana.isConnected) {
                     await window.solana.connect();
                     const solanaPublicKey = window.solana.publicKey.toString();
@@ -45,7 +46,7 @@ const usePhantom = () => {
                     const solflarePublicKey = await window.solflare.publicKey;
 
                     if (solflarePublicKey) {
-                        // debugger
+                        // //debugger
                         setConnected(true);
                         console.log(solflarePublicKey.toString(), ">>>>>>>");
                         setSolanaKey(solflarePublicKey.toString());
@@ -131,7 +132,7 @@ const usePhantom = () => {
     //     }
     // };
     const newUsersignMessage = async () => {
-        //debugger
+        ////debugger
         if (window.solana && solanaKey) {
             const message = 'To avoid digital dognappers, sign below to authenticate with fusiond_app.';
             const encoder = new TextEncoder();
@@ -232,14 +233,14 @@ const usePhantom = () => {
     //         } catch (error) {
     //             console.error('Error signing message:', error);
     //         }
-    //         // //debugger
+    //         // ////debugger
     //         navi("/dashboard");
     //     } else {
     //         console.error('Web3 instance or account not available.');
     //     }
     // };
     const signMessage = async () => {
-        //debugger
+        ////debugger
         if (window.solana && solanaKey) {
             const message = 'To avoid digital dognappers, sign below to authenticate with fusiond_app.';
             const encoder = new TextEncoder();

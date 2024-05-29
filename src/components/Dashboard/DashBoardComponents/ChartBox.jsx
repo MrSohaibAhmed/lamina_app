@@ -7,14 +7,14 @@ import toast from 'react-hot-toast';
 const ChartBox = ({ data }) => {
     const [selectedValue, setSelectedValue] = useState('15m')
     console.log(data.pairs?.[0]?.baseToken?.symbol)
-    // //debugger
+    // ////debugger
     const [tokenAddress, setTokenAddress] = useState();
     const [pairDataAddress, setPairDataAddress] = useState();
     const [name, setName] = useState("BTCUSD");
     const [imageSrc, setImageSrc] = useState(" ");
 
     const handleClick = (value) => {
-        debugger
+        //debugger
         setSelectedValue(value);
         console.log("selected Value is", value);
         log

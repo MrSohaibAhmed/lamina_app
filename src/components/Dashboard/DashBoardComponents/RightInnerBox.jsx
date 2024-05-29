@@ -151,7 +151,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
       .catch((error) => console.error("Error copying baseToken:", error));
   };
   const handleQuickBuy = () => {
-    // debugger
+    // //debugger
     console.log("solona balance is =>>", solBalance);
     if (selectedValue !== null && selectedValue !== 0) {
       if (solBalance !== 0) {
@@ -327,14 +327,14 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   useEffect(() => {
     if (Txnsfive) {
       const timer = setTimeout(() => {
-        updateData("5M");
+        updateData("6H");
       }, 1000);
 
       return () => clearTimeout(timer);
     }
   }, [Txnsfive]);
   useEffect(() => {
-    // //debugger
+    // ////debugger
     let intervalId;
     // Define a function to make the API call
     const fetchData = () => {
@@ -1009,7 +1009,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                             <input
                               type="text"
                               value={inputSellAmount}
-                               onChange={changeSellAmountHandler}
+                              onChange={changeSellAmountHandler}
                               className="form-control bg-transparent border border-left-0 text-light"
                               placeholder="0.01 SOL"
                               aria-label="Amount"
