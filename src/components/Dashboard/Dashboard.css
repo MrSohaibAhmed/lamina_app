@@ -365,8 +365,17 @@ td {
     font-size: 14px!important;
 }
 
-
-
+.active{
+    background-color: #575757  !important;
+}
+.btnChartBox{
+    background-color: transparent;
+    border-radius: 3px;
+    padding: 0px 10px;
+}
+.btnChartBox:hover{
+    background-color: gray;
+}
 @media (max-width: 996px) {
     body {
         margin: auto;

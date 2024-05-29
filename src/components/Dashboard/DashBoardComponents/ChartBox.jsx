@@ -17,6 +17,7 @@ const ChartBox = ({ data }) => {
         debugger
         setSelectedValue(value);
         console.log("selected Value is", value);
+        log
     }
 
     const handleCopy = (address) => {
@@ -67,19 +68,28 @@ const ChartBox = ({ data }) => {
     return (
         <div>
             <div className="chart-box">
-                <div className="row">
+                <div className="row d-flex justify-content-between">
                     <div className="d-flex align-middle col-4 col-sm-4 align-self-center">
                         <img width={40} style={{ borderRadius: "50px" }} src={imageSrc} />
                         <h4 className="mb-0 align-content-center m-1">{name}</h4>
-                    </div>
-                    <div className="col-4 ">
-                        {/* <button className='m-1 bg-def text-white'>1</button> */}
 
-                        <button onClick={() => handleClick('15m')} className="bg-dark btn-inner-box m-1">15M</button>
-                        <button onClick={() => handleClick('1H')} className="bg-dark btn-inner-box m-1">1H</button>
-                        <button onClick={() => handleClick('6H')} className="bg-dark btn-inner-box m-1">6H</button>
-                        <button onClick={() => handleClick('1D')} className="bg-dark btn-inner-box m-1">24H</button>
+                         {/* <button className='m-1 bg-def text-white'>1</button> */}
+
+                         {/* <button onClick={() => handleClick('15m')} className=" btn-inner-box m-1 border-0 btnChartBox">15M</button> */}
+                         <button onClick={() => handleClick('15m')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "15m" ? "active" : ""
+                            }`}>15M</button>
+                        {/* <button onClick={() => handleClick('15m')} className={`bg-dark btn-inner-box m-1 ${selectedValue === "15m" ? "active" : ""
+                            }`}>15M</button> */}
+                        <button onClick={() => handleClick('1H')}className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1H" ? "active" : ""
+                            }`}>1H</button>
+                        <button onClick={() => handleClick('6H')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "6H" ? "active" : ""
+                            }`}>6H</button>
+                        <button onClick={() => handleClick('24H')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "24H" ? "active" : ""
+                            }`}>24H</button>
                     </div>
+                    
+                       
+                    
                     <div className="col-4 mt-2 mt-sm-0 col-sm-4 d-flex def-table align-items-center align-self-center">
                         Token
                         <input type="text" className="d-none" value={tokenAddress} id="myInput-token" />
