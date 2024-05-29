@@ -3,7 +3,7 @@ import React from 'react';
 import '../Navbar/ExternalNavbar/Navbar.css'
 import { useNavigate } from 'react-router-dom';
 import KeyContext from '../../context/walletContext';
-
+import { useContext } from 'react';
 const Step3 = () => {
     const { privateKey, publicKey, decryptPrivateKey } = useContext(KeyContext);
 
