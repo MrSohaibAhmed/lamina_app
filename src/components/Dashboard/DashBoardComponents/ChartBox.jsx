@@ -76,15 +76,15 @@ const ChartBox = ({ data }) => {
                          {/* <button className='m-1 bg-def text-white'>1</button> */}
 
                          {/* <button onClick={() => handleClick('15m')} className=" btn-inner-box m-1 border-0 btnChartBox">15M</button> */}
-                         <button onClick={() => handleClick('15m')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "15m" ? "active" : ""
+                         <button onClick={() => handleClick('15m')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "15m" ? "activeBtn" : ""
                             }`}>15M</button>
                         {/* <button onClick={() => handleClick('15m')} className={`bg-dark btn-inner-box m-1 ${selectedValue === "15m" ? "active" : ""
                             }`}>15M</button> */}
-                        <button onClick={() => handleClick('1H')}className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1H" ? "active" : ""
+                        <button onClick={() => handleClick('1H')}className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1H" ? "activeBtn" : ""
                             }`}>1H</button>
-                        <button onClick={() => handleClick('6H')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "6H" ? "active" : ""
+                        <button onClick={() => handleClick('6H')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "6H" ? "activeBtn" : ""
                             }`}>6H</button>
-                        <button onClick={() => handleClick('24H')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "24H" ? "active" : ""
+                        <button onClick={() => handleClick('24H')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "24H" ? "activeBtn" : ""
                             }`}>24H</button>
                     </div>
                     
