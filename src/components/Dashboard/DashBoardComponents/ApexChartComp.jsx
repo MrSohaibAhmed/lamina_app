@@ -1385,7 +1385,7 @@ import { createChart } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-const TradingViewWidget = ({ data, token }) => {
+const TradingViewWidget = ({ data, token, candlesSpan }) => {
   const [candlesData, setCandlesData] = useState([]);
 
   useEffect(() => {
@@ -1394,9 +1394,10 @@ const TradingViewWidget = ({ data, token }) => {
         headers: { 'X-API-KEY': '1a6f67ecb3d540b984f8fc694cfb364c' }
       };
       const oneWeekAgoEpoch = Math.floor((Date.now() - (7 * 24 * 60 * 60 * 1000)) / 1000);
+      const oneMonthAgoEpoch = Math.floor((Date.now() - (30 * 24 * 60 * 60 * 1000)) / 1000);
       const currentEpoch = Math.floor(Date.now() / 1000);
       try {
-        const response = await axios.get(`https://public-api.birdeye.so/defi/ohlcv?address=${token}&type=15m&time_from=${oneWeekAgoEpoch}&time_to=${currentEpoch}`, options);
+        const response = await axios.get(`https://public-api.birdeye.so/defi/ohlcv?address=${token}&type=15m&time_from=${oneMonthAgoEpoch}&time_to=${currentEpoch}`, options);
         console.log(response.data);
         debugger
         setCandlesData(response.data?.data?.items || []);
