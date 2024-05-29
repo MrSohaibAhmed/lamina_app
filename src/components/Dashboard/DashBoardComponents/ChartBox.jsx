@@ -73,23 +73,23 @@ const ChartBox = ({ data }) => {
                         <img width={40} style={{ borderRadius: "50px" }} src={imageSrc} />
                         <h4 className="mb-0 align-content-center m-1">{name}</h4>
 
-                         {/* <button className='m-1 bg-def text-white'>1</button> */}
+                        {/* <button className='m-1 bg-def text-white'>1</button> */}
 
-                         {/* <button onClick={() => handleClick('15m')} className=" btn-inner-box m-1 border-0 btnChartBox">15M</button> */}
-                         <button onClick={() => handleClick('15m')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "15m" ? "activeBtn" : ""
+                        {/* <button onClick={() => handleClick('15m')} className=" btn-inner-box m-1 border-0 btnChartBox">15M</button> */}
+                        <button onClick={() => handleClick('15m')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "15m" ? "activeBtn" : ""
                             }`}>15M</button>
                         {/* <button onClick={() => handleClick('15m')} className={`bg-dark btn-inner-box m-1 ${selectedValue === "15m" ? "active" : ""
                             }`}>15M</button> */}
-                        <button onClick={() => handleClick('1H')}className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1H" ? "activeBtn" : ""
+                        <button onClick={() => handleClick('1H')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1H" ? "activeBtn" : ""
                             }`}>1H</button>
                         <button onClick={() => handleClick('6H')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "6H" ? "activeBtn" : ""
                             }`}>6H</button>
                         <button onClick={() => handleClick('1D')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1D" ? "activeBtn" : ""
                             }`}>24H</button>
                     </div>
-                    
-                       
-                    
+
+
+
                     <div className="col-4 mt-2 mt-sm-0 col-sm-4 d-flex def-table align-items-center align-self-center">
                         Token
                         <input type="text" className="d-none" value={tokenAddress} id="myInput-token" />

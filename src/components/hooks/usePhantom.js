@@ -9,17 +9,22 @@ const usePhantom = () => {
     const [signedMessage, setSignedMessage] = useState(null);
     const [solanaKey, setSolanaKey] = useState(null);
     const connectToPhantom = async () => {
-        // debugger
         if (window.solana) { // Check if Solana wallet extension is available
             try {
                 // Request connection to Solana wallet
-                await window.solana.connect();
-                const solanaPublicKey = window.solana.publicKey.toString();
-                console.log(solanaPublicKey, ">>>>>>>");
-                setSolanaKey(solanaPublicKey);
-                setConnected(true);
-                localStorage.setItem("solanaKey", solanaPublicKey);
-                localStorage.setItem("connected", true);
+
+                if (!window.solana.isConnected) {
+                    await window.solana.connect();
+                    const solanaPublicKey = window.solana.publicKey.toString();
+                    console.log(solanaPublicKey, ">>>>>>>");
+                    setSolanaKey(solanaPublicKey);
+                    setConnected(true);
+                    localStorage.setItem("solanaKey", solanaPublicKey);
+                    localStorage.setItem("connected", true);
+                }
+                else {
+                    navi("/dashboard")
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -33,27 +38,33 @@ const usePhantom = () => {
                 alert('Solflare extension not detected!');
                 return;
             }
+            if (!window.solflare.isConnected) {
+                const response = await window.solflare.connect();
 
-            const response = await window.solflare.connect();
+                if (response) {
+                    const solflarePublicKey = await window.solflare.publicKey;
 
-            if (response) {
-                const solflarePublicKey = await window.solflare.publicKey;
+                    if (solflarePublicKey) {
+                        // debugger
+                        setConnected(true);
+                        console.log(solflarePublicKey.toString(), ">>>>>>>");
+                        setSolanaKey(solflarePublicKey.toString());
+                        localStorage.setItem("connected", true);
+                        localStorage.setItem("solanaKey", solflarePublicKey.toString());
+                        localStorage.setItem("connectedToSolflare", true);
 
-                if (solflarePublicKey) {
-                    // debugger
-                    setConnected(true);
-                    console.log(solflarePublicKey.toString(), ">>>>>>>");
-                    setSolanaKey(solflarePublicKey.toString());
-                    localStorage.setItem("connected", true);
-                    localStorage.setItem("solanaKey", solflarePublicKey.toString());
-                    localStorage.setItem("connectedToSolflare", true);
-
+                    } else {
+                        console.error("Failed to retrieve the public key from Solflare.");
+                    }
                 } else {
-                    console.error("Failed to retrieve the public key from Solflare.");
+                    console.error("Failed to connect to the Solflare wallet.");
                 }
+
             } else {
-                console.error("Failed to connect to the Solflare wallet.");
+                navi("/dashboard");
+
             }
+
         } catch (error) {
             console.error(error);
         }
