@@ -1393,6 +1393,7 @@ const TradingViewWidget = ({ data, token, candlesSpan }) => {
   }, [candlesSpan])
   const [candlesData, setCandlesData] = useState([]);
 
+
   useEffect(() => {
     const fetchData = async () => {
       const options = {
@@ -1428,27 +1429,6 @@ const TradingViewWidget = ({ data, token, candlesSpan }) => {
       width: chartContainerRef.current.clientWidth,
       height: 500,
     });
-    //   chart.applyOptions({
-    //     crosshair: {
-    //         // Change mode from default 'magnet' to 'normal'.
-    //         // Allows the crosshair to move freely without snapping to datapoints
-    //         mode: LightweightCharts.CrosshairMode.Normal,
-
-    //         // Vertical crosshair line (showing Date in Label)
-    //         vertLine: {
-    //             width: 8,
-    //             color: '#C3BCDB44',
-    //             style: LightweightCharts.LineStyle.Solid,
-    //             labelBackgroundColor: '#9B7DFF',
-    //         },
-
-    //         // Horizontal crosshair line (showing Price in Label)
-    //         horzLine: {
-    //             color: '#9B7DFF',
-    //             labelBackgroundColor: '#9B7DFF',
-    //         },
-    //     },
-    // });
     // chart.timeScale().fitContent();
     chart.timeScale().applyOptions({
       barSpacing: 20,
