@@ -84,7 +84,7 @@ const ChartBox = ({ data }) => {
                             }`}>1H</button>
                         <button onClick={() => handleClick('6H')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "6H" ? "activeBtn" : ""
                             }`}>6H</button>
-                        <button onClick={() => handleClick('24H')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "24H" ? "activeBtn" : ""
+                        <button onClick={() => handleClick('1D')} className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1D" ? "activeBtn" : ""
                             }`}>24H</button>
                     </div>
                     
