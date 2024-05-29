@@ -12,7 +12,7 @@ const usePhantom = () => {
         if (window.solana) { // Check if Solana wallet extension is available
             try {
                 // Request connection to Solana wallet
-
+                debugger
                 if (!window.solana.isConnected) {
                     await window.solana.connect();
                     const solanaPublicKey = window.solana.publicKey.toString();
@@ -100,6 +100,9 @@ const usePhantom = () => {
         setConnected(false);
         setAccount(null);
         setWeb3(null);
+        window.solana.disconnect();
+        window.solflare.disconnect();
+
         localStorage.removeItem("account");
         localStorage.removeItem("web3");
         localStorage.removeItem("connected");
