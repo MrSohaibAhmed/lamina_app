@@ -1428,7 +1428,7 @@ const TradingViewWidget = ({ data, token, candlesSpan }) => {
       width: chartContainerRef.current.clientWidth,
       height: 500,
     });
-    chart.timeScale().fitContent();
+    // chart.timeScale().fitContent();
 
     const candlestickSeries = chart.addCandlestickSeries({
       upColor: '#26a69a',
