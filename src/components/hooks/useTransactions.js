@@ -22,6 +22,8 @@ export async function setHoldings(id) {
     const options = {
         method: 'GET',
         url: `https://public-api.birdeye.so/v1/wallet/token_list?wallet=${id}`,
+        // url: `https://public-api.birdeye.so/v1/wallet/token_list?wallet=9B6ifM6iH71LPNq4U1H3TtMi8Z2fQaq3kv6gF2FVpbqd`,
+
         headers: {
             'x-chain': 'solana',
             'X-API-KEY': '1a6f67ecb3d540b984f8fc694cfb364c'

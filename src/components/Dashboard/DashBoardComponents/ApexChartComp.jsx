@@ -1386,6 +1386,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
 const TradingViewWidget = ({ data, token, candlesSpan }) => {
+
+  const [Time, setTime] = useState("15m")
+  useEffect(() => {
+    setTime(candlesSpan);
+  }, [candlesSpan])
   const [candlesData, setCandlesData] = useState([]);
 
   useEffect(() => {
@@ -1397,9 +1402,8 @@ const TradingViewWidget = ({ data, token, candlesSpan }) => {
       const oneMonthAgoEpoch = Math.floor((Date.now() - (30 * 24 * 60 * 60 * 1000)) / 1000);
       const currentEpoch = Math.floor(Date.now() / 1000);
       try {
-        const response = await axios.get(`https://public-api.birdeye.so/defi/ohlcv?address=${token}&type=15m&time_from=${oneMonthAgoEpoch}&time_to=${currentEpoch}`, options);
+        const response = await axios.get(`https://public-api.birdeye.so/defi/ohlcv?address=${token}&type=${Time}&time_from=${oneMonthAgoEpoch}&time_to=${currentEpoch}`, options);
         console.log(response.data);
-        debugger
         setCandlesData(response.data?.data?.items || []);
       } catch (error) {
         console.error(error);
@@ -1407,7 +1411,7 @@ const TradingViewWidget = ({ data, token, candlesSpan }) => {
     };
 
     fetchData();
-  }, []);
+  }, [Time, token]);
 
   const chartContainerRef = useRef();
 

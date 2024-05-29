@@ -42,7 +42,7 @@ const HoldingTable = ({ address }) => {
               <th scope="col">Price Usd</th>
               {/* <th scope="col">Mint Address</th> */}
               <th scope="col">Balance</th>
-              <th scope="col">Amount</th>
+              <th scope="col">Value Usd</th>
               <th scope="col">ChainId</th>
             </tr>
           </thead>
@@ -83,10 +83,10 @@ const HoldingTable = ({ address }) => {
                       ${holding.priceUsd}
                     </td>
                     <td style={{ verticalAlign: "middle" }}>
-                      ${holding.balance}
+                      {holding.uiAmount}
                     </td>
                     <td style={{ verticalAlign: "middle" }}>
-                      {holding.uiAmount / 1000}K
+                      ${holding.valueUsd}
                     </td>
                     <td style={{ verticalAlign: "middle" }}>
                       <img src={solIconImg} width="18px" alt="" />{" "}

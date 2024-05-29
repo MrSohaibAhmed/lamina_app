@@ -5,7 +5,7 @@ import TradingViewWidget from "./ApexChartComp";
 import toast from 'react-hot-toast';
 
 const ChartBox = ({ data }) => {
-    const [selectedValue, setSelectedValue] = useState(' ')
+    const [selectedValue, setSelectedValue] = useState('15m')
     console.log(data.pairs?.[0]?.baseToken?.symbol)
     // //debugger
     const [tokenAddress, setTokenAddress] = useState();
@@ -13,9 +13,10 @@ const ChartBox = ({ data }) => {
     const [name, setName] = useState("BTCUSD");
     const [imageSrc, setImageSrc] = useState(" ");
 
-    const handleClick=(value)=>{
+    const handleClick = (value) => {
+        debugger
         setSelectedValue(value);
-        console.log("selected Value is",value);
+        console.log("selected Value is", value);
     }
 
     const handleCopy = (address) => {
@@ -54,9 +55,13 @@ const ChartBox = ({ data }) => {
         }
     }, [data]);
 
+    useEffect(() => {
+        setSelectedValue("15m");
+    }, [])
+
     const tradingViewComponent = useMemo(() => (
-        <TradingViewWidget data={data.pairs?.[0]?.baseToken.symbol} token={data.pairs?.[0]?.baseToken?.address} />
-    ), [data.pairs?.[0]?.baseToken.symbol, data.pairs?.[0]?.pairAddress]);
+        <TradingViewWidget data={data.pairs?.[0]?.baseToken.symbol} token={data.pairs?.[0]?.baseToken?.address} candlesSpan={selectedValue} />
+    ), [data.pairs?.[0]?.baseToken.symbol, data.pairs?.[0]?.pairAddress, selectedValue]);
 
 
     return (
@@ -69,11 +74,11 @@ const ChartBox = ({ data }) => {
                     </div>
                     <div className="col-4 ">
                         {/* <button className='m-1 bg-def text-white'>1</button> */}
-                        
-                         <button onClick={()=>handleClick('15M')} className="bg-dark btn-inner-box m-1">15M</button>
-                        <button onClick={()=>handleClick('1H')} className="bg-dark btn-inner-box m-1">1H</button>
-                        <button onClick={()=>handleClick('6H')} className="bg-dark btn-inner-box m-1">6H</button>
-                        <button onClick={()=>handleClick('24H')} className="bg-dark btn-inner-box m-1">24H</button> 
+
+                        <button onClick={() => handleClick('15m')} className="bg-dark btn-inner-box m-1">15M</button>
+                        <button onClick={() => handleClick('1H')} className="bg-dark btn-inner-box m-1">1H</button>
+                        <button onClick={() => handleClick('6H')} className="bg-dark btn-inner-box m-1">6H</button>
+                        <button onClick={() => handleClick('1D')} className="bg-dark btn-inner-box m-1">24H</button>
                     </div>
                     <div className="col-4 mt-2 mt-sm-0 col-sm-4 d-flex def-table align-items-center align-self-center">
                         Token
