@@ -13,10 +13,10 @@ const ChartBox = ({ data }) => {
     const [name, setName] = useState("BTCUSD");
     const [imageSrc, setImageSrc] = useState(" ");
 
-    // const handleClick=(value)=>{
-    //     setSelectedValue(value);
-    //     console.log("selected Value is",value);
-    // }
+    const handleClick=(value)=>{
+        setSelectedValue(value);
+        console.log("selected Value is",value);
+    }
 
     const handleCopy = (address) => {
         switch (address) {
@@ -70,10 +70,10 @@ const ChartBox = ({ data }) => {
                     <div className="col-4 ">
                         {/* <button className='m-1 bg-def text-white'>1</button> */}
                         
-                        {/* <button onClick={()=>handleClick('15M')} className="bg-dark btn-inner-box m-1">15M</button>
+                         <button onClick={()=>handleClick('15M')} className="bg-dark btn-inner-box m-1">15M</button>
                         <button onClick={()=>handleClick('1H')} className="bg-dark btn-inner-box m-1">1H</button>
                         <button onClick={()=>handleClick('6H')} className="bg-dark btn-inner-box m-1">6H</button>
-                        <button onClick={()=>handleClick('24H')} className="bg-dark btn-inner-box m-1">24H</button> */}
+                        <button onClick={()=>handleClick('24H')} className="bg-dark btn-inner-box m-1">24H</button> 
                     </div>
                     <div className="col-4 mt-2 mt-sm-0 col-sm-4 d-flex def-table align-items-center align-self-center">
                         Token
