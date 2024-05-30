@@ -70,19 +70,24 @@ const InternalNavbar = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [pairAddress, setPairAddress] = useState(null);
-  const [walletAddress, setWalletAddress] = useState('1234..')
+  const [walletAddress, setWalletAddress] = useState("");
   const { disconnectFromMetaMask } = usePhantom();
   const navigate = useNavigate();
 
   const dropdownRef = useRef(null);
-
-  
-
+  const truncateAddress = (address) => {
+    if (!address) return "";
+    const start = address.slice(0, 3);
+    const end = address.slice(-2);
+    return `${start}...${end}`;
+  };
   const copyAddress = () => {
     navigator.clipboard.writeText(walletAddress);
-    toast.success("Successfully copied Token!");
+    toast.success("Successfully copied Wallet Address!");
   };
-
+  useEffect(() => {
+    setWalletAddress(localStorage.getItem("publicKey"));
+  }, []);
   const handleClick = async (pairAddress) => {
     // //debugger
     // Check if the clicked pair's pairAddress exists in the data
@@ -207,7 +212,9 @@ const InternalNavbar = () => {
     const fetchBalance = async () => {
       try {
         // const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
-        const connection = new Connection("https://ultra-delicate-lambo.solana-mainnet.quiknode.pro/9e6a18285b47f9974b7cac73e999be568cfe9929/");
+        const connection = new Connection(
+          "https://ultra-delicate-lambo.solana-mainnet.quiknode.pro/9e6a18285b47f9974b7cac73e999be568cfe9929/"
+        );
         // const walletKey = "9B6ifM6iH71LPNq4U1H3TtMi8Z2fQaq3kv6gF2FVpbqd";
         const walletKey = localStorage.getItem("publicKey");
 
@@ -345,16 +352,15 @@ const InternalNavbar = () => {
               </li>
               <li className="nav-item dropdown">
                 <Link
-                  className="nav-link"
+                  className="nav-link active"
                   to="#"
                   id="navbarScrollingDropdown"
                   role="button"
                   onClick={copyAddress}
                   aria-expanded="false"
                 >
-                Wallet Address: {walletAddress}
+                  Wallet Address: {truncateAddress(walletAddress)}
                 </Link>
-                
               </li>
               <li className="nav-item dropdown">
                 <Link
