@@ -9,17 +9,23 @@ const usePhantom = () => {
     const [signedMessage, setSignedMessage] = useState(null);
     const [solanaKey, setSolanaKey] = useState(null);
     const connectToPhantom = async () => {
-        // debugger
+        //debugger
         if (window.solana) { // Check if Solana wallet extension is available
             try {
                 // Request connection to Solana wallet
-                await window.solana.connect();
-                const solanaPublicKey = window.solana.publicKey.toString();
-                console.log(solanaPublicKey, ">>>>>>>");
-                setSolanaKey(solanaPublicKey);
-                setConnected(true);
-                localStorage.setItem("solanaKey", solanaPublicKey);
-                localStorage.setItem("connected", true);
+                //debugger
+                if (!window.solana.isConnected) {
+                    await window.solana.connect();
+                    const solanaPublicKey = window.solana.publicKey.toString();
+                    console.log(solanaPublicKey, ">>>>>>>");
+                    setSolanaKey(solanaPublicKey);
+                    setConnected(true);
+                    localStorage.setItem("solanaKey", solanaPublicKey);
+                    localStorage.setItem("connected", true);
+                }
+                else {
+                    navi("/dashboard")
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -33,27 +39,33 @@ const usePhantom = () => {
                 alert('Solflare extension not detected!');
                 return;
             }
+            if (!window.solflare.isConnected) {
+                const response = await window.solflare.connect();
 
-            const response = await window.solflare.connect();
+                if (response) {
+                    const solflarePublicKey = await window.solflare.publicKey;
 
-            if (response) {
-                const solflarePublicKey = await window.solflare.publicKey;
+                    if (solflarePublicKey) {
+                        // //debugger
+                        setConnected(true);
+                        console.log(solflarePublicKey.toString(), ">>>>>>>");
+                        setSolanaKey(solflarePublicKey.toString());
+                        localStorage.setItem("connected", true);
+                        localStorage.setItem("solanaKey", solflarePublicKey.toString());
+                        localStorage.setItem("connectedToSolflare", true);
 
-                if (solflarePublicKey) {
-                    // debugger
-                    setConnected(true);
-                    console.log(solflarePublicKey.toString(), ">>>>>>>");
-                    setSolanaKey(solflarePublicKey.toString());
-                    localStorage.setItem("connected", true);
-                    localStorage.setItem("solanaKey", solflarePublicKey.toString());
-                    localStorage.setItem("connectedToSolflare", true);
-
+                    } else {
+                        console.error("Failed to retrieve the public key from Solflare.");
+                    }
                 } else {
-                    console.error("Failed to retrieve the public key from Solflare.");
+                    console.error("Failed to connect to the Solflare wallet.");
                 }
+
             } else {
-                console.error("Failed to connect to the Solflare wallet.");
+                navi("/dashboard");
+
             }
+
         } catch (error) {
             console.error(error);
         }
@@ -89,6 +101,9 @@ const usePhantom = () => {
         setConnected(false);
         setAccount(null);
         setWeb3(null);
+        window.solana.disconnect();
+        window.solflare.disconnect();
+
         localStorage.removeItem("account");
         localStorage.removeItem("web3");
         localStorage.removeItem("connected");
@@ -117,7 +132,7 @@ const usePhantom = () => {
     //     }
     // };
     const newUsersignMessage = async () => {
-        //debugger
+        ////debugger
         if (window.solana && solanaKey) {
             const message = 'To avoid digital dognappers, sign below to authenticate with fusiond_app.';
             const encoder = new TextEncoder();
@@ -218,14 +233,14 @@ const usePhantom = () => {
     //         } catch (error) {
     //             console.error('Error signing message:', error);
     //         }
-    //         // //debugger
+    //         // ////debugger
     //         navi("/dashboard");
     //     } else {
     //         console.error('Web3 instance or account not available.');
     //     }
     // };
     const signMessage = async () => {
-        //debugger
+        ////debugger
         if (window.solana && solanaKey) {
             const message = 'To avoid digital dognappers, sign below to authenticate with fusiond_app.';
             const encoder = new TextEncoder();

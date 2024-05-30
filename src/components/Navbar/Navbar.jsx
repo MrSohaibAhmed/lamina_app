@@ -9,6 +9,7 @@ import { checkUser } from "../hooks/useWallet";
 import usePhantom from "../../components/hooks/usePhantom";
 
 const NavbarComp = () => {
+  //debugger
   const {
     connectToPhantom,
     connected,
@@ -21,11 +22,11 @@ const NavbarComp = () => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
   useEffect(() => {
-    //debugger
+    // //debugger
     if (solanaKey) {
       checkUser(solanaKey)
         .then((res) => {
-          // //debugger
+          // ////debugger
           console.log(res);
           localStorage.setItem("publicKey", res?.data?.data.publicKey);
           console.log("user found");
