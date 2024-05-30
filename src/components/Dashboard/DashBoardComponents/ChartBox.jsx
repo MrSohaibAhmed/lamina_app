@@ -3,7 +3,6 @@ import shortBoxImg from "../../../assets/dashboard/short-box.png";
 import "../Dashboard.css";
 import TradingViewWidget from "./ApexChartComp";
 import toast from "react-hot-toast";
-
 const ChartBox = ({ data }) => {
   const [selectedValue, setSelectedValue] = useState("15m");
   console.log(data.pairs?.[0]?.baseToken?.symbol);
@@ -12,14 +11,12 @@ const ChartBox = ({ data }) => {
   const [pairDataAddress, setPairDataAddress] = useState();
   const [name, setName] = useState("BTCUSD");
   const [imageSrc, setImageSrc] = useState(" ");
-
   const handleClick = (value) => {
     //debugger
     setSelectedValue(value);
     console.log("selected Value is", value);
     log;
   };
-
   const handleCopy = (address) => {
     switch (address) {
       case "tokenAddress":
@@ -45,7 +42,6 @@ const ChartBox = ({ data }) => {
         break;
     }
   };
-
   useEffect(() => {
     if (
       data?.pairs &&
@@ -61,11 +57,9 @@ const ChartBox = ({ data }) => {
       setTokenAddress(baseToken);
     }
   }, [data]);
-
   useEffect(() => {
     setSelectedValue("1H");
   }, []);
-
   const tradingViewComponent = useMemo(
     () => (
       <TradingViewWidget
@@ -80,7 +74,6 @@ const ChartBox = ({ data }) => {
       selectedValue,
     ]
   );
-
   return (
     <div>
       <div className="chart-box">
@@ -141,7 +134,6 @@ const ChartBox = ({ data }) => {
               24H
             </button>
           </div>
-
           <div className="col-4 mt-2 mt-sm-0 col-sm-4 d-flex def-table align-items-center align-self-center">
             Token
             <input
@@ -179,5 +171,4 @@ const ChartBox = ({ data }) => {
     </div>
   );
 };
-
 export default ChartBox;

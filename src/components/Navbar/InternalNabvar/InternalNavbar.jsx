@@ -10,6 +10,7 @@ import usePhantom from "../../hooks/usePhantom";
 import { Button } from "react-scroll";
 import { searchPair, pairData } from "../../hooks/useWallet";
 import KeyContext from "../../../context/walletContext";
+import toast, { Toaster } from "react-hot-toast";
 // import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import * as bs58 from "bs58";
 import {
@@ -69,10 +70,18 @@ const InternalNavbar = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [pairAddress, setPairAddress] = useState(null);
+  const [walletAddress, setWalletAddress] = useState('1234..')
   const { disconnectFromMetaMask } = usePhantom();
   const navigate = useNavigate();
 
   const dropdownRef = useRef(null);
+
+  
+
+  const copyAddress = () => {
+    navigator.clipboard.writeText(walletAddress);
+    toast.success("Successfully copied Token!");
+  };
 
   const handleClick = async (pairAddress) => {
     // //debugger
@@ -336,25 +345,16 @@ const InternalNavbar = () => {
               </li>
               <li className="nav-item dropdown">
                 <Link
-                  className="nav-link dropdown-toggle"
+                  className="nav-link"
                   to="#"
                   id="navbarScrollingDropdown"
                   role="button"
-                  data-bs-toggle="dropdown"
+                  onClick={copyAddress}
                   aria-expanded="false"
                 >
-                  English
+                Wallet Address: {walletAddress}
                 </Link>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="navbarScrollingDropdown"
-                >
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Germen
-                    </Link>
-                  </li>
-                </ul>
+                
               </li>
               <li className="nav-item dropdown">
                 <Link
