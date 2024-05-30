@@ -41,7 +41,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   const [activeButton, setActiveButton] = useState(null);
   const [inputAmountVal, setInputAmountVal] = useState();
   const [inputSellAmount, setInputSellAmount] = useState();
-  const [sellButtonValue, setSellButtonValue] = useState(null)
+  const [sellButtonValue, setSellButtonValue] = useState(null);
   const [buttonValue, setButtonValue] = useState(null);
   const [slippage, setSlippage] = useState(10.0);
 
@@ -174,8 +174,11 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 style={{ cursor: "pointer" }}
                 onClick={() => copy(transactionResult)}
               >
-                Your Transaction Is Sent . Click Here To
-                Check your Transaction Hash <a href={transactionResult} target="blanked"><img width={20} src={arrowImg} /></a>
+                Your Transaction Is Sent . Click Here To Check your Transaction
+                Hash{" "}
+                <a href={transactionResult} target="blanked">
+                  <img width={20} src={arrowImg} />
+                </a>
               </div>
             );
 
@@ -199,8 +202,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
       } else {
         toast.error("You Donot have Enough Sol Balance");
       }
-    }
-    else {
+    } else {
       console.error("No value selected");
       // noValueError();
       toast.error("Selected Amount is 0");
@@ -208,9 +210,8 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
   };
 
   const handleQuickSell = () => {
-
     if (!sellSelectedValue) {
-      toast.error("Please select a Value")
+      toast.error("Please select a Value");
     }
     if (sellSelectedValue !== null && sellSelectedValue !== 0) {
       console.log("slected value is =>>", sellSelectedValue);
@@ -222,7 +223,6 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
           inputMint: data?.pairs?.[0]?.baseToken?.address,
           outputMint: "So11111111111111111111111111111111111111112",
           slippageBps: slippage,
-
         };
 
         const buyPromise = swapTokensOut(value);
@@ -237,8 +237,11 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 style={{ cursor: "pointer" }}
                 onClick={() => copy(transactionResult)}
               >
-                Your Transaction is Sent . Click On Arrow To Check
-                your Transaction Hash <a href={transactionResult} target="blanked"><img width={20} src={arrowImg} /></a>
+                Your Transaction is Sent . Click On Arrow To Check your
+                Transaction Hash{" "}
+                <a href={transactionResult} target="blanked">
+                  <img width={20} src={arrowImg} />
+                </a>
               </div>
             );
             // toast.success(`Sold Successfully. Your Transaction is Sent`);
@@ -255,19 +258,17 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
           success: "Sold Successfully",
           error: "Transaction Failed. Try Again",
         });
+      } else {
+        toast.error("you donot have enough balance to sell");
       }
-      else {
-        toast.error("you donot have enough balance to sell")
-      }
-    }
-    else {
+    } else {
       console.error("No value selected");
       noValueError();
     }
   };
   const handleButtonClickSell = (value) => {
     // Remove the percentage sign (%) from the value
-    console.log("clicked on quick sell", value)
+    console.log("clicked on quick sell", value);
     setSellSelectedValue(value);
     setActiveButton(value);
     const valueWithoutPercent = value.slice(0, -1);
@@ -286,8 +287,6 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
     setActiveButton(value);
     console.log("Active Button:", activeButton);
   };
-
-
 
   const handleButtonClick = (value) => {
     setSelectedValue(value);
@@ -314,7 +313,6 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
     newValue = newValue > 100 ? 100 : newValue; // Restrict value to maximum of 100
     setSlippage(newValue);
   };
-
 
   useEffect(() => {
     if (data?.pairs && data.pairs.length > 0 && data.pairs[0]?.txns) {
@@ -391,7 +389,7 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
           </div>
         </div>
         {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100) <
-          150 ? (
+        150 ? (
           <div className="row mt-4">
             <div
               className="alert alert-info alert-dismissible fade show"
@@ -551,10 +549,11 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
             <div className=" mt-6 position-relative">
               <div className="progress-values">
                 <div className="progress-value-left">
-                  <h6 className="mb-0">BUYERS</h6> 0
+                  <h6 className="mb-0">BUYERS</h6> {buy}
                 </div>
                 <div className="progress-value-right text-end">
-                  <h6 className="mb-0">SELLERS</h6> 0
+                  <h6 className="mb-0">SELLERS</h6>
+                  {sell}
                 </div>
               </div>
               <div className="progress progress-default">
@@ -620,8 +619,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(0.25)}
-                  className={`bg-dark btn-inner-box ${activeButton == 0.25 ? "btn1-active" : ""
-                    }`}
+                  className={`bg-dark btn-inner-box ${
+                    activeButton == 0.25 ? "btn1-active" : ""
+                  }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp; 0.25
@@ -630,8 +630,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(0.5)}
-                  className={`bg-dark btn-inner-box ${activeButton == 0.5 ? "btn1-active" : ""
-                    }`}
+                  className={`bg-dark btn-inner-box ${
+                    activeButton == 0.5 ? "btn1-active" : ""
+                  }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;0.5
@@ -640,8 +641,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(1)}
-                  className={`bg-dark btn-inner-box ${activeButton == 1 ? "btn1-active" : ""
-                    }`}
+                  className={`bg-dark btn-inner-box ${
+                    activeButton == 1 ? "btn1-active" : ""
+                  }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;1
@@ -650,8 +652,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(2)}
-                  className={`bg-dark btn-inner-box ${activeButton == 2 ? "btn1-active" : ""
-                    }`}
+                  className={`bg-dark btn-inner-box ${
+                    activeButton == 2 ? "btn1-active" : ""
+                  }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;2
@@ -660,8 +663,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(1.5)}
-                  className={`bg-dark btn-inner-box ${activeButton == 1.5 ? "btn1-active" : ""
-                    }`}
+                  className={`bg-dark btn-inner-box ${
+                    activeButton == 1.5 ? "btn1-active" : ""
+                  }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;1.5
@@ -670,8 +674,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(2)}
-                  className={`bg-dark btn-inner-box ${activeButton == 2.9 ? "btn1-active" : ""
-                    }`}
+                  className={`bg-dark btn-inner-box ${
+                    activeButton == 2.9 ? "btn1-active" : ""
+                  }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;2.90
@@ -847,8 +852,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 <button
                   value="0.25"
                   onClick={() => handleButtonClickSell("25%")}
-                  className={`bg-dark btn-inner-box ${activeButton == "25%" ? "btn1-active" : ""
-                    }`}
+                  className={`bg-dark btn-inner-box ${
+                    activeButton == "25%" ? "btn1-active" : ""
+                  }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;25%
@@ -858,8 +864,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 <button
                   value="50%"
                   onClick={() => handleButtonClickSell("50%")}
-                  className={`bg-dark btn-inner-box ${activeButton == "50%" ? "btn1-active" : ""
-                    }`}
+                  className={`bg-dark btn-inner-box ${
+                    activeButton == "50%" ? "btn1-active" : ""
+                  }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;50%
@@ -869,8 +876,9 @@ const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
                 <button
                   value="100%"
                   onClick={() => handleButtonClickSell("100%")}
-                  className={`bg-dark btn-inner-box ${activeButton == "100%" ? "btn1-active" : ""
-                    }`}
+                  className={`bg-dark btn-inner-box ${
+                    activeButton == "100%" ? "btn1-active" : ""
+                  }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;100%
