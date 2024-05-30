@@ -48,9 +48,10 @@ body {
 .topnav input[type=text] {
     padding: 10px;
     margin-top: 8px;
+
     font-size: 13px;
     border: 1px solid#2E2E55;
-    width: 300px;
+    width: 200px !important;
     background-color: #0E0E26;
     color: #fff;
 }
