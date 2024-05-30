@@ -502,7 +502,7 @@ const RightInnerBox = ({ data, solBalance }) => {
             <h5>{volume}</h5>
             <br />
             <h6>MAKERS</h6>
-            <h5>{makers}</h5>
+            <h5>{totaltxns}</h5>
           </div>
           <div className="col-lg-8">
             <div className=" mt-5 position-relative">
