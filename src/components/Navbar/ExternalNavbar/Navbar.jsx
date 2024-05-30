@@ -8,6 +8,7 @@ import usePhantom from "../../../components/hooks/usePhantom";
 import { checkUser } from "../../hooks/useWallet";
 import ModalComp from "./ModalComp";
 const NavbarComp = () => {
+  const navi = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const {
     connectToPhantom,
@@ -49,6 +50,9 @@ const NavbarComp = () => {
   const handleConnectWallet = () => {
     setShowModal(true); // Show modal when "Connect Wallet" button is clicked
     // connectToPhantom();
+  };
+  const gotoDashboard = () => {
+    navi("/dashboard");
   };
 
   return (
@@ -112,10 +116,22 @@ const NavbarComp = () => {
                 </ul>
               </li>
               <li className="nav-item">
-                <ModalComp
-                  connectToPhantom={connectToPhantom}
-                  connectToSolflare={connectToSolflare}
-                />
+                {localStorage.getItem("connected") ? (
+                  <button
+                    onClick={gotoDashboard}
+                    type="button"
+                    className="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                  >
+                    Go To Dashboard
+                  </button>
+                ) : (
+                  <ModalComp
+                    connectToPhantom={connectToPhantom}
+                    connectToSolflare={connectToSolflare}
+                  />
+                )}
               </li>
               {/* )} */}
             </ul>
