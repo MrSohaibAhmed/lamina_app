@@ -19,33 +19,33 @@ const Dashboard = () => {
     setKey((prevKey) => prevKey + 1);
   };
 
-  const checkZoomLevel = () => {
-    const zoomLevel = Math.round(window.devicePixelRatio * 100);
+  // const checkZoomLevel = () => {
+  //   const zoomLevel = Math.round(window.devicePixelRatio * 100);
 
-    const elementsToHide = document.querySelectorAll(".hide-on-zoom");
-    if (zoomLevel >= 175) {
-      elementsToHide.forEach((element) => {
-        element.classList.add("hidden");
-      });
-    } else {
-      elementsToHide.forEach((element) => {
-        element.classList.remove("hidden");
-      });
-    }
-  };
+  //   const elementsToHide = document.querySelectorAll(".hide-on-zoom");
+  //   if (zoomLevel >= 175) {
+  //     elementsToHide.forEach((element) => {
+  //       element.classList.add("hidden");
+  //     });
+  //   } else {
+  //     elementsToHide.forEach((element) => {
+  //       element.classList.remove("hidden");
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     updateKey();
   }, [coinsKey]);
 
-  useEffect(() => {
-    window.addEventListener("resize", checkZoomLevel);
-    checkZoomLevel(); // Check initially
+  // useEffect(() => {
+  //   window.addEventListener("resize", checkZoomLevel);
+  //   checkZoomLevel(); // Check initially
 
-    return () => {
-      window.removeEventListener("resize", checkZoomLevel);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", checkZoomLevel);
+  //   };
+  // }, []);
   return (
     <>
       <InternalNavbar />
@@ -82,7 +82,7 @@ const Dashboard = () => {
                 {/* Right Side  */}
                 <div className="col-lg-3 right-side">
                   <RightInnerBox
-                    checkZoomLevel={checkZoomLevel}
+                    // checkZoomLevel={checkZoomLevel}
                     data={coinsKey}
                     solBalance={solBalance}
                   />

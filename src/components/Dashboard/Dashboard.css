@@ -376,6 +376,18 @@ td {
 .btnChartBox:hover{
     background-color: gray;
 }
+
+@media (max-width:427px) {
+.chart-box{
+    display:none !important;
+}
+}
+@media (max-width:769px) {
+.chart-box{
+    display:block;
+}
+}
+
 @media (max-width: 996px) {
     body {
         margin: auto;

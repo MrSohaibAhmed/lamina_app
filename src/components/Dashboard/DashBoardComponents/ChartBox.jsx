@@ -14,7 +14,7 @@ const ChartBox = ({ data }) => {
     const [imageSrc, setImageSrc] = useState(" ");
 
     const handleClick = (value) => {
-        debugger
+        // debugger
         setSelectedValue(value);
         console.log("selected Value is", value);
         log

@@ -14,14 +14,14 @@ import { Log } from "ethers";
 import { pairData } from "../../hooks/useWallet";
 import arrowImg from "../../../assets/dashboard/arrow.webp";
 
-const RightInnerBox = ({ data, checkZoomLevel, solBalance }) => {
+const RightInnerBox = ({ data, solBalance }) => {
   const [allData, setAllData] = useState([]);
   useEffect(() => {
     setAllData(data);
   }, [data]);
-  useEffect(() => {
-    checkZoomLevel();
-  }, [checkZoomLevel]);
+  // useEffect(() => {
+  //   checkZoomLevel();
+  // }, [checkZoomLevel]);
 
   const [Txnsfive, setsetTxnsfive] = useState(0);
   const [Txnsone, setsetTxnsone] = useState(0);
