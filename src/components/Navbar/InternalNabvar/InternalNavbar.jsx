@@ -273,11 +273,13 @@ const InternalNavbar = () => {
                   HOLDINGS
                 </Link>
               </li>
-              <li className="nav-item">
+           {/** 
+             <li className="nav-item">
                 <Link className="nav-link" aria-current="page" to="#">
                   LEADERBOARD
                 </Link>
               </li>
+              */} 
               <li className="nav-item topnav">
                 <div className="search-container d-flex">
                   <form onSubmit={handleSearch}>
