@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Dashboard.css";
 import { setDataAndSecurity } from "../../hooks/useTransactions";
+import toast, { Toaster } from "react-hot-toast";
 
 const RightAccordian = ({ address }) => {
   const [data, setData] = useState([]);
@@ -34,6 +35,13 @@ const RightAccordian = ({ address }) => {
     const standardTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     return standardTime;
   }
+
+  const copyAddress = (value) => {
+    navigator.clipboard.writeText(value);
+    console.log("address value is=>" , value);
+    toast.success("Successfully copied Wallet Address!");
+  };
+
   return (
     <div className="accordion accordion-flush bg-dark" id="accordionFlush">
       <div className="accordion-item">
@@ -105,7 +113,7 @@ const RightAccordian = ({ address }) => {
                 </tr>
                 <tr>
                   <td> Deployer</td>
-                  <td className="text-end">
+                  <td className="text-end" onClick={()=>copyAddress(data.creatorAddress)}>
                     <a href="#">{truncateAddress(data.creatorAddress)}</a>
                   </td>
                 </tr>
