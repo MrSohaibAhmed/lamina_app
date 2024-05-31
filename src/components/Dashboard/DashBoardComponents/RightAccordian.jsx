@@ -84,22 +84,45 @@ const RightAccordian = ({ address }) => {
                   </td>
                 </tr>
                 <tr>
-                  <td> Pooled Ansem Dog</td>
+                  <td>Total Supply</td>
                   <td className="text-end text-danger">
                     <i
                       className="fa fa-exclamation-circle"
                       aria-hidden="true"
                     ></i>{" "}
-                    0.00%
+                    {data?.totalSupply}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Owner Balance</td>
+                  <td className="text-end">
+                    {data?.ownerBalance ? data.ownerBalance : "0"}
                   </td>
                 </tr>
                 <tr>
-                  <td> LP Burned</td>
-                  <td className="text-end"> $0.0₄</td>
+                  <td>Owner Precentage</td>
+                  <td className="text-end">
+                    {data?.ownerPercentage ? data.ownerPercentage : "0"}
+                  </td>
                 </tr>
                 <tr>
-                  <td> Pooled SOL</td>
-                  <td className="text-end"> $0.17</td>
+                  <td>Fee Transfer Enable</td>
+                  <td className="text-end">
+                    {data?.transferFeeEnable ? "true " : "false"}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Update Authority</td>
+                  <td className="text-end">
+                    {data?.metaplexOwnerUpdateAuthority ? "true " : "false"}
+                  </td>
+                </tr>
+                <tr>
+                  <td> Is Token 2022</td>
+                  <td className="text-end">
+                    {data?.isToken2022 ? "true " : "false"}
+                  </td>
                 </tr>
                 <tr>
                   <td> Top 10 Holders</td>
