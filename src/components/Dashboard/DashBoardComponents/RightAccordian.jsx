@@ -38,8 +38,8 @@ const RightAccordian = ({ address }) => {
 
   const copyAddress = (value) => {
     navigator.clipboard.writeText(value);
-    console.log("address value is=>" , value);
-    toast.success("Successfully copied Wallet Address!");
+    console.log("address value is=>", value);
+    toast.success("Successfully copied!");
   };
 
   return (
@@ -136,7 +136,10 @@ const RightAccordian = ({ address }) => {
                 </tr>
                 <tr>
                   <td> Deployer</td>
-                  <td className="text-end" onClick={()=>copyAddress(data.creatorAddress)}>
+                  <td
+                    className="text-end"
+                    onClick={() => copyAddress(data.creatorAddress)}
+                  >
                     <a href="#">{truncateAddress(data.creatorAddress)}</a>
                   </td>
                 </tr>
