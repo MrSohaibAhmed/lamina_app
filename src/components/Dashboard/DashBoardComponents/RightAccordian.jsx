@@ -38,8 +38,7 @@ const RightAccordian = ({ address }) => {
 
   const copyAddress = (value) => {
     navigator.clipboard.writeText(value);
-    console.log("address value is=>" , value);
-    toast.success("Successfully copied Wallet Address!");
+    toast.success("Successfully copied!");
   };
 
   return (
@@ -69,7 +68,8 @@ const RightAccordian = ({ address }) => {
               <tbody>
                 <tr>
                   <td> Mint Authority</td>
-                  <td className="text-end text-danger">
+               { /**  <td className="text-end text-danger"> */} 
+                <td className={`text-end ${data?.mintSlot ? 'text-success' : 'text-danger'}`}>
                     <i
                       className="fa fa-exclamation-circle"
                       aria-hidden="true"
@@ -79,13 +79,13 @@ const RightAccordian = ({ address }) => {
                 </tr>
                 <tr>
                   <td> Freeze Authority</td>
-                  <td className="text-end text-success">
+                  <td className={`text-end ${data?.freezeAuthority ? 'text-success' : 'text-danger'}`}>
                     {data?.freezeAuthority ? data.freezeAuthority : "Disabled"}
                   </td>
                 </tr>
                 <tr>
                   <td>Total Supply</td>
-                  <td className="text-end text-danger">
+                  <td className="text-end text-white">
                     <i
                       className="fa fa-exclamation-circle"
                       aria-hidden="true"
@@ -108,25 +108,25 @@ const RightAccordian = ({ address }) => {
                 </tr>
                 <tr>
                   <td>Fee Transfer Enable</td>
-                  <td className="text-end">
+                  <td className={`text-end ${data?.transferFeeEnable ? 'text-success' : 'text-danger'}`}>
                     {data?.transferFeeEnable ? "true " : "false"}
                   </td>
                 </tr>
                 <tr>
                   <td>Update Authority</td>
-                  <td className="text-end">
+                  <td className={`text-end ${data?.metaplexOwnerUpdateAuthority ? 'text-success' : 'text-danger'}`}>
                     {data?.metaplexOwnerUpdateAuthority ? "true " : "false"}
                   </td>
                 </tr>
                 <tr>
                   <td> Is Token 2022</td>
-                  <td className="text-end">
+                  <td className={`text-end ${data?.isToken2022 ? 'text-success' : 'text-danger'}`}>
                     {data?.isToken2022 ? "true " : "false"}
                   </td>
                 </tr>
                 <tr>
                   <td> Top 10 Holders</td>
-                  <td className="text-end text-danger">
+                  <td className="text-end text-success">
                     <i
                       className="fa fa-exclamation-circle"
                       aria-hidden="true"
