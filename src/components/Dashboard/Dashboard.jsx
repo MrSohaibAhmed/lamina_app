@@ -87,7 +87,7 @@ const Dashboard = () => {
                     solBalance={solBalance}
                   />
                   <div className="my-3 hide-on-zoom">
-                    <RightAccordian data={coinsKey} />
+                    <RightAccordian address={coinsKey}  />
                   </div>
                 </div>
               </div>

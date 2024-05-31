@@ -116,7 +116,7 @@ const NavbarComp = () => {
                 </ul>
               </li>
               <li className="nav-item">
-                {localStorage.getItem("connected") ? (
+                {localStorage.getItem("publicKey") ? (
                   <button
                     onClick={gotoDashboard}
                     type="button"
