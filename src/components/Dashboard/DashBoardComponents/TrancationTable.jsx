@@ -3,14 +3,30 @@ import arrowImg from "../../../assets/dashboard/arrows.png";
 import solIconImg from "../../../assets/dashboard/sol-icon.png";
 import transationTableIconImg from "../../../assets/dashboard/transaction-table-icon.png";
 import { setTransaction } from "../../hooks/useTransactions";
+
 const TransactionTable = ({ address }) => {
-  // debugger;
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchTransactions = () => {
       setTransaction(address)
-        .then((responseData) => setData(responseData.data.items))
+        .then((responseData) => {
+          const newItems = responseData.data.items;
+
+          // Merge new items with existing data, placing new items at the top
+          setData((prevData) => {
+            const newData = [...newItems];
+
+            // Optionally avoid duplicates
+            prevData.forEach((item) => {
+              if (!newData.some((newItem) => newItem.txHash === item.txHash)) {
+                newData.push(item);
+              }
+            });
+
+            return newData;
+          });
+        })
         .catch((error) =>
           console.error("Error fetching transaction data:", error)
         );
@@ -29,48 +45,37 @@ const TransactionTable = ({ address }) => {
     const end = txHash.slice(-5);
     return `${start}...${end}`;
   };
+
   const formatPrice = (price) => {
     if (!price || price == "null") return "N/A";
     const priceString = price.toString();
     const truncatedPrice = priceString.substring(0, 9);
     return truncatedPrice;
   };
+
   const formatTotalUSD = (totalUsd) => {
-    // if (!totalUsd) return 'N/A';
-    // const priceString = totalUsd.toString();
-    // const truncatedPrice = priceString.substring(0, 10);
-    // return truncatedPrice;
     if (totalUsd === undefined || totalUsd === null) return "N/A";
 
-    // Convert to string and split into parts before and after the decimal point
     const parts = totalUsd.toString().split(".");
 
-    // If there are no decimal places, return the entire number
     if (parts.length === 1) return totalUsd;
 
-    // Extract the first 5 characters after the decimal point
     const decimalPart = parts[1].substring(0, 5);
 
-    // Combine the parts with the decimal point
     return parts[0] + "." + decimalPart;
   };
 
-  function epochToDateTime(epochTime) {
-    // Convert epoch time to milliseconds
+  const epochToDateTime = (epochTime) => {
     const epochMilliseconds = epochTime * 1000;
-    // Create a new Date object
     const date = new Date(epochMilliseconds);
-    // Get the components of the date (year, month, day, etc.)
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Month is zero-based, so add 1
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const day = date.getDate().toString().padStart(2, "0");
     const hours = date.getHours().toString().padStart(2, "0");
     const minutes = date.getMinutes().toString().padStart(2, "0");
     const seconds = date.getSeconds().toString().padStart(2, "0");
-    // Concatenate the components to form the standard time string
-    const standardTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    return standardTime;
-  }
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  };
 
   return (
     <>
@@ -84,7 +89,6 @@ const TransactionTable = ({ address }) => {
               <th scope="col">Type</th>
               <th scope="col">Price USD</th>
               <th scope="col">Total USD</th>
-              {/* <th scope="col">Price SOL</th> */}
               <th scope="col">Amount</th>
               <th scope="col">Total SOL</th>
               <th scope="col">Makers</th>
@@ -102,7 +106,7 @@ const TransactionTable = ({ address }) => {
                 </td>
               </tr>
             ) : (
-              data?.map((item, index) => (
+              data.map((item, index) => (
                 <tr key={index}>
                   <td>{epochToDateTime(item.blockUnixTime)}</td>
                   <td
@@ -116,7 +120,6 @@ const TransactionTable = ({ address }) => {
                   <td>
                     {formatTotalUSD(item.quote.uiAmount * item.base.uiAmount)}
                   </td>
-                  {/* <td><img src={solIconImg} width="18px" alt="" /> 0.08718</td> */}
                   <td>{item.quote.amount / 1000}K</td>
                   <td>
                     <img src={solIconImg} width="18px" alt="" />{" "}
