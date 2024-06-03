@@ -34,7 +34,7 @@ const TransactionTable = ({ address }) => {
 
     fetchTransactions(); // Fetch immediately on address change
 
-    const intervalId = setInterval(fetchTransactions, 5000); // Fetch every 5 seconds
+    const intervalId = setInterval(fetchTransactions, 6000); // Fetch every 5 seconds
 
     return () => clearInterval(intervalId); // Cleanup interval on unmount or address change
   }, [address]);
