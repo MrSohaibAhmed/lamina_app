@@ -4,14 +4,23 @@ import solIconImg from "../../../assets/dashboard/sol-icon.png";
 import transationTableIconImg from "../../../assets/dashboard/transaction-table-icon.png";
 import { setTransaction } from "../../hooks/useTransactions";
 const TransactionTable = ({ address }) => {
+  // debugger;
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setTransaction(address)
-      .then((responseData) => setData(responseData.data.items))
-      .catch((error) =>
-        console.error("Error fetching transaction data:", error)
-      );
+    const fetchTransactions = () => {
+      setTransaction(address)
+        .then((responseData) => setData(responseData.data.items))
+        .catch((error) =>
+          console.error("Error fetching transaction data:", error)
+        );
+    };
+
+    fetchTransactions(); // Fetch immediately on address change
+
+    const intervalId = setInterval(fetchTransactions, 5000); // Fetch every 5 seconds
+
+    return () => clearInterval(intervalId); // Cleanup interval on unmount or address change
   }, [address]);
 
   const formatTxHash = (txHash) => {
@@ -93,7 +102,7 @@ const TransactionTable = ({ address }) => {
                 </td>
               </tr>
             ) : (
-              data.map((item, index) => (
+              data?.map((item, index) => (
                 <tr key={index}>
                   <td>{epochToDateTime(item.blockUnixTime)}</td>
                   <td

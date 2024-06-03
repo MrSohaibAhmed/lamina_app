@@ -325,7 +325,7 @@ const RightInnerBox = ({ data, solBalance }) => {
   useEffect(() => {
     if (Txnsfive) {
       const timer = setTimeout(() => {
-        updateData("6H");
+        updateData("24H");
       }, 1000);
 
       return () => clearTimeout(timer);
