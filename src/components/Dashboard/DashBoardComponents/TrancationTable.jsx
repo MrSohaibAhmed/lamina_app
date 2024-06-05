@@ -8,6 +8,7 @@ const TransactionTable = ({ address }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    setData([])
     const fetchTransactions = () => {
       setTransaction(address)
         .then((responseData) => {
