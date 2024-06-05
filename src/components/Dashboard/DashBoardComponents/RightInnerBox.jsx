@@ -523,8 +523,8 @@ const RightInnerBox = ({ data, solBalance }) => {
             <h6>VOLUME</h6>
             <h5>{volume}</h5>
             <br />
-            <h6>MAKERS</h6>
-            <h5>{totaltxns}</h5>
+            {/* <h6>MAKERS</h6>
+            <h5>{totaltxns}</h5> */}
           </div>
           <div className="col-lg-8">
             <div className=" mt-5 position-relative">
@@ -568,7 +568,7 @@ const RightInnerBox = ({ data, solBalance }) => {
                 ></div>
               </div>
             </div>
-            <div className=" mt-6 position-relative">
+            {/* <div className=" mt-6 position-relative">
               <div className="progress-values">
                 <div className="progress-value-left">
                   <h6 className="mb-0">BUYERS</h6> {buy}
@@ -588,7 +588,7 @@ const RightInnerBox = ({ data, solBalance }) => {
                   aria-valuemax="100"
                 ></div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -709,7 +709,8 @@ const RightInnerBox = ({ data, solBalance }) => {
                 </span>
                 <input
                   type="number"
-                  value={inputAmountVal}
+                  // value={inputAmountVal}
+                  value={selectedValue}
                   onChange={changeAmountHandler}
                   className="form-control bg-transparent border border-left-0 text-light"
                   placeholder="Amount to buy in SOL"
@@ -908,7 +909,8 @@ const RightInnerBox = ({ data, solBalance }) => {
                 </span>
                 <input
                   type="text"
-                  value={inputSellAmount}
+                  // value={inputSellAmount}
+                  value={sellSelectedValue}
                   onChange={changeSellAmountHandler}
                   className="form-control bg-transparent border border-left-0 text-light"
                   placeholder="Amount to sell in SOL"
