@@ -16,12 +16,97 @@ import arrowImg from "../../../assets/dashboard/arrow.webp";
 
 const RightInnerBox = ({ data, solBalance }) => {
   const [supply, setSupply] = useState(0);
+
   const [allData, setAllData] = useState([]);
+  const [mktValueData, setMktValue] = useState(0);
   useEffect(() => {
     setAllData(data);
   }, [data]);
+
+
+
+  const formatMarketCap = (marketCap) => {
+    debugger
+    const mktCapStr = marketCap.toString();
+    const numberBeforeDotMkt = mktCapStr.split(".")[0];
+    console.log("number before dot in MKT", numberBeforeDotMkt);
+
+    if (numberBeforeDotMkt.length >= 9) {
+      const convertToBillion = (marketCap / 1000000000).toFixed(2);
+      console.log("Convert to billion MKT", convertToBillion);
+      return convertToBillion + "B";
+    } else if (numberBeforeDotMkt.length >= 7) {
+      const convertToMillion = (marketCap / 1000000).toFixed(2);
+      console.log("Convert to million MKT", convertToMillion + "M");
+      return convertToMillion + "M";
+    } else if (numberBeforeDotMkt.length >= 4) {
+      const convertToThousand = (marketCap / 1000).toFixed(2);
+      console.log("Convert to thousand", convertToThousand + "K");
+      return convertToThousand + "K";
+    } else {
+      return marketCap.toString();
+    }
+  };
+
+  const formatSupply = (supply) => {
+    const supplyValue = supply.toString();
+    const numberBeforeDot = supplyValue.split(".")[0];
+
+    if (numberBeforeDot.length >= 9) {
+      const convertToBillion = (supply / 1000000000).toFixed(2);
+      console.log("Convert to billion", convertToBillion);
+      return convertToBillion + "B";
+    } else if (numberBeforeDot.length >= 7) {
+      const convertToMillion = (supply / 1000000).toFixed(2);
+      console.log("Convert to million", convertToMillion + "M");
+      return convertToMillion + "M";
+    } else {
+      return supplyValue;
+    }
+  };
+
+  // useEffect(() => {
+  //   // //debugger
+  //   if (data && data.pairs && data.pairs[0] && data.pairs[0].baseToken && data.pairs[0].baseToken.address) {
+  //     const tokenAddress = data.pairs[0].baseToken.address;
+  //     const options = {
+  //       method: 'GET',
+  //       headers: { 'X-API-KEY': '1a6f67ecb3d540b984f8fc694cfb364c' }
+  //     };
+
+  //     fetch(`https://public-api.birdeye.so/defi/token_overview?address=${tokenAddress}`, options)
+  //       .then(response => response.json())
+  //       .then(response => {
+  //         console.log(response.data, "I am token overview");
+  //         const supplyvalue = response?.data?.supply.toString();
+
+  //         const numberBeforeDot = supplyvalue.split(".")[0];
+
+  //         if (numberBeforeDot.length >= 9) {
+  //           const value = response?.data?.supply;
+  //           const convertToBillion = (value / 1000000000).toFixed(2);
+  //           console.log("Convert to billion", convertToBillion);
+  //           setSupply(convertToBillion + "B")
+  //         }
+  //         else if (numberBeforeDot.length >= 7) {
+  //           const value = response?.data?.supply;
+  //           const convertToMillion = (value / 1000000).toFixed(2);
+  //           console.log("Convert to million", convertToMillion + "M");
+  //           setSupply(convertToMillion + "M")
+  //         }
+
+  //         // setSupply(response?.data?.supply)
+  //         console.log("supply data is =>", response?.data?.supply);
+
+  //         // setTokenOverview(response);
+  //       })
+  //       .catch(err => console.error(err));
+  //   }
+  // }, [data]);
+
+
   useEffect(() => {
-    // debugger
+    // //debugger
     if (data && data.pairs && data.pairs[0] && data.pairs[0].baseToken && data.pairs[0].baseToken.address) {
       const tokenAddress = data.pairs[0].baseToken.address;
       const options = {
@@ -33,7 +118,19 @@ const RightInnerBox = ({ data, solBalance }) => {
         .then(response => response.json())
         .then(response => {
           console.log(response.data, "I am token overview");
-          setSupply(response?.data?.supply)
+
+          const mktCap = response?.data?.mc;
+
+          const formattedMarketCap = formatMarketCap(mktCap);
+          setMktValue(formattedMarketCap);
+
+          // setSupply(response?.data?.supply)
+          console.log("MKT  data is =>", response?.data?.mc);
+
+          const supplyValue = response?.data?.supply;
+          const formattedSupply = formatSupply(supplyValue);
+          setSupply(formattedSupply);
+          // console.log("Supply data is =>", supplyValue);
 
           // setTokenOverview(response);
         })
@@ -349,7 +446,7 @@ const RightInnerBox = ({ data, solBalance }) => {
     }
   }, [Txnsfive]);
   useEffect(() => {
-    // ////debugger
+    // //////debugger
     let intervalId;
     // Define a function to make the API call
     const fetchData = () => {
@@ -453,8 +550,9 @@ const RightInnerBox = ({ data, solBalance }) => {
             </h5>
           </div>
           <div className="col-lg-4 col">
+
             <h6>MKT CAP</h6>
-            <h5>${allData?.pairs?.[0]?.fdv}M</h5>
+            <h5>${mktValueData}</h5>
           </div>
           <div className="col-lg-4 col"></div>
         </div>
@@ -690,7 +788,7 @@ const RightInnerBox = ({ data, solBalance }) => {
               </div>
               <div className="my-3 mx-2">
                 <button
-                  onClick={() => handleButtonClick(2)}
+                  onClick={() => handleButtonClick(2.90)}
                   className={`bg-dark btn-inner-box ${activeButton == 2.9 ? "btn1-active" : ""
                     }`}
                 >
