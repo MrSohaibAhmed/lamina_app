@@ -15,13 +15,31 @@ import { pairData } from "../../hooks/useWallet";
 import arrowImg from "../../../assets/dashboard/arrow.webp";
 
 const RightInnerBox = ({ data, solBalance }) => {
+  const [supply, setSupply] = useState(0);
   const [allData, setAllData] = useState([]);
   useEffect(() => {
     setAllData(data);
   }, [data]);
-  // useEffect(() => {
-  //   checkZoomLevel();
-  // }, [checkZoomLevel]);
+  useEffect(() => {
+    // debugger
+    if (data && data.pairs && data.pairs[0] && data.pairs[0].baseToken && data.pairs[0].baseToken.address) {
+      const tokenAddress = data.pairs[0].baseToken.address;
+      const options = {
+        method: 'GET',
+        headers: { 'X-API-KEY': '1a6f67ecb3d540b984f8fc694cfb364c' }
+      };
+
+      fetch(`https://public-api.birdeye.so/defi/token_overview?address=${tokenAddress}`, options)
+        .then(response => response.json())
+        .then(response => {
+          console.log(response.data, "I am token overview");
+          setSupply(response?.data?.supply)
+
+          // setTokenOverview(response);
+        })
+        .catch(err => console.error(err));
+    }
+  }, [data]);
 
   const [Txnsfive, setsetTxnsfive] = useState(0);
   const [Txnsone, setsetTxnsone] = useState(0);
@@ -151,7 +169,6 @@ const RightInnerBox = ({ data, solBalance }) => {
       .catch((error) => console.error("Error copying baseToken:", error));
   };
   const handleQuickBuy = () => {
-    // //debugger
     console.log("solona balance is =>>", solBalance);
     if (selectedValue !== null && selectedValue !== 0) {
       if (solBalance !== 0) {
@@ -419,7 +436,7 @@ const RightInnerBox = ({ data, solBalance }) => {
           </div>
           <div className="col-lg-4 col">
             <h6>SUPPLY</h6>
-            <h5>100M</h5>
+            <h5>{supply}</h5>
           </div>
         </div>
         <hr />

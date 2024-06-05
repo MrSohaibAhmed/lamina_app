@@ -1385,7 +1385,7 @@ import { createChart } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-const TradingViewWidget = ({ data, token, candlesSpan }) => {
+const TradingViewWidget = ({ data, token, candlesSpan, value }) => {
 
   const [Time, setTime] = useState("15m")
   useEffect(() => {
@@ -1416,6 +1416,7 @@ const TradingViewWidget = ({ data, token, candlesSpan }) => {
 
   const chartContainerRef = useRef();
 
+
   useEffect(() => {
     const chart = createChart(chartContainerRef.current, {
       layout: {
@@ -1433,6 +1434,25 @@ const TradingViewWidget = ({ data, token, candlesSpan }) => {
     chart.timeScale().applyOptions({
       barSpacing: 20,
     });
+
+
+
+    chart.applyOptions({
+      // crosshair: {
+      //   // hide the horizontal crosshair line
+      //   horzLine: {
+      //     visible: false,
+      //     labelVisible: false,
+      //   },
+      //   // hide the vertical crosshair label
+      //   vertLine: {
+      //     labelVisible: false,
+      //   },
+      // },
+      // hide the grid lines
+
+    });
+
     const candlestickSeries = chart.addCandlestickSeries({
       upColor: '#26a69a',
       downColor: '#ef5350',
@@ -1440,10 +1460,33 @@ const TradingViewWidget = ({ data, token, candlesSpan }) => {
       wickUpColor: '#26a69a',
       wickDownColor: '#ef5350',
     });
+    const volumeSeries = chart.addHistogramSeries({
+      color: '#26a69a',
+      priceFormat: {
+        type: 'volume',
+      },
+      priceScaleId: '', // set as an overlay by setting a blank priceScaleId
+      // set the positioning of the volume series
+      scaleMargins: {
+        top: 0.3,
+        bottom: 0.3,
+      },
+    });
+    volumeSeries.priceScale().applyOptions({
+      scaleMargins: {
+        top: 0.9,
+        bottom: 0,
+      },
+    });
+    volumeSeries.setData(candlesData.map((item, index) => ({
+      time: item.unixTime,
+      value: parseFloat(item.o),
+      color: index % 2 === 0 ? "#853441" : "#1B625B" // Alternating colors
+    })));
     candlestickSeries.applyOptions({
       priceFormat: {
         precision: 5,
-        minMove: 0.001
+        minMove: 0.0001
       }
     })
     candlestickSeries.priceScale().applyOptions({
@@ -1461,6 +1504,8 @@ const TradingViewWidget = ({ data, token, candlesSpan }) => {
       low: parseFloat(item.l),
       close: parseFloat(item.c),
     })));
+
+
 
     const handleResize = () => {
       chart.applyOptions({ width: chartContainerRef.current.clientWidth });
