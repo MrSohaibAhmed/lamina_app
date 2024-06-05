@@ -388,8 +388,10 @@ const RightInnerBox = ({ data, solBalance }) => {
             </a>
           </div>
         </div>
-        {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100) <
-        150 ? (
+        {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100)
+
+          <
+          150 ? (
           <div className="row mt-4">
             <div
               className="alert alert-info alert-dismissible fade show"
@@ -426,13 +428,16 @@ const RightInnerBox = ({ data, solBalance }) => {
             <h6>LIQUIDITY</h6>
             <h5>
               $
-              {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100)}
+              {/* {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 1000)} */}
+              {(allData?.pairs?.[0]?.liquidity?.usd / 1000).toFixed(1)}
+
+
               K
             </h5>
           </div>
           <div className="col-lg-4 col">
             <h6>MKT CAP</h6>
-            <h5>${(allData?.pairs?.[0]?.liquidity?.base || 0) / 1000000}M</h5>
+            <h5>${allData?.pairs?.[0]?.fdv}M</h5>
           </div>
           <div className="col-lg-4 col"></div>
         </div>
@@ -619,9 +624,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(0.25)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 0.25 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 0.25 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp; 0.25
@@ -630,9 +634,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(0.5)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 0.5 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 0.5 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;0.5
@@ -641,9 +644,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(1)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 1 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 1 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;1
@@ -652,9 +654,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(2)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 2 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 2 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;2
@@ -663,9 +664,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(1.5)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 1.5 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 1.5 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;1.5
@@ -674,9 +674,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(2)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 2.9 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 2.9 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;2.90
@@ -852,9 +851,8 @@ const RightInnerBox = ({ data, solBalance }) => {
                 <button
                   value="0.25"
                   onClick={() => handleButtonClickSell("25%")}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == "25%" ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == "25%" ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;25%
@@ -864,9 +862,8 @@ const RightInnerBox = ({ data, solBalance }) => {
                 <button
                   value="50%"
                   onClick={() => handleButtonClickSell("50%")}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == "50%" ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == "50%" ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;50%
@@ -876,9 +873,8 @@ const RightInnerBox = ({ data, solBalance }) => {
                 <button
                   value="100%"
                   onClick={() => handleButtonClickSell("100%")}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == "100%" ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == "100%" ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;100%
