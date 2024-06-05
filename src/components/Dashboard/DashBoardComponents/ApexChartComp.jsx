@@ -1433,6 +1433,8 @@ const TradingViewWidget = ({ data, token, candlesSpan, value }) => {
     // chart.timeScale().fitContent();
     chart.timeScale().applyOptions({
       barSpacing: 20,
+      borderColor: "#71649C",
+      timeVisible: true
     });
 
 
@@ -1452,6 +1454,9 @@ const TradingViewWidget = ({ data, token, candlesSpan, value }) => {
       // hide the grid lines
 
     });
+    chart.priceScale("right").applyOptions({
+      borderColor: "#71649C"
+    })
 
     const candlestickSeries = chart.addCandlestickSeries({
       upColor: '#26a69a',
