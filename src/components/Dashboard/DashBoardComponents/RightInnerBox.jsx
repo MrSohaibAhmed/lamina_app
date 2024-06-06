@@ -289,7 +289,7 @@ const RightInnerBox = ({ data, solBalance }) => {
     console.log("solona balance is =>>", solBalance);
     if (selectedValue !== null && selectedValue !== 0) {
 
-      // if (solBalance !== 0) {
+      if (solBalance !== 0) {
       const value = {
         address: localStorage.getItem("publicKey"),
         amount: selectedValue * 1000000000,
@@ -342,10 +342,10 @@ const RightInnerBox = ({ data, solBalance }) => {
         error: tryagain,
       });
     }
-    //  else {
-    //   toast.error("You Donot have Enough Sol Balance");
-    // }
-    // }
+     else {
+      toast.error("You Donot have Enough Sol Balance");
+    }
+    }
     else {
       console.error("No value selected");
       // noValueError();
