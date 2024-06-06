@@ -23,7 +23,7 @@ body {
     background-color: transparent;
     margin: 0px 22px;
     padding-top: 15px;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .navbar-dark .dropdown-item {
@@ -70,7 +70,7 @@ body {
 }
 
 .main {
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .chart-box {
@@ -156,7 +156,7 @@ input:checked+.slider:before {
 }
 
 .tab-box .nav-pills {
-    background-color: #595FFB;
+    background-color: #0E0E26;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
@@ -167,7 +167,7 @@ input:checked+.slider:before {
     background: none !important;
     border-bottom: 2px solid #fff;
     border-radius: 0px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .tab-box .nav-link {
