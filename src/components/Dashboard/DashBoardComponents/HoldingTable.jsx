@@ -9,9 +9,7 @@ const HoldingTable = ({ address }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const holdingsData = await setHoldings(
-          localStorage.getItem("publicKey")
-        );
+        const holdingsData = await setHoldings(localStorage.getItem("publicKey"));
         setHoldingsData(holdingsData.items);
         console.log(holdingsData.items, " these are holdings");
       } catch (error) {
@@ -20,7 +18,12 @@ const HoldingTable = ({ address }) => {
     };
 
     fetchData();
+
+    const intervalId = setInterval(fetchData, 10000);
+
+    return () => clearInterval(intervalId);
   }, [address]);
+
 
   const formatTxHash = (txHash) => {
     if (!txHash) return "";
