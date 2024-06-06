@@ -6,6 +6,7 @@ import telegramImg from "../../../assets/dashboard/telegram.png";
 import alertImg from "../../../assets/dashboard/alert.png";
 import solIconImg from "../../../assets/dashboard/sol-icon.png";
 import settingImg from "../../../assets/dashboard/setting.png";
+import TryAgain from "../../../assets/dashboard/icons8-reset-24.png";
 import { animateScroll as scroll } from "react-scroll";
 import toast, { Toaster } from "react-hot-toast";
 import { swapTokens, swapTokensOut } from "../../hooks/useWallet";
@@ -265,63 +266,116 @@ const RightInnerBox = ({ data, solBalance }) => {
       })
       .catch((error) => console.error("Error copying baseToken:", error));
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const handleQuickBuy = () => {
     console.log("solona balance is =>>", solBalance);
     if (selectedValue !== null && selectedValue !== 0) {
-      if (solBalance !== 0) {
-        const value = {
-          address: localStorage.getItem("publicKey"),
-          amount: selectedValue * 1000000000,
-          inputMint: "So11111111111111111111111111111111111111112",
-          outputMint: data?.pairs?.[0]?.baseToken?.address,
-          slippageBps: slippage,
-        };
-        const buyPromise = swapTokens(value);
-        buyPromise
-          .then((result) => {
-            const transactionResult =
-              result?.data?.swapResponse?.transactionResult;
-            setBuyResult(transactionResult);
-            console.log("Buy Promise Result:", transactionResult);
-            const t = (
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => copy(transactionResult)}
-              >
-                Your Transaction Is Sent . Click Here To Check your Transaction
-                Hash{" "}
-                <a href={transactionResult} target="blanked">
-                  <img width={20} src={arrowImg} />
-                </a>
-              </div>
-            );
 
-            // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
-            //   duration: 10000,
-            // });
-            toast.success(t, {
-              duration: 10000,
-            });
-          })
-          .catch((error) => {
-            console.error("Buy Promise Error:", error);
-            // toast.error("");
+      // if (solBalance !== 0) {
+      const value = {
+        address: localStorage.getItem("publicKey"),
+        amount: selectedValue * 1000000000,
+        inputMint: "So11111111111111111111111111111111111111112",
+        outputMint: data?.pairs?.[0]?.baseToken?.address,
+        slippageBps: slippage,
+      };
+      const buyPromise = swapTokens(value);
+      buyPromise
+        .then((result) => {
+          const transactionResult =
+            result?.data?.swapResponse?.transactionResult;
+          setBuyResult(transactionResult);
+          console.log("Buy Promise Result:", transactionResult);
+          const t = (
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => copy(transactionResult)}
+            >
+              Your Transaction Is Sent . Click Here To Check your Transaction
+              Hash{" "}
+              <a href={transactionResult} target="blanked">
+                <img width={20} src={arrowImg} />
+              </a>
+            </div>
+          );
+
+          // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
+          //   duration: 10000,
+          // });
+          toast.success(t, {
+            duration: 10000,
           });
-
-        toast.promise(buyPromise, {
-          loading: "Waiting For Transaction...",
-          success: "",
-          error: "Transaction Failed . Please Try Again",
+        })
+        .catch((error) => {
+          console.error("Buy Promise Error:", error);
+          toast.error("Transaction Failed", {
+            duration: 5000
+          });
         });
-      } else {
-        toast.error("You Donot have Enough Sol Balance");
-      }
-    } else {
+      const tryagain = (
+        <div>Click Here To Try Again
+          <img width={20} src={TryAgain} onClick={handleQuickBuy} />
+        </div>
+      )
+
+      toast.promise(buyPromise, {
+        loading: "Waiting For Transaction...",
+        success: "",
+        error: tryagain,
+      });
+    }
+    //  else {
+    //   toast.error("You Donot have Enough Sol Balance");
+    // }
+    // }
+    else {
       console.error("No value selected");
       // noValueError();
       toast.error("Selected Amount is 0");
     }
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const handleQuickSell = () => {
     if (!sellSelectedValue) {
