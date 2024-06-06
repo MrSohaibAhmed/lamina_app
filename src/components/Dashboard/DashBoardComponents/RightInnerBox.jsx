@@ -6,6 +6,7 @@ import telegramImg from "../../../assets/dashboard/telegram.png";
 import alertImg from "../../../assets/dashboard/alert.png";
 import solIconImg from "../../../assets/dashboard/sol-icon.png";
 import settingImg from "../../../assets/dashboard/setting.png";
+import TryAgain from "../../../assets/dashboard/icons8-reset-24.png";
 import { animateScroll as scroll } from "react-scroll";
 import toast, { Toaster } from "react-hot-toast";
 import { swapTokens, swapTokensOut } from "../../hooks/useWallet";
@@ -15,13 +16,128 @@ import { pairData } from "../../hooks/useWallet";
 import arrowImg from "../../../assets/dashboard/arrow.webp";
 
 const RightInnerBox = ({ data, solBalance }) => {
+  const [supply, setSupply] = useState(0);
+
   const [allData, setAllData] = useState([]);
+  const [mktValueData, setMktValue] = useState(0);
   useEffect(() => {
     setAllData(data);
   }, [data]);
+
+
+
+  const formatMarketCap = (marketCap) => {
+    // debugger
+    const mktCapStr = marketCap.toString();
+    const numberBeforeDotMkt = mktCapStr.split(".")[0];
+    console.log("number before dot in MKT", numberBeforeDotMkt);
+
+    if (numberBeforeDotMkt.length >= 9) {
+      const convertToBillion = (marketCap / 1000000000).toFixed(2);
+      console.log("Convert to billion MKT", convertToBillion);
+      return convertToBillion + "B";
+    } else if (numberBeforeDotMkt.length >= 7) {
+      const convertToMillion = (marketCap / 1000000).toFixed(2);
+      console.log("Convert to million MKT", convertToMillion + "M");
+      return convertToMillion + "M";
+    } else if (numberBeforeDotMkt.length >= 4) {
+      const convertToThousand = (marketCap / 1000).toFixed(2);
+      console.log("Convert to thousand", convertToThousand + "K");
+      return convertToThousand + "K";
+    } else {
+      return marketCap.toString();
+    }
+  };
+
+  const formatSupply = (supply) => {
+    const supplyValue = supply.toString();
+    const numberBeforeDot = supplyValue.split(".")[0];
+
+    if (numberBeforeDot.length >= 9) {
+      const convertToBillion = (supply / 1000000000).toFixed(2);
+      console.log("Convert to billion", convertToBillion);
+      return convertToBillion + "B";
+    } else if (numberBeforeDot.length >= 7) {
+      const convertToMillion = (supply / 1000000).toFixed(2);
+      console.log("Convert to million", convertToMillion + "M");
+      return convertToMillion + "M";
+    } else {
+      return supplyValue;
+    }
+  };
+
   // useEffect(() => {
-  //   checkZoomLevel();
-  // }, [checkZoomLevel]);
+  //   // //debugger
+  //   if (data && data.pairs && data.pairs[0] && data.pairs[0].baseToken && data.pairs[0].baseToken.address) {
+  //     const tokenAddress = data.pairs[0].baseToken.address;
+  //     const options = {
+  //       method: 'GET',
+  //       headers: { 'X-API-KEY': '1a6f67ecb3d540b984f8fc694cfb364c' }
+  //     };
+
+  //     fetch(`https://public-api.birdeye.so/defi/token_overview?address=${tokenAddress}`, options)
+  //       .then(response => response.json())
+  //       .then(response => {
+  //         console.log(response.data, "I am token overview");
+  //         const supplyvalue = response?.data?.supply.toString();
+
+  //         const numberBeforeDot = supplyvalue.split(".")[0];
+
+  //         if (numberBeforeDot.length >= 9) {
+  //           const value = response?.data?.supply;
+  //           const convertToBillion = (value / 1000000000).toFixed(2);
+  //           console.log("Convert to billion", convertToBillion);
+  //           setSupply(convertToBillion + "B")
+  //         }
+  //         else if (numberBeforeDot.length >= 7) {
+  //           const value = response?.data?.supply;
+  //           const convertToMillion = (value / 1000000).toFixed(2);
+  //           console.log("Convert to million", convertToMillion + "M");
+  //           setSupply(convertToMillion + "M")
+  //         }
+
+  //         // setSupply(response?.data?.supply)
+  //         console.log("supply data is =>", response?.data?.supply);
+
+  //         // setTokenOverview(response);
+  //       })
+  //       .catch(err => console.error(err));
+  //   }
+  // }, [data]);
+
+
+  useEffect(() => {
+    // //debugger
+    if (data && data.pairs && data.pairs[0] && data.pairs[0].baseToken && data.pairs[0].baseToken.address) {
+      const tokenAddress = data.pairs[0].baseToken.address;
+      const options = {
+        method: 'GET',
+        headers: { 'X-API-KEY': '1a6f67ecb3d540b984f8fc694cfb364c' }
+      };
+
+      fetch(`https://public-api.birdeye.so/defi/token_overview?address=${tokenAddress}`, options)
+        .then(response => response.json())
+        .then(response => {
+          console.log(response.data, "I am token overview");
+
+          const mktCap = response?.data?.mc;
+
+          const formattedMarketCap = formatMarketCap(mktCap);
+          setMktValue(formattedMarketCap);
+
+          // setSupply(response?.data?.supply)
+          console.log("MKT  data is =>", response?.data?.mc);
+
+          const supplyValue = response?.data?.supply;
+          const formattedSupply = formatSupply(supplyValue);
+          setSupply(formattedSupply);
+          // console.log("Supply data is =>", supplyValue);
+
+          // setTokenOverview(response);
+        })
+        .catch(err => console.error(err));
+    }
+  }, [data]);
 
   const [Txnsfive, setsetTxnsfive] = useState(0);
   const [Txnsone, setsetTxnsone] = useState(0);
@@ -150,10 +266,29 @@ const RightInnerBox = ({ data, solBalance }) => {
       })
       .catch((error) => console.error("Error copying baseToken:", error));
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const handleQuickBuy = () => {
-    // //debugger
     console.log("solona balance is =>>", solBalance);
     if (selectedValue !== null && selectedValue !== 0) {
+
       if (solBalance !== 0) {
         const value = {
           address: localStorage.getItem("publicKey"),
@@ -191,23 +326,56 @@ const RightInnerBox = ({ data, solBalance }) => {
           })
           .catch((error) => {
             console.error("Buy Promise Error:", error);
-            // toast.error("");
+            toast.error("Transaction Failed", {
+              duration: 5000
+            });
           });
+        const tryagain = (
+          <div>Click Here To Try Again
+            <img width={20} src={TryAgain} onClick={handleQuickBuy} />
+          </div>
+        )
 
         toast.promise(buyPromise, {
           loading: "Waiting For Transaction...",
           success: "",
-          error: "Transaction Failed . Please Try Again",
+          error: tryagain,
         });
-      } else {
+      }
+      else {
         toast.error("You Donot have Enough Sol Balance");
       }
-    } else {
+    }
+    else {
       console.error("No value selected");
       // noValueError();
       toast.error("Selected Amount is 0");
     }
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const handleQuickSell = () => {
     if (!sellSelectedValue) {
@@ -332,7 +500,7 @@ const RightInnerBox = ({ data, solBalance }) => {
     }
   }, [Txnsfive]);
   useEffect(() => {
-    // ////debugger
+    // //////debugger
     let intervalId;
     // Define a function to make the API call
     const fetchData = () => {
@@ -388,8 +556,10 @@ const RightInnerBox = ({ data, solBalance }) => {
             </a>
           </div>
         </div>
-        {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100) <
-        150 ? (
+        {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100)
+
+          <
+          150 ? (
           <div className="row mt-4">
             <div
               className="alert alert-info alert-dismissible fade show"
@@ -417,7 +587,7 @@ const RightInnerBox = ({ data, solBalance }) => {
           </div>
           <div className="col-lg-4 col">
             <h6>SUPPLY</h6>
-            <h5>100M</h5>
+            <h5>{supply}</h5>
           </div>
         </div>
         <hr />
@@ -426,13 +596,17 @@ const RightInnerBox = ({ data, solBalance }) => {
             <h6>LIQUIDITY</h6>
             <h5>
               $
-              {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100)}
+              {/* {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 1000)} */}
+              {(allData?.pairs?.[0]?.liquidity?.usd / 1000).toFixed(1)}
+
+
               K
             </h5>
           </div>
           <div className="col-lg-4 col">
+
             <h6>MKT CAP</h6>
-            <h5>${(allData?.pairs?.[0]?.liquidity?.base || 0) / 1000000}M</h5>
+            <h5>${mktValueData}</h5>
           </div>
           <div className="col-lg-4 col"></div>
         </div>
@@ -501,8 +675,8 @@ const RightInnerBox = ({ data, solBalance }) => {
             <h6>VOLUME</h6>
             <h5>{volume}</h5>
             <br />
-            <h6>MAKERS</h6>
-            <h5>{totaltxns}</h5>
+            {/* <h6>MAKERS</h6>
+            <h5>{totaltxns}</h5> */}
           </div>
           <div className="col-lg-8">
             <div className=" mt-5 position-relative">
@@ -546,7 +720,7 @@ const RightInnerBox = ({ data, solBalance }) => {
                 ></div>
               </div>
             </div>
-            <div className=" mt-6 position-relative">
+            {/* <div className=" mt-6 position-relative">
               <div className="progress-values">
                 <div className="progress-value-left">
                   <h6 className="mb-0">BUYERS</h6> {buy}
@@ -566,7 +740,7 @@ const RightInnerBox = ({ data, solBalance }) => {
                   aria-valuemax="100"
                 ></div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -619,9 +793,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(0.25)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 0.25 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 0.25 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp; 0.25
@@ -630,9 +803,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(0.5)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 0.5 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 0.5 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;0.5
@@ -641,9 +813,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(1)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 1 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 1 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;1
@@ -652,9 +823,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(2)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 2 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 2 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;2
@@ -663,9 +833,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   onClick={() => handleButtonClick(1.5)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 1.5 ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == 1.5 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;1.5
@@ -673,10 +842,9 @@ const RightInnerBox = ({ data, solBalance }) => {
               </div>
               <div className="my-3 mx-2">
                 <button
-                  onClick={() => handleButtonClick(2)}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == 2.9 ? "btn1-active" : ""
-                  }`}
+                  onClick={() => handleButtonClick(2.90)}
+                  className={`bg-dark btn-inner-box ${activeButton == 2.9 ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;2.90
@@ -693,7 +861,8 @@ const RightInnerBox = ({ data, solBalance }) => {
                 </span>
                 <input
                   type="number"
-                  value={inputAmountVal}
+                  // value={inputAmountVal}
+                  value={selectedValue}
                   onChange={changeAmountHandler}
                   className="form-control bg-transparent border border-left-0 text-light"
                   placeholder="Amount to buy in SOL"
@@ -852,9 +1021,8 @@ const RightInnerBox = ({ data, solBalance }) => {
                 <button
                   value="0.25"
                   onClick={() => handleButtonClickSell("25%")}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == "25%" ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == "25%" ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;25%
@@ -864,9 +1032,8 @@ const RightInnerBox = ({ data, solBalance }) => {
                 <button
                   value="50%"
                   onClick={() => handleButtonClickSell("50%")}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == "50%" ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == "50%" ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;50%
@@ -876,9 +1043,8 @@ const RightInnerBox = ({ data, solBalance }) => {
                 <button
                   value="100%"
                   onClick={() => handleButtonClickSell("100%")}
-                  className={`bg-dark btn-inner-box ${
-                    activeButton == "100%" ? "btn1-active" : ""
-                  }`}
+                  className={`bg-dark btn-inner-box ${activeButton == "100%" ? "btn1-active" : ""
+                    }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
                   &nbsp;100%
@@ -895,7 +1061,8 @@ const RightInnerBox = ({ data, solBalance }) => {
                 </span>
                 <input
                   type="text"
-                  value={inputSellAmount}
+                  // value={inputSellAmount}
+                  value={sellSelectedValue}
                   onChange={changeSellAmountHandler}
                   className="form-control bg-transparent border border-left-0 text-light"
                   placeholder="Amount to sell in SOL"

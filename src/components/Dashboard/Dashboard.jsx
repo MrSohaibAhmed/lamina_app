@@ -87,7 +87,7 @@ const Dashboard = () => {
                     solBalance={solBalance}
                   />
                   <div className="my-3 hide-on-zoom">
-                    <RightAccordian address={coinsKey}  />
+                    <RightAccordian address={coinsKey} />
                   </div>
                 </div>
               </div>
@@ -101,7 +101,7 @@ const Dashboard = () => {
 
 // Memoized ChartBox component
 const MemoizedChartBox = React.memo(ChartBox, (prevProps, nextProps) => {
-  // ////debugger
+  // //////debugger
   // Compare the symbols in the previous and next props
   return (
     prevProps.data?.pairs?.[0]?.baseToken.symbol ===

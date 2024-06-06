@@ -6,8 +6,11 @@ import { setTransaction } from "../../hooks/useTransactions";
 
 const TransactionTable = ({ address }) => {
   const [data, setData] = useState([]);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
+    setData([])
+    setShowMore(false)
     const fetchTransactions = () => {
       setTransaction(address)
         .then((responseData) => {
@@ -106,7 +109,7 @@ const TransactionTable = ({ address }) => {
                 </td>
               </tr>
             ) : (
-              data.map((item, index) => (
+              (data.length > 10 ? data.slice(0, showMore ? data.length : 10) : data).map((item, index) => (
                 <tr key={index}>
                   <td>{epochToDateTime(item.blockUnixTime)}</td>
                   <td
@@ -134,6 +137,11 @@ const TransactionTable = ({ address }) => {
             )}
           </tbody>
         </table>
+        {data.length > 10 && !showMore && (
+          <div className="text-center d-flex justify-content-center">
+            <button className="btn-buy-quick w-25" onClick={() => setShowMore(true)}>Show More</button>
+          </div>
+        )}
       </div>
     </>
   );

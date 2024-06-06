@@ -4,15 +4,16 @@ import "../Dashboard.css";
 import TradingViewWidget from "./ApexChartComp";
 import toast from "react-hot-toast";
 const ChartBox = ({ data }) => {
+  //debugger
   const [selectedValue, setSelectedValue] = useState("15m");
   console.log(data.pairs?.[0]?.baseToken?.symbol);
-  // ////debugger
+  // //////debugger
   const [tokenAddress, setTokenAddress] = useState();
   const [pairDataAddress, setPairDataAddress] = useState();
   const [name, setName] = useState("BTCUSD");
   const [imageSrc, setImageSrc] = useState(" ");
   const handleClick = (value) => {
-    //debugger
+    ////debugger
     setSelectedValue(value);
     console.log("selected Value is", value);
     log;
@@ -63,6 +64,7 @@ const ChartBox = ({ data }) => {
   const tradingViewComponent = useMemo(
     () => (
       <TradingViewWidget
+        value={data.pairs?.[0]?.priceUsd}
         data={data.pairs?.[0]?.baseToken.symbol}
         token={data.pairs?.[0]?.baseToken?.address}
         candlesSpan={selectedValue}
@@ -83,17 +85,15 @@ const ChartBox = ({ data }) => {
             <h4 className="mb-0 align-content-center m-1">{name}</h4>
             <button
               onClick={() => handleClick("1m")}
-              className={`btn-inner-box m-1 border-0 btnChartBox ${
-                selectedValue === "1m" ? "activeBtn" : ""
-              }`}
+              className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1m" ? "activeBtn" : ""
+                }`}
             >
               1m
             </button>{" "}
             <button
               onClick={() => handleClick("5m")}
-              className={`btn-inner-box m-1 border-0 btnChartBox ${
-                selectedValue === "5m" ? "activeBtn" : ""
-              }`}
+              className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "5m" ? "activeBtn" : ""
+                }`}
             >
               5m
             </button>
@@ -101,9 +101,8 @@ const ChartBox = ({ data }) => {
             {/* <button onClick={() => handleClick('15m')} className=" btn-inner-box m-1 border-0 btnChartBox">15M</button> */}
             <button
               onClick={() => handleClick("15m")}
-              className={`btn-inner-box m-1 border-0 btnChartBox ${
-                selectedValue === "15m" ? "activeBtn" : ""
-              }`}
+              className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "15m" ? "activeBtn" : ""
+                }`}
             >
               15m
             </button>
@@ -111,25 +110,22 @@ const ChartBox = ({ data }) => {
                             }`}>15M</button> */}
             <button
               onClick={() => handleClick("1H")}
-              className={`btn-inner-box m-1 border-0 btnChartBox ${
-                selectedValue === "1H" ? "activeBtn" : ""
-              }`}
+              className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1H" ? "activeBtn" : ""
+                }`}
             >
               1H
             </button>
             <button
               onClick={() => handleClick("6H")}
-              className={`btn-inner-box m-1 border-0 btnChartBox ${
-                selectedValue === "6H" ? "activeBtn" : ""
-              }`}
+              className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "6H" ? "activeBtn" : ""
+                }`}
             >
               6H
             </button>
             <button
               onClick={() => handleClick("1D")}
-              className={`btn-inner-box m-1 border-0 btnChartBox ${
-                selectedValue === "1D" ? "activeBtn" : ""
-              }`}
+              className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1D" ? "activeBtn" : ""
+                }`}
             >
               24H
             </button>
