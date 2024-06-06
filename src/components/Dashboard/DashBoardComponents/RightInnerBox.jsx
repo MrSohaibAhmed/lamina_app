@@ -12,9 +12,17 @@ import { swapTokens, swapTokensOut } from "../../hooks/useWallet";
 import "../Dashboard.css";
 import { Log } from "ethers";
 import { pairData } from "../../hooks/useWallet";
-import shortBoxImg from "../../../assets/dashboard/short-box.png";
+import arrowImg from "../../../assets/dashboard/arrow.webp";
+import { setHoldings } from "../../hooks/useTransactions";
+import { useContext } from "react";
+import KeyContext from "../../../context/walletContext";
+
+
 
 const RightInnerBox = ({ data, checkZoomLevel }) => {
+  const { AllHoldings } =
+  useContext(KeyContext);
+const [supply, setSupply] = useState(0);
   const [allData, setAllData] = useState([]);
   useEffect(() => {
     setAllData(data);
@@ -192,6 +200,38 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
       noValueError();
     }
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const handleButtonClickSell = (value) => {
+    // Remove the percentage sign (%) from the value
+    console.log("clicked on quick sell", value);
+    setSellSelectedValue(value);
+    setActiveButton(value);
+    const valueWithoutPercent = value.slice(0, -1);
+    console.log("Sell button is", valueWithoutPercent);
 
   const handleQuickSell = () => {
     if (selectedValue !== null && selectedValue !== 0) {
@@ -963,5 +1003,6 @@ const RightInnerBox = ({ data, checkZoomLevel }) => {
     </>
   );
 };
+}
 
 export default RightInnerBox;

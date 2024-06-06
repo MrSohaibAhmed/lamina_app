@@ -3,8 +3,12 @@ import arrowImg from "../../../assets/dashboard/arrows.png";
 import solIconImg from "../../../assets/dashboard/sol-icon.png";
 import transationTableIconImg from "../../../assets/dashboard/transaction-table-icon.png";
 import { setHoldings } from "../../hooks/useTransactions";
+import { useContext } from "react";
+import KeyContext from "../../../context/walletContext";
 const HoldingTable = ({ address }) => {
-  const [holdings, setHoldingsData] = useState([]);
+  const [ setHoldingsData] = useState([]);
+  const { setAllHoldings, AllHoldings } =
+    useContext(KeyContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,6 +17,7 @@ const HoldingTable = ({ address }) => {
           localStorage.getItem("publicKey")
         );
         setHoldingsData(holdingsData.items);
+        setAllHoldings(holdingsData.items);
         console.log(holdingsData.items, " these are holdings");
       } catch (error) {
         console.error("Error fetching holdings:", error);

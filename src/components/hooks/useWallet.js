@@ -3,7 +3,9 @@ import axios from "axios";
 
 // const baseURL = "http://192.168.1.21:5000/";
 // const baseURL = "http://35.238.34.252:5000/";
-const baseURL = "https://backend-fusion-dapp-production.up.railway.app/";
+const baseURL = "http://localhost:4000/";
+// const baseURL = "https://backend-fusion-dapp-production.up.railway.app/";
+
 
 export async function createWalletAndSaveToMongoDB(id) {
     try {
