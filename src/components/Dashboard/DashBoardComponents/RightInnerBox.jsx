@@ -26,7 +26,7 @@ const RightInnerBox = ({ data, solBalance }) => {
 
 
   const formatMarketCap = (marketCap) => {
-    debugger
+    // debugger
     const mktCapStr = marketCap.toString();
     const numberBeforeDotMkt = mktCapStr.split(".")[0];
     console.log("number before dot in MKT", numberBeforeDotMkt);
