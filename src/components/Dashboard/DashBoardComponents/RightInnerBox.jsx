@@ -14,7 +14,8 @@ import "../Dashboard.css";
 import { Log } from "ethers";
 import { pairData } from "../../hooks/useWallet";
 import arrowImg from "../../../assets/dashboard/arrow.webp";
-
+import { useContext } from "react";
+import KeyContext from "../../../context/walletContext";
 const RightInnerBox = ({ data, solBalance }) => {
   const [supply, setSupply] = useState(0);
 
@@ -376,64 +377,135 @@ const RightInnerBox = ({ data, solBalance }) => {
 
 
 
+  const { setAllHoldings, AllHoldings } = useContext(KeyContext);
+  // const handleQuickSell = () => {
+  //   if (!sellSelectedValue) {
+  //     toast.error("Please select a Value");
+  //   }
+  //   if (sellSelectedValue !== null && sellSelectedValue !== 0) {
+  //     console.log("slected value is =>>", sellSelectedValue);
+  //     // Check if selectedValue is not null or 0
+  //     if (solBalance !== 0) {
+  //       const value = {
+  //         address: localStorage.getItem("publicKey"),
+  //         amount: sellButtonValue * 1000000000,
+  //         inputMint: data?.pairs?.[0]?.baseToken?.address,
+  //         outputMint: "So11111111111111111111111111111111111111112",
+  //         slippageBps: slippage,
+  //       };
 
+  //       const buyPromise = swapTokensOut(value);
+  //       buyPromise
+  //         .then((result) => {
+  //           const transactionResult =
+  //             result?.data?.swapResponse?.transactionResult;
+  //           setBuyResult(transactionResult);
+  //           console.log("Buy Promise Result:", transactionResult);
+  //           const t = (
+  //             <div
+  //               style={{ cursor: "pointer" }}
+  //               onClick={() => copy(transactionResult)}
+  //             >
+  //               Your Transaction is Sent . Click On Arrow To Check your
+  //               Transaction Hash{" "}
+  //               <a href={transactionResult} target="blanked">
+  //                 <img width={20} src={arrowImg} />
+  //               </a>
+  //             </div>
+  //           );
+  //           // toast.success(`Sold Successfully. Your Transaction is Sent`);
+  //           toast.success(t, {
+  //             duration: 10000,
+  //           });
+  //         })
+  //         .catch((error) => {
+  //           console.error("Buy Promise Error:", error);
+  //           toast.error("Cannot Buy. Try Again");
+  //         });
+  //       toast.promise(buyPromise, {
+  //         loading: "Waiting For Transaction...",
+  //         success: "Sold Successfully",
+  //         error: "Transaction Failed. Try Again",
+  //       });
+  //     } else {
+  //       toast.error("you donot have enough balance to sell");
+  //     }
+  //   } else {
+  //     console.error("No value selected");
+  //     noValueError();
+  //   }
+  // };
   const handleQuickSell = () => {
     if (!sellSelectedValue) {
       toast.error("Please select a Value");
+      return;
     }
+
     if (sellSelectedValue !== null && sellSelectedValue !== 0) {
-      console.log("slected value is =>>", sellSelectedValue);
+      console.log("selected value is =>>", sellSelectedValue);
+
       // Check if selectedValue is not null or 0
       if (solBalance !== 0) {
-        const value = {
-          address: localStorage.getItem("publicKey"),
-          amount: sellButtonValue * 1000000000,
-          inputMint: data?.pairs?.[0]?.baseToken?.address,
-          outputMint: "So11111111111111111111111111111111111111112",
-          slippageBps: slippage,
-        };
+        const baseTokenAddress = data?.pairs?.[0]?.baseToken?.address;
 
-        const buyPromise = swapTokensOut(value);
-        buyPromise
-          .then((result) => {
-            const transactionResult =
-              result?.data?.swapResponse?.transactionResult;
-            setBuyResult(transactionResult);
-            console.log("Buy Promise Result:", transactionResult);
-            const t = (
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => copy(transactionResult)}
-              >
-                Your Transaction is Sent . Click On Arrow To Check your
-                Transaction Hash{" "}
-                <a href={transactionResult} target="blanked">
-                  <img width={20} src={arrowImg} />
-                </a>
-              </div>
-            );
-            // toast.success(`Sold Successfully. Your Transaction is Sent`);
-            toast.success(t, {
-              duration: 10000,
+        // Find the holding in Allholdings with the same address as baseTokenAddress
+        const holding = AllHoldings.find(item => item.address === baseTokenAddress);
+
+        if (holding) {
+
+          const amount = holding.balance * sellSelectedValue;
+          const value = {
+            address: localStorage.getItem("publicKey"),
+            amount: amount,
+            inputMint: baseTokenAddress,
+            outputMint: "So11111111111111111111111111111111111111112",
+            slippageBps: slippage,
+          };
+
+          const buyPromise = swapTokensOut(value);
+          buyPromise
+            .then((result) => {
+              const transactionResult = result?.data?.swapResponse?.transactionResult;
+              setBuyResult(transactionResult);
+              console.log("Buy Promise Result:", transactionResult);
+              const t = (
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => copy(transactionResult)}
+                >
+                  Your Transaction is Sent. Click On Arrow To Check your
+                  Transaction Hash{" "}
+                  <a href={transactionResult} target="blank">
+                    <img width={20} src={arrowImg} alt="arrow" />
+                  </a>
+                </div>
+              );
+              toast.success(t, {
+                duration: 10000,
+              });
+            })
+            .catch((error) => {
+              console.error("Buy Promise Error:", error);
+              toast.error("Cannot Buy. Try Again");
             });
-          })
-          .catch((error) => {
-            console.error("Buy Promise Error:", error);
-            toast.error("Cannot Buy. Try Again");
+
+          toast.promise(buyPromise, {
+            loading: "Waiting For Transaction...",
+            success: "Sold Successfully",
+            error: "Transaction Failed. Try Again",
           });
-        toast.promise(buyPromise, {
-          loading: "Waiting For Transaction...",
-          success: "Sold Successfully",
-          error: "Transaction Failed. Try Again",
-        });
+        } else {
+          toast.error("You don't have enough balance to sell");
+        }
       } else {
-        toast.error("you donot have enough balance to sell");
+        toast.error("You don't have enough balance to sell");
       }
     } else {
       console.error("No value selected");
       noValueError();
     }
   };
+
   const handleButtonClickSell = (value) => {
     // Remove the percentage sign (%) from the value
     console.log("clicked on quick sell", value);
@@ -1020,8 +1092,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   value="0.25"
-                  onClick={() => handleButtonClickSell("25%")}
-                  className={`bg-dark btn-inner-box ${activeButton == "25%" ? "btn1-active" : ""
+                  onClick={() => handleButtonClickSell(0.25)}
+                  className={`bg-dark btn-inner-box ${activeButton == 0.25 ? "btn1-active" : ""
                     }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
@@ -1031,8 +1103,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   value="50%"
-                  onClick={() => handleButtonClickSell("50%")}
-                  className={`bg-dark btn-inner-box ${activeButton == "50%" ? "btn1-active" : ""
+                  onClick={() => handleButtonClickSell(0.5)}
+                  className={`bg-dark btn-inner-box ${activeButton == 0.5 ? "btn1-active" : ""
                     }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />
@@ -1042,8 +1114,8 @@ const RightInnerBox = ({ data, solBalance }) => {
               <div className="my-3 mx-2">
                 <button
                   value="100%"
-                  onClick={() => handleButtonClickSell("100%")}
-                  className={`bg-dark btn-inner-box ${activeButton == "100%" ? "btn1-active" : ""
+                  onClick={() => handleButtonClickSell(1)}
+                  className={`bg-dark btn-inner-box ${activeButton == 1 ? "btn1-active" : ""
                     }`}
                 >
                   <img src={solIconImg} width="14px" alt="" />

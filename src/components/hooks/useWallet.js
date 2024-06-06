@@ -4,6 +4,7 @@ import axios from "axios";
 // const baseURL = "http://192.168.1.21:5000/";
 // const baseURL = "http://35.238.34.252:5000/";
 const baseURL = "https://backend-fusion-dapp-production.up.railway.app/";
+const URl_two = "https://jitoendpointsdeploy-production.up.railway.app/"
 
 export async function createWalletAndSaveToMongoDB(id) {
     try {
@@ -38,7 +39,7 @@ export async function getPrivateKey(wallet) {
 }
 export async function swapTokens(tokenData) {
     try {
-        const response = await axios.post(`${baseURL}swapTokensExactIn`, tokenData);
+        const response = await axios.post(`${URl_two}swapTokensExactIn`, tokenData);
         // const response = await axios.post(`http://192.168.1.21:8000/swapTokensExactIn`, tokenData);
 
         return response;
@@ -49,7 +50,7 @@ export async function swapTokens(tokenData) {
 }
 export async function swapTokensOut(tokenData) {
     try {
-        const response = await axios.post(`${baseURL}swapTokensExactOut`, tokenData);
+        const response = await axios.post(`${URl_two}swapTokensExactOut`, tokenData);
         return response;
     } catch (error) {
         console.error("Error creating wallet:", error);

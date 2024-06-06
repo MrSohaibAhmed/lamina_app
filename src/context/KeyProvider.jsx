@@ -13,6 +13,8 @@ export const KeyProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [solBalance, setSolBalance] = useState(false);
   const [decryptPrivateKey, setDecryptPrivateKey] = useState()
+  const [AllHoldings, setAllHoldings] = useState([])
+
 
   // const [balance, setBalance] = useState(null);
   const generateKeyHandler = async () => {
@@ -64,7 +66,9 @@ export const KeyProvider = ({ children }) => {
         setLoading,
         solBalance,
         setSolBalance,
-        decryptPrivateKey
+        decryptPrivateKey,
+        setAllHoldings,
+        AllHoldings
       }}
     >
       {children}
