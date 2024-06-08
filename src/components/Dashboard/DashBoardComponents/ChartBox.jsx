@@ -79,8 +79,8 @@ const ChartBox = ({ data }) => {
   return (
     <div>
       <div className="chart-box">
-        <div className="row d-flex justify-content-between">
-          <div className="d-flex align-middle col-8 col-sm-8 align-self-center">
+        <div className="row d-flex s-sm-block justify-content-center">
+          <div className="d-flex justify-content-center justify-content-md-start align-middle col-sm-8 align-self-center">
             <img width={40} style={{ borderRadius: "50px" }} src={imageSrc} />
             <h4 className="mb-0 align-content-center m-1">{name}</h4>
             <button
@@ -130,7 +130,7 @@ const ChartBox = ({ data }) => {
               24H
             </button>
           </div>
-          <div className="col-4 mt-2 mt-sm-0 col-sm-4 d-flex def-table align-items-center align-self-center">
+          <div className="col-sm-4 mt-2 mt-sm-0 col-sm-4 d-flex justify-content-center def-table align-items-center align-self-center">
             Token
             <input
               type="text"

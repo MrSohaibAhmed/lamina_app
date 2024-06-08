@@ -381,10 +381,18 @@ td {
 .chart-box{
     display:none !important;
 }
+
 }
 @media (max-width:769px) {
 .chart-box{
     display:block;
+}
+.chart-box h4 {
+    font-size: 12px;
+    font-weight: 500;
+}
+.btnChartBox{
+    padding: 0px 5px;
 }
 }
 

@@ -606,11 +606,11 @@ const RightInnerBox = ({ data, solBalance }) => {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="right-inner-box">
         <div className="row">
-          <div className="col-lg-5 col-md-12 sm-font align-self-center d-flex">
+          <div className="col-sm-5 col-5 sm-font align-self-center d-flex">
             <h5>{data?.pairs?.[0]?.baseToken?.symbol || "BTC"}</h5>&nbsp;{" "}
             <img src={sercureImg} height="15px" width="10px" alt="" />
           </div>
-          <div className="col-lg-7 col-md-12 px-0 sm-font align-self-center d-flex">
+          <div className="col-sm-7 col-7 px-0 sm-font align-self-center d-flex">
             <p>{data?.pairs?.[0]?.dexId || "raydium V4"}</p>&nbsp; |&nbsp;{" "}
             <p>Profile</p>
           </div>

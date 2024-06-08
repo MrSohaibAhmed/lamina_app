@@ -80,7 +80,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 {/* Right Side  */}
-                <div className="col-lg-3 right-side">
+                <div className="col-lg-3  mt-sm-3 right-side">
                   <RightInnerBox
                     // checkZoomLevel={checkZoomLevel}
                     data={coinsKey}
