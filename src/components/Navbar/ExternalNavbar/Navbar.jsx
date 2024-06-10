@@ -60,7 +60,7 @@ const NavbarComp = () => {
       <nav className="navbar py-3 navbar-expand-lg navbar-dark">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
+            <img className="logo-img" src={logoImg} width="30px" alt="" /> TOPG TRADING
           </Link>
           <button
             className="navbar-toggler"
@@ -77,15 +77,15 @@ const NavbarComp = () => {
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
               <li className="nav-item">
                 <a className="mx-4 txt-nav">
-                  $GENAI CA - 5XzX3PGu2mmWSeSJ8yXdXgX9xjAA1Prdr8dPz3FNzQT9
+                AJA46gwnfkwB74CwpRwPR2x2gh2VP457tzKvdRo4wgQk
                 </a>
               </li>
               <li className="nav-item">
-                <a href="https://x.com/genaitrade" className="btn-nav">
+                <a href="https://x.com/TheTateGold" className="btn-nav">
                   Twitter
                 </a>{" "}
                 /{" "}
-                <a href="https://t.me/genaitrade" className="me-3 btn-nav">
+                <a href="https://t.me/TheTateGold" className="me-3 btn-nav">
                   Telegram
                 </a>
               </li>

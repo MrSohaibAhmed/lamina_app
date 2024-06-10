@@ -243,7 +243,7 @@ const InternalNavbar = () => {
       <nav className="navbar py-3 navbar-expand-lg navbar-dark ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
+            <img className="logo-img" src={logoImg} width="30px" alt="" /> TOPG TRADING
           </Link>
           <button
             className="navbar-toggler"
@@ -344,11 +344,11 @@ const InternalNavbar = () => {
             </ul>
             <ul className="navbar-nav d-content ms-auto mb-2 mb-lg-0">
               <li className="nav-item dropdown">
-                <a href="https://x.com/genaitrade" className="btn-nav">
+                <a href="https://x.com/TheTateGold" className="btn-nav">
                   Twitter
                 </a>{" "}
                 /{" "}
-                <a href="https://t.me/genaitrade" className="btn-nav">
+                <a href="https://t.me/TheTateGold" className="btn-nav">
                   Telegram
                 </a>
               </li>
