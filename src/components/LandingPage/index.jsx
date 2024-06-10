@@ -146,7 +146,7 @@ const LandingPage = () => {
             <div className="col-lg-12 footer-bottom">
               <div className="row">
                 <div className="col-lg-6 text-lg-start text-center">
-                  <p>© $GENAI SOLANA Wallet Inc. 2024</p>
+                  <p>© $TOPG SOLANA TRADING Inc. 2024</p>
                 </div>
                 <div className="col-lg-6 text-center text-lg-end">
                   <Link onClick={scrollToTop}>Terms of use </Link> |{" "}
