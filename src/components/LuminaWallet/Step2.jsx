@@ -30,7 +30,7 @@ const Step2 = () => {
             <div className='step2main'>
                 <div className="text-center py-4">
                     <Link className="navbar-brand" to="/">
-                        <img className="logo-img" src={logoImg} width="30px" alt="" /> GenAI
+                        <img className="logo-img" src={logoImg} width="30px" alt="" /> TOPG TRADING
                     </Link>
                 </div>
                 <div className="text-center py-4"><Link to="/"><img src="assets/img/logo.png" width="200px" alt="" /></Link></div>
@@ -38,14 +38,14 @@ const Step2 = () => {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-lg-12 pt-5 text-center">
-                                <h1 className="main-heading step-heading">This is your <br className="d-break" /> GENAI trading wallet</h1>
+                                <h1 className="main-heading step-heading">This is your <br className="d-break" /> TOPG trading wallet</h1>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-lg-5 mx-auto step-box text-lg-start">
                                 <div className="row">
                                     <div className="col-lg-11 mx-auto">
-                                        <h3 className="mb-4">GENAI Trading wallet</h3>
+                                        <h3 className="mb-4">TOPG Trading wallet</h3>
                                         <div className="row">
                                             <div className="col-lg-12 mx-auto">
                                                 <div className="input-group input-group mb-4">
