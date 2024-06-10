@@ -77,7 +77,7 @@ const NavbarComp = () => {
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
               <li className="nav-item">
                 <a className="mx-4 txt-nav">
-                AJA46gwnfkwB74CwpRwPR2x2gh2VP457tzKvdRo4wgQk
+                $TOPG CA - AJA46gwnfkwB74CwpRwPR2x2gh2VP457tzKvdRo4wgQk
                 </a>
               </li>
               <li className="nav-item">
