@@ -21,7 +21,7 @@ const RightInnerBox = ({ data, solBalance }) => {
   const { tokenid } = useParams();
   const shouldShowButton = !tokenid;
   // const shouldShowButton = tokenid !== "3eoU8s1WtRcgwfy1CWf732fT2HCuFL7HD7j29c6iHnBc";
-  debugger
+  // debugger
   const [supply, setSupply] = useState(0);
 
   const [allData, setAllData] = useState([]);
