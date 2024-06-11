@@ -9,6 +9,7 @@ import InternalNavbar from "./components/Navbar/InternalNabvar/InternalNavbar";
 import Dashboard from "./components/Dashboard/Dashboard";
 import { KeyProvider } from "./context/KeyProvider";
 import SharedPage from "./components/SharedPage";
+import TransferFund from "./components/TransferFund";
 // import { clusterApiUrl } from "@solana/web3.js";
 // import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 // import {
@@ -92,6 +93,8 @@ function App() {
         <Route path="step2" element={<Step2 />} />
         <Route path="step3" element={<Step3 />} />
         <Route path="token/:tokenid" element={<SharedPage />} />
+        <Route path="transfer-funds" element={<TransferFund />} />
+
 
         <Route
           path="dashboard"

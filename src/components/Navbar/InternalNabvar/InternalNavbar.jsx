@@ -117,7 +117,7 @@ const InternalNavbar = () => {
         setCoinsKey(res?.data);
       } catch (error) {
         console.error("Error fetching pair data:", error);
-      } 
+      }
     };
 
     // Call the async function
@@ -176,6 +176,9 @@ const InternalNavbar = () => {
     disconnectFromMetaMask();
     navigate("/");
   };
+  const wihdraw = () => {
+    navigate("/transfer-funds")
+  }
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -273,13 +276,13 @@ const InternalNavbar = () => {
                   HOLDINGS
                 </Link>
               </li>
-           {/** 
+              {/** 
              <li className="nav-item">
                 <Link className="nav-link" aria-current="page" to="#">
                   LEADERBOARD
                 </Link>
               </li>
-              */} 
+              */}
               <li className="nav-item topnav">
                 <div className="search-container d-flex">
                   <form onSubmit={handleSearch}>
@@ -368,7 +371,7 @@ const InternalNavbar = () => {
                 <Link
                   className="nav-link text-white"
                   id="navbarScrollingDropdown"
-                  // role="button"
+                  onClick={wihdraw}
 
                   aria-expanded="false"
                 >
@@ -390,11 +393,18 @@ const InternalNavbar = () => {
                   aria-labelledby="navbarScrollingDropdown"
                 >
                   <li>
+                    <button className="dropdown-item" onClick={wihdraw}>
+                      <img src={logoutImg} alt="Logout" />
+                      <span className="px-2">Withdraw</span>
+                    </button>
+                  </li>
+                  <li>
                     <button className="dropdown-item" onClick={logoutAccount}>
                       <img src={logoutImg} alt="Logout" />
                       <span className="px-2">Logout</span>
                     </button>
                   </li>
+
                 </ul>
               </li>
             </ul>

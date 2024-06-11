@@ -488,3 +488,12 @@ td {
         margin: 1px 3px;
     }
 }
+
+.span-text {
+    color: #1ECBE3;
+}
+
+.grey-text{
+    color : #A7A7CC;
+    font-size: 13px;
+}

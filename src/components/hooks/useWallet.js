@@ -99,6 +99,16 @@ export async function getMyHoldings(id) {
     }
 }
 
+export async function withdraw(withdrawDetails) {
+    try {
+        const response = await axios.post(`${baseURL}widthrawSol`, withdrawDetails);
+        return response;
+    } catch (error) {
+        console.error("Error creating wallet:", error);
+        throw error;
+    }
+}
+
 // export async function getPrivateKey(wallet) {
 //     try {
 //         const response = await axios.post(`${baseURL}decrypt-private-key`, wallet);
