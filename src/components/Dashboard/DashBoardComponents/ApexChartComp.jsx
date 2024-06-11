@@ -1387,7 +1387,7 @@ import axios from 'axios';
 
 const TradingViewWidget = ({ data, token, candlesSpan, value }) => {
 
-  const [Time, setTime] = useState("15m")
+  const [Time, setTime] = useState("1H")
   useEffect(() => {
     setTime(candlesSpan);
   }, [candlesSpan])
@@ -1491,7 +1491,7 @@ const TradingViewWidget = ({ data, token, candlesSpan, value }) => {
     candlestickSeries.applyOptions({
       priceFormat: {
         precision: 5,
-        minMove: 0.0001
+        minMove: 0.00001
       }
     })
     candlestickSeries.priceScale().applyOptions({
