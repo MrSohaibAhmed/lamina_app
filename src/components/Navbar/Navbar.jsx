@@ -7,8 +7,9 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { checkUser } from "../hooks/useWallet";
 import usePhantom from "../../components/hooks/usePhantom";
-
+import { useParams } from "react-router-dom";
 const NavbarComp = () => {
+  const { tokenid } = useParams();
   ////debugger
   const {
     connectToPhantom,

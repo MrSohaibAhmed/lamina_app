@@ -7,7 +7,14 @@ import { Link, useNavigate } from "react-router-dom";
 import usePhantom from "../../../components/hooks/usePhantom";
 import { checkUser } from "../../hooks/useWallet";
 import ModalComp from "./ModalComp";
+import { useParams } from "react-router-dom";
+import { pairData } from "../../hooks/useWallet";
+import { useContext } from "react";
+import KeyContext from "../../../context/walletContext";
 const NavbarComp = () => {
+  const { tokenid } = useParams();
+  const { setCoinsKey, setNoDetails, setSolBalance, solBalance } =
+    useContext(KeyContext);
   const navi = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const {
@@ -54,6 +61,25 @@ const NavbarComp = () => {
   const gotoDashboard = () => {
     navi("/dashboard");
   };
+  useEffect(() => {
+    const fetchPairData = async () => {
+      try {
+        // const res = await pairData(
+        //   "CwJCznavdHe6AYU85v56nDh1VCWKs3ywcRj8uShXd3F3"
+        // );
+        const res = await pairData(
+          tokenid
+        );
+        console.log(res?.data, "Response data is = >>>>>>>>>");
+        setCoinsKey(res?.data);
+      } catch (error) {
+        console.error("Error fetching pair data:", error);
+      }
+    };
+
+    // Call the async function
+    fetchPairData();
+  }, []); //
 
   return (
     <>
@@ -77,7 +103,7 @@ const NavbarComp = () => {
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
               <li className="nav-item">
                 <a className="mx-4 txt-nav">
-                $TOPG CA - AJA46gwnfkwB74CwpRwPR2x2gh2VP457tzKvdRo4wgQk
+                  $TOPG CA - AJA46gwnfkwB74CwpRwPR2x2gh2VP457tzKvdRo4wgQk
                 </a>
               </li>
               <li className="nav-item">

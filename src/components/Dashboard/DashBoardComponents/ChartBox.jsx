@@ -82,7 +82,7 @@ const ChartBox = ({ data }) => {
         <div className="row d-flex s-sm-block justify-content-center">
           <div className="d-flex justify-content-center justify-content-md-start align-middle col-sm-8 align-self-center">
             <img width={40} style={{ borderRadius: "50px" }} src={imageSrc} />
-            <h4 className="mb-0 align-content-center m-1">TOPG TRADING</h4>
+            <h4 className="mb-0 align-content-center m-1">{name}</h4>
             <button
               onClick={() => handleClick("1m")}
               className={`btn-inner-box m-1 border-0 btnChartBox ${selectedValue === "1m" ? "activeBtn" : ""

@@ -8,6 +8,7 @@ import Home from "./components/Home/Home";
 import InternalNavbar from "./components/Navbar/InternalNabvar/InternalNavbar";
 import Dashboard from "./components/Dashboard/Dashboard";
 import { KeyProvider } from "./context/KeyProvider";
+import SharedPage from "./components/SharedPage";
 // import { clusterApiUrl } from "@solana/web3.js";
 // import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 // import {
@@ -69,8 +70,8 @@ function App() {
       // Update state only if any relevant value changes
       setIsSolanaConnected(
         localStorage.getItem("connected") === "true" &&
-          localStorage.getItem("solanaKey") !== null &&
-          localStorage.getItem("publicKey") !== null
+        localStorage.getItem("solanaKey") !== null &&
+        localStorage.getItem("publicKey") !== null
       );
     };
 
@@ -83,23 +84,25 @@ function App() {
     // <ConnectionProvider endpoint={endpoint}>
     //   <WalletProvider wallets={wallets}>
     //     <WalletModalProvider>
-    
-          <KeyProvider>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="step1" element={<LuminaWallets />} />
-              <Route path="step2" element={<Step2 />} />
-              <Route path="step3" element={<Step3 />} />
-              <Route
-                path="dashboard"
-                element={
-                  <ProtectedRoute isSolanaConnected={isSolanaConnected}>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </KeyProvider>
+
+    <KeyProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="step1" element={<LuminaWallets />} />
+        <Route path="step2" element={<Step2 />} />
+        <Route path="step3" element={<Step3 />} />
+        <Route path="token/:tokenid" element={<SharedPage />} />
+
+        <Route
+          path="dashboard"
+          element={
+            <ProtectedRoute isSolanaConnected={isSolanaConnected}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </KeyProvider>
     //     </WalletModalProvider>
     //   </WalletProvider>
     // </ConnectionProvider>

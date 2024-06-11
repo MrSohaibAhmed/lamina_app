@@ -6,8 +6,12 @@ import solIconImg from "../../../assets/dashboard/sol-icon.png";
 import transationTableIconImg from "../../../assets/dashboard/transaction-table-icon.png";
 import TransactionTable from "./TrancationTable";
 import HoldingTable from "./HoldingTable";
+import { useParams } from "react-router-dom";
 // import { getTokenAccounts } from '../../hooks/useTransactions';
 const TabComp = ({ data }) => {
+  const { tokenid } = useParams();
+  const shouldShowButton = !tokenid;
+
   return (
     <div className="mt-3 tab-box">
       <ul className="nav nav-pills" id="pills-tab" role="tablist">
@@ -25,20 +29,25 @@ const TabComp = ({ data }) => {
             <img src={transcationImg} width="12px" alt="" /> &nbsp; Transaction
           </button>
         </li>
-        <li className="nav-item" role="presentation">
-          <button
-            className="nav-link fw-semibold position-relative"
-            id="pills-holding-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#pills-holding"
-            type="button"
-            role="tab"
-            aria-controls="pills-holding"
-            aria-selected="false"
-          >
-            <img src={holdingImg} width="12px" alt="" /> &nbsp;My Holding
-          </button>
-        </li>
+        {
+          shouldShowButton && (
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link fw-semibold position-relative"
+                id="pills-holding-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-holding"
+                type="button"
+                role="tab"
+                aria-controls="pills-holding"
+                aria-selected="false"
+              >
+                <img src={holdingImg} width="12px" alt="" /> &nbsp;My Holding
+              </button>
+            </li>
+          )
+        }
+
       </ul>
       <div className="tab-content" id="pills-tabContent">
         <div
@@ -61,7 +70,12 @@ const TabComp = ({ data }) => {
             role="tabpanel"
             aria-labelledby="pills-transaction-tab"
           >
-            <HoldingTable address={data?.pairs?.[0]?.pairAddress} />
+            {
+              shouldShowButton && (
+                <HoldingTable address={data?.pairs?.[0]?.pairAddress} />
+              )
+            }
+
           </div>
         </div>
       </div>
