@@ -1,0 +1,24 @@
+.tableClassMainDiv{
+    border-radius: 10px;
+}
+
+.tableHeader {
+    background: linear-gradient(90deg, #AF47F8 0%, #20C7E4 100%);
+    
+}
+.tableClass{
+    border-radius: 20px;
+}
+
+.btn-buy-quick {
+    background: linear-gradient(90deg, #AF47F8 0%, #20C7E4 100%);
+    padding: 5px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    width: 60%;
+    margin: auto;
+}
