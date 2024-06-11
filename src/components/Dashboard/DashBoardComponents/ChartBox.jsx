@@ -5,6 +5,7 @@ import TradingViewWidget from "./ApexChartComp";
 import toast from "react-hot-toast";
 const ChartBox = ({ data }) => {
   //debugger
+  const baseUrl = window.location.origin;
   const [selectedValue, setSelectedValue] = useState("15m");
   console.log(data.pairs?.[0]?.baseToken?.symbol);
   // //////debugger
@@ -36,6 +37,15 @@ const ChartBox = ({ data }) => {
           .then(() => {
             toast.success("Successfully copied pair address!");
             console.log("Pair address copied successfully");
+          })
+          .catch((error) => console.error("Error copying pairAddress:", error));
+        break;
+      case "Link":
+        navigator.clipboard
+          .writeText(`${baseUrl}/token/${pairDataAddress}`)
+          .then(() => {
+            toast.success("Successfully copied Dashboard Address!");
+
           })
           .catch((error) => console.error("Error copying pairAddress:", error));
         break;
@@ -132,7 +142,7 @@ const ChartBox = ({ data }) => {
           </div>
 
           <div className="col-sm-2 d-flex align-middle align-items-center">
-          <span>Copy the link</span>  
+            <span>Shareable URL</span>
             <button
               className="bg-transparent border-0"
               onClick={() => handleCopy("Link")}
@@ -140,7 +150,7 @@ const ChartBox = ({ data }) => {
               <img src={shortBoxImg} width="15px" alt="" />
             </button>
           </div>
-          
+
           <div className="col-sm-4 mt-2 mt-sm-0 col-sm-4 d-flex justify-content-center def-table align-items-center align-self-center">
             Token
             <input
