@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import InternalNavbar from '../Navbar/InternalNabvar/InternalNavbar'
 import "../Dashboard/Dashboard.css"
-import Img from '../../assets/img/Img'
+// import Img from '../../assets/img/Img'
 import { withdraw } from '../hooks/useWallet'
 import { useContext } from 'react'
 import KeyContext from '../../context/walletContext'
@@ -22,23 +22,53 @@ function TransferFund() {
         });
     };
 
+    // const withdrawFunds = () => {
+    //     console.log("amount is" , formData.amount);
+    //     if (solBalance >0 && solBalance !<= formData.amount) {
+    //         const newVal = {
+    //             fromPublicKey: formData.fromPublicKey,
+    //             amount: Number(formData.amount) * 1000000000,
+    //             toPublicKey: formData.toPublicKey,
+    //         }
+    //         // const response = withdraw(newVal).then((res) => {
+    //     //     toast.success("Withdraw Successfull")
+    //     //     console.log(res)
+    //     // }).catch((err) => {
+    //     //     toast.error("Try Again ")
+    //     // })
+    //     }
+
+    //     else{
+    //         console.log("you donot have enough money");
+    //     }
+        
+
+        
+
+    // }
+
     const withdrawFunds = () => {
-
-        const newVal = {
-
-            fromPublicKey: formData.fromPublicKey,
-            amount: Number(formData.amount) * 1000000000,
-            toPublicKey: formData.toPublicKey,
+        console.log("amount is", formData.amount);
+        if (solBalance<=  0 ) {
+            toast.error("sol balance is 0")
+            if(solBalance >= formData.amount){
+            const newVal = {
+                fromPublicKey: formData.fromPublicKey,
+                amount: Number(formData.amount) * 1000000000,
+                toPublicKey: formData.toPublicKey,
+            };
+            // const response = withdraw(newVal).then((res) => {
+    //     //     toast.success("Withdraw Successfull")
+    //     //     console.log(res)
+    //     // }).catch((err) => {
+    //     //     toast.error("Try Again ")
+    //     // })
+        }} else {
+            console.log("You do not have enough money");
+            toast.error("You do not have enough money ")
         }
-
-        const response = withdraw(newVal).then((res) => {
-            toast.success("Withdraw Successfull")
-            console.log(res)
-        }).catch((err) => {
-            toast.error("Try Again ")
-        })
-
-    }
+    };
+    
 
     return (
         <>
@@ -88,7 +118,6 @@ function TransferFund() {
                         <div className='row mt-5'>
                             <div className='col-lg-6 col-md-12 col-sm-12'>
                                 <label>Withdraw To </label>
-
                                 <input
                                     name="toPublicKey"
                                     type="text"
