@@ -80,7 +80,7 @@ const ChartBox = ({ data }) => {
     <div>
       <div className="chart-box">
         <div className="row d-flex s-sm-block justify-content-center">
-          <div className="d-flex justify-content-center justify-content-md-start align-middle col-sm-8 align-self-center">
+          <div className="d-flex justify-content-center justify-content-md-start align-middle col-sm-6 align-self-center">
             <img width={40} style={{ borderRadius: "50px" }} src={imageSrc} />
             <h4 className="mb-0 align-content-center m-1">TOPG TRADING</h4>
             <button
@@ -130,6 +130,17 @@ const ChartBox = ({ data }) => {
               24H
             </button>
           </div>
+
+          <div className="col-sm-2 d-flex align-middle align-items-center">
+          <span>Copy the link</span>  
+            <button
+              className="bg-transparent border-0"
+              onClick={() => handleCopy("Link")}
+            >
+              <img src={shortBoxImg} width="15px" alt="" />
+            </button>
+          </div>
+          
           <div className="col-sm-4 mt-2 mt-sm-0 col-sm-4 d-flex justify-content-center def-table align-items-center align-self-center">
             Token
             <input
