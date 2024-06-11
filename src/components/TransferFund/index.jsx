@@ -8,6 +8,7 @@ import KeyContext from '../../context/walletContext'
 import toast, { Toaster } from 'react-hot-toast'
 function TransferFund() {
     const { solBalance } = useContext(KeyContext)
+    console.log(solBalance)
     const [formData, setFormData] = useState({
         fromPublicKey: localStorage.getItem("publicKey"),
         amount: '',
@@ -41,34 +42,35 @@ function TransferFund() {
     //     else{
     //         console.log("you donot have enough money");
     //     }
-        
 
-        
+
+
 
     // }
 
     const withdrawFunds = () => {
         console.log("amount is", formData.amount);
-        if (solBalance<=  0 ) {
-            toast.error("sol balance is 0")
-            if(solBalance >= formData.amount){
+        if (solBalance <= 0) {
+            toast.error("Your sol balance is 0");
+        } else if (solBalance < formData.amount) {
+            toast.error("Your amount should be smaller or equal to sol balance");
+        } else {
             const newVal = {
                 fromPublicKey: formData.fromPublicKey,
                 amount: Number(formData.amount) * 1000000000,
                 toPublicKey: formData.toPublicKey,
             };
-            // const response = withdraw(newVal).then((res) => {
-    //     //     toast.success("Withdraw Successfull")
-    //     //     console.log(res)
-    //     // }).catch((err) => {
-    //     //     toast.error("Try Again ")
-    //     // })
-        }} else {
-            console.log("You do not have enough money");
-            toast.error("You do not have enough money ")
+            const response = withdraw(newVal)
+                .then((res) => {
+                    toast.success("Withdraw Successful");
+                    console.log(res);
+                })
+                .catch((err) => {
+                    toast.error("Try Again ");
+                });
         }
     };
-    
+
 
     return (
         <>
