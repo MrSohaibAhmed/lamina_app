@@ -16,16 +16,22 @@ function TransferFund() {
     });
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        const newValue = name === 'amount' ? parseFloat(value) * 1000000000 : value;
         setFormData({
             ...formData,
-            [name]: newValue
+            [name]: value
         });
     };
 
     const withdrawFunds = () => {
 
-        const response = withdraw(formData).then((res) => {
+        const newVal = {
+
+            fromPublicKey: formData.fromPublicKey,
+            amount: Number(formData.amount) * 1000000000,
+            toPublicKey: formData.toPublicKey,
+        }
+
+        const response = withdraw(newVal).then((res) => {
             toast.success("Withdraw Successfull")
             console.log(res)
         }).catch((err) => {
