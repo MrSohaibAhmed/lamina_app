@@ -11,6 +11,7 @@ import { KeyProvider } from "./context/KeyProvider";
 import SharedPage from "./components/SharedPage";
 import TransferFund from "./components/TransferFund";
 import Newpairs from "./components/NewPairs";
+import Settings from "./components/Settings";
 // import { clusterApiUrl } from "@solana/web3.js";
 // import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 // import {
@@ -95,6 +96,8 @@ function App() {
         <Route path="step3" element={<Step3 />} />
         <Route path="token/:tokenid" element={<SharedPage />} />
         <Route path="transfer-funds" element={<TransferFund />} />
+        <Route path="settings" element={<Settings />} />
+
 
         <Route path="/new-pairs" element={<Newpairs />} />
 

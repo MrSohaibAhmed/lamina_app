@@ -497,3 +497,13 @@ td {
     color : #A7A7CC;
     font-size: 13px;
 }
+
+.font-twelve{
+    font-size: 14px;
+}
+.gradient-text {
+    background: linear-gradient(100.89deg, #AF47F8 1.78%, #595FFB 1.78%, #1ECBE3 95.1%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 22px;
+}
