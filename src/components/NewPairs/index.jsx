@@ -8,14 +8,31 @@ import SwitchComp from '../../utilities/SwitchComp';
 import DropdownComp from '../../utilities/DropdownComp';
 import { width } from '@fortawesome/free-solid-svg-icons/fa0';
 import FilterDropdown from '../../utilities/FilterDropdownComp';
-
+import { getNewPairs } from '../hooks/useWallet';
 function Newpairs() {
+    const [isChecked, setIsChecked] = useState(false);
+    const [inputValue, setInputValue] = useState(0.1);
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+    };
+
+    const toggleSwitch = () => {
+        setIsChecked(!isChecked);
+    };
+    const [tableData, setTableData] = useState([]);
     const dropdownItems = [
         { label: '1', href: '#' },
         { label: '2', href: '#' },
         { label: '3', href: '#' },
         { label: '4', href: '#' },
     ];
+    useEffect(() => {
+        const fetch = async () => {
+            const response = await getNewPairs();
+            setTableData(response?.data);
+        }
+        fetch();
+    }, [])
     return (
         <>
             <InternalNavbar />
@@ -29,7 +46,7 @@ function Newpairs() {
                     <div className='d-flex align-content-center align-items-center'>
 
                         <div>
-                            <SwitchComp label="Quick Buy" />
+                            <SwitchComp label="Quick Buy" isChecked={isChecked} onToggle={toggleSwitch} />
                         </div>
 
                         <div>
@@ -39,14 +56,16 @@ function Newpairs() {
                                 imgSrc={filterImg} />
                         </div>
                         <div>
-                        <FilterDropdown/>
+                            <FilterDropdown />
                         </div>
                         <div style={{ width: '15%', padding: '7px 6px', borderRadius: '5px' }} className='d-flex border align-items-center'>
                             <img style={{ width: '10px', height: '10px' }} src={solIconImg} />
                             <input
-                                className='bg-transparent border-0 w-100 text-center'
+                                className='bg-transparent border-0 w-100 text-center text-white'
                                 type='number'
                                 placeholder='0.0'
+                                value={inputValue}
+                                onChange={handleInputChange}
                             />
                         </div>
                         <div>
@@ -57,8 +76,8 @@ function Newpairs() {
                         </div>
                     </div>
                 </div>
-                <NewpairTable />
-                
+                <NewpairTable tableData={tableData} isChecked={isChecked} />
+
             </div>
         </>
     )

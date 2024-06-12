@@ -4,7 +4,8 @@ import axios from "axios";
 // const baseURL = "http://192.168.1.21:5000/";
 // const baseURL = "http://35.238.34.252:5000/";
 const baseURL = "https://backend-fusion-dapp-production.up.railway.app/";
-const URl_two = "https://jitoendpointsdeploy-production.up.railway.app/"
+const URl_two = "https://jitoendpointsdeploy-production.up.railway.app/";
+const newPairsUrl = "https://mongonewpairs-production.up.railway.app/"
 
 export async function createWalletAndSaveToMongoDB(id) {
     try {
@@ -105,6 +106,15 @@ export async function withdraw(withdrawDetails) {
         return response;
     } catch (error) {
         console.error("Error creating wallet:", error);
+        throw error;
+    }
+}
+export async function getNewPairs(query) {
+    try {
+        const response = await axios.get(newPairsUrl);
+        return response;
+    } catch (error) {
+        console.error("Error Finding Pair", error);
         throw error;
     }
 }
