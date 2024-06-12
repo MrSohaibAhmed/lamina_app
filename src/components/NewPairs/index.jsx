@@ -46,9 +46,7 @@ function Newpairs() {
         } finally {
             setLoading(false)
         }
-        finally {
-            setLoading(false)
-        }
+       
     };
     useEffect(() => {
         fetchData(); // Initial fetch
