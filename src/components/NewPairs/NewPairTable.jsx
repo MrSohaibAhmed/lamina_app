@@ -74,7 +74,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
 
     }
     const handleQuickBuy = (item) => {
-        debugger
+        // debugger
         // console.log("solona balance is =>>", solBalance);
         if (inputValue !== null && inputValue !== 0) {
 
