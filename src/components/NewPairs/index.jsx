@@ -42,6 +42,9 @@ function Newpairs() {
         } catch (error) {
             console.error('Error fetching data:', error);
         }
+        finally {
+            setLoading(false)
+        }
     };
     useEffect(() => {
         fetchData(); // Initial fetch

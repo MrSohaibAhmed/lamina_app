@@ -24,7 +24,7 @@ const usePhantom = () => {
                     localStorage.setItem("connected", true);
                 }
                 else {
-                    navi("/dashboard")
+                    navi("/new-pairs")
                 }
             } catch (error) {
                 console.error(error);
@@ -62,7 +62,7 @@ const usePhantom = () => {
                 }
 
             } else {
-                navi("/dashboard");
+                navi("/new-pairs");
 
             }
 
@@ -214,7 +214,7 @@ const usePhantom = () => {
             // localStorage.setItem("sign", signature);
 
             // Navigate to the next step
-            navi("/dashboard");
+            navi("/new-pairs");
         } catch (error) {
             console.error('Error signing message:', error);
         }
@@ -252,7 +252,7 @@ const usePhantom = () => {
                 setSignedMessage(signature);
                 localStorage.setItem("sign", signature);
 
-                navi("/dashboard");
+                navi("/new-pairs");
             } catch (error) {
                 console.error('Error signing message:', error);
             }

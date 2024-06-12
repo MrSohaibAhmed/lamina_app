@@ -5,10 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import userImg from "../../../assets/navbarImg/user-f8beea3763a4782d7f5c91103f0c9df185fc299918645612b3676041dc5b979b.svg";
 import logoutImg from "../../../assets/navbarImg/logout-4ab325d57345e54eed9bbecc031b0c11e357293d36575697d05cd5f5779944e6.svg";
+import withdrawImg from "../../../assets/pairtableImg/withdraw-1.svg"
 import "./InternalNavbar.css";
 import usePhantom from "../../hooks/usePhantom";
 import { Button } from "react-scroll";
 import { searchPair, pairData } from "../../hooks/useWallet";
+import settingImg from '../../../assets/pairtableImg/settings.svg'
 import KeyContext from "../../../context/walletContext";
 import toast, { Toaster } from "react-hot-toast";
 // import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
@@ -181,6 +183,10 @@ const InternalNavbar = () => {
   const wihdraw = () => {
     navigate("/transfer-funds")
   }
+  const handleSetting = () => {
+    navigate("/settings")
+  }
+
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -395,8 +401,14 @@ const InternalNavbar = () => {
                   aria-labelledby="navbarScrollingDropdown"
                 >
                   <li>
+                    <button className="dropdown-item" onClick={handleSetting}>
+                      <img style={{widows:"25px" , height:"25px"}} src={settingImg} alt="Logout" />
+                      <span className="px-2">Setting</span>
+                    </button>
+                  </li>
+                  <li>
                     <button className="dropdown-item" onClick={wihdraw}>
-                      <img src={logoutImg} alt="Logout" />
+                      <img src={withdrawImg} alt="Logout" />
                       <span className="px-2">Withdraw</span>
                     </button>
                   </li>
