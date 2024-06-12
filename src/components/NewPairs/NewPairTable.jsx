@@ -8,9 +8,15 @@ import twiterImg from '../../assets/pairtableImg/twitter 1.png'
 import telegramImg from '../../assets/pairtableImg/telegram 1.png'
 import clockImg from '../../assets/pairtableImg/noun-clock-6929908 1.png'
 import Cross from '../../assets/img/cross';
-
+import { useContext } from 'react';
+import KeyContext from '../../context/walletContext';
 import './newpair.css'
-function NewpairTable({ tableData, isChecked }) {
+import { pairData } from '../hooks/useWallet';
+import { useNavigate } from 'react-router-dom';
+function NewpairTable({ tableData, isChecked, inputValue }) {
+    const navigate = useNavigate();
+    const { setCoinsKey, setNoDetails, setSolBalance, solBalance } =
+        useContext(KeyContext);
     const [data, setData] = useState([])
     useEffect(() => {
         setData(tableData)
@@ -42,6 +48,28 @@ function NewpairTable({ tableData, isChecked }) {
 
         return readableFormat;
     }
+    const handleClick = async (pairAddress) => {
+        // ////debugger
+        // Check if the clicked pair's pairAddress exists in the data
+        // const foundPair = data.find((pair) => pair.pairaddress === pairAddress);
+        // if (foundPair) {
+        // setNoDetails(false);
+        // setPairAddress(pairAddress);
+        // console.log(foundPair);
+        const res = await pairData(pairAddress);
+        console.log(res?.data, "Response data is = >>>>>>>>>");
+        setCoinsKey(res?.data);
+        navigate("/dashboard");
+
+        // } else {
+        // setNoDetails(true);
+        // alert("Sorry We Are Not Dealing with this Pair.");
+        // }
+    };
+    const tokenInfo = (item) => {
+        handleClick(item.address)
+
+    }
 
     return (
         <>
@@ -68,7 +96,7 @@ function NewpairTable({ tableData, isChecked }) {
                     <tbody className="border-top-0">
                         {
                             data.map((item, index) =>
-                                <tr style={{ backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
+                                <tr onClick={() => tokenInfo(item)} style={{ backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
                                     <td>
                                         <div className='d-flex'>
                                             <div><img style={{ borderRadius: "20px" }} src={item?.base?.icon} height={40} width={40} /></div>

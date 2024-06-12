@@ -28,25 +28,26 @@ function Newpairs() {
         { label: '3', href: '#' },
         { label: '4', href: '#' },
     ];
-    useEffect(() => {
-        // const fetch = async () => {
-        //     const response = await getNewPairs();
-        //     setTableData(response?.data);
-        // }
-        // fetch();
-        const fetch = async () => {
-            try {
-                const response = await getNewPairs();
-                setTableData(response?.data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetch();
+    const fetchData = async () => {
+        try {
+            const response = await getNewPairs();
+            const newData = response?.data;
 
-    }, [])
+            // Append only unique entries
+            setTableData(prevData => {
+                const newDataIds = newData.map(entry => entry.id);
+                const uniqueEntries = prevData.filter(entry => !newDataIds.includes(entry.id));
+                return [...newData, ...uniqueEntries];
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    useEffect(() => {
+        fetchData(); // Initial fetch
+        const intervalId = setInterval(fetchData, 5000); // Fetch every 5 seconds
+        return () => clearInterval(intervalId); // Cleanup function
+    }, []);
     return (
         <>
             <InternalNavbar />
@@ -93,7 +94,7 @@ function Newpairs() {
                 {loading ? (
                     <p>Loading...</p>
                 ) : tableData.length > 0 ? (
-                    <NewpairTable tableData={tableData} isChecked={isChecked} />
+                    <NewpairTable tableData={tableData} isChecked={isChecked} inputValue={inputValue} />
                 ) : (
                     <p>No data found</p>
                 )}
