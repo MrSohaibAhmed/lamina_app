@@ -8,6 +8,7 @@ import twiterImg from '../../assets/pairtableImg/twitter 1.png'
 import telegramImg from '../../assets/pairtableImg/telegram 1.png'
 import clockImg from '../../assets/pairtableImg/noun-clock-6929908 1.png'
 import Cross from '../../assets/img/cross';
+import crossImg from "../../assets/pairtableImg/x-mark.png"
 import { useContext } from 'react';
 import KeyContext from '../../context/walletContext';
 import './newpair.css'
@@ -215,7 +216,8 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                                 <p>Mint Auth <br /> Disabled</p>
                                             </div>
                                             <div>
-                                                <img src={clockImg} />
+                                                
+                                                {item.freezeAuthority ? <img src={clockImg} /> : <img src={crossImg}/>}
                                                 <p>Freeze Auth <br />{item.freezeAuthority ? "Enabled" : "Disabled"} </p>
                                             </div>
                                             <div>
@@ -224,7 +226,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                             </div>
                                             <div>
                                                 {
-                                                    item?.top10HolderPercent * 100 > 15 ? <img src={clockImg} /> : null
+                                                    item?.top10HolderPercent * 100 > 15 ? <img src={clockImg} /> : <img src={crossImg}/>
                                                 }
 
                                                 <p>Top 10 Holders <br /> {item.top10HolderPercent * 100 > 15 ? "Enabled " : "Disabled"}</p>
