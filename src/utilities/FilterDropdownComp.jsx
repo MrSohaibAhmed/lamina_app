@@ -83,7 +83,7 @@ const FilterDropdown = () => {
       </button>
 
       {isOpen && (
-        <div style={{width:"300px" , backgroundColor:"#151530"}} className="dropdown-menu show text-white" aria-labelledby="dropdownMenuButton">
+        <div style={{ width:"300px" , backgroundColor:"#151530" ,height: '70vh', overflowY: 'auto' }} className="dropdown-menu show text-white" aria-labelledby="dropdownMenuButton">
           <div className="p-3">
             <div className="form-check">
               <input
