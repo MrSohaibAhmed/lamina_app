@@ -119,18 +119,20 @@ const TransactionTable = ({ address }) => {
                   >
                     {item.side}
                   </td>
-                  <td>{formatPrice(item.base.price)}</td>
+                  <td>{item.quote.nearestPrice.toFixed(7)}</td>
                   <td>
-                    {formatTotalUSD(item.quote.uiAmount * item.base.uiAmount)}
+                    {(item.quote.nearestPrice * item.quote.uiAmount).toFixed(6)}
                   </td>
-                  <td>{item.quote.amount / 1000}K</td>
+                  <td>{item.quote.uiAmount}</td>
                   <td>
                     <img src={solIconImg} width="18px" alt="" />{" "}
-                    {item.quote.uiAmount}
+                    {item.base.uiAmount}
                   </td>
                   <td>{formatTxHash(item.txHash)}</td>
                   <td>
-                    <img src={transationTableIconImg} width="20px" alt="" />
+                    <a href={`https://solscan.io/tx/${item.txHash}`} target="_blank" rel="noopener noreferrer">
+                      <img src={transationTableIconImg} width="20px" alt="" />
+                    </a>
                   </td>
                 </tr>
               ))

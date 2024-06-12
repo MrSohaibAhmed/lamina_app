@@ -457,7 +457,6 @@ const RightInnerBox = ({ data, solBalance }) => {
         const holding = AllHoldings.find(item => item.address === baseTokenAddress);
 
         if (holding) {
-
           const amount = holding.balance * sellSelectedValue;
           const value = {
             address: localStorage.getItem("publicKey"),
