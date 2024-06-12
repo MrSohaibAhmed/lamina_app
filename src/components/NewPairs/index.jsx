@@ -10,6 +10,7 @@ import { width } from '@fortawesome/free-solid-svg-icons/fa0';
 import FilterDropdown from '../../utilities/FilterDropdownComp';
 import { getNewPairs } from '../hooks/useWallet';
 import '../Dashboard/Dashboard.css'
+import toast, { Toaster } from "react-hot-toast";
 function Newpairs() {
     const [isChecked, setIsChecked] = useState(false);
     const [inputValue, setInputValue] = useState(0.1);
@@ -39,8 +40,11 @@ function Newpairs() {
                 const uniqueEntries = prevData.filter(entry => !newDataIds.includes(entry.id));
                 return [...newData, ...uniqueEntries];
             });
+            setLoading(false);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false)
         }
     };
     useEffect(() => {
@@ -50,6 +54,8 @@ function Newpairs() {
     }, []);
     return (
         <>
+            <Toaster position="top-center" reverseOrder={false} />
+
             <InternalNavbar />
             <div className=' container-fluid px-5 bg-class'>
                 <div className='d-flex justify-content-between py-5'>
@@ -98,7 +104,7 @@ function Newpairs() {
                 ) : (
                     <p>No data found</p>
                 )}
-               
+
 
             </div>
         </>

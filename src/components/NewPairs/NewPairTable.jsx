@@ -11,8 +11,10 @@ import Cross from '../../assets/img/cross';
 import { useContext } from 'react';
 import KeyContext from '../../context/walletContext';
 import './newpair.css'
-import { pairData } from '../hooks/useWallet';
+import { pairData, swapTokens } from '../hooks/useWallet';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import TryAgain from "../../assets/dashboard/icons8-reset-24.png"
 function NewpairTable({ tableData, isChecked, inputValue }) {
     const navigate = useNavigate();
     const { setCoinsKey, setNoDetails, setSolBalance, solBalance } =
@@ -70,7 +72,79 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         handleClick(item.address)
 
     }
+    const handleQuickBuy = (item) => {
+        debugger
+        // console.log("solona balance is =>>", solBalance);
+        if (inputValue !== null && inputValue !== 0) {
 
+            if (solBalance !== 0) {
+                const value = {
+                    address: localStorage.getItem("publicKey"),
+                    amount: inputValue * 1000000000,
+                    inputMint: "So11111111111111111111111111111111111111112",
+                    outputMint: item?.base?.address,
+                    slippageBps: 10,
+                };
+                const buyPromise = swapTokens(value);
+                buyPromise
+                    .then((result) => {
+                        const transactionResult =
+                            result?.data?.swapResponse?.transactionResult;
+                        setBuyResult(transactionResult);
+                        console.log("Buy Promise Result:", transactionResult);
+                        const t = (
+                            <div
+                                style={{ cursor: "pointer" }}
+                                onClick={() => copy(transactionResult)}
+                            >
+                                Your Transaction Is Sent . Click Here To Check your Transaction
+                                Hash{" "}
+                                <a href={transactionResult} target="blanked">
+                                    <img width={20} src={arrowImg} />
+                                </a>
+                            </div>
+                        );
+
+                        // toast.success(`Buyed Successfully. Your Transaction Is Sent`, {
+                        //   duration: 10000,
+                        // });
+                        toast.success(t, {
+                            duration: 10000,
+                        });
+                    })
+                    .catch((error) => {
+                        console.error("Buy Promise Error:", error);
+                        toast.error("Transaction Failed", {
+                            duration: 5000
+                        });
+                    });
+                const tryagain = (
+                    <div>Click Here To Try Again
+                        <img width={20} src={TryAgain} onClick={handleQuickBuy} />
+                    </div>
+                )
+
+                toast.promise(buyPromise, {
+                    loading: "Waiting For Transaction...",
+                    success: "",
+                    error: tryagain,
+                });
+            }
+            else {
+                toast.error("You Donot have Enough Sol Balance");
+            }
+        }
+        else {
+            console.error("No value selected");
+            // noValueError();
+            toast.error("Selected Amount is 0");
+        }
+    };
+    const handleBuy = (e, item) => {
+        e.stopPropagation(); // Prevent event propagation
+        handleQuickBuy(item) // Log the item data to the console
+        // Add other functionalities as needed
+    };
     return (
         <>
             <div className="table-responsive def-table tableClassMainDiv">
@@ -160,7 +234,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                     </td>
                                     {
                                         isChecked ? <td className=' align-content-center'>
-                                            <button className='btn-buy-quick'>Quick Buy</button>
+                                            <button className='btn-buy-quick' onClick={(e) => handleBuy(e, item)}>Quick Buy</button>
                                         </td> : null
                                     }
 
