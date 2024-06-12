@@ -99,6 +99,8 @@ const InternalNavbar = () => {
     const res = await pairData(pairAddress);
     console.log(res?.data, "Response data is = >>>>>>>>>");
     setCoinsKey(res?.data);
+    navigate("/dashboard");
+
     // } else {
     // setNoDetails(true);
     // alert("Sorry We Are Not Dealing with this Pair.");

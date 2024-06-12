@@ -47,7 +47,16 @@ function TransferFund() {
 
 
     // }
-
+    const handleCopy = (keyValue) => {
+        navigator.clipboard.writeText(keyValue)
+            .then(() => {
+                console.log("Hash copied to clipboard:");
+                toast.success("Successfully copied ");
+            })
+            .catch((error) => {
+                console.error("Error copying text:", error);
+            });
+    }
     const withdrawFunds = () => {
         console.log("amount is", formData.amount);
         if (solBalance <= 0) {
@@ -60,14 +69,25 @@ function TransferFund() {
                 amount: Number(formData.amount) * 1000000000,
                 toPublicKey: formData.toPublicKey,
             };
+
             const response = withdraw(newVal)
                 .then((res) => {
-                    toast.success("Withdraw Successful");
+                    const t = (
+                        <div onClick={() => handleCopy(res?.data?.signature
+                        )}>Click Here To Copy your Hash</div>
+                    )
+                    debugger
+                    toast.success(t);
                     console.log(res);
                 })
                 .catch((err) => {
                     toast.error("Try Again ");
                 });
+            toast.promise(response, {
+                loading: "Waiting For Transaction...",
+                // success: "Sold Successfully",
+                // error: "Transaction Failed. Try Again",
+            });
         }
     };
 
