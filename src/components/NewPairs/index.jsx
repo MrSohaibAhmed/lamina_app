@@ -9,9 +9,11 @@ import DropdownComp from '../../utilities/DropdownComp';
 import { width } from '@fortawesome/free-solid-svg-icons/fa0';
 import FilterDropdown from '../../utilities/FilterDropdownComp';
 import { getNewPairs } from '../hooks/useWallet';
+import '../Dashboard/Dashboard.css'
 function Newpairs() {
     const [isChecked, setIsChecked] = useState(false);
     const [inputValue, setInputValue] = useState(0.1);
+    const [loading, setLoading] = useState(true);
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
@@ -27,16 +29,28 @@ function Newpairs() {
         { label: '4', href: '#' },
     ];
     useEffect(() => {
+        // const fetch = async () => {
+        //     const response = await getNewPairs();
+        //     setTableData(response?.data);
+        // }
+        // fetch();
         const fetch = async () => {
-            const response = await getNewPairs();
-            setTableData(response?.data);
-        }
+            try {
+                const response = await getNewPairs();
+                setTableData(response?.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
         fetch();
+
     }, [])
     return (
         <>
             <InternalNavbar />
-            <div className=' container-fluid px-5'>
+            <div className=' container-fluid px-5 bg-class'>
                 <div className='d-flex justify-content-between py-5'>
                     <div>
                         <h4 className=' font-weight-bold'>NEW PAIRS</h4>
@@ -76,7 +90,14 @@ function Newpairs() {
                         </div>
                     </div>
                 </div>
-                <NewpairTable tableData={tableData} isChecked={isChecked} />
+                {loading ? (
+                    <p>Loading...</p>
+                ) : tableData.length > 0 ? (
+                    <NewpairTable tableData={tableData} isChecked={isChecked} />
+                ) : (
+                    <p>No data found</p>
+                )}
+               
 
             </div>
         </>
