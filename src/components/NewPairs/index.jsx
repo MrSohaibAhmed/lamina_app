@@ -26,13 +26,26 @@ function Newpairs() {
         { label: '3', href: '#' },
         { label: '4', href: '#' },
     ];
-    useEffect(() => {
-        const fetch = async () => {
+    const fetchData = async () => {
+        try {
             const response = await getNewPairs();
-            setTableData(response?.data);
+            const newData = response?.data;
+
+            // Append only unique entries
+            setTableData(prevData => {
+                const newDataIds = newData.map(entry => entry.id);
+                const uniqueEntries = prevData.filter(entry => !newDataIds.includes(entry.id));
+                return [...newData, ...uniqueEntries];
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error);
         }
-        fetch();
-    }, [])
+    };
+    useEffect(() => {
+        fetchData(); // Initial fetch
+        const intervalId = setInterval(fetchData, 5000); // Fetch every 5 seconds
+        return () => clearInterval(intervalId); // Cleanup function
+    }, []);
     return (
         <>
             <InternalNavbar />
@@ -76,7 +89,7 @@ function Newpairs() {
                         </div>
                     </div>
                 </div>
-                <NewpairTable tableData={tableData} isChecked={isChecked} />
+                <NewpairTable tableData={tableData} isChecked={isChecked} inputValue={inputValue} />
 
             </div>
         </>

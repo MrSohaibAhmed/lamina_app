@@ -106,25 +106,25 @@ const InternalNavbar = () => {
     // alert("Sorry We Are Not Dealing with this Pair.");
     // }
   };
-  useEffect(() => {
-    const fetchPairData = async () => {
-      try {
-        // const res = await pairData(
-        //   "CwJCznavdHe6AYU85v56nDh1VCWKs3ywcRj8uShXd3F3"
-        // );
-        const res = await pairData(
-          "3eoU8s1WtRcgwfy1CWf732fT2HCuFL7HD7j29c6iHnBc"
-        );
-        console.log(res?.data, "Response data is = >>>>>>>>>");
-        setCoinsKey(res?.data);
-      } catch (error) {
-        console.error("Error fetching pair data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPairData = async () => {
+  //     try {
+  //       // const res = await pairData(
+  //       //   "CwJCznavdHe6AYU85v56nDh1VCWKs3ywcRj8uShXd3F3"
+  //       // );
+  //       const res = await pairData(
+  //         "3eoU8s1WtRcgwfy1CWf732fT2HCuFL7HD7j29c6iHnBc"
+  //       );
+  //       console.log(res?.data, "Response data is = >>>>>>>>>");
+  //       setCoinsKey(res?.data);
+  //     } catch (error) {
+  //       console.error("Error fetching pair data:", error);
+  //     }
+  //   };
 
-    // Call the async function
-    fetchPairData();
-  }, []); //
+  //   // Call the async function
+  //   fetchPairData();
+  // }, []); //
   // const toggleDropdown = () => {
   //     setShowDropdown(!showDropdown);
   // };
