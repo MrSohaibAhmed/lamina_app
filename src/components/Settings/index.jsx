@@ -6,6 +6,9 @@ import InfoIcon from "../../assets/img/info.png"
 import "../Dashboard/Dashboard.css"
 import SwitchComp from '../../utilities/SwitchComp'
 import solIconImg from "../../assets/dashboard/sol-icon.png";
+import clockImg from '../../assets/pairtableImg/noun-clock-6929908 1.png'
+import SettingLeft from './SettingLeft'
+import SettingRight from './SettingRight'
 
 
 function Settings() {
@@ -13,7 +16,7 @@ function Settings() {
         <>
             <InternalNavbar />
 
-            <div className='container-fluid p-5'>
+            <div className='container-fluid bg-class  p-5'>
                 <div className='row'>
                     <div className='col-6'>
                         <div className='row'>
@@ -28,7 +31,7 @@ function Settings() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-6'>
+                    <div className='col-6 '>
                         <div className='row mt-4'>
                             <div className='col-3'></div>
                             <div className='col-3 gradient-text'><p>Sending Method<img className='ml-2' src={InfoIcon} /></p></div>
@@ -38,125 +41,22 @@ function Settings() {
                     </div>
                 </div>
 
-                <div className='container-fluid p-5'>
-                    <div className='row'>
-                        <div className='col-lg-9 col-md-12 col-sm-12'>
-                            <div className='row'>
-                                <div className='col-6 settings-card'><p className=''>SLIPPACE</p>
-                                    <p className='font-twelve opacity-50'>How much less tokens you're willing to receive from a trade due to price volatility.</p></div>
-                                <div className='col-6 settings-card-two'><p className=''>SLIPPACE</p>
-                                    <p className='font-twelve opacity-50'>How much less tokens you're willing to receive from a trade due to price volatility.</p></div>
-                                <div className='col-6 settings-card-two'><p className=''>SLIPPACE</p>
-                                    <p className='font-twelve opacity-50'>How much less tokens you're willing to receive from a trade due to price volatility.</p></div>
-                                <div className='col-6 settings-card'><p className=''>SLIPPACE</p>
-                                    <p className='font-twelve opacity-50'>How much less tokens you're willing to receive from a trade due to price volatility.</p></div>
-                                <div className='col-12 settings-card'>
-                                    <p>Customize</p>
-                                    <p className='font-twelve opacity'>Customize your Quick Buy buttons with your own preset amounts.</p>
-                                    <div className='d-flex justify-content-evenely'>
-                                        <div className="input-group mx-2 my-4">
-                                            <span
-                                                className="input-group-text bg-transparent border border-right-0"
-                                                id="basic-addon1"
-                                            >
-                                                <img src={solIconImg} width="14px" alt="" />
-                                            </span>
-                                            <input
-                                                type="number"
-                                                // value={inputAmountVal}
-                                                value={0.5}
-                                                //   onChange={changeAmountHandler}
-                                                className="form-control bg-transparent border border-left-0 text-light"
-                                                placeholder="Amount to buy in SOL"
-                                                aria-label="Amount"
-                                                aria-describedby="basic-addon1"
-                                            />
-                                        </div>
-                                        <div className="input-group mx-2 my-4">
-                                            <span
-                                                className="input-group-text bg-transparent border border-right-0"
-                                                id="basic-addon1"
-                                            >
-                                                <img src={solIconImg} width="14px" alt="" />
-                                            </span>
-                                            <input
-                                                type="number"
-                                                // value={inputAmountVal}
-                                                value={0.5}
-                                                //   onChange={changeAmountHandler}
-                                                className="form-control bg-transparent border border-left-0 text-light"
-                                                placeholder="Amount to buy in SOL"
-                                                aria-label="Amount"
-                                                aria-describedby="basic-addon1"
-                                            />
-                                        </div>  <div className="input-group mx-2 my-4">
-                                            <span
-                                                className="input-group-text bg-transparent border border-right-0"
-                                                id="basic-addon1"
-                                            >
-                                                <img src={solIconImg} width="14px" alt="" />
-                                            </span>
-                                            <input
-                                                type="number"
-                                                // value={inputAmountVal}
-                                                value={0.5}
-                                                //   onChange={changeAmountHandler}
-                                                className="form-control bg-transparent border border-left-0 text-light"
-                                                placeholder="Amount to buy in SOL"
-                                                aria-label="Amount"
-                                                aria-describedby="basic-addon1"
-                                            />
-                                        </div>  <div className="input-group mx-2 my-4">
-                                            <span
-                                                className="input-group-text bg-transparent border border-right-0"
-                                                id="basic-addon1"
-                                            >
-                                                <img src={solIconImg} width="14px" alt="" />
-                                            </span>
-                                            <input
-                                                type="number"
-                                                // value={inputAmountVal}
-                                                value={0.5}
-                                                //   onChange={changeAmountHandler}
-                                                className="form-control bg-transparent border border-left-0 text-light"
-                                                placeholder="Amount to buy in SOL"
-                                                aria-label="Amount"
-                                                aria-describedby="basic-addon1"
-                                            />
-                                        </div>  <div className="input-group mx-2 my-4">
-                                            <span
-                                                className="input-group-text bg-transparent border border-right-0"
-                                                id="basic-addon1"
-                                            >
-                                                <img src={solIconImg} width="14px" alt="" />
-                                            </span>
-                                            <input
-                                                type="number"
-                                                // value={inputAmountVal}
-                                                value={0.5}
-                                                //   onChange={changeAmountHandler}
-                                                className="form-control bg-transparent border border-left-0 text-light"
-                                                placeholder="Amount to buy in SOL"
-                                                aria-label="Amount"
-                                                aria-describedby="basic-addon1"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+                <div className='container-fluid py-5'>
+                    <div className='row d-flex justify-content-evenly align-items-stretch'>
+                        <div className='col-lg-9 col-md-12 col-sm-12 d-flex flex-column'>
+                       <div className='flex-grow-1'>
+                       <SettingLeft/>
+                       </div>
+                        
+                        
                         </div>
-                        <div className='col-lg-3 col-md-12 col-sm-12'>
-                            <div className='right-settings-card p-5'>
-                                <h3 className='mb-4 '>What is Slippage?</h3>
-                                <p className='font-ten'>Suppose you wanted to spend 1 sol to buy 10 $MOON tokens, and you have your slippage set to 10%. You place your order, and when it's confirmed, you see that instead of 10 $MOON tokens, you only received 9 $MOON tokens.I</p>
-                                <p className='font-ten'>Suppose you wanted to spend 1 sol to buy 10 $MOON tokens, and you have your slippage set to 10%. You place your order, and when it's confirmed, you see that instead of 10 $MOON tokens, you only received 9 $MOON tokens.I</p>
-                                <p className='font-ten'>Suppose you wanted to spend 1 sol to buy 10 $MOON tokens, and you have your slippage set to 10%. You place your order, and when it's confirmed, you see that instead of 10 $MOON tokens, you only received 9 $MOON tokens.I</p>
-
+                        <div className='col-lg-3 col-md-12 col-sm-12 d-flex flex-column'>
+                        <div className='flex-grow-1 SettingRightClass'>
+                            <SettingRight/>
                             </div>
-
                         </div>
                     </div>
+                   
                 </div>
 
             </div>

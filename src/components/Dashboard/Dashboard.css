@@ -512,27 +512,48 @@ td {
     font-size: 22px;
 }
 
-.settings-card {
+
+.setting-silpace{
+background-color: #151530;
+
+}
+.setting-silpace2{
+background-color:  #0E0E26;
+}
+.settingRowClass{
+    border-bottom: 1px solid #2C2C45;
+}
+.row.settingRowClass {
+    --bs-gutter-x: 0px !important;
+}
+.bg-class{
+    background-color: #000000;
+}
+
+.fixed-height {
+    height: 800px; /* Set your desired height here */
+    overflow-y: auto; /* Add this if you want the content to be scrollable when it overflows */
+}
+.SettingRightClass{
+    background-color: #0e0e26;
+}
+/* .settings-card {
     height: 220px;
     background-color: #0E0E26;
     border: 1px solid rgb(36, 32, 32);
 
 
 
-}
+} */
 
-.settings-card-two {
+/* .settings-card-two {
     height: 220px;
     background-color: #151530;
     border: 1px solid rgb(36, 32, 32);
 
-}
+} */
 
 .opacity-50 {
     opacity: 50%;
 }
 
-.right-settings-card {
-    background-color: #0E0E26;
-    height: 660px;
-}
