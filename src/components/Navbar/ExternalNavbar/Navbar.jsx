@@ -59,7 +59,7 @@ const NavbarComp = () => {
     // connectToPhantom();
   };
   const gotoDashboard = () => {
-    navi("/dashboard");
+    navi("/new-pairs");
   };
   useEffect(() => {
     const fetchPairData = async () => {
