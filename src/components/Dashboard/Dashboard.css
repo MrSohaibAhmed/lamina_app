@@ -493,17 +493,46 @@ td {
     color: #1ECBE3;
 }
 
-.grey-text{
-    color : #A7A7CC;
+.grey-text {
+    color: #A7A7CC;
     font-size: 13px;
 }
 
-.font-twelve{
+.font-twelve {
     font-size: 14px;
+}
+
+.font-ten {
+    font-size: 11px;
 }
 .gradient-text {
     background: linear-gradient(100.89deg, #AF47F8 1.78%, #595FFB 1.78%, #1ECBE3 95.1%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 22px;
+}
+
+.settings-card {
+    height: 220px;
+    background-color: #0E0E26;
+    border: 1px solid rgb(36, 32, 32);
+
+
+
+}
+
+.settings-card-two {
+    height: 220px;
+    background-color: #151530;
+    border: 1px solid rgb(36, 32, 32);
+
+}
+
+.opacity-50 {
+    opacity: 50%;
+}
+
+.right-settings-card {
+    background-color: #0E0E26;
+    height: 660px;
 }
