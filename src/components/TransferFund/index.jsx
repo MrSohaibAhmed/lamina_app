@@ -12,7 +12,7 @@ function TransferFund() {
     console.log(solBalance)
     const [formData, setFormData] = useState({
         fromPublicKey: localStorage.getItem("publicKey"),
-        amount: '',
+        amount: solBalance,
         toPublicKey: localStorage.getItem("solanaKey"),
 
     });
@@ -144,6 +144,8 @@ function TransferFund() {
                                     aria-describedby="basic-addon1"
                                     value={formData.amount}
                                     onChange={handleInputChange}
+                                    min={0}
+                                    max={solBalance}
                                 />
                             </div>
 
@@ -184,14 +186,14 @@ function TransferFund() {
                         </div>
                     </div>
 
-                    <hr className='mt-3' />
+                    {/* <hr className='mt-3' /> */}
                     <div>
-                        <div className='mt-2 py-4'>
+                        {/* <div className='mt-2 py-4'>
                             <center>
                                 <p>History</p>
                                 <p className='bg-transparent grey-text'>There are currently no transactions yet.</p>
                             </center>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

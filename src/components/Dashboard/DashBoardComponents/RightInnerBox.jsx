@@ -301,8 +301,8 @@ const RightInnerBox = ({ data, solBalance }) => {
           amount: selectedValue * 1000000000,
           inputMint: "So11111111111111111111111111111111111111112",
           outputMint: data?.pairs?.[0]?.baseToken?.address,
-          slippageBps: slippage*100,
-          tip : 5000000,
+          slippageBps: slippage * 100,
+          tip: 500000,
         };
         const buyPromise = swapTokens(value);
         buyPromise
@@ -464,8 +464,8 @@ const RightInnerBox = ({ data, solBalance }) => {
             amount: amount,
             inputMint: baseTokenAddress,
             outputMint: "So11111111111111111111111111111111111111112",
-            slippageBps: slippage*100,
-            tip : 5000000,
+            slippageBps: slippage * 100,
+            tip: 500000,
           };
 
           const buyPromise = swapTokensOut(value);
