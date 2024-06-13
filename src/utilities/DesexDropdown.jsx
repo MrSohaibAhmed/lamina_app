@@ -43,8 +43,9 @@ const DesexDropdown = () => {
   return (
     <div className="dropdown">
       <button
+      style={{border:"1px solid #303138"}}
         onClick={toggleMenu}
-        className="btn text-white dropdown-toggle border py-2 mr-2"
+        className="btn text-white dropdown-toggle  py-2 mr-2"
         type="button"
         id="dropdownMenuButton"
         aria-expanded={isOpen}

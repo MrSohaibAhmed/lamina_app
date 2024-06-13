@@ -9,8 +9,9 @@ const DropdownComp = ({ label, items, imgSrc, DropdownContent }) => {
     };
 
     return (
-        <div className="btn-group border mx-2 rounded-3">
+        <div className="btn-group  mx-2 rounded-3">
             <button
+            style={{border:"1px solid #303138"}}
                 type="button"
                 className="btn dropdown-toggle text-white"
                 onClick={toggleDropdown}

@@ -10,6 +10,7 @@ import clockImg from '../../assets/pairtableImg/noun-clock-6929908 1.png'
 import infoImg from '../../assets/pairtableImg/noun-info-4520370 2.png'
 import TickImg from "../../assets/pairtableImg/noun-tick-1611443 1.png"
 import Cross from '../../assets/img/cross';
+import copyIcon from "../../assets/pairtableImg/svgexport-23.png"
 import crossImg from "../../assets/pairtableImg/x-mark.png"
 import { useContext } from 'react';
 import KeyContext from '../../context/walletContext';
@@ -217,7 +218,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                             <div><img style={{ borderRadius: "20px" }} src={item?.base?.icon} height={40} width={40} /></div>
                                             <div className=' ml-2'>
                                                 <h6 style={{ margin: "3px" }}>{item?.base?.symbol}/{item?.quote?.symbol}</h6>
-                                                <p style={{ margin: "3px" }}>{shortenAddress(item?.address)}</p>
+                                                <p style={{ margin: "3px" }}>{shortenAddress(item?.address)} <img src={copyIcon}/></p>
                                                 <div className=' pt-2'>
                                                     <span className='mr-2' style={{ backgroundColor: "#D9D9D9", borderRadius: "50%", padding: "2px 6px" }}><img src={twiterImg} /></span>
                                                     <span className='mr-2' style={{ backgroundColor: "#D9D9D9", borderRadius: "50%", padding: "2px 6px" }}><img src={telegramImg} /></span>
