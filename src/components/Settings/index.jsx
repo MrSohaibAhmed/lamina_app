@@ -51,7 +51,7 @@ function Settings() {
                         
                         </div>
                         <div className='col-lg-3 col-md-12 col-sm-12 d-flex flex-column'>
-                        <div className='flex-grow-1 SettingRightClass'>
+                        <div className='flex-grow-1 SettingRightClass rounded-custom'>
                             <SettingRight/>
                             </div>
                         </div>

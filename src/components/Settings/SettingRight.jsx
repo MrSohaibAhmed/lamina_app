@@ -5,7 +5,7 @@ import clockImg from '../../assets/pairtableImg/noun-clock-6929908 1.png'
 const SettingRight = () => {
     return (
 
-        <div className='row '>
+        <div className='row rounded-3'>
             <div className=' p-5 rounded-3'>
                 <h4 className='mb-4 '>What is Slippage?</h4>
                 <p className='font-ten'>Suppose you wanted to spend 1 sol to buy 10 $MOON tokens, and you have your slippage set to 10%. You place your order, and when it's confirmed, you see that instead of 10 $MOON tokens, you only received 9 $MOON tokens.I</p>

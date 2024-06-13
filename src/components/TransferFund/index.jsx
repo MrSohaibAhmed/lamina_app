@@ -6,6 +6,7 @@ import { withdraw } from '../hooks/useWallet'
 import { useContext } from 'react'
 import KeyContext from '../../context/walletContext'
 import toast, { Toaster } from 'react-hot-toast'
+import fundImg from "../../assets/transferFund/noun-withdraw-6779380 1.png"
 function TransferFund() {
     const { solBalance } = useContext(KeyContext)
     console.log(solBalance)
@@ -99,9 +100,19 @@ function TransferFund() {
             <center>
                 <h1 className='mt-6'>Transfer Fund</h1>
             </center>
-            <div className='mt-4'>
-                <div className='right-inner-box col-7 mx-auto '>
-                    {/* <img src={Img}/> */}
+            <div className='mt-1 bg-class py-5'>
+                <div className='right-inner-box-transfer-fund col-7 mx-auto '>
+                    <div className='d-flex justify-content-center transferFundHeadClass py-2'>
+                        <div className='p-0 mx-2'>
+                            <button className=' bg-transparent text-white w-100 border-0 rounded'>Deposit</button>
+                        </div>
+                        <div className='mx-2'>
+                            <button className='w-100  border-0 rounded'>Withdraw</button>
+                        </div>
+                    </div>
+                    <div className='m-auto d-flex justify-content-center align-items-center py-5'>
+                        <img src={fundImg} className="img-fluid" />
+                    </div>
                     <center className='mt-3'>
                         <p><span className='span-text'>Withdraw </span>from Photon trading wallet to your selected wallet</p>
                     </center>
@@ -174,14 +185,14 @@ function TransferFund() {
                     </div>
 
                     <hr className='mt-3' />
-                    {/* <div>
-                        <div className='mt-2'>
+                    <div>
+                        <div className='mt-2 py-4'>
                             <center>
                                 <p>History</p>
-                                <p className='bg-transparent grey-text'>There is no History yet .....</p>
+                                <p className='bg-transparent grey-text'>There are currently no transactions yet.</p>
                             </center>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
 
