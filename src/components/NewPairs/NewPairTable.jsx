@@ -149,7 +149,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                 <table className="table tableClass newPairTable">
                     <thead className='tableHeader'>
                         <tr className=" text-white">
-                            <th style={{borderBottom:"1px solid #151530"}} scope="col">
+                            <th style={{borderBottom:"1px solid #151530" , paddingLeft:"20px"}} scope="col">
                                 Pair Info
                             </th>
                             <th style={{borderBottom:"1px solid #151530"}} scope="col">Created <img src={arrowImg} width="14px" alt="" /></th>
@@ -160,7 +160,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                             <th style={{borderBottom:"1px solid #151530"}} scope="col">Volume</th>
                             <th style={{borderBottom:"1px solid #151530"}} scope="col">Audit Result</th>
                             {
-                                isChecked ? <th scope="col">Actions</th> : null
+                                isChecked ? <th style={{borderBottom:"1px solid #151530"}} scope="col">Actions</th> : null
                             }
 
                         </tr>
@@ -169,7 +169,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                         {
                             uniqueTableData.map((item, index) =>
                                 <tr  onClick={() => tokenInfo(item)} style={{borderColor:"#151530", backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
-                                    <td>
+                                    <td style={{ paddingLeft:"20px"}}>
                                         <div className='d-flex'>
                                             <div><img style={{ borderRadius: "20px" }} src={item?.base?.icon} height={40} width={40} /></div>
                                             <div className=' ml-2'>
@@ -183,7 +183,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                         </div>
 
                                     </td>
-                                    <td className=' align-content-center'>
+                                    <td  className=' align-content-center'>
                                         <img src={clockImg} /> {convertTimestampToReadable(item?.timestamp)}
                                     </td>
                                     {/* <td className=' align-content-center'>
@@ -244,7 +244,15 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
 
                     </tbody>
                 </table>
-
+                        <div className='d-flex justify-content-center '>
+                            <button className='bg-transparent text-white border'>Previous</button>
+                            <button className='bg-transparent text-white border'>1</button>
+                            <button className='bg-transparent text-white border'>2</button>
+                            <button className='bg-transparent text-white border'>3</button>
+                            <button className='bg-transparent text-white border'>4</button>
+                            <button className='bg-transparent text-white border'>5</button>
+                            <button className='bg-transparent text-white border'>Next</button>
+                        </div>
             </div>
 
         </>
