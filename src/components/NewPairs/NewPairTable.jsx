@@ -22,6 +22,7 @@ import TryAgain from "../../assets/dashboard/icons8-reset-24.png"
 
 
 function NewpairTable({ tableData, isChecked, inputValue }) {
+    // debugger
 
     // const[activeBtn , setActiveBtn] = useState({
     //     btn1:true,
@@ -98,15 +99,24 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         return readableFormat;
     }
     const handleClick = async (pairAddress) => {
+        // debugger
         // //debugger
         setCoinsKey([])
 
         const res = await pairData(pairAddress);
-        // console.log(res?.data, "Response data is = >>>>>>>>>");
-        // //debugger
-        setCoinsKey(res?.data);
+        // debugger
+        if (res.data.pairs!==null) {
+            // debugger
+            setCoinsKey(res?.data);
         navigate("/dashboard");
 
+        } else {
+         toast.success("Try clicking this Pair a little while later")
+            
+        }
+        // console.log(res?.data, "Response data is = >>>>>>>>>");
+        // //debugger
+        
 
     };
     const tokenInfo = (item) => {

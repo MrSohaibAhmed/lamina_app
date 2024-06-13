@@ -46,7 +46,7 @@ function Newpairs() {
         try {
             const response = await getNewPairs();
             const newData = response?.data;
-
+// debugger
             // Filter out entries with addresses already present in tableData
             const uniqueEntries = newData.filter(newEntry => !tableData.some(prevEntry => prevEntry.address === newEntry.address));
 
@@ -71,7 +71,7 @@ function Newpairs() {
                     return item;
                 }
             }));
-
+            // debugger
             // Update tableData with the updatedDataArray
             setTableData(prevData => {
                 // Concatenate unique entries with previous data

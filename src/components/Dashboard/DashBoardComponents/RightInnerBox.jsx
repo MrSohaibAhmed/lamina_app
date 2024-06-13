@@ -302,7 +302,7 @@ const RightInnerBox = ({ data, solBalance }) => {
           inputMint: "So11111111111111111111111111111111111111112",
           outputMint: data?.pairs?.[0]?.baseToken?.address,
           slippageBps: slippage * 100,
-          tip: 500000,
+          tip: 100000000,
         };
         const buyPromise = swapTokens(value);
         buyPromise
