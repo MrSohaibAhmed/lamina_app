@@ -113,7 +113,9 @@ export async function withdraw(withdrawDetails) {
 }
 export async function getNewPairs(query) {
     try {
-        const response = await axios.get(newPairsUrl);
+        // const response = await axios.get(newPairsUrl);
+        const response = await axios.get(`${baseURL}recent-data`);
+
         return response;
     } catch (error) {
         console.error("Error Finding Pair", error);

@@ -22,29 +22,23 @@ import TryAgain from "../../assets/dashboard/icons8-reset-24.png"
 
 
 function NewpairTable({ tableData, isChecked, inputValue }) {
-    // debugger
 
-    // const[activeBtn , setActiveBtn] = useState({
-    //     btn1:true,
-    //     btn2:false,
-    //     btn3:false,
-    //     btn4:false,
-    // })
+    const [activeBtn, setActiveBtn] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
-    // const handleActiveBtn = ()=>{
-    //     setActiveBtn(()=>{
-    //         ...prevState,
-    //         activeBtn[item]=true
-    //     })
-    // }
+    const totalItems = tableData.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-    const [activeBtn, setActiveBtn] = useState({
-        btn1: true,
-        btn2: false,
-        btn3: false,
-        btn4: false,
-        btn5: false,
-    });
+
+
+    // const [activeBtn, setActiveBtn] = useState({
+    //     btn1: true,
+    //     btn2: false,
+    //     btn3: false,
+    //     btn4: false,
+    //     btn5: false,
+    // });
 
     const handleActiveBtn = (item) => {
         setActiveBtn({
@@ -57,7 +51,9 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         });
     };
 
-    // //debugger
+
+
+
 
     const navigate = useNavigate();
     const { setCoinsKey, setNoDetails, setSolBalance, solBalance } =
@@ -72,6 +68,13 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
             t.address === item.address
         ))
     );
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        setActiveBtn(pageNumber);
+    };
+    const lastIndex = currentPage * itemsPerPage;
+    const firstIndex = lastIndex - itemsPerPage;
+    const currentItems = uniqueTableData.slice(firstIndex, lastIndex);
     function shortenAddress(address) {
 
         // Extract the first 4 characters
@@ -105,18 +108,16 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
 
         const res = await pairData(pairAddress);
         // debugger
-        if (res.data.pairs!==null) {
+        if (res.data.pairs !== null) {
             // debugger
             setCoinsKey(res?.data);
-        navigate("/dashboard");
+            navigate("/dashboard");
 
         } else {
-         toast.success("Try clicking this Pair a little while later")
-            
+            toast.success("Try clicking this Pair a little while later")
+
         }
-        // console.log(res?.data, "Response data is = >>>>>>>>>");
-        // //debugger
-        
+
 
     };
     const tokenInfo = (item) => {
@@ -203,7 +204,6 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
             .writeText(item.address)
             .then(() => {
                 toast.success("Successfully copied Pair Address!");
-                // console.log("Base token copied successfully");
             })
             .catch((error) => console.error("Error copying baseToken:", error));
 
@@ -232,7 +232,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                     </thead>
                     <tbody className="border-top-0">
                         {
-                            uniqueTableData.map((item, index) =>
+                            currentItems.map((item, index) =>
                                 <tr onClick={() => tokenInfo(item)} style={{ borderColor: "#151530", backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
                                     <td style={{ paddingLeft: "20px" }}>
                                         <div className='d-flex'>
@@ -240,10 +240,10 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                             <div className=' ml-2'>
                                                 <h6 style={{ margin: "3px" }}>{item?.base?.symbol}/{item?.quote?.symbol}</h6>
                                                 <p style={{ margin: "3px" }}>{shortenAddress(item?.address)} <img src={copyIcon} onClick={(e) => handleCopy(e, item)} /></p>
-                                                <div className=' pt-2'>
+                                                {/* <div className=' pt-2'>
                                                     <span className='mr-2' style={{ backgroundColor: "#D9D9D9", borderRadius: "50%", padding: "2px 6px" }}><img src={twiterImg} /></span>
                                                     <span className='mr-2' style={{ backgroundColor: "#D9D9D9", borderRadius: "50%", padding: "2px 6px" }}><img src={telegramImg} /></span>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
 
@@ -251,9 +251,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                     <td className=' align-content-center'>
                                         <img src={clockImg} /> {convertTimestampToReadable(item?.timestamp)}
                                     </td>
-                                    {/* <td className=' align-content-center'>
-                                        <img src={solIconImg} /> 63.61088/ $10k
-                                    </td> */}
+
                                     <td className=' align-content-center'>
                                         <img height={18} src={solIconImg} />{item?.liquidity.toFixed(4)}
                                     </td>
@@ -262,7 +260,6 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                             <p className=' mb-2'>{item.marketCap ? (item.marketCap / 1000).toFixed(4) + 'k' : 'N/A'}</p>
 
 
-                                            {/* <p style={{ color: "#1ECBE3" }} className=' mb-0'>${lamportsToSol(item?.price)}</p> */}
                                         </div>
                                     </td>
                                     <td className=' align-content-center'>
@@ -307,18 +304,33 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                 </tr>)
                         }
 
-
-
                     </tbody>
                 </table>
                 <div className='d-flex justify-content-center newPairfooterBtn py-5'>
-                    <button className='bg-transparent text-white border rounded mx-1 btnPrev'>Previous</button>
-                    <button onClick={() => handleActiveBtn("btn1")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn1 ? 'activeBtnPair' : ''}`}>1</button>
-                    <button onClick={() => handleActiveBtn("btn2")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn2 ? 'activeBtnPair' : ''}`}>2</button>
-                    <button onClick={() => handleActiveBtn("btn3")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn3 ? 'activeBtnPair' : ''}`}>3</button>
-                    <button onClick={() => handleActiveBtn("btn4")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn4 ? 'activeBtnPair' : ''}`}>4</button>
-                    <button onClick={() => handleActiveBtn("btn5")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn5 ? 'activeBtnPair' : ''}`}>5</button>
-                    <button className='bg-transparent text-white border rounded mx-1 btnPrev'>Next</button>
+                    <button
+                        className='bg-transparent text-white border rounded mx-1 btnPrev'
+                        onClick={() => paginate(currentPage - 1)}
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+                    {[...Array(totalPages)].map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handleActiveBtn(index + 1)}
+                            className={`bg-transparent text-white border rounded mx-1 ${activeBtn === index + 1 ? 'activeBtnPair' : ''
+                                }`}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                    <button
+                        className='bg-transparent text-white border rounded mx-1 btnPrev'
+                        onClick={() => paginate(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                    </button>
                 </div>
             </div>
 
