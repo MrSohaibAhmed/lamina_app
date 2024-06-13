@@ -76,7 +76,7 @@ function TransferFund() {
                         <div onClick={() => handleCopy(res?.data?.signature
                         )}>Click Here To Copy your Hash</div>
                     )
-                    debugger
+                    // debugger
                     toast.success(t);
                     console.log(res);
                 })

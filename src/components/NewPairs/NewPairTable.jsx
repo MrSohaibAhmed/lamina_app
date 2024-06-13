@@ -52,22 +52,13 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         return readableFormat;
     }
     const handleClick = async (pairAddress) => {
-        // ////debugger
-        // Check if the clicked pair's pairAddress exists in the data
-        // const foundPair = data.find((pair) => pair.pairaddress === pairAddress);
-        // if (foundPair) {
-        // setNoDetails(false);
-        // setPairAddress(pairAddress);
-        // console.log(foundPair);
+       
         const res = await pairData(pairAddress);
         console.log(res?.data, "Response data is = >>>>>>>>>");
         setCoinsKey(res?.data);
         navigate("/dashboard");
 
-        // } else {
-        // setNoDetails(true);
-        // alert("Sorry We Are Not Dealing with this Pair.");
-        // }
+       
     };
     const tokenInfo = (item) => {
         handleClick(item.address)
@@ -84,7 +75,8 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                     amount: inputValue * 1000000000,
                     inputMint: "So11111111111111111111111111111111111111112",
                     outputMint: item?.base?.address,
-                    slippageBps: 10,
+                    slippageBps: 1000,
+                    tip: 5000000,
                 };
                 const buyPromise = swapTokens(value);
                 buyPromise
@@ -216,8 +208,8 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                                 <p>Mint Auth <br /> Disabled</p>
                                             </div>
                                             <div>
-                                                
-                                                {item.freezeAuthority ? <img src={clockImg} /> : <img src={crossImg}/>}
+
+                                                {item.freezeAuthority ? <img src={clockImg} /> : <img src={crossImg} />}
                                                 <p>Freeze Auth <br />{item.freezeAuthority ? "Enabled" : "Disabled"} </p>
                                             </div>
                                             <div>
@@ -226,7 +218,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                             </div>
                                             <div>
                                                 {
-                                                    item?.top10HolderPercent * 100 > 15 ? <img src={clockImg} /> : <img src={crossImg}/>
+                                                    item?.top10HolderPercent * 100 > 15 ? <img src={clockImg} /> : <img src={crossImg} />
                                                 }
 
                                                 <p>Top 10 Holders <br /> {item.top10HolderPercent * 100 > 15 ? "Enabled " : "Disabled"}</p>

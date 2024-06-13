@@ -34,8 +34,8 @@ function Newpairs() {
             const response = await getNewPairs();
             const newData = response?.data;
 
-            // Append only unique entries
             setTableData(prevData => {
+                // debugger
                 const newDataIds = newData.map(entry => entry.id);
                 const uniqueEntries = prevData.filter(entry => !newDataIds.includes(entry.id));
                 return [...newData, ...uniqueEntries];

@@ -110,7 +110,7 @@ const InternalNavbar = () => {
   };
   useEffect(() => {
     const fetchPairData = async () => {
-      debugger
+      // debugger
       if (coinsKey.pairs == null) {
         try {
           // const res = await pairData(
