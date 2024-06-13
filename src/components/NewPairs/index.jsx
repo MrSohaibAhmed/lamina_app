@@ -26,10 +26,10 @@ function Newpairs() {
     };
     const [tableData, setTableData] = useState([]);
     const dropdownItems = [
+        { label: '0.25', href: '#' },
+        { label: '0.5', href: '#' },
         { label: '1', href: '#' },
-        { label: '2', href: '#' },
-        { label: '3', href: '#' },
-        { label: '4', href: '#' },
+        { label: '2', href: '#' }
     ];
     const fetchTokenData = async (tokenAddress) => {
         const options = {

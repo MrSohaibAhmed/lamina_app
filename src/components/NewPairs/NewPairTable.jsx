@@ -7,6 +7,7 @@ import pairImg from '../../assets/pairtableImg/Ellipse 1020.png'
 import twiterImg from '../../assets/pairtableImg/twitter 1.png'
 import telegramImg from '../../assets/pairtableImg/telegram 1.png'
 import clockImg from '../../assets/pairtableImg/noun-clock-6929908 1.png'
+import infoImg from '../../assets/pairtableImg/noun-info-4520370 2.png'
 import Cross from '../../assets/img/cross';
 import crossImg from "../../assets/pairtableImg/x-mark.png"
 import { useContext } from 'react';
@@ -190,18 +191,18 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                 <table className="table tableClass newPairTable">
                     <thead className='tableHeader'>
                         <tr className=" text-white">
-                            <th style={{ borderBottom: "1px solid #151530", paddingLeft: "20px" }} scope="col">
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530", paddingLeft: "20px" }} scope="col">
                                 Pair Info
                             </th>
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Created <img src={arrowImg} width="14px" alt="" /></th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Created <img src={arrowImg} width="14px" alt="" /></th>
                             {/* <th scope="col">Liquidity</th> */}
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Initial Liquidity</th>
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">MKT App</th>
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">TXNS</th>
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Volume</th>
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Audit Result</th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Initial Liquidity</th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">MKT Cap <img src={infoImg}/></th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">TXN</th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Volume</th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Audit Results</th>
                             {
-                                isChecked ? <th style={{ borderBottom: "1px solid #151530" }} scope="col">Actions</th> : null
+                                isChecked ? <th style={{ borderBottom: "1px solid #151530" , borderTop: "1px solid #151530" }} scope="col">Action</th> : null
                             }
 
                         </tr>
