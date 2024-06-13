@@ -114,7 +114,7 @@ function TransferFund() {
                         <img src={fundImg} className="img-fluid" />
                     </div>
                     <center className='mt-3'>
-                        <p><span className='span-text'>Withdraw </span>from Photon trading wallet to your selected wallet</p>
+                        <p><span className='span-text'>Withdraw </span>from TOPG trading wallet to your selected wallet</p>
                     </center>
                     <div className='container mt-3 p-5'>
                         <div className='row'>

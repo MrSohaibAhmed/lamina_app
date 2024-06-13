@@ -15,7 +15,7 @@ const Step3 = () => {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-12 pt-5 text-center">
-                            <h1 className="main-heading step-heading">Confirm your Photon trading <br className="d-break" /> wallet balance</h1>
+                            <h1 className="main-heading step-heading">Confirm your TOPG trading <br className="d-break" /> wallet balance</h1>
                         </div>
                     </div>
                     <div className="row">

@@ -26,7 +26,7 @@ function Settings() {
                                 <p className='ml-4 font-twelve'>Sed ut perspiciatis unde omnis iste natus error sit </p>
                             </div>
                             <div className='col-6'>
-                                <p className='gradient-text m-0 mb-2'>PHOTON TRADING WALLET</p>
+                                <p className='gradient-text m-0 mb-2'>TOP G TRADING WALLET</p>
                                 <p className='font-twelve'>9W8WwWWAMT18s2L6Rg3ERW6dYN6vFrTkj5gn3emnLCkJ</p>
                             </div>
                         </div>
