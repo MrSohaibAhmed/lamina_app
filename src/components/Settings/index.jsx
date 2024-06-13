@@ -18,25 +18,25 @@ function Settings() {
 
             <div className='container-fluid bg-class  p-5'>
                 <div className='row'>
-                    <div className='col-6'>
+                    <div className='col-lg-6'>
                         <div className='row'>
-                            <div className='col-6'>
+                            <div className='col-lg-6'>
 
                                 <h3 className=''> <img className='mr-1' src={SettingsIcon} />SETTINGS</h3>
                                 <p className='ml-4 font-twelve'>Sed ut perspiciatis unde omnis iste natus error sit </p>
                             </div>
-                            <div className='col-6'>
-                                <p className='gradient-text m-0 mb-2'>PHOTON TRADING WALLET</p>
+                            <div className='col-lg-6'>
+                                <p className='gradient-text m-0 mb-2'>TOPG TRADING</p>
                                 <p className='font-twelve'>9W8WwWWAMT18s2L6Rg3ERW6dYN6vFrTkj5gn3emnLCkJ</p>
                             </div>
                         </div>
                     </div>
-                    <div className='col-6 '>
+                    <div className='col-lg-6 '>
                         <div className='row mt-4'>
-                            <div className='col-3'></div>
-                            <div className='col-3 gradient-text'><p>Sending Method<img className='ml-2' src={InfoIcon} /></p></div>
-                            <div className='col-3 font-twelve d-flex justify-content-evenly mt-2'><p className=''>Mev On/Off</p> <SwitchComp /></div>
-                            <div className='col-3 font-twelve mt-2'><p>Fast/Secure</p></div>
+                            <div className='col-lg-3'></div>
+                            <div className='col-lg-3 gradient-text'><p>Sending Method<img className='ml-2' src={InfoIcon} /></p></div>
+                            <div className='col-lg-3 font-twelve d-flex justify-content-evenly mt-2'><p className=''>Mev On/Off</p> <SwitchComp /></div>
+                            <div className='col-lg-3 font-twelve mt-2'><p>Fast/Secure</p></div>
                         </div>
                     </div>
                 </div>
