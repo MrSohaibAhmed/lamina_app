@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import TryAgain from "../../assets/dashboard/icons8-reset-24.png"
 function NewpairTable({ tableData, isChecked, inputValue }) {
-    debugger
+    // debugger
     const navigate = useNavigate();
     const { setCoinsKey, setNoDetails, setSolBalance, solBalance } =
         useContext(KeyContext);
@@ -146,19 +146,19 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
     return (
         <>
             <div className="table-responsive def-table tableClassMainDiv">
-                <table className="table tableClass">
+                <table className="table tableClass newPairTable">
                     <thead className='tableHeader'>
                         <tr className=" text-white">
-                            <th scope="col">
+                            <th style={{borderBottom:"1px solid #151530"}} scope="col">
                                 Pair Info
                             </th>
-                            <th scope="col">Created <img src={arrowImg} width="14px" alt="" /></th>
+                            <th style={{borderBottom:"1px solid #151530"}} scope="col">Created <img src={arrowImg} width="14px" alt="" /></th>
                             {/* <th scope="col">Liquidity</th> */}
-                            <th scope="col">Initial Liquidity</th>
-                            <th scope="col">MKT App</th>
-                            <th scope="col">TXNS</th>
-                            <th scope="col">Volume</th>
-                            <th scope="col">Audit Result</th>
+                            <th style={{borderBottom:"1px solid #151530"}} scope="col">Initial Liquidity</th>
+                            <th style={{borderBottom:"1px solid #151530"}} scope="col">MKT App</th>
+                            <th style={{borderBottom:"1px solid #151530"}} scope="col">TXNS</th>
+                            <th style={{borderBottom:"1px solid #151530"}} scope="col">Volume</th>
+                            <th style={{borderBottom:"1px solid #151530"}} scope="col">Audit Result</th>
                             {
                                 isChecked ? <th scope="col">Actions</th> : null
                             }
@@ -168,7 +168,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                     <tbody className="border-top-0">
                         {
                             uniqueTableData.map((item, index) =>
-                                <tr onClick={() => tokenInfo(item)} style={{ backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
+                                <tr  onClick={() => tokenInfo(item)} style={{borderColor:"#151530", backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
                                     <td>
                                         <div className='d-flex'>
                                             <div><img style={{ borderRadius: "20px" }} src={item?.base?.icon} height={40} width={40} /></div>

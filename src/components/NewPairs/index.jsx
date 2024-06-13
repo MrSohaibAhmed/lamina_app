@@ -11,6 +11,7 @@ import FilterDropdown from '../../utilities/FilterDropdownComp';
 import { getNewPairs } from '../hooks/useWallet';
 import '../Dashboard/Dashboard.css'
 import toast, { Toaster } from "react-hot-toast";
+import DesexDropdown from '../../utilities/DesexDropdown';
 function Newpairs() {
     const [isChecked, setIsChecked] = useState(false);
     const [inputValue, setInputValue] = useState(0.1);
@@ -69,10 +70,11 @@ function Newpairs() {
                         </div>
 
                         <div>
-                            <DropdownComp
+                            {/* <DropdownComp
                                 label="Decax"
                                 items={dropdownItems}
-                                imgSrc={filterImg} />
+                                imgSrc={filterImg} /> */}
+                                <DesexDropdown/>
                         </div>
                         <div>
                             <FilterDropdown />
