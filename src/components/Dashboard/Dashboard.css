@@ -190,6 +190,12 @@ td {
     padding: 20px 25px;
     border: 1px solid #26263C;
 }
+.right-inner-box-transfer-fund{
+    background-color: #0E0E26;
+    border-radius: 10px;
+    padding: 0px !important;
+    border:1px solid #1ECBE3;
+}
 
 .contact-inner {
     border: 1px solid #26263C;
@@ -512,13 +518,31 @@ td {
     font-size: 22px;
 }
 
+.transferFundHeadClass{
+ background: linear-gradient(100.89deg, #AF47F8 1.78%, #595FFB 43.31%, #1ECBE3 95.1%);
+ border-top-left-radius:10px;
+ border-top-right-radius:10px;
+}
+
+.rounded-custom{
+    border-radius: 20px  !important;
+}
+.rounded-custom2{
+    border-top-left-radius: 20px;
+}
+.rounded-custom3{
+    border-top-right-radius: 20px  !important;
+}
 
 .setting-silpace{
 background-color: #151530;
+/* border-radius: 20px  !important; */
+/* border-top-left-radius: 20px !important; */
 
 }
 .setting-silpace2{
 background-color:  #0E0E26;
+/* border-top-left-radius: 20px  !important; */
 }
 .settingRowClass{
     border-bottom: 1px solid #2C2C45;
