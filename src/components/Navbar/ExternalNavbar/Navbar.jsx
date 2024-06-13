@@ -28,11 +28,11 @@ const NavbarComp = () => {
     newSignMessageWithSolflare,
   } = usePhantom();
   useEffect(() => {
-    ////debugger;
+    //////debugger;
     if (solanaKey) {
       checkUser(solanaKey)
         .then((res) => {
-          ////debugger
+          //////debugger
           localStorage.setItem("publicKey", res?.data?.data.publicKey);
           console.log("user found");
           if (localStorage.getItem("connectedToSolflare")) {
@@ -63,7 +63,7 @@ const NavbarComp = () => {
   };
   useEffect(() => {
     const fetchPairData = async () => {
-      debugger
+      //debugger
       try {
         // const res = await pairData(
         //   "CwJCznavdHe6AYU85v56nDh1VCWKs3ywcRj8uShXd3F3"

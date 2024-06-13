@@ -50,7 +50,7 @@ const DesexDropdown = () => {
         aria-expanded={isOpen}
       >
         <img className="mr-2" src={filterImg}/>
-       Desex
+       Dexes
       </button>
 
       {isOpen && (

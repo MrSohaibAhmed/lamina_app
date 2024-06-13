@@ -53,7 +53,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         });
     };
 
-    // debugger
+    // //debugger
 
     const navigate = useNavigate();
     const { setCoinsKey, setNoDetails, setSolBalance, solBalance } =
@@ -95,24 +95,24 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         return readableFormat;
     }
     const handleClick = async (pairAddress) => {
-        debugger
+        // //debugger
         setCoinsKey([])
 
         const res = await pairData(pairAddress);
         console.log(res?.data, "Response data is = >>>>>>>>>");
-        debugger
+        // //debugger
         setCoinsKey(res?.data);
         navigate("/dashboard");
 
 
     };
     const tokenInfo = (item) => {
-        debugger
+        // //debugger
         handleClick(item.address)
 
     }
     const handleQuickBuy = (item) => {
-        // debugger
+        // //debugger
         // console.log("solona balance is =>>", solBalance);
         if (inputValue !== null && inputValue !== 0) {
 
@@ -123,7 +123,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                     inputMint: "So11111111111111111111111111111111111111112",
                     outputMint: item?.base?.address,
                     slippageBps: 1000,
-                    tip: 5000000,
+                    tip: 500000,
                 };
                 const buyPromise = swapTokens(value);
                 buyPromise
@@ -231,7 +231,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                         <img src={solIconImg} /> 63.61088/ $10k
                                     </td> */}
                                     <td className=' align-content-center'>
-                                        <img src={solIconImg} />{item?.liquidity.toFixed(4)}
+                                        <img height={18} src={solIconImg} />{item?.liquidity.toFixed(4)}
                                     </td>
                                     <td className=' align-content-center my-auto'>
                                         <div>

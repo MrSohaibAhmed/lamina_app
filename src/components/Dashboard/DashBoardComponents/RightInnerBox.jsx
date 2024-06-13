@@ -21,7 +21,7 @@ const RightInnerBox = ({ data, solBalance }) => {
   const { tokenid } = useParams();
   const shouldShowButton = !tokenid;
   // const shouldShowButton = tokenid !== "3eoU8s1WtRcgwfy1CWf732fT2HCuFL7HD7j29c6iHnBc";
-  // debugger
+  // //debugger
   const [supply, setSupply] = useState(0);
 
   const [allData, setAllData] = useState([]);
@@ -33,7 +33,7 @@ const RightInnerBox = ({ data, solBalance }) => {
 
 
   const formatMarketCap = (marketCap) => {
-    // debugger
+    // //debugger
     const mktCapStr = marketCap.toString();
     const numberBeforeDotMkt = mktCapStr.split(".")[0];
     console.log("number before dot in MKT", numberBeforeDotMkt);
@@ -73,7 +73,7 @@ const RightInnerBox = ({ data, solBalance }) => {
   };
 
   // useEffect(() => {
-  //   // //debugger
+  //   // ////debugger
   //   if (data && data.pairs && data.pairs[0] && data.pairs[0].baseToken && data.pairs[0].baseToken.address) {
   //     const tokenAddress = data.pairs[0].baseToken.address;
   //     const options = {
@@ -113,7 +113,7 @@ const RightInnerBox = ({ data, solBalance }) => {
 
 
   useEffect(() => {
-    // //debugger
+    // ////debugger
     if (data && data.pairs && data.pairs[0] && data.pairs[0].baseToken && data.pairs[0].baseToken.address) {
       const tokenAddress = data.pairs[0].baseToken.address;
       const options = {
@@ -578,13 +578,13 @@ const RightInnerBox = ({ data, solBalance }) => {
     }
   }, [Txnsfive]);
   useEffect(() => {
-    // //////debugger
+    // ////////debugger
     let intervalId;
     // Define a function to make the API call
     const fetchData = () => {
       // Check if the required data is available
       if (data?.pairs?.[0]?.priceUsd) {
-        debugger
+        //debugger
         // Make the API call with the required parameter
         pairData(data.pairs?.[0]?.pairAddress)
           .then((response) => {
@@ -699,7 +699,7 @@ const RightInnerBox = ({ data, solBalance }) => {
             <h4>5M</h4>
             <h5
               className={
-                data?.pairs?.[0]?.priceChange?.m5 < 0 ? "text-danger" : ""
+                data?.pairs?.[0]?.priceChange?.m5 < 0 ? "text-danger" : "text-success"
               }
             >
               {data?.pairs?.[0]?.priceChange?.m5 || 0}
@@ -712,7 +712,7 @@ const RightInnerBox = ({ data, solBalance }) => {
             <h4>1H</h4>
             <h5
               className={
-                data?.pairs?.[0]?.priceChange?.h1 < 0 ? "text-danger" : ""
+                data?.pairs?.[0]?.priceChange?.h1 < 0 ? "text-danger" : "text-success"
               }
             >
               {data?.pairs?.[0]?.priceChange?.h1 || 0}
@@ -725,7 +725,7 @@ const RightInnerBox = ({ data, solBalance }) => {
             <h4>6H</h4>
             <h5
               className={
-                data?.pairs?.[0]?.priceChange?.h6 < 0 ? "text-danger" : ""
+                data?.pairs?.[0]?.priceChange?.h6 < 0 ? "text-danger" : "text-success"
               }
             >
               {data?.pairs?.[0]?.priceChange?.h6 || 0}
@@ -738,7 +738,7 @@ const RightInnerBox = ({ data, solBalance }) => {
             <h4>24H</h4>
             <h5
               className={
-                data?.pairs?.[0]?.priceChange?.h24 < 0 ? "text-danger" : ""
+                data?.pairs?.[0]?.priceChange?.h24 < 0 ? "text-danger" : "text-success"
               }
             >
               {data?.pairs?.[0]?.priceChange?.h24 || 0}

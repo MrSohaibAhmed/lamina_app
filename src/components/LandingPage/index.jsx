@@ -27,7 +27,7 @@ const LandingPage = () => {
     if (solanaKey) {
       checkUser(solanaKey)
         .then((res) => {
-          // //////debugger
+          // ////////debugger
           console.log(res);
           localStorage.setItem("publicKey", res?.data?.data.publicKey);
           console.log("user found");

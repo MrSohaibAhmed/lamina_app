@@ -81,10 +81,10 @@ export async function searchPair(query) {
 }
 
 export async function pairData(id) {
-    // debugger
+    // //debugger
     try {
         const response = await axios.get(`https://api.dexscreener.com/latest/dex/pairs/solana/${id}`);
-        // debugger
+        // //debugger
         return response;
     } catch (error) {
         console.error("Error Finding Pair", error);

@@ -91,14 +91,14 @@ const InternalNavbar = () => {
     setWalletAddress(localStorage.getItem("publicKey"));
   }, []);
   const handleClick = async (pairAddress) => {
-    // debugger
+    // //debugger
     // Check if the clicked pair's pairAddress exists in the data
     // const foundPair = data.find((pair) => pair.pairaddress === pairAddress);
     // if (foundPair) {
     setNoDetails(false);
     setPairAddress(pairAddress);
     // console.log(foundPair);
-    // debugger
+    // //debugger
     const res = await pairData(pairAddress);
     console.log(res?.data, "Response data is = >>>>>>>>>");
     setCoinsKey(res?.data);
@@ -111,7 +111,7 @@ const InternalNavbar = () => {
   };
   useEffect(() => {
     const fetchPairData = async () => {
-      // debugger
+      // //debugger
       if (coinsKey.pairs == null) {
         try {
           // const res = await pairData(
@@ -141,7 +141,7 @@ const InternalNavbar = () => {
   // };
 
   const handleSearch = async (e) => {
-    // //////debugger
+    // ////////debugger
     e.preventDefault();
     // Call the searchPair function with the input parameter
     const response = await searchPair(searchInput);
@@ -153,7 +153,7 @@ const InternalNavbar = () => {
     setSearchInput("");
   };
   const quickSearch = async (e) => {
-    // //////debugger
+    // ////////debugger
     // e.preventDefault();
     // Call the searchPair function with the input parameter
     const response = await searchPair(searchInput);
@@ -216,7 +216,7 @@ const InternalNavbar = () => {
 
   // (async () => {
   //   let balance = await connection.getBalance(feePayer.publicKey);
-  //   ////debugger;
+  //   //////debugger;
   //   console.log(`${balance / LAMPORTS_PER_SOL} SOL`);
   // })();
   // const [solBalance, setSolBalance] = useState(0);

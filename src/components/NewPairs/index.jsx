@@ -12,6 +12,7 @@ import { getNewPairs } from '../hooks/useWallet';
 import '../Dashboard/Dashboard.css'
 import toast, { Toaster } from "react-hot-toast";
 import DesexDropdown from '../../utilities/DesexDropdown';
+import { filterOnDexes } from '../hooks/useNewPairs';
 function Newpairs() {
     const [isChecked, setIsChecked] = useState(false);
     const [inputValue, setInputValue] = useState(0.1);
@@ -35,10 +36,10 @@ function Newpairs() {
             method: 'GET',
             headers: { 'X-API-KEY': '1a6f67ecb3d540b984f8fc694cfb364c' }
         };
-        // debugger
+        // //debugger
         const response = await fetch(`https://public-api.birdeye.so/defi/token_overview?address=${tokenAddress}`, options);
         const data = await response.json();
-        // debugger
+        // //debugger
         return data.data;
     };
     const fetchData = async () => {
@@ -51,13 +52,13 @@ function Newpairs() {
 
             // Fetch token data for each unique entry and update tableData
             const updatedDataArray = await Promise.all(uniqueEntries.map(async (item) => {
-                // debugger
-                // debugger
+                // //debugger
+                // //debugger
                 const tokenData = await fetchTokenData(item.base.address);
                 console.log(tokenData, "I am token Data")
-                // debugger
+                // //debugger
                 if (tokenData) {
-                    // debugger
+                    // //debugger
                     return {
                         ...item,
                         trade24h: tokenData.trade24h,
@@ -102,7 +103,7 @@ function Newpairs() {
 
                     <div className='d-flex align-content-center align-items-center'>
 
-                        <div>
+                        <div className='mr-3'>
                             <SwitchComp label="Quick Buy" isChecked={isChecked} onToggle={toggleSwitch} />
                         </div>
 
@@ -111,9 +112,9 @@ function Newpairs() {
                                 label="Decax"
                                 items={dropdownItems}
                                 imgSrc={filterImg} /> */}
-                                <DesexDropdown/>
+                            <DesexDropdown />
                         </div>
-                        <div>
+                        <div className=''>
                             <FilterDropdown />
                         </div>
                         <div style={{ width: '15%', padding: '7px 6px', borderRadius: '5px' }} className='d-flex border align-items-center'>

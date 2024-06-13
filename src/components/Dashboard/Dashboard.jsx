@@ -101,7 +101,7 @@ const Dashboard = () => {
 
 // Memoized ChartBox component
 const MemoizedChartBox = React.memo(ChartBox, (prevProps, nextProps) => {
-  // //////debugger
+  // ////////debugger
   // Compare the symbols in the previous and next props
   return (
     prevProps.data?.pairs?.[0]?.baseToken.symbol ===
