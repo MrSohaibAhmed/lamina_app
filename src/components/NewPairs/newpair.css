@@ -23,3 +23,13 @@
     margin: auto;
 }
 
+.newPairfooterBtn .btnPrev{
+    border-color: #1ECBE3  !important;
+    color: #1ECBE3  !important;
+    
+}
+
+.newPairfooterBtn .activeBtnPair{
+    background-color: #1ECBE3 !important;
+    border: transparent  !important;
+}

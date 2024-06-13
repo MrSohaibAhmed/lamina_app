@@ -16,7 +16,43 @@ import { pairData, swapTokens } from '../hooks/useWallet';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import TryAgain from "../../assets/dashboard/icons8-reset-24.png"
+
+
 function NewpairTable({ tableData, isChecked, inputValue }) {
+
+    // const[activeBtn , setActiveBtn] = useState({
+    //     btn1:true,
+    //     btn2:false,
+    //     btn3:false,
+    //     btn4:false,
+    // })
+
+    // const handleActiveBtn = ()=>{
+    //     setActiveBtn(()=>{
+    //         ...prevState,
+    //         activeBtn[item]=true
+    //     })
+    // }
+
+    const [activeBtn, setActiveBtn] = useState({
+        btn1: true,
+        btn2: false,
+        btn3: false,
+        btn4: false,
+        btn5: false,
+    });
+
+    const handleActiveBtn = (item) => {
+        setActiveBtn({
+            btn1: false,
+            btn2: false,
+            btn3: false,
+            btn4: false,
+            btn5: false,
+            [item]: true,
+        });
+    };
+
     // debugger
     const navigate = useNavigate();
     const { setCoinsKey, setNoDetails, setSolBalance, solBalance } =
@@ -149,18 +185,18 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                 <table className="table tableClass newPairTable">
                     <thead className='tableHeader'>
                         <tr className=" text-white">
-                            <th style={{borderBottom:"1px solid #151530" , paddingLeft:"20px"}} scope="col">
+                            <th style={{ borderBottom: "1px solid #151530", paddingLeft: "20px" }} scope="col">
                                 Pair Info
                             </th>
-                            <th style={{borderBottom:"1px solid #151530"}} scope="col">Created <img src={arrowImg} width="14px" alt="" /></th>
+                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Created <img src={arrowImg} width="14px" alt="" /></th>
                             {/* <th scope="col">Liquidity</th> */}
-                            <th style={{borderBottom:"1px solid #151530"}} scope="col">Initial Liquidity</th>
-                            <th style={{borderBottom:"1px solid #151530"}} scope="col">MKT App</th>
-                            <th style={{borderBottom:"1px solid #151530"}} scope="col">TXNS</th>
-                            <th style={{borderBottom:"1px solid #151530"}} scope="col">Volume</th>
-                            <th style={{borderBottom:"1px solid #151530"}} scope="col">Audit Result</th>
+                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Initial Liquidity</th>
+                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">MKT App</th>
+                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">TXNS</th>
+                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Volume</th>
+                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Audit Result</th>
                             {
-                                isChecked ? <th style={{borderBottom:"1px solid #151530"}} scope="col">Actions</th> : null
+                                isChecked ? <th style={{ borderBottom: "1px solid #151530" }} scope="col">Actions</th> : null
                             }
 
                         </tr>
@@ -168,8 +204,8 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                     <tbody className="border-top-0">
                         {
                             uniqueTableData.map((item, index) =>
-                                <tr  onClick={() => tokenInfo(item)} style={{borderColor:"#151530", backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
-                                    <td style={{ paddingLeft:"20px"}}>
+                                <tr onClick={() => tokenInfo(item)} style={{ borderColor: "#151530", backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
+                                    <td style={{ paddingLeft: "20px" }}>
                                         <div className='d-flex'>
                                             <div><img style={{ borderRadius: "20px" }} src={item?.base?.icon} height={40} width={40} /></div>
                                             <div className=' ml-2'>
@@ -183,7 +219,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                         </div>
 
                                     </td>
-                                    <td  className=' align-content-center'>
+                                    <td className=' align-content-center'>
                                         <img src={clockImg} /> {convertTimestampToReadable(item?.timestamp)}
                                     </td>
                                     {/* <td className=' align-content-center'>
@@ -244,15 +280,15 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
 
                     </tbody>
                 </table>
-                        <div className='d-flex justify-content-center '>
-                            <button className='bg-transparent text-white border'>Previous</button>
-                            <button className='bg-transparent text-white border'>1</button>
-                            <button className='bg-transparent text-white border'>2</button>
-                            <button className='bg-transparent text-white border'>3</button>
-                            <button className='bg-transparent text-white border'>4</button>
-                            <button className='bg-transparent text-white border'>5</button>
-                            <button className='bg-transparent text-white border'>Next</button>
-                        </div>
+                <div className='d-flex justify-content-center newPairfooterBtn py-5'>
+                    <button className='bg-transparent text-white border rounded mx-1 btnPrev'>Previous</button>
+                    <button onClick={() => handleActiveBtn("btn1")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn1 ? 'activeBtnPair' : ''}`}>1</button>
+                    <button onClick={() => handleActiveBtn("btn2")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn2 ? 'activeBtnPair' : ''}`}>2</button>
+                    <button onClick={() => handleActiveBtn("btn3")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn3 ? 'activeBtnPair' : ''}`}>3</button>
+                    <button onClick={() => handleActiveBtn("btn4")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn4 ? 'activeBtnPair' : ''}`}>4</button>
+                    <button onClick={() => handleActiveBtn("btn5")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn5 ? 'activeBtnPair' : ''}`}>5</button>
+                    <button className='bg-transparent text-white border rounded mx-1 btnPrev'>Next</button>
+                </div>
             </div>
 
         </>
