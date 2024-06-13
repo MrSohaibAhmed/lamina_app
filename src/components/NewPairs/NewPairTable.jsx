@@ -101,7 +101,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         setCoinsKey([])
 
         const res = await pairData(pairAddress);
-        console.log(res?.data, "Response data is = >>>>>>>>>");
+        // console.log(res?.data, "Response data is = >>>>>>>>>");
         // //debugger
         setCoinsKey(res?.data);
         navigate("/dashboard");
@@ -198,12 +198,12 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                             <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Created <img src={arrowImg} width="14px" alt="" /></th>
                             {/* <th scope="col">Liquidity</th> */}
                             <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Initial Liquidity</th>
-                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">MKT Cap <img src={infoImg}/></th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">MKT Cap <img src={infoImg} /></th>
                             <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">TXN</th>
                             <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Volume</th>
                             <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Audit Results</th>
                             {
-                                isChecked ? <th style={{ borderBottom: "1px solid #151530" , borderTop: "1px solid #151530" }} scope="col">Action</th> : null
+                                isChecked ? <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Action</th> : null
                             }
 
                         </tr>
@@ -237,7 +237,9 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                     </td>
                                     <td className=' align-content-center my-auto'>
                                         <div>
-                                            <p className=' mb-2'>${(item?.marketCap / 1000).toFixed(4)}k</p>
+                                            <p className=' mb-2'>{item.marketCap ? (item.marketCap / 1000).toFixed(4) + 'k' : 'N/A'}</p>
+
+
                                             {/* <p style={{ color: "#1ECBE3" }} className=' mb-0'>${lamportsToSol(item?.price)}</p> */}
                                         </div>
                                     </td>

@@ -68,7 +68,7 @@ const DesexDropdown = () => {
               Raydium
               </label>
             </div>
-            <div className="form-check">
+            {/* <div className="form-check">
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -79,7 +79,7 @@ const DesexDropdown = () => {
               <label className="form-check-label" htmlFor="social">
               Pump.fun
               </label>
-            </div>
+            </div> */}
             <div className="form-check">
               <input
                 className="form-check-input"
@@ -92,7 +92,7 @@ const DesexDropdown = () => {
                Orca
               </label>
             </div>
-            <div className="form-check">
+            {/* <div className="form-check">
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -103,7 +103,7 @@ const DesexDropdown = () => {
               <label className="form-check-label" htmlFor="LiquidityAdded">
               Meteora
               </label>
-            </div>
+            </div> */}
           </div>
        
           <div className="d-flex justify-content-between p-3">

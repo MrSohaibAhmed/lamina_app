@@ -140,14 +140,14 @@ const FilterDropdown = () => {
               <input
                 onChange={handleChange(setLiquidityFrom)}
                 value={liquidityFrom}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="From"
               />
               <span className="mx-2">to</span>
               <input
                 onChange={handleChange(setLiquidityTo)}
                 value={liquidityTo}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="To"
               />
             </div>
@@ -158,14 +158,14 @@ const FilterDropdown = () => {
               <input
                 onChange={handleChange(setVolumeFrom)}
                 value={volumeFrom}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="From"
               />
               <span className="mx-2">to</span>
               <input
                 onChange={handleChange(setVolumeTo)}
                 value={volumeTo}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="To"
               />
             </div>
@@ -176,14 +176,14 @@ const FilterDropdown = () => {
               <input
                 onChange={handleChange(setMarketCapFrom)}
                 value={marketCapFrom}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="From"
               />
               <span className="mx-2">to</span>
               <input
                 onChange={handleChange(setMarketCapTo)}
                 value={marketCapTo}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="To"
               />
             </div>
@@ -194,14 +194,14 @@ const FilterDropdown = () => {
               <input
                 onChange={handleChange(setTxnsFrom)}
                 value={txnsFrom}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="From"
               />
               <span className="mx-2">to</span>
               <input
                 onChange={handleChange(setTxnsTo)}
                 value={txnsTo}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="To"
               />
             </div>
@@ -212,14 +212,14 @@ const FilterDropdown = () => {
               <input
                 onChange={handleChange(setBuysFrom)}
                 value={buysFrom}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="From"
               />
               <span className="mx-2">to</span>
               <input
                 onChange={handleChange(setBuysTo)}
                 value={buysTo}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="To"
               />
             </div>
@@ -230,14 +230,14 @@ const FilterDropdown = () => {
               <input
                 onChange={handleChange(setSellsFrom)}
                 value={sellsFrom}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="From"
               />
               <span className="mx-2">to</span>
               <input
                 onChange={handleChange(setSellsTo)}
                 value={sellsTo}
-                className="form-control form-control-sm"
+                className="form-control form-control-sm bg-transparent text-white"
                 placeholder="To"
               />
             </div>
