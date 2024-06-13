@@ -46,7 +46,7 @@ const HoldingTable = ({ address }) => {
               <th scope="col"> Logo </th>
               <th scope="col"> Name </th>
               <th scope="col"> Symbol </th>
-              <th scope="col">Account Address</th>
+              <th scope="col"> Address</th>
               <th scope="col">Price Usd</th>
               {/* <th scope="col">Mint Address</th> */}
               <th scope="col">Balance</th>
