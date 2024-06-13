@@ -16,7 +16,43 @@ import { pairData, swapTokens } from '../hooks/useWallet';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import TryAgain from "../../assets/dashboard/icons8-reset-24.png"
+
+
 function NewpairTable({ tableData, isChecked, inputValue }) {
+
+    // const[activeBtn , setActiveBtn] = useState({
+    //     btn1:true,
+    //     btn2:false,
+    //     btn3:false,
+    //     btn4:false,
+    // })
+
+    // const handleActiveBtn = ()=>{
+    //     setActiveBtn(()=>{
+    //         ...prevState,
+    //         activeBtn[item]=true
+    //     })
+    // }
+
+    const [activeBtn, setActiveBtn] = useState({
+        btn1: true,
+        btn2: false,
+        btn3: false,
+        btn4: false,
+        btn5: false,
+    });
+
+    const handleActiveBtn = (item) => {
+        setActiveBtn({
+            btn1: false,
+            btn2: false,
+            btn3: false,
+            btn4: false,
+            btn5: false,
+            [item]: true,
+        });
+    };
+
     // debugger
 
     const navigate = useNavigate();
@@ -249,14 +285,14 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
 
                     </tbody>
                 </table>
-                <div className='d-flex justify-content-center '>
-                    <button className='bg-transparent text-white border'>Previous</button>
-                    <button className='bg-transparent text-white border'>1</button>
-                    <button className='bg-transparent text-white border'>2</button>
-                    <button className='bg-transparent text-white border'>3</button>
-                    <button className='bg-transparent text-white border'>4</button>
-                    <button className='bg-transparent text-white border'>5</button>
-                    <button className='bg-transparent text-white border'>Next</button>
+                <div className='d-flex justify-content-center newPairfooterBtn py-5'>
+                    <button className='bg-transparent text-white border rounded mx-1 btnPrev'>Previous</button>
+                    <button onClick={() => handleActiveBtn("btn1")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn1 ? 'activeBtnPair' : ''}`}>1</button>
+                    <button onClick={() => handleActiveBtn("btn2")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn2 ? 'activeBtnPair' : ''}`}>2</button>
+                    <button onClick={() => handleActiveBtn("btn3")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn3 ? 'activeBtnPair' : ''}`}>3</button>
+                    <button onClick={() => handleActiveBtn("btn4")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn4 ? 'activeBtnPair' : ''}`}>4</button>
+                    <button onClick={() => handleActiveBtn("btn5")} className={`bg-transparent text-white border rounded mx-1 ${activeBtn.btn5 ? 'activeBtnPair' : ''}`}>5</button>
+                    <button className='bg-transparent text-white border rounded mx-1 btnPrev'>Next</button>
                 </div>
             </div>
 
