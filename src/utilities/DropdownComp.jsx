@@ -57,11 +57,11 @@ const DropdownComp = ({ label, items, imgSrc, DropdownContent }) => {
             >
                 {imgSrc && <img src={imgSrc} alt="dropdown icon" />} {label}
             </button>
-            <ul className={`dropdown-menu ${isOpen ? 'show' : ''}`}>
+            <ul style={{backgroundColor:"#151530" , width:"90px"}} className={`dropdown-menu ${isOpen ? 'show' : ''}`}>
                 {items && items.length > 0 ? (
                     items.map((item, index) => (
-                        <li key={index}>
-                            <a className="dropdown-item" href={item.href}>{item.label}</a>
+                        <li className='text-white' key={index}>
+                            <a className="dropdown-item text-white" href={item.href}>{item.label}</a>
                         </li>
                     ))
                 ) : (
