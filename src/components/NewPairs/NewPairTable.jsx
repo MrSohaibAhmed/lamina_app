@@ -8,6 +8,7 @@ import twiterImg from '../../assets/pairtableImg/twitter 1.png'
 import telegramImg from '../../assets/pairtableImg/telegram 1.png'
 import clockImg from '../../assets/pairtableImg/noun-clock-6929908 1.png'
 import infoImg from '../../assets/pairtableImg/noun-info-4520370 2.png'
+import TickImg from "../../assets/pairtableImg/noun-tick-1611443 1.png"
 import Cross from '../../assets/img/cross';
 import crossImg from "../../assets/pairtableImg/x-mark.png"
 import { useContext } from 'react';
@@ -251,21 +252,21 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                     <td className=' align-content-center'>
                                         <div className='d-flex justify-content-between'>
                                             <div>
-                                                <img src={clockImg} />
+                                                <img src={TickImg} />
                                                 <p>Mint Auth <br /> Disabled</p>
                                             </div>
                                             <div>
 
-                                                {item.freezeAuthority ? <img src={clockImg} /> : <img src={crossImg} />}
+                                                {item.freezeAuthority ? <img src={TickImg} /> : <img src={crossImg} />}
                                                 <p>Freeze Auth <br />{item.freezeAuthority ? "Enabled" : "Disabled"} </p>
                                             </div>
                                             <div>
-                                                <img src={clockImg} />
+                                                <img src={TickImg} />
                                                 <p>LP Burned <br /> Disabled</p>
                                             </div>
                                             <div>
                                                 {
-                                                    item?.top10HolderPercent * 100 > 15 ? <img src={clockImg} /> : <img src={crossImg} />
+                                                    item?.top10HolderPercent * 100 > 15 ? <img src={TickImg} /> : <img src={crossImg} />
                                                 }
 
                                                 <p>Top 10 Holders <br /> {item.top10HolderPercent * 100 > 15 ? "Enabled " : "Disabled"}</p>
