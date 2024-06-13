@@ -190,18 +190,18 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                 <table className="table tableClass newPairTable">
                     <thead className='tableHeader'>
                         <tr className=" text-white">
-                            <th style={{ borderBottom: "1px solid #151530", paddingLeft: "20px" }} scope="col">
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530", paddingLeft: "20px" }} scope="col">
                                 Pair Info
                             </th>
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Created <img src={arrowImg} width="14px" alt="" /></th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Created <img src={arrowImg} width="14px" alt="" /></th>
                             {/* <th scope="col">Liquidity</th> */}
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Initial Liquidity</th>
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">MKT App</th>
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">TXNS</th>
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Volume</th>
-                            <th style={{ borderBottom: "1px solid #151530" }} scope="col">Audit Result</th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Initial Liquidity</th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">MKT App</th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">TXNS</th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Volume</th>
+                            <th style={{ borderBottom: "1px solid #151530", borderTop: "1px solid #151530" }} scope="col">Audit Result</th>
                             {
-                                isChecked ? <th style={{ borderBottom: "1px solid #151530" }} scope="col">Actions</th> : null
+                                isChecked ? <th style={{ borderBottom: "1px solid #151530" , borderTop: "1px solid #151530" }} scope="col">Actions</th> : null
                             }
 
                         </tr>
