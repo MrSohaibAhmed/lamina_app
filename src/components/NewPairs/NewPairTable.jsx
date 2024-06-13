@@ -10,6 +10,7 @@ import clockImg from '../../assets/pairtableImg/noun-clock-6929908 1.png'
 import infoImg from '../../assets/pairtableImg/noun-info-4520370 2.png'
 import TickImg from "../../assets/pairtableImg/noun-tick-1611443 1.png"
 import Cross from '../../assets/img/cross';
+import copyIcon from "../../assets/pairtableImg/svgexport-23.png"
 import crossImg from "../../assets/pairtableImg/x-mark.png"
 import { useContext } from 'react';
 import KeyContext from '../../context/walletContext';

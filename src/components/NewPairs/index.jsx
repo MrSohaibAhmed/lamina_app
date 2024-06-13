@@ -101,7 +101,7 @@ function Newpairs() {
                         <p>New token pairs in the last 24-hours updated in real-time.</p>
                     </div>
 
-                    <div className='d-flex align-content-center align-items-center'>
+                    <div className='d-flex align-content-center align-items-center justify-content-end'>
 
                         <div className='mr-3'>
                             <SwitchComp label="Quick Buy" isChecked={isChecked} onToggle={toggleSwitch} />
@@ -117,10 +117,10 @@ function Newpairs() {
                         <div className=''>
                             <FilterDropdown />
                         </div>
-                        <div style={{ width: '15%', padding: '7px 6px', borderRadius: '5px' }} className='d-flex border align-items-center'>
+                        <div style={{ width: '15%', padding: '7px 6px', borderRadius: '5px' ,border:"1px solid #303138" }} className='d-flex align-items-center'>
                             <img style={{ width: '10px', height: '10px' }} src={solIconImg} />
                             <input
-                                className='bg-transparent border-0 w-100 text-center text-white'
+                                className='bg-transparent w-100 border-0 text-center text-white'
                                 type='number'
                                 placeholder='0.0'
                                 value={inputValue}
