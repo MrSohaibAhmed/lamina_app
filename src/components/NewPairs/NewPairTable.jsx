@@ -218,10 +218,10 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                             <div className=' ml-2'>
                                                 <h6 style={{ margin: "3px" }}>{item?.base?.symbol}/{item?.quote?.symbol}</h6>
                                                 <p style={{ margin: "3px" }}>{shortenAddress(item?.address)}</p>
-                                                <div className=' pt-2'>
+                                                {/* <div className=' pt-2'>
                                                     <span className='mr-2' style={{ backgroundColor: "#D9D9D9", borderRadius: "50%", padding: "2px 6px" }}><img src={twiterImg} /></span>
                                                     <span className='mr-2' style={{ backgroundColor: "#D9D9D9", borderRadius: "50%", padding: "2px 6px" }}><img src={telegramImg} /></span>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
 
