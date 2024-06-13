@@ -30,25 +30,62 @@ function Newpairs() {
         { label: '3', href: '#' },
         { label: '4', href: '#' },
     ];
+    const fetchTokenData = async (tokenAddress) => {
+        const options = {
+            method: 'GET',
+            headers: { 'X-API-KEY': '1a6f67ecb3d540b984f8fc694cfb364c' }
+        };
+        // debugger
+        const response = await fetch(`https://public-api.birdeye.so/defi/token_overview?address=${tokenAddress}`, options);
+        const data = await response.json();
+        // debugger
+        return data.data;
+    };
     const fetchData = async () => {
         try {
             const response = await getNewPairs();
             const newData = response?.data;
 
+            // Filter out entries with addresses already present in tableData
+            const uniqueEntries = newData.filter(newEntry => !tableData.some(prevEntry => prevEntry.address === newEntry.address));
+
+            // Fetch token data for each unique entry and update tableData
+            const updatedDataArray = await Promise.all(uniqueEntries.map(async (item) => {
+                // debugger
+                // debugger
+                const tokenData = await fetchTokenData(item.base.address);
+                console.log(tokenData, "I am token Data")
+                // debugger
+                if (tokenData) {
+                    // debugger
+                    return {
+                        ...item,
+                        trade24h: tokenData.trade24h,
+                        sell24h: tokenData.sell24h,
+                        buy24h: tokenData.buy24h,
+                        marketCap: tokenData.mc,
+                    };
+                } else {
+                    // If API call fails or doesn't return data, keep original values
+                    return item;
+                }
+            }));
+
+            // Update tableData with the updatedDataArray
             setTableData(prevData => {
-                // Concatenate new data with previous data
-                return [...newData, ...prevData];
+                // Concatenate unique entries with previous data
+                return [...updatedDataArray, ...prevData];
             });
+
             setLoading(false);
         } catch (error) {
             console.error('Error fetching data:', error);
-        } finally {
             setLoading(false);
         }
     };
     useEffect(() => {
         fetchData(); // Initial fetch
-        const intervalId = setInterval(fetchData, 5000); // Fetch every 5 seconds
+        const intervalId = setInterval(fetchData, 20000); // Fetch every 5 seconds
         return () => clearInterval(intervalId); // Cleanup function
     }, []);
     return (

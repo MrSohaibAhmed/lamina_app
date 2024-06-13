@@ -63,6 +63,7 @@ const NavbarComp = () => {
   };
   useEffect(() => {
     const fetchPairData = async () => {
+      debugger
       try {
         // const res = await pairData(
         //   "CwJCznavdHe6AYU85v56nDh1VCWKs3ywcRj8uShXd3F3"

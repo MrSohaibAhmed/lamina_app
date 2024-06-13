@@ -91,13 +91,14 @@ const InternalNavbar = () => {
     setWalletAddress(localStorage.getItem("publicKey"));
   }, []);
   const handleClick = async (pairAddress) => {
-    // ////debugger
+    // debugger
     // Check if the clicked pair's pairAddress exists in the data
     // const foundPair = data.find((pair) => pair.pairaddress === pairAddress);
     // if (foundPair) {
     setNoDetails(false);
     setPairAddress(pairAddress);
     // console.log(foundPair);
+    // debugger
     const res = await pairData(pairAddress);
     console.log(res?.data, "Response data is = >>>>>>>>>");
     setCoinsKey(res?.data);

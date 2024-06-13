@@ -584,6 +584,7 @@ const RightInnerBox = ({ data, solBalance }) => {
     const fetchData = () => {
       // Check if the required data is available
       if (data?.pairs?.[0]?.priceUsd) {
+        debugger
         // Make the API call with the required parameter
         pairData(data.pairs?.[0]?.pairAddress)
           .then((response) => {

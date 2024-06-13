@@ -18,6 +18,7 @@ import toast from 'react-hot-toast';
 import TryAgain from "../../assets/dashboard/icons8-reset-24.png"
 function NewpairTable({ tableData, isChecked, inputValue }) {
     // debugger
+
     const navigate = useNavigate();
     const { setCoinsKey, setNoDetails, setSolBalance, solBalance } =
         useContext(KeyContext);
@@ -58,15 +59,19 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         return readableFormat;
     }
     const handleClick = async (pairAddress) => {
+        debugger
+        setCoinsKey([])
 
         const res = await pairData(pairAddress);
         console.log(res?.data, "Response data is = >>>>>>>>>");
+        debugger
         setCoinsKey(res?.data);
         navigate("/dashboard");
 
 
     };
     const tokenInfo = (item) => {
+        debugger
         handleClick(item.address)
 
     }
