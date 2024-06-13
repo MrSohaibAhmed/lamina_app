@@ -35,18 +35,15 @@ function Newpairs() {
             const newData = response?.data;
 
             setTableData(prevData => {
-                // debugger
-                const newDataIds = newData.map(entry => entry.id);
-                const uniqueEntries = prevData.filter(entry => !newDataIds.includes(entry.id));
-                return [...newData, ...uniqueEntries];
+                // Concatenate new data with previous data
+                return [...newData, ...prevData];
             });
             setLoading(false);
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-       
     };
     useEffect(() => {
         fetchData(); // Initial fetch

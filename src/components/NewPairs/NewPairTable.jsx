@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import TryAgain from "../../assets/dashboard/icons8-reset-24.png"
 function NewpairTable({ tableData, isChecked, inputValue }) {
+    debugger
     const navigate = useNavigate();
     const { setCoinsKey, setNoDetails, setSolBalance, solBalance } =
         useContext(KeyContext);
@@ -25,6 +26,11 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         setData(tableData)
 
     }, [tableData])
+    const uniqueTableData = data.filter((item, index, self) =>
+        index === self.findIndex((t) => (
+            t.address === item.address
+        ))
+    );
     function shortenAddress(address) {
 
         // Extract the first 4 characters
@@ -52,13 +58,13 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         return readableFormat;
     }
     const handleClick = async (pairAddress) => {
-       
+
         const res = await pairData(pairAddress);
         console.log(res?.data, "Response data is = >>>>>>>>>");
         setCoinsKey(res?.data);
         navigate("/dashboard");
 
-       
+
     };
     const tokenInfo = (item) => {
         handleClick(item.address)
@@ -134,9 +140,8 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         }
     };
     const handleBuy = (e, item) => {
-        e.stopPropagation(); // Prevent event propagation
-        handleQuickBuy(item) // Log the item data to the console
-        // Add other functionalities as needed
+        e.stopPropagation();
+        handleQuickBuy(item)
     };
     return (
         <>
@@ -162,7 +167,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                     </thead>
                     <tbody className="border-top-0">
                         {
-                            data.map((item, index) =>
+                            uniqueTableData.map((item, index) =>
                                 <tr onClick={() => tokenInfo(item)} style={{ backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
                                     <td>
                                         <div className='d-flex'>
