@@ -187,6 +187,17 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         e.stopPropagation();
         handleQuickBuy(item)
     };
+    const handleCopy = (e, item) => {
+        e.stopPropagation();
+        navigator.clipboard
+            .writeText(item.address)
+            .then(() => {
+                toast.success("Successfully copied Pair Address!");
+                // console.log("Base token copied successfully");
+            })
+            .catch((error) => console.error("Error copying baseToken:", error));
+
+    };
     return (
         <>
             <div className="table-responsive def-table tableClassMainDiv">
@@ -218,11 +229,11 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                                             <div><img style={{ borderRadius: "20px" }} src={item?.base?.icon} height={40} width={40} /></div>
                                             <div className=' ml-2'>
                                                 <h6 style={{ margin: "3px" }}>{item?.base?.symbol}/{item?.quote?.symbol}</h6>
-                                                <p style={{ margin: "3px" }}>{shortenAddress(item?.address)}</p>
-                                                {/* <div className=' pt-2'>
+                                                <p style={{ margin: "3px" }}>{shortenAddress(item?.address)} <img src={copyIcon} onClick={(e) => handleCopy(e, item)} /></p>
+                                                <div className=' pt-2'>
                                                     <span className='mr-2' style={{ backgroundColor: "#D9D9D9", borderRadius: "50%", padding: "2px 6px" }}><img src={twiterImg} /></span>
                                                     <span className='mr-2' style={{ backgroundColor: "#D9D9D9", borderRadius: "50%", padding: "2px 6px" }}><img src={telegramImg} /></span>
-                                                </div> */}
+                                                </div>
                                             </div>
                                         </div>
 
