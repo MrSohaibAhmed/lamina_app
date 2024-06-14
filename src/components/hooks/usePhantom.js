@@ -2,14 +2,6 @@ import { useState } from 'react';
 import Web3 from 'web3';
 import { useNavigate } from 'react-router-dom';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom';
-import {
-    clusterApiUrl,
-    Connection,
-    PublicKey,
-    Transaction,
-} from "@solana/web3.js";
-import nacl from "tweetnacl"; // Import tweetnacl library for cryptographic operations
-import bs58 from "bs58";
 const usePhantom = () => {
     const navi = useNavigate();
     const [connected, setConnected] = useState(false);
@@ -44,15 +36,13 @@ const usePhantom = () => {
     // };
     const connectToPhantom = async () => {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            const onConnectRedirectLink = `${window.location.origin}/onConnect`;
-            const [dappKeyPair] = useState(nacl.box.keyPair());
+            
             // alert('Phantom wallet is not supported on mobile devices. Please use desktop browser to connect to')
             // If on mobile, connect to the Phantom mobile app
             const params = new URLSearchParams({
-                dapp_encryption_public_key: bs58.encode(dappKeyPair.publicKey),
                 cluster: "devnet",
                 app_url: "https://lamina-app.vercel.app/", // Replace this with your actual app URL
-                redirect_link: onConnectRedirectLink, // Redirect back to the current page after connecting
+                redirect_link: window.location.href, // Redirect back to the current page after connecting
             });
             const url = `https://phantom.app/ul/v1/connect?${encodeURIComponent(JSON.stringify(params))}`;
             window.location.href = url;
