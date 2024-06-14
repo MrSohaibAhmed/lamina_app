@@ -23,13 +23,12 @@ import TryAgain from "../../assets/dashboard/icons8-reset-24.png"
 
 function NewpairTable({ tableData, isChecked, inputValue }) {
 
-    console.log(tableData , "This is Table Data")
+    console.log(tableData, "This is Table Data")
     const [activeBtn, setActiveBtn] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    const totalItems = tableData.length;
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
 
 
 
@@ -56,21 +55,22 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         setData(tableData)
 
     }, [tableData])
-    // const uniqueTableData = data.filter((item, index, self) =>
-    //     index === self.findIndex((t) => (
-    //         t.address === item.address
-    //     ))
-    // );
+    const uniqueTableData = data.filter((item, index, self) =>
+        index === self.findIndex((t) => (
+            t.address === item.address
+        ))
+    );
     const paginate = (pageNumber) => {
-        // debugger
         setCurrentPage(pageNumber);
         setActiveBtn(pageNumber);
     };
     const lastIndex = currentPage * itemsPerPage;
     const firstIndex = lastIndex - itemsPerPage;
-    debugger
-    const currentItems = data.slice(firstIndex, lastIndex);
-    console.log(currentItems , "These are curreny Items")
+    const totalItems = uniqueTableData.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const currentItems = uniqueTableData.slice(firstIndex, lastIndex);
+
+    console.log(currentItems, "These are curreny Items")
     function shortenAddress(address) {
 
         // Extract the first 4 characters
@@ -84,7 +84,6 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
     function convertTimestampToReadable(timestamp) {
         const date = new Date(timestamp);
 
-        // Extracting date components
         const year = date.getFullYear();
         const month = ("0" + (date.getMonth() + 1)).slice(-2);
         const day = ("0" + date.getDate()).slice(-2);
@@ -92,20 +91,16 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         const minutes = ("0" + date.getMinutes()).slice(-2);
         const seconds = ("0" + date.getSeconds()).slice(-2);
 
-        // Creating a readable format
         const readableFormat = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
         return readableFormat;
     }
     const handleClick = async (pairAddress) => {
-        // debugger
-        // //debugger
+
         setCoinsKey([])
 
         const res = await pairData(pairAddress);
-        // debugger
         if (res.data.pairs !== null) {
-            // debugger
             setCoinsKey(res?.data);
             navigate("/dashboard");
 
@@ -117,13 +112,11 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
 
     };
     const tokenInfo = (item) => {
-        // //debugger
         handleClick(item.address)
 
     }
     const handleQuickBuy = (item) => {
-        // //debugger
-        // console.log("solona balance is =>>", solBalance);
+
         if (inputValue !== null && inputValue !== 0) {
 
             if (solBalance !== 0) {
