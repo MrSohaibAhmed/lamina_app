@@ -33,7 +33,7 @@ const SettingLeft = () => {
                         </div>
 
                         <div className='text-end col-4'>
-                            <span><input className='bg-transparent w-50 border mr-1' type='number' placeholder='0.0' />%</span>
+                            <span><input style={{border:"1px solid #303138" , padding:"5px" , borderRadius:"5px"}} className='bg-transparent w-50  mr-1' type='number' placeholder='20.0' />%</span>
                         </div>
                     </div>
                     <div className='col px-3 d-flex justify-content-between align-items-center settings-card py-5 setting-silpace rounded-custom3  rounded'>
@@ -45,7 +45,7 @@ const SettingLeft = () => {
                         </div>
 
                         <div className='text-end col-4'>
-                            <span><input className='bg-transparent w-50 border mr-1' type='number' placeholder='0.0' />SOL</span>
+                            <span><input style={{border:"1px solid #303138" , padding:"5px" , borderRadius:"5px"}} className='bg-transparent w-50  mr-1' type='number' placeholder='0.00001' />SOL</span>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ const SettingLeft = () => {
                         </div>
 
                         <div className='col-4 text-end'>
-                            <span><input className='bg-transparent w-50 border mr-1' type='number' placeholder='0.0' />SOL</span>
+                            <span><input style={{ backgroundColor: 'transparent' }} className='border mr-1' type='checkbox' />Enable</span>
                         </div>
                     </div>
 
@@ -70,7 +70,7 @@ const SettingLeft = () => {
                         </div>
 
                         <div className='col-4 text-end'>
-                            <span><input className='bg-transparent w-50 border mr-1' type='number' placeholder='0.0' />SOL</span>
+                            <span><input style={{border:"1px solid #303138" , padding:"5px" , borderRadius:"5px"}} className='bg-transparent w-50 mr-1' type='number' placeholder='0.00001' />SOL</span>
                         </div>
                     </div>
                 </div>

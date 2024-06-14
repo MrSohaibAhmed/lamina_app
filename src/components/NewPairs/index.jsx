@@ -95,13 +95,13 @@ function Newpairs() {
 
             <InternalNavbar />
             <div className=' container-fluid px-5 bg-class'>
-                <div className='d-flex justify-content-between py-5'>
+                <div className='d-lg-flex justify-content-between py-5'>
                     <div>
                         <h4 className=' font-weight-bold'>NEW PAIRS</h4>
                         <p>New token pairs in the last 24-hours updated in real-time.</p>
                     </div>
 
-                    <div className='d-flex align-content-center align-items-center justify-content-end'>
+                    <div className='d-flex align-content-center align-items-center justify-content-lg-end'>
 
                         <div className='mr-3'>
                             <SwitchComp label="Quick Buy" isChecked={isChecked} onToggle={toggleSwitch} />
