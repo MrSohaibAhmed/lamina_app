@@ -37,7 +37,7 @@ const usePhantom = () => {
     const connectToPhantom = async () => {
         try {
             // Check if Phantom wallet is available
-            if (window.solana && window.solana.isPhantom) {
+            // if (window.solana && window.solana.isPhantom) {
                 // Create a new instance of the Phantom wallet adapter
                 const phantomWallet = new PhantomWalletAdapter();
 
@@ -54,10 +54,10 @@ const usePhantom = () => {
                 } else {
                     navi("/new-pairs");
                 }
-            } else {
-                // Prompt the user to install the Phantom wallet
-                alert('Phantom wallet not detected!');
-            }
+            // } else {
+            //     // Prompt the user to install the Phantom wallet
+            //     alert('Phantom wallet not detected!');
+            // }
         } catch (error) {
             console.error(error);
         }
