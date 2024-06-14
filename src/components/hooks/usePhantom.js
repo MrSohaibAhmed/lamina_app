@@ -36,32 +36,32 @@ const usePhantom = () => {
     // };
     const connectToPhantom = async () => {
         try {
-            // Check if Phantom wallet is available
-            // if (window.solana && window.solana.isPhantom) {
-                // Create a new instance of the Phantom wallet adapter
-                const phantomWallet = new PhantomWalletAdapter();
-
-                // Check if the wallet is connected
-                if (!phantomWallet.connected) {
-                    // Request connection to the Phantom wallet
-                    await phantomWallet.connect();
-                    const solanaPublicKey = phantomWallet.publicKey.toString();
-                    console.log(solanaPublicKey, ">>>>>>>");
-                    setSolanaKey(solanaPublicKey);
-                    setConnected(true);
-                    localStorage.setItem("solanaKey", solanaPublicKey);
-                    localStorage.setItem("connected", true);
-                } else {
-                    navi("/new-pairs");
-                }
-            // } else {
-            //     // Prompt the user to install the Phantom wallet
-            //     alert('Phantom wallet not detected!');
-            // }
+          // Check if Phantom wallet is available
+          if (window.solana && window.solana.isPhantom) {
+            // Create a new instance of the Phantom wallet adapter
+            const phantomWallet = new PhantomWalletAdapter();
+      
+            // Check if the wallet is connected
+            if (!phantomWallet.connected) {
+              // Request connection to the Phantom wallet
+              await phantomWallet.connect();
+              const solanaPublicKey = phantomWallet.publicKey.toString();
+              console.log(solanaPublicKey, ">>>>>>>");
+              setSolanaKey(solanaPublicKey);
+              setConnected(true);
+              localStorage.setItem("solanaKey", solanaPublicKey);
+              localStorage.setItem("connected", true);
+            } else {
+              navi("/new-pairs");
+            }
+          } else {
+            // Prompt the user to install the Phantom wallet
+            alert('Phantom wallet not detected!');
+          }
         } catch (error) {
-            console.error(error);
+          console.error(error);
         }
-    };
+      };
     const connectToSolflare = async () => {
         try {
             if (!window.solflare) {
