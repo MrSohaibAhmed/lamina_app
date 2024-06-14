@@ -19,6 +19,7 @@ import { pairData, swapTokens } from '../hooks/useWallet';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import TryAgain from "../../assets/dashboard/icons8-reset-24.png"
+import coinImg from "../../assets/pairtableImg/gold-coin.png"
 
 
 function NewpairTable({ tableData, isChecked, inputValue }) {
@@ -28,18 +29,6 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const [timeDifferences, setTimeDifferences] = useState([]);
-
-
-
-
-
-    // const [activeBtn, setActiveBtn] = useState({
-    //     btn1: true,
-    //     btn2: false,
-    //     btn3: false,
-    //     btn4: false,
-    //     btn5: false,
-    // });
 
     const handleActiveBtn = (index) => {
         setActiveBtn(index);
@@ -82,77 +71,23 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         return `${firstPart}...${lastPart}`;
     }
 
-    // function convertTimestampToReadable(timestamp) {
-    //     const date = new Date(timestamp);
-
-    //     const year = date.getFullYear();
-    //     const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    //     const day = ("0" + date.getDate()).slice(-2);
-    //     const hours = ("0" + date.getHours()).slice(-2);
-    //     const minutes = ("0" + date.getMinutes()).slice(-2);
-    //     const seconds = ("0" + date.getSeconds()).slice(-2);
-
-    //     const readableFormat = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
-    //     const time = new Date();
-    //     return time - readableFormat;
-    // }
-
-    // function convertTimestampToReadable(timestamp) {
-    //     const date = new Date(timestamp);
-    //   console.log("api time=>>>" , date);
-    //     const year = date.getFullYear();
-    //     const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    //     const day = ("0" + date.getDate()).slice(-2);
-    //     const hours = ("0" + date.getHours()).slice(-2);
-    //     const minutes = ("0" + date.getMinutes()).slice(-2);
-    //     const seconds = ("0" + date.getSeconds()).slice(-2);
-      
-    //     // const readableFormat = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-      
-    //     // Get current time in milliseconds
-    //     const currentTime = new Date().getTime();
-    //     console.log("current time=>>>" , currentTime);
-    //     // Calculate difference in milliseconds
-    //     const differenceInMs = currentTime - date.getTime();
-    //     console.log("differenceInMs time=>>>" , differenceInMs);
-    //     const differenceInSeconds = Math.floor(differenceInMs / 1000);
-    //     console.log("differenceInSeconds=>>>", differenceInSeconds);
-    
-    //     return differenceInSeconds;
-        
-    //   }
-    useEffect(() => {
-        function calculateTimeDifferences() {
-            const times = currentItems.map(item => convertTimestampToReadable(item.timestamp));
-            setTimeDifferences(times);
-        }
-
-        calculateTimeDifferences();
-
-        const interval = setInterval(() => {
-            calculateTimeDifferences();
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, [currentItems]);
 
     function convertTimestampToReadable(timestamp) {
         const date = new Date(timestamp);
         console.log("api time=>>>", date);
-    
+
         // Get current time in milliseconds
         const currentTime = new Date().getTime();
         console.log("current time=>>>", currentTime);
-    
+
         // Calculate difference in milliseconds
         const differenceInMs = currentTime - date.getTime();
         console.log("differenceInMs time=>>>", differenceInMs);
-    
+
         // Convert milliseconds to seconds
         const differenceInSeconds = Math.floor(differenceInMs / 1000);
         console.log("differenceInSeconds=>>>", differenceInSeconds);
-    
+
         let readableFormat;
         if (differenceInSeconds < 60) {
             readableFormat = `${differenceInSeconds}s ago`;
@@ -172,10 +107,10 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
             const seconds = differenceInSeconds % 60;
             readableFormat = `${days}d ${hours}h ${minutes}m ${seconds}s ago`;
         }
-    
+
         return readableFormat;
     }
-    
+
 
     const handleClick = async (pairAddress) => {
 
@@ -279,6 +214,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
             .catch((error) => console.error("Error copying baseToken:", error));
 
     };
+
     return (
         <>
             <div className="table-responsive def-table tableClassMainDiv">
@@ -305,9 +241,16 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                         {
                             currentItems.map((item, index) =>
                                 <tr onClick={() => tokenInfo(item)} style={{ borderColor: "#151530", backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
-                                    <td style={{ paddingLeft: "20px" , verticalAlign:"middle" }}>
+                                    <td style={{ paddingLeft: "20px", verticalAlign: "middle" }}>
                                         <div className='d-flex'>
-                                            <div><img style={{ borderRadius: "20px" }} src={item?.base?.icon} height={40} width={40} /></div>
+                                            {/* <div><img style={{ borderRadius: "20px" }} src={item?.base?.icon} height={40} width={40} /></div> */}
+                                            <div>
+                                                {item?.base?.icon ? (
+                                                    <img style={{ borderRadius: "20px" }} src={item.base.icon} height={40} width={40} onError={(e) => { e.target.onerror = null; e.target.src = 'url_of_static_image_here'; }} />
+                                                ) : (
+                                                    <img style={{ borderRadius: "20px", maxWidth:"60px", marginLeft:"-10px"}} src={coinImg}  />
+                                                )}
+                                            </div>
                                             <div className=' ml-2'>
                                                 <h6 style={{ margin: "3px" }}>{item?.base?.symbol}/{item?.quote?.symbol}</h6>
                                                 <p style={{ margin: "3px" }}>{shortenAddress(item?.address)} <img src={copyIcon} onClick={(e) => handleCopy(e, item)} /></p>
@@ -320,9 +263,9 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
 
                                     </td>
                                     <td className=' align-content-center'>
-                                        <img src={clockImg} /> 
-                                        {/* {convertTimestampToReadable(item?.timestamp)} */}
-                                        {timeDifferences[index]}
+                                        <img src={clockImg} />
+                                        {convertTimestampToReadable(item?.timestamp)}
+
                                     </td>
 
                                     <td className=' align-content-center'>
