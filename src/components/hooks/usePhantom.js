@@ -36,7 +36,7 @@ const usePhantom = () => {
     // };
     const connectToPhantom = async () => {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            alert('Phantom wallet is not supported on mobile devices. Please use desktop browser to connect to')
+            // alert('Phantom wallet is not supported on mobile devices. Please use desktop browser to connect to')
             // If on mobile, connect to the Phantom mobile app
             const params = {
                 cluster: "devnet",
@@ -45,6 +45,7 @@ const usePhantom = () => {
             const url = `https://phantom.app/ul/v1/connect?${encodeURIComponent(JSON.stringify(params))}`;
             window.location.href = url;
         } else {
+            // alert("hello")
             // If on laptop or desktop browser, connect using existing code
             if (window.solana) { // Check if Solana wallet extension is available
                 try {
