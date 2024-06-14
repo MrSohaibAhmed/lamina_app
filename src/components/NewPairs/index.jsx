@@ -31,6 +31,12 @@ function Newpairs() {
         { label: '1', href: '#' },
         { label: '2', href: '#' }
     ];
+
+    const handleClick = (value) => {
+        console.log("Clicked value:", value);
+        setInputValue(value)
+    };
+
     const fetchTokenData = async (tokenAddress) => {
         const options = {
             method: 'GET',
@@ -121,6 +127,7 @@ function Newpairs() {
                             <img style={{ width: '10px', height: '10px' }} src={solIconImg} />
                             <input
                                 className='bg-transparent w-100 border-0 text-center text-white'
+                                style={{ border: 'none', outline: 'none' }}
                                 type='number'
                                 placeholder='0.0'
                                 value={inputValue}
@@ -131,7 +138,8 @@ function Newpairs() {
                             <DropdownComp
                                 label="SOL"
                                 items={dropdownItems}
-                                imgSrc={solIconImg} />
+                                imgSrc={solIconImg} 
+                                onClick={handleClick}/>   
                         </div>
                     </div>
                 </div>

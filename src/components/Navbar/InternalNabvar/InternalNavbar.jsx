@@ -264,8 +264,10 @@ const InternalNavbar = () => {
 
     const fetchSettings = async () => {
       const response = await getSettings(localStorage.getItem("publicKey"))
+      // debugger
       setSettings(response.data)
     }
+    fetchSettings();
 
   }, [])
   return (

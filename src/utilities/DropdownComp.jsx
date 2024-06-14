@@ -1,11 +1,17 @@
 
 import React, { useState } from 'react';
+import "./Utilities.css"
 
-const DropdownComp = ({ label, items, imgSrc, DropdownContent }) => {
+const DropdownComp = ({ label, items, imgSrc, DropdownContent,onClick }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
+    };
+    const handleItemClick = (item) => {
+        if (onClick) {
+            onClick(item.label);
+        }
     };
 
     return (
@@ -16,14 +22,15 @@ const DropdownComp = ({ label, items, imgSrc, DropdownContent }) => {
                 className="btn dropdown-toggle text-white"
                 onClick={toggleDropdown}
                 aria-expanded={isOpen}
+               
             >
                 {imgSrc && <img src={imgSrc} alt="dropdown icon" />} {label}
             </button>
             <ul style={{backgroundColor:"#151530" , width:"90px"}} className={`dropdown-menu ${isOpen ? 'show' : ''}`}>
                 {items && items.length > 0 ? (
                     items.map((item, index) => (
-                        <li className='text-white' key={index}>
-                            <a className="dropdown-item text-white" href={item.href}>{item.label}</a>
+                        <li className='text-white dropDownCompCls' key={index}>
+                            <a className="dropdown-item text-white" href={item.href} onClick={() => handleItemClick(item)}>{item.label}</a>
                         </li>
                     ))
                 ) : (

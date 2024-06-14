@@ -19,6 +19,8 @@ import KeyContext from "../../../context/walletContext";
 import { useParams } from "react-router-dom";
 const RightInnerBox = ({ data, solBalance, settings }) => {
 
+  console.log("setting response is =>>>" , settings);
+  // const settingResponse = settings.
   const { tokenid } = useParams();
   const shouldShowButton = !tokenid;
   // const shouldShowButton = tokenid !== "3eoU8s1WtRcgwfy1CWf732fT2HCuFL7HD7j29c6iHnBc";
@@ -873,62 +875,62 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                 <div className="d-flex flex-wrap">
                   <div className="my-3 mx-2">
                     <button
-                      onClick={() => handleButtonClick(0.25)}
-                      className={`bg-dark btn-inner-box ${activeButton == 0.25 ? "btn1-active" : ""
+                      onClick={() => handleButtonClick(settings.amount1)}
+                      className={`bg-dark btn-inner-box ${activeButton == settings.amount1 ? "btn1-active" : ""
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp; 0.25
+                      &nbsp; {settings.amount1}
                     </button>
                   </div>
                   <div className="my-3 mx-2">
                     <button
-                      onClick={() => handleButtonClick(0.5)}
-                      className={`bg-dark btn-inner-box ${activeButton == 0.5 ? "btn1-active" : ""
+                      onClick={() => handleButtonClick(settings.amount2)}
+                      className={`bg-dark btn-inner-box ${activeButton == settings.amount2 ? "btn1-active" : ""
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;0.5
+                      &nbsp;{settings.amount2}
                     </button>
                   </div>
                   <div className="my-3 mx-2">
                     <button
-                      onClick={() => handleButtonClick(1)}
-                      className={`bg-dark btn-inner-box ${activeButton == 1 ? "btn1-active" : ""
+                      onClick={() => handleButtonClick(settings.amount3)}
+                      className={`bg-dark btn-inner-box ${activeButton == settings.amount3? "btn1-active" : ""
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;1
+                      &nbsp;{settings.amount3}
                     </button>
                   </div>
                   <div className="my-3 mx-2">
                     <button
-                      onClick={() => handleButtonClick(2)}
-                      className={`bg-dark btn-inner-box ${activeButton == 2 ? "btn1-active" : ""
+                      onClick={() => handleButtonClick(settings.amount4)}
+                      className={`bg-dark btn-inner-box ${activeButton == settings.amount4 ? "btn1-active" : ""
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;2
+                      &nbsp;{settings.amount4}
                     </button>
                   </div>
                   <div className="my-3 mx-2">
                     <button
-                      onClick={() => handleButtonClick(1.5)}
-                      className={`bg-dark btn-inner-box ${activeButton == 1.5 ? "btn1-active" : ""
+                      onClick={() => handleButtonClick(settings.amount5)}
+                      className={`bg-dark btn-inner-box ${activeButton == settings.amount5 ? "btn1-active" : ""
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;1.5
+                      &nbsp;{settings.amount5}
                     </button>
                   </div>
                   <div className="my-3 mx-2">
                     <button
-                      onClick={() => handleButtonClick(2.90)}
-                      className={`bg-dark btn-inner-box ${activeButton == 2.9 ? "btn1-active" : ""
+                      onClick={() => handleButtonClick(settings.amount6)}
+                      className={`bg-dark btn-inner-box ${activeButton == settings.amount6 ? "btn1-active" : ""
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;2.90
+                      &nbsp;{settings.amount6}
                     </button>
                   </div>
                 </div>
