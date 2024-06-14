@@ -36,7 +36,7 @@ const usePhantom = () => {
     // };
     const connectToPhantom = async () => {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            
+
             // alert('Phantom wallet is not supported on mobile devices. Please use desktop browser to connect to')
             // If on mobile, connect to the Phantom mobile app
             const params = new URLSearchParams({

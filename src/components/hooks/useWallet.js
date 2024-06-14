@@ -128,17 +128,17 @@ export async function getNewPairs(query) {
 
 export async function postSettings(settingsData) {
     try {
-        const response = await axios.put(`${localServer}settingsData`, settingsData);
+        const response = await axios.put(`${baseURL}settingsData`, settingsData);
         return response;
     } catch (error) {
         console.error("Error creating wallet:", error);
         throw error;
     }
-}   
+}
 export async function getSettings(userAddress) {
     try {
         // const response = await axios.get(newPairsUrl);
-        const response = await axios.get(`${localServer}settingsData?userAddress=${userAddress}`);
+        const response = await axios.get(`${baseURL}settingsData?userAddress=${userAddress}`);
 
         return response;
     } catch (error) {
