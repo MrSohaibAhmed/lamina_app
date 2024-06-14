@@ -35,7 +35,7 @@ const usePhantom = () => {
     //     }
     // };
     const connectToPhantom = async () => {
-        if (window.solana) { // Check if Solana wallet extension is available
+        // if (window.solana) { // Check if Solana wallet extension is available
             try {
                 if (!window.solana.isConnected) {
                     // If on mobile, check if the Phantom mobile app is available
@@ -68,9 +68,9 @@ const usePhantom = () => {
             } catch (error) {
                 console.error(error);
             }
-        } else {
-            alert('Phantom extension not detected!');
-        }
+        // } else {
+        //     alert('Phantom extension not detected!');
+        // }
     };
     
     const connectToSolflare = async () => {
