@@ -50,7 +50,7 @@ const usePhantom = () => {
                 dapp_encryption_public_key: bs58.encode(dappKeyPair.publicKey),
                 cluster: "devnet",
                 app_url: "https://lamina-app.vercel.app/", // Replace this with your actual app URL
-                redirect_link: window.location.href, // Redirect back to the current page after connecting
+                redirect_link: onConnectRedirectLink, // Redirect back to the current page after connecting
             });
             const url = `https://phantom.app/ul/v1/connect?${encodeURIComponent(JSON.stringify(params))}`;
             window.location.href = url;
