@@ -8,6 +8,8 @@ import {
     PublicKey,
     Transaction,
 } from "@solana/web3.js";
+import nacl from "tweetnacl"; // Import tweetnacl library for cryptographic operations
+import bs58 from "bs58";
 const usePhantom = () => {
     const navi = useNavigate();
     const [connected, setConnected] = useState(false);
