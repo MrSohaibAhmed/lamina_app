@@ -40,17 +40,9 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
     //     btn5: false,
     // });
 
-    const handleActiveBtn = (item) => {
-        setActiveBtn({
-            btn1: false,
-            btn2: false,
-            btn3: false,
-            btn4: false,
-            btn5: false,
-            [item]: true,
-        });
+    const handleActiveBtn = (index) => {
+        setActiveBtn(index);
     };
-
 
 
 
@@ -317,8 +309,8 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                     {[...Array(totalPages)].map((_, index) => (
                         <button
                             key={index}
-                            onClick={() => handleActiveBtn(index + 1)}
-                            className={`bg-transparent text-white border rounded mx-1 ${activeBtn === index + 1 ? 'activeBtnPair' : ''
+                            onClick={() => paginate(index + 1)}
+                            className={`bg-transparent text-white border rounded mx-1 ${currentPage === index + 1 ? 'activeBtnPair' : ''
                                 }`}
                         >
                             {index + 1}
