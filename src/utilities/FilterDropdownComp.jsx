@@ -248,7 +248,7 @@ const FilterDropdown = () => {
               Reset
             </button>
             <div>
-              <button className=" rounded-3" onclick={applyBtnHandler}>Apply</button>
+              <button className=" rounded-3" onClick={applyBtnHandler}>Apply</button>
             </div>
           </div>
         </div>
