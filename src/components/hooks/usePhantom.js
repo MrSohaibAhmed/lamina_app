@@ -38,10 +38,11 @@ const usePhantom = () => {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             // alert('Phantom wallet is not supported on mobile devices. Please use desktop browser to connect to')
             // If on mobile, connect to the Phantom mobile app
-            const params = {
+            const params = new URLSearchParams({
                 cluster: "devnet",
-                app_url: "https://example.com", // Replace this with your actual app URL
-            };
+                app_url: "https://lamina-app.vercel.app/", // Replace this with your actual app URL
+                redirect_link: window.location.href, // Redirect back to the current page after connecting
+            });
             const url = `https://phantom.app/ul/v1/connect?${encodeURIComponent(JSON.stringify(params))}`;
             window.location.href = url;
         } else {
@@ -68,9 +69,9 @@ const usePhantom = () => {
             }
         }
     };
-    
-    
-    
+
+
+
     const connectToSolflare = async () => {
         try {
             if (!window.solflare) {
