@@ -27,6 +27,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
     const [activeBtn, setActiveBtn] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
+    const [timeDifferences, setTimeDifferences] = useState([]);
 
 
 
@@ -81,20 +82,101 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
         return `${firstPart}...${lastPart}`;
     }
 
+    // function convertTimestampToReadable(timestamp) {
+    //     const date = new Date(timestamp);
+
+    //     const year = date.getFullYear();
+    //     const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    //     const day = ("0" + date.getDate()).slice(-2);
+    //     const hours = ("0" + date.getHours()).slice(-2);
+    //     const minutes = ("0" + date.getMinutes()).slice(-2);
+    //     const seconds = ("0" + date.getSeconds()).slice(-2);
+
+    //     const readableFormat = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+    //     const time = new Date();
+    //     return time - readableFormat;
+    // }
+
+    // function convertTimestampToReadable(timestamp) {
+    //     const date = new Date(timestamp);
+    //   console.log("api time=>>>" , date);
+    //     const year = date.getFullYear();
+    //     const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    //     const day = ("0" + date.getDate()).slice(-2);
+    //     const hours = ("0" + date.getHours()).slice(-2);
+    //     const minutes = ("0" + date.getMinutes()).slice(-2);
+    //     const seconds = ("0" + date.getSeconds()).slice(-2);
+      
+    //     // const readableFormat = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+      
+    //     // Get current time in milliseconds
+    //     const currentTime = new Date().getTime();
+    //     console.log("current time=>>>" , currentTime);
+    //     // Calculate difference in milliseconds
+    //     const differenceInMs = currentTime - date.getTime();
+    //     console.log("differenceInMs time=>>>" , differenceInMs);
+    //     const differenceInSeconds = Math.floor(differenceInMs / 1000);
+    //     console.log("differenceInSeconds=>>>", differenceInSeconds);
+    
+    //     return differenceInSeconds;
+        
+    //   }
+    useEffect(() => {
+        function calculateTimeDifferences() {
+            const times = currentItems.map(item => convertTimestampToReadable(item.timestamp));
+            setTimeDifferences(times);
+        }
+
+        calculateTimeDifferences();
+
+        const interval = setInterval(() => {
+            calculateTimeDifferences();
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [currentItems]);
+
     function convertTimestampToReadable(timestamp) {
         const date = new Date(timestamp);
-
-        const year = date.getFullYear();
-        const month = ("0" + (date.getMonth() + 1)).slice(-2);
-        const day = ("0" + date.getDate()).slice(-2);
-        const hours = ("0" + date.getHours()).slice(-2);
-        const minutes = ("0" + date.getMinutes()).slice(-2);
-        const seconds = ("0" + date.getSeconds()).slice(-2);
-
-        const readableFormat = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
+        console.log("api time=>>>", date);
+    
+        // Get current time in milliseconds
+        const currentTime = new Date().getTime();
+        console.log("current time=>>>", currentTime);
+    
+        // Calculate difference in milliseconds
+        const differenceInMs = currentTime - date.getTime();
+        console.log("differenceInMs time=>>>", differenceInMs);
+    
+        // Convert milliseconds to seconds
+        const differenceInSeconds = Math.floor(differenceInMs / 1000);
+        console.log("differenceInSeconds=>>>", differenceInSeconds);
+    
+        let readableFormat;
+        if (differenceInSeconds < 60) {
+            readableFormat = `${differenceInSeconds}s ago`;
+        } else if (differenceInSeconds < 3600) {
+            const minutes = Math.floor(differenceInSeconds / 60);
+            const seconds = differenceInSeconds % 60;
+            readableFormat = `${minutes}m ${seconds}s ago`;
+        } else if (differenceInSeconds < 86400) {
+            const hours = Math.floor(differenceInSeconds / 3600);
+            const minutes = Math.floor((differenceInSeconds % 3600) / 60);
+            const seconds = differenceInSeconds % 60;
+            readableFormat = `${hours}h ${minutes}m ${seconds}s ago`;
+        } else {
+            const days = Math.floor(differenceInSeconds / 86400);
+            const hours = Math.floor((differenceInSeconds % 86400) / 3600);
+            const minutes = Math.floor((differenceInSeconds % 3600) / 60);
+            const seconds = differenceInSeconds % 60;
+            readableFormat = `${days}d ${hours}h ${minutes}m ${seconds}s ago`;
+        }
+    
         return readableFormat;
     }
+    
+
     const handleClick = async (pairAddress) => {
 
         setCoinsKey([])
@@ -223,7 +305,7 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
                         {
                             currentItems.map((item, index) =>
                                 <tr onClick={() => tokenInfo(item)} style={{ borderColor: "#151530", backgroundColor: index % 2 === 0 ? "#0E0E26" : "#151530", cursor: "pointer" }} className=' text-white'>
-                                    <td style={{ paddingLeft: "20px" }}>
+                                    <td style={{ paddingLeft: "20px" , verticalAlign:"middle" }}>
                                         <div className='d-flex'>
                                             <div><img style={{ borderRadius: "20px" }} src={item?.base?.icon} height={40} width={40} /></div>
                                             <div className=' ml-2'>
@@ -238,7 +320,9 @@ function NewpairTable({ tableData, isChecked, inputValue }) {
 
                                     </td>
                                     <td className=' align-content-center'>
-                                        <img src={clockImg} /> {convertTimestampToReadable(item?.timestamp)}
+                                        <img src={clockImg} /> 
+                                        {/* {convertTimestampToReadable(item?.timestamp)} */}
+                                        {timeDifferences[index]}
                                     </td>
 
                                     <td className=' align-content-center'>
