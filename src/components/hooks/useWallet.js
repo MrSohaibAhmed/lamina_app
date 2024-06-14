@@ -5,7 +5,10 @@ import axios from "axios";
 // const baseURL = "http://35.238.34.252:5000/";
 const baseURL = "https://backend-fusion-dapp-production.up.railway.app/";
 const URl_two = "https://jitoendpointsdeploy-production.up.railway.app/";
-const newPairsUrl = "https://mongonewpairs-production.up.railway.app/"
+const newPairsUrl = "https://mongonewpairs-production.up.railway.app/";
+const localServer = "http://192.168.1.14:3000/";
+
+
 
 export async function createWalletAndSaveToMongoDB(id) {
     try {
@@ -115,6 +118,27 @@ export async function getNewPairs(query) {
     try {
         // const response = await axios.get(newPairsUrl);
         const response = await axios.get(`${baseURL}recent-data`);
+
+        return response;
+    } catch (error) {
+        console.error("Error Finding Pair", error);
+        throw error;
+    }
+}
+
+export async function postSettings(settingsData) {
+    try {
+        const response = await axios.put(`${localServer}settingsData`, settingsData);
+        return response;
+    } catch (error) {
+        console.error("Error creating wallet:", error);
+        throw error;
+    }
+}   
+export async function getSettings(userAddress) {
+    try {
+        // const response = await axios.get(newPairsUrl);
+        const response = await axios.get(`${localServer}settingsData?userAddress=${userAddress}`);
 
         return response;
     } catch (error) {

@@ -8,7 +8,7 @@ import KeyContext from "../../context/walletContext";
 import "./Dashboard.css";
 import axios from "axios";
 const Dashboard = () => {
-  const { solBalance, coinsKey, noDetails } = useContext(KeyContext);
+  const { solBalance, coinsKey, noDetails , settings } = useContext(KeyContext);
   const [key, setKey] = useState(0); // State to manage the key for ChartBox component
 
   const coinKeyLength = coinsKey.length;
@@ -85,6 +85,7 @@ const Dashboard = () => {
                     // checkZoomLevel={checkZoomLevel}
                     data={coinsKey}
                     solBalance={solBalance}
+                    settings = {settings}
                   />
                   <div className="my-3 hide-on-zoom">
                     <RightAccordian address={coinsKey} />

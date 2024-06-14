@@ -14,6 +14,8 @@ export const KeyProvider = ({ children }) => {
   const [solBalance, setSolBalance] = useState(false);
   const [decryptPrivateKey, setDecryptPrivateKey] = useState()
   const [AllHoldings, setAllHoldings] = useState([])
+  const [settings, setSettings] = useState([])
+
 
 
   // const [balance, setBalance] = useState(null);
@@ -68,7 +70,9 @@ export const KeyProvider = ({ children }) => {
         setSolBalance,
         decryptPrivateKey,
         setAllHoldings,
-        AllHoldings
+        AllHoldings,
+        settings,
+        setSettings
       }}
     >
       {children}

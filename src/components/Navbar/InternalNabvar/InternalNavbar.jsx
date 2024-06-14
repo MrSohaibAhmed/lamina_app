@@ -13,6 +13,7 @@ import { searchPair, pairData } from "../../hooks/useWallet";
 import settingImg from '../../../assets/pairtableImg/settings.svg'
 import KeyContext from "../../../context/walletContext";
 import toast, { Toaster } from "react-hot-toast";
+import { getSettings } from "../../hooks/useWallet";
 // import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import * as bs58 from "bs58";
 import {
@@ -66,7 +67,8 @@ const data = [
 ];
 
 const InternalNavbar = () => {
-  const { setCoinsKey, setNoDetails, setSolBalance, solBalance, coinsKey } =
+  const { setCoinsKey, setNoDetails, setSolBalance, solBalance, coinsKey, settings,
+    setSettings } =
     useContext(KeyContext);
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -258,6 +260,14 @@ const InternalNavbar = () => {
 
     return () => clearInterval(interval);
   }, []);
+  useEffect(() => {
+
+    const fetchSettings = async () => {
+      const response = await getSettings(localStorage.getItem("publicKey"))
+      setSettings(response.data)
+    }
+
+  }, [])
   return (
     <div>
       <nav className="navbar py-3 navbar-expand-lg navbar-dark ">
