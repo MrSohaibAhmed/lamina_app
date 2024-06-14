@@ -55,7 +55,7 @@ function Newpairs() {
                 // //debugger
                 // //debugger
                 const tokenData = await fetchTokenData(item.base.address);
-                console.log(tokenData, "I am token Data")
+                // console.log(tokenData, "I am token Data")
                 // //debugger
                 if (tokenData) {
                     // //debugger
