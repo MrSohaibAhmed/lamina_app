@@ -36,40 +36,41 @@ const usePhantom = () => {
     // };
     const connectToPhantom = async () => {
         // if (window.solana) { // Check if Solana wallet extension is available
-            try {
+            // try {
                 // if (!window.solana.isConnected) {
                     // If on mobile, check if the Phantom mobile app is available
-                    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                        if (window.solana.isPhantom) {
-                            await window.solana.connect();
-                            const solanaPublicKey = window.solana.publicKey.toString();
-                            console.log(solanaPublicKey, ">>>>>>>");
-                            setSolanaKey(solanaPublicKey);
-                            setConnected(true);
-                            localStorage.setItem("solanaKey", solanaPublicKey);
-                            localStorage.setItem("connected", true);
-                        } else {
+                    // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                        // if (window.solana.isPhantom) {
+                        //     await window.solana.connect();
+                        //     const solanaPublicKey = window.solana.publicKey.toString();
+                        //     console.log(solanaPublicKey, ">>>>>>>");
+                        //     setSolanaKey(solanaPublicKey);
+                        //     setConnected(true);
+                        //     localStorage.setItem("solanaKey", solanaPublicKey);
+                        //     localStorage.setItem("connected", true);
+                        // } else {
                             // Redirect to the Phantom mobile app download page
                             window.location.href = 'https://phantom.app/';
-                        }
-                    } else {
-                        // If on desktop, connect to the Phantom browser extension
-                        await window.solana.connect();
-                        const solanaPublicKey = window.solana.publicKey.toString();
-                        console.log(solanaPublicKey, ">>>>>>>");
-                        setSolanaKey(solanaPublicKey);
-                        setConnected(true);
-                        localStorage.setItem("solanaKey", solanaPublicKey);
-                        localStorage.setItem("connected", true);
-                    }
-                }
+                        // }
+                    // }
+                    //  else {
+                    //     // If on desktop, connect to the Phantom browser extension
+                    //     await window.solana.connect();
+                    //     const solanaPublicKey = window.solana.publicKey.toString();
+                    //     console.log(solanaPublicKey, ">>>>>>>");
+                    //     setSolanaKey(solanaPublicKey);
+                    //     setConnected(true);
+                    //     localStorage.setItem("solanaKey", solanaPublicKey);
+                    //     localStorage.setItem("connected", true);
+                    // }
+                // }
                 //  else {
                 //     navi("/new-pairs");
                 // }
             // }
-             catch (error) {
-                console.error(error);
-            }
+            //  catch (error) {
+            //     console.error(error);
+            // }
         // } else {
         //     alert('Phantom extension not detected!');
         // }
