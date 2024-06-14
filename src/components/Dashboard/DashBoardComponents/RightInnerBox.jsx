@@ -17,7 +17,8 @@ import arrowImg from "../../../assets/dashboard/arrow.webp";
 import { useContext } from "react";
 import KeyContext from "../../../context/walletContext";
 import { useParams } from "react-router-dom";
-const RightInnerBox = ({ data, solBalance }) => {
+const RightInnerBox = ({ data, solBalance, settings }) => {
+
   const { tokenid } = useParams();
   const shouldShowButton = !tokenid;
   // const shouldShowButton = tokenid !== "3eoU8s1WtRcgwfy1CWf732fT2HCuFL7HD7j29c6iHnBc";

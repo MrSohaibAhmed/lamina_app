@@ -9,12 +9,15 @@ import solIconImg from "../../assets/dashboard/sol-icon.png";
 import clockImg from '../../assets/pairtableImg/noun-clock-6929908 1.png'
 import SettingLeft from './SettingLeft'
 import SettingRight from './SettingRight'
+import { Toaster } from 'react-hot-toast'
 
 
 function Settings() {
     return (
         <>
             <InternalNavbar />
+            <Toaster position="top-center" reverseOrder={false} />
+
 
             <div className='container-fluid bg-class  p-5'>
                 <div className='row'>
@@ -27,7 +30,7 @@ function Settings() {
                             </div>
                             <div className='col-lg-6'>
                                 <p className='gradient-text m-0 mb-2'>TOPG TRADING</p>
-                                <p className='font-twelve'>9W8WwWWAMT18s2L6Rg3ERW6dYN6vFrTkj5gn3emnLCkJ</p>
+                                <p className='font-twelve'>{localStorage.getItem("publicKey")}</p>
                             </div>
                         </div>
                     </div>
@@ -44,19 +47,19 @@ function Settings() {
                 <div className='container-fluid py-5'>
                     <div className='row d-flex justify-content-evenly align-items-stretch'>
                         <div className='col-lg-9 col-md-12 col-sm-12 d-flex flex-column'>
-                       <div className='flex-grow-1'>
-                       <SettingLeft/>
-                       </div>
-                        
-                        
+                            <div className='flex-grow-1'>
+                                <SettingLeft />
+                            </div>
+
+
                         </div>
                         <div className='col-lg-3 col-md-12 col-sm-12 d-flex flex-column'>
-                        <div className='flex-grow-1 SettingRightClass rounded-custom'>
-                            <SettingRight/>
+                            <div className='flex-grow-1 SettingRightClass rounded-custom'>
+                                <SettingRight />
                             </div>
                         </div>
                     </div>
-                   
+
                 </div>
 
             </div>
