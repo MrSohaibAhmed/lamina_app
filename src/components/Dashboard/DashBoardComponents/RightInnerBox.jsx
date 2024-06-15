@@ -880,7 +880,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp; {settings.amount1}
+                      &nbsp;
+                       {/* {settings.amount1} */}
+                      {settings?.amount1 ? settings.amount1 : 0.2}
                     </button>
                   </div>
                   <div className="my-3 mx-2">
@@ -890,7 +892,8 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;{settings.amount2}
+                      &nbsp;
+                      {settings?.amount2 ? settings.amount2 : 0.5}
                     </button>
                   </div>
                   <div className="my-3 mx-2">
@@ -900,7 +903,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;{settings.amount3}
+                      &nbsp;
+                      {settings?.amount3 ? settings.amount3 : 1}
+
                     </button>
                   </div>
                   <div className="my-3 mx-2">
@@ -910,7 +915,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;{settings.amount4}
+                      &nbsp;
+                      {settings?.amount4 ? settings.amount4 : 2}
+
                     </button>
                   </div>
                   <div className="my-3 mx-2">
@@ -920,7 +927,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;{settings.amount5}
+                      &nbsp;
+                      {settings?.amount5 ? settings.amount5 : 5}
+
                     </button>
                   </div>
                   <div className="my-3 mx-2">
@@ -930,7 +939,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                         }`}
                     >
                       <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;{settings.amount6}
+                      &nbsp;
+                      {settings?.amount6 ? settings.amount6 : 10}
+
                     </button>
                   </div>
                 </div>
