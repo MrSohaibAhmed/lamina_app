@@ -121,7 +121,7 @@ export async function getNewPairs(query) {
 
         return response;
     } catch (error) {
-        console.error("Error Finding Pair", error);
+        console.error("Error Finding Pair", error);p
         throw error;
     }
 }
