@@ -51,14 +51,15 @@ const SettingLeft = () => {
         });
         // console.log(formattedAmounts);
         const slippageNumber = parseFloat(formData.Slippage);
-        const briberyAmountNumber = parseFloat(formData.BriberyAmount);
-        const priorityFeeNumber = parseFloat(formData.priorityFee);
+        const briberyAmountNumber = Number(formData.BriberyAmount);
+        const priorityFeeNumber = Number(formData.priorityFee);
 
         // Replace the string values with the converted numbers in the formData object
         formData.Slippage = slippageNumber;
         formData.BriberyAmount = briberyAmountNumber;
         formData.priorityFee = priorityFeeNumber;
-        formData.amounts = formattedAmounts;
+        // formData.amounts = formattedAmounts;
+
 
         const res = await postSettings(formData).then((res) => {
             toast.success("Settings Updated Successfully")
@@ -71,7 +72,8 @@ const SettingLeft = () => {
         const fetchSettings = async () => {
             try {
                 const res = await getSettings(localStorage.getItem("publicKey"));
-                const responseData = res.data;
+
+                const responseData = res.data.data;
                 setSettingsData(responseData);
                 const { _id, createdAt, ...formDataFromAPI } = responseData;
                 setFormData({

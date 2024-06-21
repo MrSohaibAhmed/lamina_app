@@ -48,48 +48,87 @@ function Newpairs() {
         // //debugger
         return data.data;
     };
+    // const fetchData = async () => {
+    //     try {
+    //         const response = await getNewPairs();
+    //         const newData = response?.data;
+    //         // debugger
+    //         // Filter out entries with addresses already present in tableData
+    //         const uniqueEntries = newData.filter(newEntry => !tableData.some(prevEntry => prevEntry.address === newEntry.address));
+
+    //         // Fetch token data for each unique entry and update tableData
+    //         const updatedDataArray = await Promise.all(uniqueEntries.map(async (item) => {
+    //             // //debugger
+    //             // //debugger
+    //             const tokenData = await fetchTokenData(item.base.address);
+    //             // console.log(tokenData, "I am token Data")
+    //             // //debugger
+    //             if (tokenData) {
+    //                 // //debugger
+    //                 return {
+    //                     ...item,
+    //                     trade24h: tokenData.trade24h,
+    //                     sell24h: tokenData.sell24h,
+    //                     buy24h: tokenData.buy24h,
+    //                     marketCap: tokenData.mc,
+    //                 };
+    //             } else {
+    //                 // If API call fails or doesn't return data, keep original values
+    //                 return item;
+    //             }
+    //         }));
+    //         // debugger
+    //         // Update tableData with the updatedDataArray
+    //         setTableData(prevData => {
+    //             // Concatenate unique entries with previous data
+    //             return [...updatedDataArray, ...prevData];
+    //         });
+
+    //         setLoading(false);
+    //     } catch (error) {
+    //         console.error('Error fetching data:', error);
+    //         setLoading(false);
+    //     }
+    // };
     const fetchData = async () => {
         try {
             const response = await getNewPairs();
             const newData = response?.data;
-            // debugger
+
             // Filter out entries with addresses already present in tableData
             const uniqueEntries = newData.filter(newEntry => !tableData.some(prevEntry => prevEntry.address === newEntry.address));
 
-            // Fetch token data for each unique entry and update tableData
-            const updatedDataArray = await Promise.all(uniqueEntries.map(async (item) => {
-                // //debugger
-                // //debugger
-                const tokenData = await fetchTokenData(item.base.address);
-                // console.log(tokenData, "I am token Data")
-                // //debugger
-                if (tokenData) {
-                    // //debugger
-                    return {
-                        ...item,
-                        trade24h: tokenData.trade24h,
-                        sell24h: tokenData.sell24h,
-                        buy24h: tokenData.buy24h,
-                        marketCap: tokenData.mc,
-                    };
-                } else {
-                    // If API call fails or doesn't return data, keep original values
-                    return item;
-                }
-            }));
-            // debugger
-            // Update tableData with the updatedDataArray
-            setTableData(prevData => {
-                // Concatenate unique entries with previous data
-                return [...updatedDataArray, ...prevData];
-            });
+            // Update tableData with token data for each unique entry
+            for (const item of uniqueEntries) {
+                try {
+                    const tokenData = await fetchTokenData(item.base.address);
 
-            setLoading(false);
+                    if (tokenData) {
+                        // Merge token data with the current entry
+                        const updatedEntry = {
+                            ...item,
+                            trade24h: tokenData.trade24h,
+                            sell24h: tokenData.sell24h,
+                            buy24h: tokenData.buy24h,
+                            marketCap: tokenData.mc,
+                        };
+
+                        // Update tableData with the updated entry
+                        setTableData(prevData => [...prevData, updatedEntry]);
+                        setLoading(false);
+
+                    }
+                } catch (error) {
+                    console.error('Error fetching token data:', error);
+                }
+            }
+
         } catch (error) {
             console.error('Error fetching data:', error);
             setLoading(false);
         }
     };
+
     useEffect(() => {
         fetchData(); // Initial fetch
         const intervalId = setInterval(fetchData, 20000); // Fetch every 5 seconds
@@ -138,8 +177,8 @@ function Newpairs() {
                             <DropdownComp
                                 label="SOL"
                                 items={dropdownItems}
-                                imgSrc={solIconImg} 
-                                onClick={handleClick}/>   
+                                imgSrc={solIconImg}
+                                onClick={handleClick} />
                         </div>
                     </div>
                 </div>

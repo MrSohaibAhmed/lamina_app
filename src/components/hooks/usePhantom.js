@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Web3 from 'web3';
 import { useNavigate } from 'react-router-dom';
+import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom';
 const usePhantom = () => {
     const navi = useNavigate();
     const [connected, setConnected] = useState(false);
@@ -8,31 +9,70 @@ const usePhantom = () => {
     const [web3, setWeb3] = useState(null);
     const [signedMessage, setSignedMessage] = useState(null);
     const [solanaKey, setSolanaKey] = useState(null);
+    // const connectToPhantom = async () => {
+    //     //////debugger
+    //     if (window.solana) { // Check if Solana wallet extension is available
+    //         try {
+    //             // Request connection to Solana wallet
+    //             //////debugger
+    //             if (!window.solana.isConnected) {
+    //                 await window.solana.connect();
+    //                 const solanaPublicKey = window.solana.publicKey.toString();
+    //                 console.log(solanaPublicKey, ">>>>>>>");
+    //                 setSolanaKey(solanaPublicKey);
+    //                 setConnected(true);
+    //                 localStorage.setItem("solanaKey", solanaPublicKey);
+    //                 localStorage.setItem("connected", true);
+    //             }
+    //             else {
+    //                 navi("/new-pairs")
+    //             }
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     } else {
+    //         alert('Phantom extension not detected!');
+    //     }
+    // };
     const connectToPhantom = async () => {
-        //////debugger
-        if (window.solana) { // Check if Solana wallet extension is available
-            try {
-                // Request connection to Solana wallet
-                //////debugger
-                if (!window.solana.isConnected) {
-                    await window.solana.connect();
-                    const solanaPublicKey = window.solana.publicKey.toString();
-                    console.log(solanaPublicKey, ">>>>>>>");
-                    setSolanaKey(solanaPublicKey);
-                    setConnected(true);
-                    localStorage.setItem("solanaKey", solanaPublicKey);
-                    localStorage.setItem("connected", true);
-                }
-                else {
-                    navi("/new-pairs")
-                }
-            } catch (error) {
-                console.error(error);
-            }
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+
+            // alert('Phantom wallet is not supported on mobile devices. Please use desktop browser to connect to')
+            // If on mobile, connect to the Phantom mobile app
+            const params = new URLSearchParams({
+                cluster: "devnet",
+                app_url: "https://lamina-app.vercel.app/", // Replace this with your actual app URL
+                redirect_link: window.location.href, // Redirect back to the current page after connecting
+            });
+            const url = `https://phantom.app/ul/v1/connect?${encodeURIComponent(JSON.stringify(params))}`;
+            window.location.href = url;
         } else {
-            alert('Phantom extension not detected!');
+            // alert("hello")
+            // If on laptop or desktop browser, connect using existing code
+            if (window.solana) { // Check if Solana wallet extension is available
+                try {
+                    if (!window.solana.isConnected) {
+                        await window.solana.connect();
+                        const solanaPublicKey = window.solana.publicKey.toString();
+                        console.log(solanaPublicKey, ">>>>>>>");
+                        setSolanaKey(solanaPublicKey);
+                        setConnected(true);
+                        localStorage.setItem("solanaKey", solanaPublicKey);
+                        localStorage.setItem("connected", true);
+                    } else {
+                        navi("/new-pairs");
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            } else {
+                alert('Phantom extension not detected!');
+            }
         }
     };
+
+
+
     const connectToSolflare = async () => {
         try {
             if (!window.solflare) {
