@@ -5,6 +5,7 @@ import transationTableIconImg from "../../../assets/dashboard/transaction-table-
 import { setHoldings } from "../../hooks/useTransactions";
 import { useContext } from "react";
 import KeyContext from "../../../context/walletContext";
+import toast from "react-hot-toast";
 const HoldingTable = ({ address }) => {
   const { setAllHoldings } = useContext(KeyContext);
 
@@ -36,6 +37,15 @@ const HoldingTable = ({ address }) => {
     const end = txHash.slice(-5);
     return `${start}.....${end}`;
   };
+  const copyAddress = (tokenAddress) => {
+    navigator.clipboard
+      .writeText(tokenAddress)
+      .then(() => {
+        toast.success("Successfully copied Token!");
+        console.log("Base token copied successfully");
+      })
+      .catch((error) => console.error("Error copying baseToken:", error));
+  }
 
   return (
     <>
@@ -83,7 +93,7 @@ const HoldingTable = ({ address }) => {
                     </td>
                     {/* <td>SOL STREET BETS</td> */}
                     {/* <td>{holding.address}</td> */}
-                    <td style={{ verticalAlign: "middle" }}>
+                    <td onClick={() => { copyAddress(holding.address) }} style={{ verticalAlign: "middle" , cursor :"pointer" }}>
                       {formatTxHash(holding.address)}
                     </td>
                     {/* <td> 3XUv67...7uU8</td> */}

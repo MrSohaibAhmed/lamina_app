@@ -18,8 +18,7 @@ import { useContext } from "react";
 import KeyContext from "../../../context/walletContext";
 import { useParams } from "react-router-dom";
 const RightInnerBox = ({ data, solBalance, settings }) => {
-
-  console.log("setting response is =>>>" , settings);
+  console.log("setting response is =>>>", settings);
   // const settingResponse = settings.
   const { tokenid } = useParams();
   const shouldShowButton = !tokenid;
@@ -32,8 +31,6 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
   useEffect(() => {
     setAllData(data);
   }, [data]);
-
-
 
   const formatMarketCap = (marketCap) => {
     // //debugger
@@ -114,19 +111,27 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
   //   }
   // }, [data]);
 
-
   useEffect(() => {
     // ////debugger
-    if (data && data.pairs && data.pairs[0] && data.pairs[0].baseToken && data.pairs[0].baseToken.address) {
+    if (
+      data &&
+      data.pairs &&
+      data.pairs[0] &&
+      data.pairs[0].baseToken &&
+      data.pairs[0].baseToken.address
+    ) {
       const tokenAddress = data.pairs[0].baseToken.address;
       const options = {
-        method: 'GET',
-        headers: { 'X-API-KEY': '1a6f67ecb3d540b984f8fc694cfb364c' }
+        method: "GET",
+        headers: { "X-API-KEY": "1a6f67ecb3d540b984f8fc694cfb364c" },
       };
 
-      fetch(`https://public-api.birdeye.so/defi/token_overview?address=${tokenAddress}`, options)
-        .then(response => response.json())
-        .then(response => {
+      fetch(
+        `https://public-api.birdeye.so/defi/token_overview?address=${tokenAddress}`,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => {
           console.log(response.data, "I am token overview");
 
           const mktCap = response?.data?.mc;
@@ -144,7 +149,7 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
 
           // setTokenOverview(response);
         })
-        .catch(err => console.error(err));
+        .catch((err) => console.error(err));
     }
   }, [data]);
 
@@ -276,28 +281,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
       .catch((error) => console.error("Error copying baseToken:", error));
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const handleQuickBuy = () => {
     console.log("solona balance is =>>", solBalance);
     if (selectedValue !== null && selectedValue !== 0) {
-
       if (solBalance !== 0) {
         const value = {
           address: localStorage.getItem("publicKey"),
@@ -337,54 +323,30 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
           .catch((error) => {
             console.error("Buy Promise Error:", error);
             toast.error("Transaction Failed", {
-              duration: 5000
+              duration: 5000,
             });
           });
         const tryagain = (
-          <div>Click Here To Try Again
+          <div>
+            Click Here To Try Again
             <img width={20} src={TryAgain} onClick={handleQuickBuy} />
           </div>
-        )
+        );
 
         toast.promise(buyPromise, {
           loading: "Waiting For Transaction...",
           success: "",
           error: tryagain,
         });
-      }
-      else {
+      } else {
         toast.error("You Donot have Enough Sol Balance");
       }
-    }
-    else {
+    } else {
       console.error("No value selected");
       // noValueError();
       toast.error("Selected Amount is 0");
     }
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const { setAllHoldings, AllHoldings } = useContext(KeyContext);
   // const handleQuickSell = () => {
@@ -458,7 +420,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
         const baseTokenAddress = data?.pairs?.[0]?.baseToken?.address;
 
         // Find the holding in Allholdings with the same address as baseTokenAddress
-        const holding = AllHoldings.find(item => item.address === baseTokenAddress);
+        const holding = AllHoldings.find(
+          (item) => item.address === baseTokenAddress
+        );
 
         if (holding) {
           const amount = holding.balance * sellSelectedValue;
@@ -474,7 +438,8 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
           const buyPromise = swapTokensOut(value);
           buyPromise
             .then((result) => {
-              const transactionResult = result?.data?.swapResponse?.transactionResult;
+              const transactionResult =
+                result?.data?.swapResponse?.transactionResult;
               setBuyResult(transactionResult);
               console.log("Buy Promise Result:", transactionResult);
               const t = (
@@ -638,10 +603,8 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
             </a>
           </div>
         </div>
-        {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100)
-
-          <
-          150 ? (
+        {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 100) <
+        150 ? (
           <div className="row mt-4">
             <div
               className="alert alert-info alert-dismissible fade show"
@@ -679,14 +642,10 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
             <h5>
               $
               {/* {Math.floor((allData?.pairs?.[0]?.liquidity?.usd || 16400) / 1000)} */}
-              {(allData?.pairs?.[0]?.liquidity?.usd / 1000).toFixed(1)}
-
-
-              K
+              {(allData?.pairs?.[0]?.liquidity?.usd / 1000).toFixed(1)}K
             </h5>
           </div>
           <div className="col-lg-4 col">
-
             <h6>MKT CAP</h6>
             <h5>${mktValueData}</h5>
           </div>
@@ -702,7 +661,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
             <h4>5M</h4>
             <h5
               className={
-                data?.pairs?.[0]?.priceChange?.m5 < 0 ? "text-danger" : "text-success"
+                data?.pairs?.[0]?.priceChange?.m5 < 0
+                  ? "text-danger"
+                  : "text-success"
               }
             >
               {data?.pairs?.[0]?.priceChange?.m5 || 0}
@@ -715,7 +676,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
             <h4>1H</h4>
             <h5
               className={
-                data?.pairs?.[0]?.priceChange?.h1 < 0 ? "text-danger" : "text-success"
+                data?.pairs?.[0]?.priceChange?.h1 < 0
+                  ? "text-danger"
+                  : "text-success"
               }
             >
               {data?.pairs?.[0]?.priceChange?.h1 || 0}
@@ -728,7 +691,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
             <h4>6H</h4>
             <h5
               className={
-                data?.pairs?.[0]?.priceChange?.h6 < 0 ? "text-danger" : "text-success"
+                data?.pairs?.[0]?.priceChange?.h6 < 0
+                  ? "text-danger"
+                  : "text-success"
               }
             >
               {data?.pairs?.[0]?.priceChange?.h6 || 0}
@@ -741,7 +706,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
             <h4>24H</h4>
             <h5
               className={
-                data?.pairs?.[0]?.priceChange?.h24 < 0 ? "text-danger" : "text-success"
+                data?.pairs?.[0]?.priceChange?.h24 < 0
+                  ? "text-danger"
+                  : "text-success"
               }
             >
               {data?.pairs?.[0]?.priceChange?.h24 || 0}
@@ -826,176 +793,206 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
           </div>
         </div>
       </div>
-      {
-        shouldShowButton && (
-          <div className="right-inner-box mt-3 p-0">
-            <ul className="nav nav-pills" id="pills-tab" role="tablist">
-              <li className="nav-item" role="presentation">
-                <button
-                  className="nav-link fw-semibold active position-relative"
-                  id="pills-two-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-two"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-two"
-                  aria-selected="true"
-                >
-                  BUY
-                </button>
-              </li>
-              <li className="nav-item" role="presentation">
-                <button
-                  className="nav-link fw-semibold position-relative"
-                  id="pills-one-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-one"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-one"
-                  aria-selected="false"
-                >
-                  SELL
-                </button>
-              </li>
-            </ul>
-            <div className="tab-content p-4" id="pills-tabContent">
-              <div
-                className="tab-pane fade show active"
-                id="pills-two"
-                role="tabpanel"
-                aria-labelledby="pills-two-tab"
+      {shouldShowButton && (
+        <div className="right-inner-box mt-3 p-0">
+          <ul className="nav nav-pills" id="pills-tab" role="tablist">
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link fw-semibold active position-relative"
+                id="pills-two-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-two"
+                type="button"
+                role="tab"
+                aria-controls="pills-two"
+                aria-selected="true"
               >
-                <label className="switch">
-                  <input type="checkbox" />
-                  <span className="slider round"></span>
-                </label>
-                <span className="switch-lable ms-1">Insta buy</span>
-                <hr />
-                <div className="d-flex flex-wrap">
-                  <div className="my-3 mx-2">
-                    <button
-                      onClick={() => handleButtonClick(settings.amount1)}
-                      className={`bg-dark btn-inner-box ${activeButton == settings.amount1 ? "btn1-active" : ""
-                        }`}
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                      &nbsp; {settings.amount1}
-                    </button>
-                  </div>
-                  <div className="my-3 mx-2">
-                    <button
-                      onClick={() => handleButtonClick(settings.amount2)}
-                      className={`bg-dark btn-inner-box ${activeButton == settings.amount2 ? "btn1-active" : ""
-                        }`}
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;{settings.amount2}
-                    </button>
-                  </div>
-                  <div className="my-3 mx-2">
-                    <button
-                      onClick={() => handleButtonClick(settings.amount3)}
-                      className={`bg-dark btn-inner-box ${activeButton == settings.amount3? "btn1-active" : ""
-                        }`}
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;{settings.amount3}
-                    </button>
-                  </div>
-                  <div className="my-3 mx-2">
-                    <button
-                      onClick={() => handleButtonClick(settings.amount4)}
-                      className={`bg-dark btn-inner-box ${activeButton == settings.amount4 ? "btn1-active" : ""
-                        }`}
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;{settings.amount4}
-                    </button>
-                  </div>
-                  <div className="my-3 mx-2">
-                    <button
-                      onClick={() => handleButtonClick(settings.amount5)}
-                      className={`bg-dark btn-inner-box ${activeButton == settings.amount5 ? "btn1-active" : ""
-                        }`}
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;{settings.amount5}
-                    </button>
-                  </div>
-                  <div className="my-3 mx-2">
-                    <button
-                      onClick={() => handleButtonClick(settings.amount6)}
-                      className={`bg-dark btn-inner-box ${activeButton == settings.amount6 ? "btn1-active" : ""
-                        }`}
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;{settings.amount6}
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <div className="input-group mx-2 my-4">
-                    <span
-                      className="input-group-text bg-transparent border border-right-0"
-                      id="basic-addon1"
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                    </span>
-                    <input
-                      type="number"
-                      // value={inputAmountVal}
-                      value={selectedValue}
-                      onChange={changeAmountHandler}
-                      className="form-control bg-transparent border border-left-0 text-light"
-                      placeholder="Amount to buy in SOL"
-                      aria-label="Amount"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-                </div>
-                <hr />
-                <div>
-                  <div
-                    className="accordion accordion-flush bg-dark"
-                    id="accordionFlush"
+                BUY
+              </button>
+            </li>
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link fw-semibold position-relative"
+                id="pills-one-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-one"
+                type="button"
+                role="tab"
+                aria-controls="pills-one"
+                aria-selected="false"
+              >
+                SELL
+              </button>
+            </li>
+          </ul>
+          <div className="tab-content p-4" id="pills-tabContent">
+            <div
+              className="tab-pane fade show active"
+              id="pills-two"
+              role="tabpanel"
+              aria-labelledby="pills-two-tab"
+            >
+              <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+              </label>
+              <span className="switch-lable ms-1">Insta buy</span>
+              <hr />
+              <div className="d-flex flex-wrap">
+                <div className="my-3 mx-2">
+                  <button
+                    onClick={() =>
+                      handleButtonClick(
+                        settings.amount1 ? settings.amount1 : 0.2
+                      )
+                    }
+                    className={`bg-dark btn-inner-box ${
+                      activeButton == settings.amount1 ? "btn1-active" : ""
+                    }`}
                   >
-                    <div className="accordion-item ">
-                      <h2 className="accordion-header" id="flush-headingOne">
-                        <button
-                          className="accordion-button accordion-button-inner collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseOne"
-                          aria-expanded="false"
-                          aria-controls="flush-collapseOne"
-                        >
-                          <img src={settingImg} width="24px" alt="" />
-                          &nbsp;&nbsp;Advance Options
-                        </button>
-                      </h2>
-                      <div
-                        id="flush-collapseOne"
-                        className="accordion-collapse accordion-body-inner collapse"
-                        aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlush"
+                    <img src={solIconImg} width="14px" alt="" />
+                    &nbsp;
+                    {/* {settings.amount1} */}
+                    {settings?.amount1 ? settings.amount1 : 0.2}
+                  </button>
+                </div>
+                <div className="my-3 mx-2">
+                  <button
+                    onClick={() =>
+                      handleButtonClick(
+                        settings.amount2 ? settings.amount2 : 0.5
+                      )
+                    }
+                    className={`bg-dark btn-inner-box ${
+                      activeButton == settings.amount2 ? "btn1-active" : ""
+                    }`}
+                  >
+                    <img src={solIconImg} width="14px" alt="" />
+                    &nbsp;
+                    {settings?.amount2 ? settings.amount2 : 0.5}
+                  </button>
+                </div>
+                <div className="my-3 mx-2">
+                  <button
+                    onClick={() =>
+                      handleButtonClick(settings.amount3 ? settings.amount3 : 1)
+                    }
+                    className={`bg-dark btn-inner-box ${
+                      activeButton == settings.amount3 ? "btn1-active" : ""
+                    }`}
+                  >
+                    <img src={solIconImg} width="14px" alt="" />
+                    &nbsp;
+                    {settings?.amount3 ? settings.amount3 : 1}
+                  </button>
+                </div>
+                <div className="my-3 mx-2">
+                  <button
+                    onClick={() =>
+                      handleButtonClick(settings.amount4 ? settings.amount4 : 2)
+                    }
+                    className={`bg-dark btn-inner-box ${
+                      activeButton == settings.amount4 ? "btn1-active" : ""
+                    }`}
+                  >
+                    <img src={solIconImg} width="14px" alt="" />
+                    &nbsp;
+                    {settings?.amount4 ? settings.amount4 : 2}
+                  </button>
+                </div>
+                <div className="my-3 mx-2">
+                  <button
+                    onClick={() =>
+                      handleButtonClick(settings.amount5 ? settings.amount5 : 5)
+                    }
+                    className={`bg-dark btn-inner-box ${
+                      activeButton == settings.amount5 ? "btn1-active" : ""
+                    }`}
+                  >
+                    <img src={solIconImg} width="14px" alt="" />
+                    &nbsp;
+                    {settings?.amount5 ? settings.amount5 : 5}
+                  </button>
+                </div>
+                <div className="my-3 mx-2">
+                  <button
+                    onClick={() =>
+                      handleButtonClick(
+                        settings.amount6 ? settings.amount6 : 10
+                      )
+                    }
+                    className={`bg-dark btn-inner-box ${
+                      activeButton == settings.amount6 ? "btn1-active" : ""
+                    }`}
+                  >
+                    <img src={solIconImg} width="14px" alt="" />
+                    &nbsp;
+                    {settings?.amount6 ? settings.amount6 : 10}
+                  </button>
+                </div>
+              </div>
+              <div>
+                <div className="input-group mx-2 my-4">
+                  <span
+                    className="input-group-text bg-transparent border border-right-0"
+                    id="basic-addon1"
+                  >
+                    <img src={solIconImg} width="14px" alt="" />
+                  </span>
+                  <input
+                    type="number"
+                    // value={inputAmountVal}
+                    value={selectedValue}
+                    onChange={changeAmountHandler}
+                    className="form-control bg-transparent border border-left-0 text-light"
+                    placeholder="Amount to buy in SOL"
+                    aria-label="Amount"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+              </div>
+              <hr />
+              <div>
+                <div
+                  className="accordion accordion-flush bg-dark"
+                  id="accordionFlush"
+                >
+                  <div className="accordion-item ">
+                    <h2 className="accordion-header" id="flush-headingOne">
+                      <button
+                        className="accordion-button accordion-button-inner collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseOne"
                       >
-                        <div className="accordion-body">
-                          <div className="row">
-                            <div className="col mt-2">
-                              Slippage % <br />
-                              <input
-                                className="form-control bg-transparent border border-left-0 text-light"
-                                type="number"
-                                // className="btn-inner-box mt-3"
-                                value={slippage}
-                                onChange={handleSlippageChange} // Call handleSlippageChange on input change
-                                min={1}
-                                max={100}
-                              />
-                            </div>
+                        <img src={settingImg} width="24px" alt="" />
+                        &nbsp;&nbsp;Advance Options
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseOne"
+                      className="accordion-collapse accordion-body-inner collapse"
+                      aria-labelledby="flush-headingOne"
+                      data-bs-parent="#accordionFlush"
+                    >
+                      <div className="accordion-body">
+                        <div className="row">
+                          <div className="col mt-2">
+                            Slippage % <br />
+                            <input
+                              className="form-control bg-transparent border border-left-0 text-light"
+                              type="number"
+                              // className="btn-inner-box mt-3"
+                              value={slippage}
+                              onChange={handleSlippageChange} // Call handleSlippageChange on input change
+                              min={1}
+                              max={100}
+                            />
+                          </div>
 
-                            {/* <div className="col mt-2 ">
+                          {/* <div className="col mt-2 ">
                                     Smart-Mev protection
                                     <div className="mt-2 form-check">
                                       <input
@@ -1008,9 +1005,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                                       </label>
                                     </div>
                                   </div> */}
-                          </div>
-                          <div className="row mt-3">
-                            {/* <div className="col mt-2 ">
+                        </div>
+                        <div className="row mt-3">
+                          {/* <div className="col mt-2 ">
                                     Priority Fee <br />
                                     <div className="d-flex flex-wrap">
                                       <div className="my-3 mx-1">
@@ -1030,9 +1027,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                                       </div>
                                     </div>
                                   </div> */}
-                          </div>
-                          <div className="row mt-3">
-                            {/* <div className="col mt-2 ">
+                        </div>
+                        <div className="row mt-3">
+                          {/* <div className="col mt-2 ">
                                     Priority Fee <br />
                                     <div className="d-flex row flex-wrap">
                                       <div className="my-3  align-self-center col-lg-3 mx-1">
@@ -1049,30 +1046,29 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                                       </div>
                                     </div>
                                   </div> */}
-                          </div>
-                          <div className="row">
-                            <div className="col mt-2 ">
-                              Bribery Amount
-                              <br />{" "}
-                              <i>
-                                Higher success:{" "}
-                                <span className="text-success"> 0.01+</span>
-                              </i>
-                              <div className="input-group my-3">
-                                <span
-                                  className="input-group-text bg-transparent border border-right-0"
-                                  id="basic-addon1"
-                                >
-                                  <img src={solIconImg} width="14px" alt="" />
-                                </span>
-                                <input
-                                  type="text"
-                                  className="form-control bg-transparent border border-left-0 text-light"
-                                  placeholder="0.01 SOL"
-                                  aria-label="Amount"
-                                  aria-describedby="basic-addon1"
-                                />
-                              </div>
+                        </div>
+                        <div className="row">
+                          <div className="col mt-2 ">
+                            Bribery Amount
+                            <br />{" "}
+                            <i>
+                              Higher success:{" "}
+                              <span className="text-success"> 0.01+</span>
+                            </i>
+                            <div className="input-group my-3">
+                              <span
+                                className="input-group-text bg-transparent border border-right-0"
+                                id="basic-addon1"
+                              >
+                                <img src={solIconImg} width="14px" alt="" />
+                              </span>
+                              <input
+                                type="text"
+                                className="form-control bg-transparent border border-left-0 text-light"
+                                placeholder="0.01 SOL"
+                                aria-label="Amount"
+                                aria-describedby="basic-addon1"
+                              />
                             </div>
                           </div>
                         </div>
@@ -1080,121 +1076,125 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                     </div>
                   </div>
                 </div>
-                <hr />
-                <div className="mt-5 mb-3">
-                  <button onClick={handleQuickBuy} className=" btn-buy-quick">
-                    Quick Buy {selectedValue}
+              </div>
+              <hr />
+              <div className="mt-5 mb-3">
+                <button onClick={handleQuickBuy} className=" btn-buy-quick">
+                  Quick Buy {selectedValue}
+                </button>
+              </div>
+            </div>
+            <div
+              className="tab-pane fade"
+              id="pills-one"
+              role="tabpanel"
+              aria-labelledby="pills-one-tab"
+            >
+              <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+              </label>
+              <span className="switch-lable ms-1">Insta Sell</span>
+              <hr />
+              <div className="d-flex flex-wrap">
+                <div className="my-3 mx-2">
+                  <button
+                    value="0.25"
+                    onClick={() => handleButtonClickSell(0.25)}
+                    className={`bg-dark btn-inner-box ${
+                      activeButton == 0.25 ? "btn1-active" : ""
+                    }`}
+                  >
+                    <img src={solIconImg} width="14px" alt="" />
+                    &nbsp;25%
+                  </button>
+                </div>
+                <div className="my-3 mx-2">
+                  <button
+                    value="50%"
+                    onClick={() => handleButtonClickSell(0.5)}
+                    className={`bg-dark btn-inner-box ${
+                      activeButton == 0.5 ? "btn1-active" : ""
+                    }`}
+                  >
+                    <img src={solIconImg} width="14px" alt="" />
+                    &nbsp;50%
+                  </button>
+                </div>
+                <div className="my-3 mx-2">
+                  <button
+                    value="100%"
+                    onClick={() => handleButtonClickSell(1)}
+                    className={`bg-dark btn-inner-box ${
+                      activeButton == 1 ? "btn1-active" : ""
+                    }`}
+                  >
+                    <img src={solIconImg} width="14px" alt="" />
+                    &nbsp;100%
                   </button>
                 </div>
               </div>
-              <div
-                className="tab-pane fade"
-                id="pills-one"
-                role="tabpanel"
-                aria-labelledby="pills-one-tab"
-              >
-                <label className="switch">
-                  <input type="checkbox" />
-                  <span className="slider round"></span>
-                </label>
-                <span className="switch-lable ms-1">Insta Sell</span>
-                <hr />
-                <div className="d-flex flex-wrap">
-                  <div className="my-3 mx-2">
-                    <button
-                      value="0.25"
-                      onClick={() => handleButtonClickSell(0.25)}
-                      className={`bg-dark btn-inner-box ${activeButton == 0.25 ? "btn1-active" : ""
-                        }`}
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;25%
-                    </button>
-                  </div>
-                  <div className="my-3 mx-2">
-                    <button
-                      value="50%"
-                      onClick={() => handleButtonClickSell(0.5)}
-                      className={`bg-dark btn-inner-box ${activeButton == 0.5 ? "btn1-active" : ""
-                        }`}
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;50%
-                    </button>
-                  </div>
-                  <div className="my-3 mx-2">
-                    <button
-                      value="100%"
-                      onClick={() => handleButtonClickSell(1)}
-                      className={`bg-dark btn-inner-box ${activeButton == 1 ? "btn1-active" : ""
-                        }`}
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                      &nbsp;100%
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <div className="input-group mx-2 my-4">
-                    <span
-                      className="input-group-text bg-transparent border border-right-0"
-                      id="basic-addon1"
-                    >
-                      <img src={solIconImg} width="14px" alt="" />
-                    </span>
-                    <input
-                      type="text"
-                      // value={inputSellAmount}
-                      value={sellSelectedValue}
-                      onChange={changeSellAmountHandler}
-                      className="form-control bg-transparent border border-left-0 text-light"
-                      placeholder="Amount to sell in SOL"
-                      aria-label="Amount"
-                      aria-describedby="basic-addon1"
-                    />
-                  </div>
-                </div>
-                <hr />
-                <div>
-                  <div
-                    className="accordion accordion-flush bg-dark"
-                    id="accordionFlush"
+              <div>
+                <div className="input-group mx-2 my-4">
+                  <span
+                    className="input-group-text bg-transparent border border-right-0"
+                    id="basic-addon1"
                   >
-                    <div className="accordion-item">
-                      <h2 className="accordion-header" id="flush-headingOne">
-                        <button
-                          className="accordion-button accordion-button-inner collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseOne"
-                          aria-expanded="false"
-                          aria-controls="flush-collapseOne"
-                        >
-                          <img src={settingImg} width="24px" alt="" />
-                          &nbsp;&nbsp;Advance Options
-                        </button>
-                      </h2>
-                      <div
-                        id="flush-collapseOne"
-                        className="accordion-collapse accordion-body-inner collapse"
-                        aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlush"
+                    <img src={solIconImg} width="14px" alt="" />
+                  </span>
+                  <input
+                    type="text"
+                    // value={inputSellAmount}
+                    value={sellSelectedValue}
+                    onChange={changeSellAmountHandler}
+                    className="form-control bg-transparent border border-left-0 text-light"
+                    placeholder="Amount to sell in SOL"
+                    aria-label="Amount"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+              </div>
+              <hr />
+              <div>
+                <div
+                  className="accordion accordion-flush bg-dark"
+                  id="accordionFlush"
+                >
+                  <div className="accordion-item">
+                    <h2 className="accordion-header" id="flush-headingOne">
+                      <button
+                        className="accordion-button accordion-button-inner collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseOne"
                       >
-                        <div className="accordion-body">
-                          <div className="row">
-                            <div className="col mt-2">
-                              Slippage % <br />
-                              <input
-                                className="form-control bg-transparent border border-left-0 text-light"
-                                type="number"
-                                // className="btn-inner-box mt-3"
-                                value={slippage}
-                                onChange={handleSlippageChange} // Call handleSlippageChange on input change
-                                min={1}
-                                max={100}
-                              />
-                            </div>
-                            {/* <div className="col mt-2 ">
+                        <img src={settingImg} width="24px" alt="" />
+                        &nbsp;&nbsp;Advance Options
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseOne"
+                      className="accordion-collapse accordion-body-inner collapse"
+                      aria-labelledby="flush-headingOne"
+                      data-bs-parent="#accordionFlush"
+                    >
+                      <div className="accordion-body">
+                        <div className="row">
+                          <div className="col mt-2">
+                            Slippage % <br />
+                            <input
+                              className="form-control bg-transparent border border-left-0 text-light"
+                              type="number"
+                              // className="btn-inner-box mt-3"
+                              value={slippage}
+                              onChange={handleSlippageChange} // Call handleSlippageChange on input change
+                              min={1}
+                              max={100}
+                            />
+                          </div>
+                          {/* <div className="col mt-2 ">
                                     Smart-Mev protection
                                     <div className="mt-2 form-check">
                                       <input
@@ -1207,9 +1207,9 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                                       </label>
                                     </div>
                                   </div> */}
-                          </div>
-                          <div className="row mt-3">
-                            {/* <div className="col mt-2 ">
+                        </div>
+                        <div className="row mt-3">
+                          {/* <div className="col mt-2 ">
                                     Priority Fee <br />
                                     <div className="d-flex flex-wrap">
                                       <div className="my-3 mx-1">
@@ -1229,8 +1229,8 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                                       </div>
                                     </div>
                                   </div> */}
-                          </div>
-                          {/* <div className="row mt-3">
+                        </div>
+                        {/* <div className="row mt-3">
                                   <div className="col mt-2 ">
                                     Priority Fee <br />
                                     <div className="d-flex row flex-wrap">
@@ -1249,31 +1249,30 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                                     </div>
                                   </div>
                                 </div> */}
-                          <div className="row">
-                            <div className="col mt-2 ">
-                              Bribery Amount
-                              <br />{" "}
-                              <i>
-                                Higher success:{" "}
-                                <span className="text-success"> 0.01+</span>
-                              </i>
-                              <div className="input-group my-3">
-                                <span
-                                  className="input-group-text bg-transparent border border-right-0"
-                                  id="basic-addon1"
-                                >
-                                  <img src={solIconImg} width="14px" alt="" />
-                                </span>
-                                <input
-                                  type="text"
-                                  value={inputSellAmount}
-                                  onChange={changeSellAmountHandler}
-                                  className="form-control bg-transparent border border-left-0 text-light"
-                                  placeholder="0.01 SOL"
-                                  aria-label="Amount"
-                                  aria-describedby="basic-addon1"
-                                />
-                              </div>
+                        <div className="row">
+                          <div className="col mt-2 ">
+                            Bribery Amount
+                            <br />{" "}
+                            <i>
+                              Higher success:{" "}
+                              <span className="text-success"> 0.01+</span>
+                            </i>
+                            <div className="input-group my-3">
+                              <span
+                                className="input-group-text bg-transparent border border-right-0"
+                                id="basic-addon1"
+                              >
+                                <img src={solIconImg} width="14px" alt="" />
+                              </span>
+                              <input
+                                type="text"
+                                value={inputSellAmount}
+                                onChange={changeSellAmountHandler}
+                                className="form-control bg-transparent border border-left-0 text-light"
+                                placeholder="0.01 SOL"
+                                aria-label="Amount"
+                                aria-describedby="basic-addon1"
+                              />
                             </div>
                           </div>
                         </div>
@@ -1281,18 +1280,17 @@ const RightInnerBox = ({ data, solBalance, settings }) => {
                     </div>
                   </div>
                 </div>
-                <hr />
-                <div className="mt-5 mb-3">
-                  <button onClick={handleQuickSell} className=" btn-buy-quick">
-                    Quick Sell {sellSelectedValue}
-                  </button>
-                </div>
+              </div>
+              <hr />
+              <div className="mt-5 mb-3">
+                <button onClick={handleQuickSell} className=" btn-buy-quick">
+                  Quick Sell {sellSelectedValue}
+                </button>
               </div>
             </div>
           </div>
-        )
-      }
-
+        </div>
+      )}
     </>
   );
 };
